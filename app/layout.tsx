@@ -1,8 +1,11 @@
-export default function Page() {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <main style={{ padding: "40px", fontFamily: "sans-serif" }}>
-      <h1>Atelier Provenance</h1>
-      <p>Le site fonctionne.</p>
-    </main>
+    <html lang="fr">
+      <body>{children}</body>
+    </html>
   );
 }
