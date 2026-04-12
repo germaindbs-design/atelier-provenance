@@ -1,11 +1,98 @@
 "use client";
 
+import { useState } from "react";
+
+const examples = [
+  {
+    id: 1,
+    meta: "Mobilier de rangement · 1960s",
+    title: "Enfilade Karlit",
+    summary:
+      "Repositionnement d'une pièce déjà forte : meilleure lecture, meilleure présence, cohérence renforcée avec le positionnement prix.",
+    before: {
+      label: "Avant",
+      text: "Enfilade vintage années 60. Bon état général. Quelques traces d'usure. Dimensions : 180 × 45 × 75 cm. Livraison possible.",
+    },
+    after: {
+      label: "Après",
+      text: "Enfilade Karlit, circa 1960. Structure en chêne massif, façades laquées blanc cassé, piètement fuselé laqué noir — une combinaison sobre qui situe immédiatement la pièce dans le meilleur du mobilier fonctionnaliste nordique. Patine homogène, état très satisfaisant. 180 × 45 × 75 cm.",
+    },
+  },
+  {
+    id: 2,
+    meta: "Assise · 1950s · Lot de 3",
+    title: "Trois chaises années 1950",
+    summary:
+      "Transformation d'un lot utilitaire en ensemble cohérent, lisible et plus désirable à l'œil comme sur la page.",
+    before: {
+      label: "Avant",
+      text: "Lot de 3 chaises vintage années 50. Structure bois, assises rembourrées tissu. Usure normale. À voir sur place.",
+    },
+    after: {
+      label: "Après",
+      text: "Ensemble de trois chaises, circa 1955. Piètement en hêtre tourné, assises et dossiers garnis d'un tissu bouclé ocre d'origine — encore présent et solide. La sobriété de la ligne et la chaleur du tissu en font un ensemble immédiatement cohérent, rare à trouver complet.",
+    },
+  },
+  {
+    id: 3,
+    meta: "Bureau · Vers 1880",
+    title: "Bureau ancien",
+    summary:
+      "Justification du positionnement et du prix par la structure, l'usage, la qualité et la lisibilité historique.",
+    before: {
+      label: "Avant",
+      text: "Bureau ancien style Louis-Philippe. Bois massif. Nombreux tiroirs. Bon état. Prix ferme. Idéal bureau ou cabinet.",
+    },
+    after: {
+      label: "Après",
+      text: "Bureau à cylindre, vers 1880, dans le goût Louis-Philippe. Noyer massif, neuf tiroirs en ceinture, dessus en cuir maroquiné bordeaux d'origine. La solidité de la construction, la lisibilité du style et la rareté du cuir encore intact justifient pleinement le positionnement. Pièce de caractère, utilisable immédiatement.",
+    },
+  },
+];
+
+function ExampleCard({ example }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div
+      className={`example ${hovered ? "example-hovered" : ""}`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className="example-default">
+        <div className="example-meta">{example.meta}</div>
+        <h3>{example.title}</h3>
+        <p>{example.summary}</p>
+        <span className="example-hint">Survoler pour voir la réécriture →</span>
+      </div>
+
+      <div className="example-reveal">
+        <div className="example-col">
+          <div className="reveal-label reveal-label-before">
+            {example.before.label}
+          </div>
+          <p className="reveal-text reveal-text-before">{example.before.text}</p>
+        </div>
+        <div className="example-divider" />
+        <div className="example-col">
+          <div className="reveal-label reveal-label-after">
+            {example.after.label}
+          </div>
+          <p className="reveal-text reveal-text-after">{example.after.text}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Page() {
   return (
     <>
       <nav className="nav">
         <div className="container nav-inner">
-          <a href="#" className="nav-logo">Atelier Provenance</a>
+          <a href="#" className="nav-logo">
+            Atelier Provenance
+          </a>
           <div className="nav-links">
             <a href="#proposition">La proposition</a>
             <a href="#offres">Prestations</a>
@@ -18,85 +105,83 @@ export default function Page() {
       </nav>
 
       <main>
+        {/* HERO */}
         <section className="hero">
-          <div className="container hero-grid">
-            <div>
-              <p className="eyebrow">Atelier Provenance</p>
-              <h1>
-                Vous avez les bonnes pièces.
-                <br />
-                <em>Nous leur donnons le langage qu’elles méritent.</em>
-              </h1>
-              <p className="intro">
-                Rédaction et mise en valeur de mobilier de collection pour antiquaires,
-                marchands, galeries et vendeurs de design. Des fiches de vente claires,
-                désirables et prêtes à publier.
-              </p>
-              <div className="actions">
-                <a href="#contact" className="button button-primary">
-                  Demander un exemple gratuit
-                </a>
-                <a href="#offres" className="button button-secondary">
-                  Voir les prestations
-                </a>
-              </div>
-            </div>
-            <div className="hero-panel">
-              <div className="hero-card">
-                <p className="hero-label">Promesse</p>
-                <p>
-                  Augmenter la valeur perçue, clarifier la lecture et renforcer la
-                  désirabilité des pièces sans artifice.
-                </p>
-              </div>
+          <div className="container">
+            <p className="eyebrow">Atelier Provenance</p>
+            <h1>
+              Vous avez les bonnes pièces.
+              <br />
+              <em>Nous leur donnons le langage qu'elles méritent.</em>
+            </h1>
+            <p className="intro">
+              Rédaction et mise en valeur de mobilier de collection pour
+              antiquaires, marchands, galeries et vendeurs de design. Des fiches
+              de vente claires, désirables et prêtes à publier.
+            </p>
+            <div className="actions">
+              <a href="#contact" className="button button-primary">
+                Demander un exemple gratuit
+              </a>
+              <a href="#offres" className="button button-secondary">
+                Voir les prestations
+              </a>
             </div>
           </div>
+          <div className="hero-rule" />
         </section>
 
+        {/* BAND */}
         <section className="band">
           <div className="container grid-three">
             <div className="feature">
               <span className="feature-number">01</span>
               <p className="feature-title">Clarté</p>
               <p>
-                Titres positionnants, informations hiérarchisées, lecture immédiate.
+                Titres positionnants, informations hiérarchisées, lecture
+                immédiate.
               </p>
             </div>
             <div className="feature">
               <span className="feature-number">02</span>
               <p className="feature-title">Désirabilité</p>
               <p>
-                Mise en valeur sobre du design, de la matière, de l’époque et de la présence.
+                Mise en valeur sobre du design, de la matière, de l'époque et
+                de la présence.
               </p>
             </div>
             <div className="feature">
               <span className="feature-number">03</span>
               <p className="feature-title">Exploitation directe</p>
               <p>
-                Versions prêtes à publier pour site, marketplace, newsletter ou réseaux.
+                Versions prêtes à publier pour site, marketplace, newsletter ou
+                réseaux.
               </p>
             </div>
           </div>
         </section>
 
+        {/* CONSTAT */}
         <section className="section">
           <div className="container split">
             <div>
               <p className="eyebrow">Le constat</p>
               <h2>
-                Beaucoup d’objets sont bien choisis.
+                Beaucoup d'objets sont bien choisis.
                 <br />
                 <em>Peu sont réellement bien présentés.</em>
               </h2>
             </div>
             <div className="text-block">
               <p>
-                La plupart des annonces décrivent sans valoriser. Elles informent, mais ne
-                donnent ni lecture, ni cohérence, ni projection.
+                La plupart des annonces décrivent sans valoriser. Elles
+                informent, mais ne donnent ni lecture, ni cohérence, ni
+                projection.
               </p>
               <p>
-                Résultat : des objets sous-positionnés, une valeur perçue affaiblie et une
-                image de catalogue moins forte qu’elle ne pourrait l’être.
+                Résultat : des objets sous-positionnés, une valeur perçue
+                affaiblie et une image de catalogue moins forte qu'elle ne
+                pourrait l'être.
               </p>
               <div className="pull-quote">
                 « Un objet bien décrit se vend mieux — et au bon prix. »
@@ -105,41 +190,54 @@ export default function Page() {
           </div>
         </section>
 
+        {/* PROPOSITION */}
         <section className="section border-top" id="proposition">
           <div className="container">
             <div className="section-head">
               <p className="eyebrow">La proposition</p>
               <h2>Nous transformons des objets en récits de vente.</h2>
               <p className="section-intro">
-                Pas pour en dire plus. Pour rendre la valeur visible, clarifier la pièce et
-                aider l’acheteur à se projeter.
+                Pas pour en dire plus. Pour rendre la valeur visible, clarifier
+                la pièce et aider l'acheteur à se projeter.
               </p>
             </div>
             <div className="cards cards-three">
               <div className="card card-plain">
                 <div className="card-icon">—</div>
                 <h3>Structuration</h3>
-                <p>Titre positionnant, informations hiérarchisées, points saillants mis en avant.</p>
+                <p>
+                  Titre positionnant, informations hiérarchisées, points
+                  saillants mis en avant.
+                </p>
               </div>
               <div className="card card-plain">
                 <div className="card-icon">—</div>
                 <h3>Mise en valeur</h3>
-                <p>Vocabulaire précis, contexte cohérent, justification naturelle du prix.</p>
+                <p>
+                  Vocabulaire précis, contexte cohérent, justification naturelle
+                  du prix.
+                </p>
               </div>
               <div className="card card-plain">
                 <div className="card-icon">—</div>
                 <h3>Déclinaisons</h3>
-                <p>Version longue, version courte, extraits réutilisables selon les canaux.</p>
+                <p>
+                  Version longue, version courte, extraits réutilisables selon
+                  les canaux.
+                </p>
               </div>
             </div>
           </div>
         </section>
 
+        {/* OFFRES */}
         <section className="section section-alt" id="offres">
           <div className="container">
             <div className="section-head">
               <p className="eyebrow">Prestations</p>
-              <h2>Une gamme simple, pour tester, structurer, puis déléguer.</h2>
+              <h2>
+                Une gamme simple, pour tester, structurer, puis déléguer.
+              </h2>
             </div>
             <div className="cards cards-two">
               <div className="card">
@@ -148,8 +246,8 @@ export default function Page() {
                   <span className="price">390 €</span>
                 </div>
                 <p className="offer-desc">
-                  Une première démonstration concrète pour voir immédiatement ce que
-                  vos objets pourraient devenir.
+                  Une première démonstration concrète pour voir immédiatement ce
+                  que vos objets pourraient devenir.
                 </p>
                 <ul>
                   <li>Analyse de 10 objets</li>
@@ -157,7 +255,10 @@ export default function Page() {
                   <li>Recommandations concrètes</li>
                   <li>Appel de restitution de 30 minutes</li>
                 </ul>
-                <a href="#contact" className="button button-secondary offer-cta">
+                <a
+                  href="#contact"
+                  className="button button-secondary offer-cta"
+                >
                   Commencer
                 </a>
               </div>
@@ -169,8 +270,8 @@ export default function Page() {
                   <span className="price">1 900 €</span>
                 </div>
                 <p className="offer-desc">
-                  L’offre centrale pour transformer un premier lot d’objets en catalogue
-                  plus lisible, plus cohérent et plus vendable.
+                  L'offre centrale pour transformer un premier lot d'objets en
+                  catalogue plus lisible, plus cohérent et plus vendable.
                 </p>
                 <ul>
                   <li>15 fiches premium prêtes à publier</li>
@@ -189,8 +290,8 @@ export default function Page() {
                   <span className="price">3 000 – 6 000 € / mois</span>
                 </div>
                 <p className="offer-desc">
-                  Une externalisation fluide pour les structures qui ont du volume et
-                  veulent gagner du temps sans perdre en niveau.
+                  Une externalisation fluide pour les structures qui ont du
+                  volume et veulent gagner du temps sans perdre en niveau.
                 </p>
                 <ul>
                   <li>30 à 60 fiches par mois</li>
@@ -198,7 +299,10 @@ export default function Page() {
                   <li>Support asynchrone</li>
                   <li>Production régulière et homogène</li>
                 </ul>
-                <a href="#contact" className="button button-secondary offer-cta">
+                <a
+                  href="#contact"
+                  className="button button-secondary offer-cta"
+                >
                   Nous contacter
                 </a>
               </div>
@@ -209,16 +313,19 @@ export default function Page() {
                   <span className="price">8 000 – 20 000 €</span>
                 </div>
                 <p className="offer-desc">
-                  Pour les catalogues à structurer en profondeur : refonte éditoriale,
-                  harmonisation et transmission de méthode.
+                  Pour les catalogues à structurer en profondeur : refonte
+                  éditoriale, harmonisation et transmission de méthode.
                 </p>
                 <ul>
                   <li>Refonte catalogue complète</li>
                   <li>Storytelling global de la marque</li>
                   <li>Templates et process documentés</li>
-                  <li>Formation d’équipe incluse</li>
+                  <li>Formation d'équipe incluse</li>
                 </ul>
-                <a href="#contact" className="button button-secondary offer-cta">
+                <a
+                  href="#contact"
+                  className="button button-secondary offer-cta"
+                >
                   Nous contacter
                 </a>
               </div>
@@ -226,203 +333,41 @@ export default function Page() {
           </div>
         </section>
 
-        <section className="section" id="exemples">
-          <div className="container section-head examples-head">
-            <p className="eyebrow">Exemples</p>
-            <h2>Avant / après : trois cas complets.</h2>
-            <p className="section-intro">
-              Chaque exemple montre un objet réel, un point de départ fonctionnel et une
-              reformulation pensée pour renforcer lecture, désirabilité et cohérence.
-            </p>
-          </div>
-
-          <div className="container examples-stack">
-            <article className="case-study">
-              <div className="case-top">
-                <div>
-                  <p className="case-meta">Exemple 1 · Enfilade suédoise Karlit, années 1960</p>
-                  <h3>Du descriptif correct à une pièce vraiment positionnée.</h3>
-                </div>
-                <div className="case-specs">
-                  <span>Teck miel</span>
-                  <span>L 159,5 · P 42 · H 80 cm</span>
-                  <span>Très bon état</span>
-                </div>
-              </div>
-
-              <div className="case-image-grid">
-                <div className="image-card">
-                  <img src="/images/enfilade-karlit.jpg" alt="Enfilade suédoise Karlit en teck miel" />
-                </div>
-                <div className="image-card image-placeholder">
-                  <div>
-                    <p>Capture de l’annonce d’origine</p>
-                    <span>À ajouter dans /public/images/annonce-enfilade-karlit.jpg</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="before-after-grid">
-                <div className="text-panel before-panel">
-                  <p className="panel-label">Avant</p>
-                  <p>
-                    Enfilade scandinave vintage suédoise Karlit. Enfilade suédoise des années 60,
-                    teck miel, tampon Karlit présent, portes coulissantes et tiroirs, bon état général,
-                    nettoyage récent, dimensions : L 159,5 × P 42 × H 80 cm.
-                  </p>
-                </div>
-                <div className="text-panel after-panel">
-                  <p className="panel-label">Après</p>
-                  <h4>Enfilade suédoise Karlit, années 1960 — teck miel, ligne basse et équilibre nordique</h4>
-                  <p>
-                    Une enfilade suédoise signée Karlit, représentative du design des années 1960,
-                    où la précision du dessin rencontre la chaleur stable du teck. Une pièce à la
-                    présence calme, structurante, prête à s’intégrer sans effort dans un intérieur contemporain.
-                  </p>
-                  <p>
-                    Cette enfilade des années 1960, attribuée à la maison Karlit, incarne avec justesse
-                    l’esthétique scandinave de l’époque : recherche d’équilibre entre sobriété formelle,
-                    qualité d’exécution et fonctionnalité réelle. Réalisée en teck à la teinte miel, elle
-                    développe une silhouette basse et étirée. La façade se compose de deux portes
-                    coulissantes latérales et d’un ensemble central de tiroirs inclinés, apportant un rythme
-                    discret et une lecture graphique élégante.
-                  </p>
-                  <p>
-                    Ce type d’enfilade s’intègre naturellement dans un salon, une salle à manger ou une entrée,
-                    où il apporte une structure visuelle stable sans alourdir l’espace. Sa ligne basse permet
-                    d’installer au-dessus un tableau, un miroir ou une composition d’objets.
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article className="case-study">
-              <div className="case-top">
-                <div>
-                  <p className="case-meta">Exemple 2 · Ensemble de trois chaises années 1950</p>
-                  <h3>Du lot utilitaire à l’ensemble cohérent et désirable.</h3>
-                </div>
-                <div className="case-specs">
-                  <span>Métal noir · velours vert</span>
-                  <span>3 chaises dont 1 à accoudoirs</span>
-                  <span>H 83 · L 60 · P 53 cm</span>
-                </div>
-              </div>
-
-              <div className="case-image-grid">
-                <div className="image-card">
-                  <img src="/images/chaises-1950.jpg" alt="Trois chaises années 1950 en métal noir et velours vert" />
-                </div>
-                <div className="image-card image-placeholder">
-                  <div>
-                    <p>Capture de l’annonce d’origine</p>
-                    <span>À ajouter dans /public/images/annonce-chaises-1950.jpg</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="before-after-grid">
-                <div className="text-panel before-panel">
-                  <p className="panel-label">Avant</p>
-                  <p>
-                    3 chaises années 50 métal et velours vert, idéales pour bureau ou table,
-                    bon état, velours nettoyé, traces d’usage sur le métal, dimensions :
-                    H 83 × L 60 × P 53 cm.
-                  </p>
-                </div>
-                <div className="text-panel after-panel">
-                  <p className="panel-label">Après</p>
-                  <h4>Ensemble de trois chaises années 1950 — structure métallique noire et velours vert, esprit bureau moderniste</h4>
-                  <p>
-                    Un ensemble cohérent de chaises des années 1950, où la rigueur du métal rencontre
-                    la douceur du velours vert. Une esthétique fonctionnelle et chaleureuse, idéale pour
-                    structurer un coin bureau ou une table de repas sans surcharge.
-                  </p>
-                  <p>
-                    Cet ensemble se caractérise par une structure métallique noire aux lignes simples et efficaces,
-                    typiques du mobilier de travail et d’après-guerre. Les assises et dossiers habillés d’un velours
-                    vert récemment nettoyé apportent un contraste intéressant entre structure et matière.
-                    L’une des chaises est dotée d’accoudoirs, ce qui introduit une variation subtile permettant
-                    de composer l’espace plus librement.
-                  </p>
-                  <p>
-                    Quelques traces d’usage sont visibles sur le métal, cohérentes avec l’âge. L’ensemble est propre,
-                    prêt à être utilisé immédiatement.
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article className="case-study">
-              <div className="case-top">
-                <div>
-                  <p className="case-meta">Exemple 3 · Bureau ancien à compartiments, Europe du Nord vers 1880</p>
-                  <h3>Du meuble ancien restauré à l’outil de travail historique structuré.</h3>
-                </div>
-                <div className="case-specs">
-                  <span>Europe du Nord</span>
-                  <span>Vers 1880</span>
-                  <span>H 108 · L 106 · P 58 cm</span>
-                </div>
-              </div>
-
-              <div className="case-image-grid">
-                <div className="image-card">
-                  <img src="/images/bureau-1880.jpg" alt="Bureau ancien à compartiments en bois vers 1880" />
-                </div>
-                <div className="image-card image-placeholder">
-                  <div>
-                    <p>Capture de l’annonce d’origine</p>
-                    <span>À ajouter dans /public/images/annonce-bureau-1880.jpg</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="before-after-grid">
-                <div className="text-panel before-panel">
-                  <p className="panel-label">Avant</p>
-                  <p>
-                    Bureau ancien à compartiments de rangement, Europe du Nord, vers 1880,
-                    après restauration. Bureau ancien fin XIXe siècle, très bon état après restauration,
-                    dimensions : H 108 × L 106 × P 58 cm.
-                  </p>
-                </div>
-                <div className="text-panel after-panel">
-                  <p className="panel-label">Après</p>
-                  <h4>Bureau ancien à compartiments, Europe du Nord vers 1880 — architecture structurée et restauration soignée</h4>
-                  <p>
-                    Un bureau de la fin du XIXe siècle conçu comme un véritable espace de travail structuré :
-                    compartiments, organisation, logique d’usage. Une pièce restaurée professionnellement,
-                    prête à intégrer un intérieur actuel.
-                  </p>
-                  <p>
-                    Ce bureau ancien se distingue par une organisation intérieure développée. Il ne s’agit pas
-                    simplement d’un support, mais d’un véritable outil de travail pensé pour ordonner et hiérarchiser
-                    les gestes : ranger, classer, écrire, conserver. L’architecture du bureau est compacte mais
-                    fonctionnelle. Les compartiments et tiroirs sont disposés de manière à rendre l’ensemble
-                    immédiatement lisible.
-                  </p>
-                  <p>
-                    L’ensemble a fait l’objet d’une restauration professionnelle assurant à la fois la stabilité
-                    de la pièce et une lecture esthétique nette, tout en respectant son caractère d’origine.
-                  </p>
-                </div>
-              </div>
-            </article>
+        {/* EXEMPLES */}
+        <section className="section section-examples" id="exemples">
+          <div className="container">
+            <div className="section-head">
+              <p className="eyebrow">Exemples</p>
+              <h2>Ce que change une fiche bien construite.</h2>
+              <p className="section-intro">
+                Trois cas concrets. Survolez chaque carte pour voir la
+                réécriture avant / après.
+              </p>
+            </div>
+            <div className="examples-grid">
+              {examples.map((ex) => (
+                <ExampleCard key={ex.id} example={ex} />
+              ))}
+            </div>
           </div>
         </section>
 
+        {/* CONTACT */}
         <section className="section section-contact border-top" id="contact">
           <div className="container">
             <div className="contact-box">
               <p className="eyebrow">Contact</p>
-              <h2>Le plus simple : m’envoyer 2 ou 3 objets.</h2>
+              <h2>Le plus simple : m'envoyer 2 ou 3 objets.</h2>
               <p className="section-intro narrow">
-                Photos, prix, dimensions, état — et toute information disponible.
-                Je vous dirai si c’est un bon test et sous quelle forme commencer.
+                Photos, prix, dimensions, état — et toute information
+                disponible. Je vous dirai si c'est un bon test et sous quelle
+                forme commencer.
               </p>
               <div className="actions">
-                <a href="mailto:contact@atelierprovenance.fr" className="button button-primary">
+                <a
+                  href="mailto:contact@atelierprovenance.fr"
+                  className="button button-primary"
+                >
                   Écrire un email
                 </a>
                 <a href="#offres" className="button button-secondary">
@@ -434,19 +379,32 @@ export default function Page() {
         </section>
       </main>
 
+      {/* FOOTER */}
       <footer className="footer">
         <div className="container footer-inner">
           <p className="footer-logo">Atelier Provenance</p>
           <p className="footer-copy">
             © {new Date().getFullYear()} — Rédaction de mobilier de collection.
           </p>
-          <a href="mailto:contact@atelierprovenance.fr" className="footer-email">
+          <a
+            href="mailto:contact@atelierprovenance.fr"
+            className="footer-email"
+          >
             contact@atelierprovenance.fr
           </a>
         </div>
       </footer>
 
       <style jsx global>{`
+        /* ── PALETTE ──────────────────────────────────────────
+           Crème     #F5F0E8
+           Beige     #EDE5D8
+           Ocre clair #D4A96A
+           Ocre foncé #A87C3E
+           Brun chaud #3D2B1F
+           Neutre     #6B5B4E
+        ──────────────────────────────────────────────────── */
+
         *, *::before, *::after {
           box-sizing: border-box;
         }
@@ -458,8 +416,8 @@ export default function Page() {
         body {
           margin: 0;
           font-family: Georgia, "Times New Roman", serif;
-          color: #2d241d;
-          background: #f6efe4;
+          color: #3D2B1F;
+          background: #F5F0E8;
           -webkit-font-smoothing: antialiased;
         }
 
@@ -468,45 +426,42 @@ export default function Page() {
           text-decoration: none;
         }
 
-        img {
-          display: block;
-          width: 100%;
-          height: auto;
-        }
-
         main {
           width: 100%;
         }
 
+        /* ── CONTAINER ── */
         .container {
           width: 100%;
-          max-width: 1180px;
+          max-width: 1140px;
           margin: 0 auto;
           padding: 0 32px;
         }
 
+        /* ── NAV ── */
         .nav {
           position: sticky;
           top: 0;
           z-index: 100;
-          background: rgba(246, 239, 228, 0.92);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          border-bottom: 1px solid #dccbb7;
+          background: rgba(245, 240, 232, 0.92);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+          border-bottom: 1px solid #DDD5C4;
         }
 
         .nav-inner {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          height: 68px;
+          height: 64px;
           gap: 32px;
         }
 
         .nav-logo {
           font-size: 0.95rem;
-          letter-spacing: 0.08em;
-          font-weight: 600;
+          letter-spacing: 0.1em;
+          font-weight: 500;
+          color: #3D2B1F;
           white-space: nowrap;
         }
 
@@ -516,107 +471,70 @@ export default function Page() {
           gap: 28px;
           font-family: Arial, Helvetica, sans-serif;
           font-size: 0.875rem;
-          color: #6a5648;
+          color: #6B5B4E;
         }
 
         .nav-links a:not(.button):hover {
-          color: #2d241d;
+          color: #3D2B1F;
         }
 
+        /* ── HERO ── */
         .hero {
-          padding: 104px 0 84px;
-          background: linear-gradient(180deg, #f6efe4 0%, #f3eadc 100%);
+          padding: 104px 0 88px;
+          background: #F5F0E8;
         }
 
-        .hero-grid {
-          display: grid;
-          grid-template-columns: 1.2fr 0.8fr;
-          gap: 48px;
-          align-items: end;
-        }
-
-        .hero-panel {
-          display: flex;
-          justify-content: flex-end;
-        }
-
-        .hero-card {
+        .hero-rule {
           width: 100%;
-          max-width: 320px;
-          background: #fffaf2;
-          border: 1px solid #dccbb7;
-          border-radius: 20px;
-          padding: 24px;
-          box-shadow: 0 10px 30px rgba(88, 62, 40, 0.08);
+          height: 1px;
+          background: #DDD5C4;
+          margin-top: 88px;
         }
 
-        .hero-label,
-        .panel-label,
-        .case-meta,
-        .feature-title,
-        .feature-number,
-        .eyebrow {
-          font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .hero-label {
-          margin: 0 0 12px;
-          font-size: 11px;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          color: #a06d2c;
-        }
-
+        /* ── TYPOGRAPHY ── */
         .eyebrow {
           margin: 0 0 20px;
           font-size: 11px;
-          letter-spacing: 0.24em;
+          letter-spacing: 0.28em;
           text-transform: uppercase;
-          color: #9a744d;
+          color: #A87C3E;
+          font-family: Arial, Helvetica, sans-serif;
         }
 
-        h1, h2, h3, h4, p, ul {
+        h1, h2, h3, p, ul {
           margin-top: 0;
         }
 
         h1 {
           max-width: 900px;
           margin-bottom: 32px;
-          font-size: clamp(2.7rem, 5.5vw, 5rem);
-          line-height: 1.04;
+          font-size: clamp(2.6rem, 5.5vw, 5rem);
+          line-height: 1.05;
           font-weight: 400;
           letter-spacing: -0.02em;
-          color: #2d241d;
+          color: #3D2B1F;
         }
 
         h1 em, h2 em {
           font-style: italic;
-          color: #8d5a1c;
+          color: #A87C3E;
         }
 
         h2 {
           margin-bottom: 20px;
-          font-size: clamp(1.95rem, 3vw, 2.8rem);
-          line-height: 1.14;
+          font-size: clamp(1.9rem, 3vw, 2.75rem);
+          line-height: 1.15;
           font-weight: 400;
           letter-spacing: -0.015em;
-          color: #2d241d;
+          color: #3D2B1F;
         }
 
         h3 {
           margin-bottom: 12px;
           font-size: 1.2rem;
           line-height: 1.35;
-          font-weight: 600;
-          color: #2d241d;
-        }
-
-        h4 {
-          margin-bottom: 14px;
-          font-size: 1.05rem;
-          line-height: 1.5;
-          font-weight: 600;
-          color: #2d241d;
+          font-weight: 500;
+          color: #3D2B1F;
         }
 
         .intro,
@@ -624,12 +542,9 @@ export default function Page() {
         .text-block p,
         .card p,
         .offer-desc,
-        .example p,
-        .feature p,
-        .text-panel p,
-        .hero-card p {
+        .feature p {
           font-family: Arial, Helvetica, sans-serif;
-          color: #5e5146;
+          color: #6B5B4E;
           line-height: 1.85;
         }
 
@@ -641,32 +556,43 @@ export default function Page() {
 
         .section-intro {
           font-size: 1.05rem;
-          max-width: 760px;
+          max-width: 680px;
           margin-bottom: 0;
         }
 
+        /* ── SECTIONS ── */
         .section {
           padding: 96px 0;
+          background: #F5F0E8;
         }
 
         .section-alt {
-          background: #f0e5d4;
+          background: #EDE5D8;
+        }
+
+        .section-examples {
+          background: #F5F0E8;
+        }
+
+        .section-contact {
+          background: #EDE5D8;
         }
 
         .border-top {
-          border-top: 1px solid #dccbb7;
+          border-top: 1px solid #DDD5C4;
         }
 
         .section-head {
-          max-width: 900px;
+          max-width: 840px;
           margin-bottom: 52px;
         }
 
+        /* ── BAND ── */
         .band {
-          background: #fffaf2;
-          border-top: 1px solid #dccbb7;
-          border-bottom: 1px solid #dccbb7;
-          padding: 40px 0;
+          background: #EDE5D8;
+          border-top: 1px solid #DDD5C4;
+          border-bottom: 1px solid #DDD5C4;
+          padding: 44px 0;
         }
 
         .grid-three {
@@ -676,37 +602,40 @@ export default function Page() {
         }
 
         .feature {
-          padding: 8px 36px 8px 0;
-          border-right: 1px solid #e3d2be;
+          padding: 8px 40px 8px 0;
+          border-right: 1px solid #DDD5C4;
         }
 
         .feature:last-child {
           border-right: none;
           padding-right: 0;
-          padding-left: 36px;
+          padding-left: 40px;
         }
 
         .feature:not(:first-child):not(:last-child) {
-          padding-left: 36px;
+          padding-left: 40px;
         }
 
         .feature-number {
           display: block;
+          font-family: Arial, Helvetica, sans-serif;
           font-size: 11px;
-          color: #c5a17a;
-          letter-spacing: 0.1em;
+          color: #D4A96A;
+          letter-spacing: 0.12em;
           margin-bottom: 10px;
         }
 
         .feature-title {
           margin-bottom: 8px;
           font-size: 11px;
-          letter-spacing: 0.2em;
+          letter-spacing: 0.22em;
           text-transform: uppercase;
-          color: #9a744d;
-          font-weight: 700;
+          color: #A87C3E;
+          font-family: Arial, Helvetica, sans-serif;
+          font-weight: 600;
         }
 
+        /* ── SPLIT ── */
         .split {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -718,18 +647,20 @@ export default function Page() {
           margin-top: 20px;
         }
 
+        /* ── PULL QUOTE ── */
         .pull-quote {
           margin-top: 32px;
           padding: 20px 24px;
-          border-left: 2px solid #a06d2c;
+          border-left: 2px solid #D4A96A;
           font-style: italic;
           font-size: 1.05rem;
-          color: #5a4330;
-          line-height: 1.6;
-          background: #fff7ec;
+          color: #3D2B1F;
+          line-height: 1.7;
+          background: #EDE5D8;
           border-radius: 0 10px 10px 0;
         }
 
+        /* ── CARDS ── */
         .cards {
           display: grid;
           gap: 20px;
@@ -744,75 +675,76 @@ export default function Page() {
         }
 
         .card {
-          border: 1px solid #dccbb7;
-          border-radius: 22px;
-          background: #fffaf2;
+          border: 1px solid #DDD5C4;
+          border-radius: 20px;
+          background: #F5F0E8;
           padding: 32px;
           display: flex;
           flex-direction: column;
-          transition: box-shadow 0.25s ease, transform 0.2s ease;
+          transition: box-shadow 0.25s ease;
         }
 
         .card:hover {
-          box-shadow: 0 8px 30px rgba(88, 62, 40, 0.08);
-          transform: translateY(-2px);
+          box-shadow: 0 4px 28px rgba(61, 43, 31, 0.09);
         }
 
         .card-plain {
-          background: #fff7ec;
+          background: #EDE5D8;
+          border-color: transparent;
         }
 
         .card-icon {
           font-size: 1.4rem;
           margin-bottom: 20px;
-          color: #c5a17a;
+          color: #D4A96A;
           letter-spacing: 0.05em;
         }
 
         .card-featured {
           border-width: 1.5px;
-          border-color: #8d5a1c;
-          background: linear-gradient(180deg, #8d5a1c 0%, #6e4416 100%);
-          color: #fff7ec;
+          border-color: #3D2B1F;
+          background: #3D2B1F;
+          color: #F5F0E8;
           position: relative;
         }
 
         .card-featured h3 {
-          color: #fff7ec;
+          color: #F5F0E8;
         }
 
         .card-featured .offer-desc,
         .card-featured ul {
-          color: #f4e7d7;
+          color: #C4B09A;
         }
 
         .card-featured .price {
-          color: #f3d2aa;
+          color: #D4A96A;
         }
 
         .card-featured .button-primary {
-          background: #fffaf2;
-          color: #6e4416;
+          background: #D4A96A;
+          color: #3D2B1F;
         }
 
         .card-featured .button-primary:hover {
-          background: #f4eadc;
+          background: #C49A58;
         }
 
         .badge {
           display: inline-block;
           font-family: Arial, Helvetica, sans-serif;
-          font-size: 11px;
-          letter-spacing: 0.15em;
+          font-size: 10px;
+          letter-spacing: 0.18em;
           text-transform: uppercase;
-          color: #6e4416;
-          background: #fffaf2;
+          color: #3D2B1F;
+          background: #D4A96A;
           border-radius: 999px;
-          padding: 4px 12px;
+          padding: 4px 14px;
           margin-bottom: 20px;
           align-self: flex-start;
         }
 
+        /* ── OFFER ── */
         .offer-head {
           display: flex;
           align-items: baseline;
@@ -825,7 +757,7 @@ export default function Page() {
         .price {
           font-family: Arial, Helvetica, sans-serif;
           font-size: 0.9rem;
-          color: #8b6f58;
+          color: #A87C3E;
           white-space: nowrap;
         }
 
@@ -836,7 +768,7 @@ export default function Page() {
         ul {
           padding-left: 16px;
           font-family: Arial, Helvetica, sans-serif;
-          color: #5b4b3f;
+          color: #6B5B4E;
           line-height: 1.9;
           margin-bottom: 28px;
           flex: 1;
@@ -851,131 +783,143 @@ export default function Page() {
           margin-top: auto;
         }
 
-        .examples-head {
-          margin-bottom: 36px;
-        }
-
-        .examples-stack {
+        /* ── EXAMPLES ── */
+        .examples-grid {
           display: grid;
-          gap: 32px;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 20px;
         }
 
-        .case-study {
-          border: 1px solid #dccbb7;
-          border-radius: 26px;
-          background: #fffaf2;
-          padding: 30px;
-          box-shadow: 0 10px 30px rgba(88, 62, 40, 0.05);
-        }
-
-        .case-top {
-          display: flex;
-          justify-content: space-between;
-          align-items: start;
-          gap: 24px;
-          margin-bottom: 24px;
-        }
-
-        .case-meta {
-          margin: 0 0 8px;
-          font-size: 11px;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
-          color: #a06d2c;
-        }
-
-        .case-specs {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 10px;
-          justify-content: flex-end;
-        }
-
-        .case-specs span {
-          font-family: Arial, Helvetica, sans-serif;
-          font-size: 0.8rem;
-          color: #7f6856;
-          border: 1px solid #e3d2be;
-          border-radius: 999px;
-          padding: 6px 10px;
-          background: #fff7ec;
-        }
-
-        .case-image-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 18px;
-          margin-bottom: 22px;
-        }
-
-        .image-card {
+        .example {
+          border: 1px solid #DDD5C4;
+          border-radius: 20px;
+          padding: 28px;
+          background: #F5F0E8;
+          cursor: default;
+          position: relative;
+          min-height: 240px;
+          transition: background 0.3s ease, border-color 0.3s ease,
+            box-shadow 0.3s ease;
           overflow: hidden;
-          border-radius: 18px;
-          border: 1px solid #e3d2be;
-          background: #f3eadc;
-          min-height: 280px;
         }
 
-        .image-card img {
-          height: 100%;
-          min-height: 280px;
-          object-fit: cover;
+        .example-default {
+          transition: opacity 0.25s ease, transform 0.25s ease;
+          opacity: 1;
+          transform: translateY(0);
         }
 
-        .image-placeholder {
+        .example-reveal {
+          position: absolute;
+          inset: 0;
+          padding: 24px 28px;
           display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          padding: 24px;
-          color: #7f6856;
+          gap: 0;
+          opacity: 0;
+          transform: translateY(10px);
+          transition: opacity 0.3s ease 0.05s, transform 0.3s ease 0.05s;
+          pointer-events: none;
+          overflow: hidden;
         }
 
-        .image-placeholder p {
-          margin-bottom: 10px;
+        .example-hovered {
+          background: #3D2B1F;
+          border-color: #3D2B1F;
+          box-shadow: 0 8px 40px rgba(61, 43, 31, 0.2);
+        }
+
+        .example-hovered .example-default {
+          opacity: 0;
+          transform: translateY(-8px);
+          pointer-events: none;
+        }
+
+        .example-hovered .example-reveal {
+          opacity: 1;
+          transform: translateY(0);
+          pointer-events: auto;
+        }
+
+        .example-meta {
           font-family: Arial, Helvetica, sans-serif;
+          font-size: 11px;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: #A87C3E;
+          margin-bottom: 10px;
+        }
+
+        .example h3 {
+          margin-bottom: 10px;
+          font-size: 1.1rem;
+        }
+
+        .example p {
+          font-family: Arial, Helvetica, sans-serif;
+          color: #6B5B4E;
+          line-height: 1.75;
+          font-size: 0.9rem;
+        }
+
+        .example-hint {
+          display: block;
+          margin-top: 18px;
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 11px;
+          letter-spacing: 0.12em;
+          color: #D4A96A;
+          text-transform: uppercase;
+        }
+
+        .example-col {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+        }
+
+        .example-divider {
+          width: 1px;
+          background: rgba(212, 169, 106, 0.3);
+          margin: 0 20px;
+          flex-shrink: 0;
+        }
+
+        .reveal-label {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 10px;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          margin-bottom: 12px;
           font-weight: 600;
         }
 
-        .image-placeholder span {
+        .reveal-label-before {
+          color: #7A6A5A;
+        }
+
+        .reveal-label-after {
+          color: #D4A96A;
+        }
+
+        .reveal-text {
           font-family: Arial, Helvetica, sans-serif;
-          font-size: 0.85rem;
-          line-height: 1.6;
+          font-size: 0.82rem;
+          line-height: 1.8;
+          margin: 0;
+          overflow-y: auto;
         }
 
-        .before-after-grid {
-          display: grid;
-          grid-template-columns: 0.85fr 1.15fr;
-          gap: 18px;
+        .reveal-text-before {
+          color: #8A7A6A;
+          font-style: italic;
         }
 
-        .text-panel {
-          border-radius: 18px;
-          padding: 24px;
+        .reveal-text-after {
+          color: #EDE5D8;
         }
 
-        .before-panel {
-          background: #f3eadc;
-          border: 1px solid #e3d2be;
-        }
-
-        .after-panel {
-          background: #fff7ec;
-          border: 1px solid #dccbb7;
-        }
-
-        .panel-label {
-          margin: 0 0 12px;
-          font-size: 11px;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
-          color: #9a744d;
-        }
-
-        .section-contact {
-          background: #efe2cf;
-        }
-
+        /* ── CONTACT ── */
         .contact-box {
           max-width: 780px;
         }
@@ -985,6 +929,7 @@ export default function Page() {
           margin-bottom: 36px;
         }
 
+        /* ── BUTTONS ── */
         .actions {
           display: flex;
           flex-wrap: wrap;
@@ -996,7 +941,7 @@ export default function Page() {
           align-items: center;
           justify-content: center;
           min-height: 48px;
-          padding: 0 24px;
+          padding: 0 26px;
           border-radius: 999px;
           font-family: Arial, Helvetica, sans-serif;
           font-size: 0.9rem;
@@ -1012,29 +957,30 @@ export default function Page() {
         }
 
         .button-primary {
-          background: #8d5a1c;
-          color: #fffaf2;
+          background: #3D2B1F;
+          color: #F5F0E8;
         }
 
         .button-primary:hover {
-          background: #6e4416;
+          background: #5C3E2E;
         }
 
         .button-secondary {
-          border: 1px solid #c9ae91;
-          color: #6e4c2a;
+          border: 1px solid #C4B09A;
+          color: #3D2B1F;
           background: transparent;
         }
 
         .button-secondary:hover {
-          border-color: #a06d2c;
-          background: #fff7ec;
+          border-color: #A87C3E;
+          background: #EDE5D8;
         }
 
+        /* ── FOOTER ── */
         .footer {
-          border-top: 1px solid #dccbb7;
+          border-top: 1px solid #DDD5C4;
           padding: 36px 0;
-          background: #f6efe4;
+          background: #EDE5D8;
         }
 
         .footer-inner {
@@ -1047,47 +993,51 @@ export default function Page() {
 
         .footer-logo {
           font-size: 0.95rem;
-          font-weight: 600;
-          letter-spacing: 0.06em;
+          font-weight: 500;
+          letter-spacing: 0.08em;
           margin: 0;
+          color: #3D2B1F;
         }
 
         .footer-copy {
           font-family: Arial, Helvetica, sans-serif;
           font-size: 0.8rem;
-          color: #8b6f58;
+          color: #9A8A7A;
           margin: 0;
         }
 
         .footer-email {
           font-family: Arial, Helvetica, sans-serif;
           font-size: 0.85rem;
-          color: #6e4c2a;
+          color: #6B5B4E;
           transition: color 0.2s ease;
         }
 
         .footer-email:hover {
-          color: #8d5a1c;
+          color: #A87C3E;
         }
 
+        /* ── RESPONSIVE ── */
         @media (max-width: 960px) {
           .container {
             padding: 0 24px;
           }
 
-          .hero-grid,
           .grid-three,
           .cards-three,
           .cards-two,
           .split,
-          .case-image-grid,
-          .before-after-grid {
+          .examples-grid {
             grid-template-columns: 1fr;
+          }
+
+          .split {
+            gap: 48px;
           }
 
           .feature {
             border-right: none;
-            border-bottom: 1px solid #e3d2be;
+            border-bottom: 1px solid #DDD5C4;
             padding: 0 0 24px 0 !important;
           }
 
@@ -1100,24 +1050,31 @@ export default function Page() {
             padding: 72px 0 64px;
           }
 
-          .section {
-            padding: 72px 0;
+          .hero-rule {
+            margin-top: 64px;
           }
 
-          .split {
-            gap: 48px;
+          .section {
+            padding: 72px 0;
           }
 
           .nav-links a:not(.button) {
             display: none;
           }
 
-          .case-top {
-            flex-direction: column;
+          .example {
+            min-height: auto;
           }
 
-          .case-specs {
-            justify-content: flex-start;
+          .example-reveal {
+            flex-direction: column;
+            gap: 20px;
+          }
+
+          .example-divider {
+            width: 100%;
+            height: 1px;
+            margin: 0;
           }
 
           .footer-inner {
@@ -1136,13 +1093,13 @@ export default function Page() {
             padding: 56px 0;
           }
 
+          .actions {
+            flex-direction: column;
+          }
+
           .button {
             width: 100%;
             justify-content: center;
-          }
-
-          .actions {
-            flex-direction: column;
           }
         }
       `}</style>
