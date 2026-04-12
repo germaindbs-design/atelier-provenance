@@ -18,34 +18,41 @@ export default function Page() {
       </nav>
 
       <main>
-
-        {/* HERO */}
         <section className="hero">
-          <div className="container">
-            <p className="eyebrow">Atelier Provenance</p>
-            <h1>
-              Vous avez les bonnes pièces.
-              <br />
-              <em>Nous leur donnons le langage qu'elles méritent.</em>
-            </h1>
-            <p className="intro">
-              Rédaction et mise en valeur de mobilier de collection pour antiquaires,
-              marchands, galeries et vendeurs de design. Des fiches de vente claires,
-              désirables et prêtes à publier.
-            </p>
-            <div className="actions">
-              <a href="#contact" className="button button-primary">
-                Demander un exemple gratuit
-              </a>
-              <a href="#offres" className="button button-secondary">
-                Voir les prestations
-              </a>
+          <div className="container hero-grid">
+            <div>
+              <p className="eyebrow">Atelier Provenance</p>
+              <h1>
+                Vous avez les bonnes pièces.
+                <br />
+                <em>Nous leur donnons le langage qu’elles méritent.</em>
+              </h1>
+              <p className="intro">
+                Rédaction et mise en valeur de mobilier de collection pour antiquaires,
+                marchands, galeries et vendeurs de design. Des fiches de vente claires,
+                désirables et prêtes à publier.
+              </p>
+              <div className="actions">
+                <a href="#contact" className="button button-primary">
+                  Demander un exemple gratuit
+                </a>
+                <a href="#offres" className="button button-secondary">
+                  Voir les prestations
+                </a>
+              </div>
+            </div>
+            <div className="hero-panel">
+              <div className="hero-card">
+                <p className="hero-label">Promesse</p>
+                <p>
+                  Augmenter la valeur perçue, clarifier la lecture et renforcer la
+                  désirabilité des pièces sans artifice.
+                </p>
+              </div>
             </div>
           </div>
-          <div className="hero-rule" />
         </section>
 
-        {/* BAND */}
         <section className="band">
           <div className="container grid-three">
             <div className="feature">
@@ -59,7 +66,7 @@ export default function Page() {
               <span className="feature-number">02</span>
               <p className="feature-title">Désirabilité</p>
               <p>
-                Mise en valeur sobre du design, de la matière, de l'époque et de la présence.
+                Mise en valeur sobre du design, de la matière, de l’époque et de la présence.
               </p>
             </div>
             <div className="feature">
@@ -72,13 +79,12 @@ export default function Page() {
           </div>
         </section>
 
-        {/* CONSTAT */}
         <section className="section">
           <div className="container split">
             <div>
               <p className="eyebrow">Le constat</p>
               <h2>
-                Beaucoup d'objets sont bien choisis.
+                Beaucoup d’objets sont bien choisis.
                 <br />
                 <em>Peu sont réellement bien présentés.</em>
               </h2>
@@ -90,7 +96,7 @@ export default function Page() {
               </p>
               <p>
                 Résultat : des objets sous-positionnés, une valeur perçue affaiblie et une
-                image de catalogue moins forte qu'elle ne pourrait l'être.
+                image de catalogue moins forte qu’elle ne pourrait l’être.
               </p>
               <div className="pull-quote">
                 « Un objet bien décrit se vend mieux — et au bon prix. »
@@ -99,7 +105,6 @@ export default function Page() {
           </div>
         </section>
 
-        {/* PROPOSITION */}
         <section className="section border-top" id="proposition">
           <div className="container">
             <div className="section-head">
@@ -107,7 +112,7 @@ export default function Page() {
               <h2>Nous transformons des objets en récits de vente.</h2>
               <p className="section-intro">
                 Pas pour en dire plus. Pour rendre la valeur visible, clarifier la pièce et
-                aider l'acheteur à se projeter.
+                aider l’acheteur à se projeter.
               </p>
             </div>
             <div className="cards cards-three">
@@ -130,7 +135,6 @@ export default function Page() {
           </div>
         </section>
 
-        {/* OFFRES */}
         <section className="section section-alt" id="offres">
           <div className="container">
             <div className="section-head">
@@ -138,7 +142,6 @@ export default function Page() {
               <h2>Une gamme simple, pour tester, structurer, puis déléguer.</h2>
             </div>
             <div className="cards cards-two">
-
               <div className="card">
                 <div className="offer-head">
                   <h3>Audit Express</h3>
@@ -166,7 +169,7 @@ export default function Page() {
                   <span className="price">1 900 €</span>
                 </div>
                 <p className="offer-desc">
-                  L'offre centrale pour transformer un premier lot d'objets en catalogue
+                  L’offre centrale pour transformer un premier lot d’objets en catalogue
                   plus lisible, plus cohérent et plus vendable.
                 </p>
                 <ul>
@@ -213,66 +216,210 @@ export default function Page() {
                   <li>Refonte catalogue complète</li>
                   <li>Storytelling global de la marque</li>
                   <li>Templates et process documentés</li>
-                  <li>Formation d'équipe incluse</li>
+                  <li>Formation d’équipe incluse</li>
                 </ul>
                 <a href="#contact" className="button button-secondary offer-cta">
                   Nous contacter
                 </a>
               </div>
-
             </div>
           </div>
         </section>
 
-        {/* EXEMPLES */}
         <section className="section" id="exemples">
-          <div className="container split split-reverse">
-            <div>
-              <p className="eyebrow">Exemples</p>
-              <h2>Ce que change une fiche bien construite.</h2>
-              <p className="section-intro" style={{ marginTop: "16px" }}>
-                Trois cas concrets pour illustrer l'écart entre une description
-                fonctionnelle et une fiche qui vend.
-              </p>
-            </div>
-            <div className="examples">
-              <div className="example">
-                <div className="example-meta">Mobilier de rangement · 1960s</div>
-                <h3>Enfilade Karlit</h3>
-                <p>
-                  Repositionnement d'une pièce déjà forte : meilleure lecture, meilleure
-                  présence, cohérence renforcée avec le positionnement prix.
-                </p>
+          <div className="container section-head examples-head">
+            <p className="eyebrow">Exemples</p>
+            <h2>Avant / après : trois cas complets.</h2>
+            <p className="section-intro">
+              Chaque exemple montre un objet réel, un point de départ fonctionnel et une
+              reformulation pensée pour renforcer lecture, désirabilité et cohérence.
+            </p>
+          </div>
+
+          <div className="container examples-stack">
+            <article className="case-study">
+              <div className="case-top">
+                <div>
+                  <p className="case-meta">Exemple 1 · Enfilade suédoise Karlit, années 1960</p>
+                  <h3>Du descriptif correct à une pièce vraiment positionnée.</h3>
+                </div>
+                <div className="case-specs">
+                  <span>Teck miel</span>
+                  <span>L 159,5 · P 42 · H 80 cm</span>
+                  <span>Très bon état</span>
+                </div>
               </div>
-              <div className="example">
-                <div className="example-meta">Assise · 1950s · Lot de 3</div>
-                <h3>Trois chaises années 1950</h3>
-                <p>
-                  Transformation d'un lot utilitaire en ensemble cohérent, lisible et
-                  plus désirable à l'œil comme sur la page.
-                </p>
+
+              <div className="case-image-grid">
+                <div className="image-card">
+                  <img src="/images/enfilade-karlit.jpg" alt="Enfilade suédoise Karlit en teck miel" />
+                </div>
+                <div className="image-card image-placeholder">
+                  <div>
+                    <p>Capture de l’annonce d’origine</p>
+                    <span>À ajouter dans /public/images/annonce-enfilade-karlit.jpg</span>
+                  </div>
+                </div>
               </div>
-              <div className="example">
-                <div className="example-meta">Bureau · Vers 1880</div>
-                <h3>Bureau ancien</h3>
-                <p>
-                  Justification du positionnement et du prix par la structure, l'usage,
-                  la qualité et la lisibilité historique.
-                </p>
+
+              <div className="before-after-grid">
+                <div className="text-panel before-panel">
+                  <p className="panel-label">Avant</p>
+                  <p>
+                    Enfilade scandinave vintage suédoise Karlit. Enfilade suédoise des années 60,
+                    teck miel, tampon Karlit présent, portes coulissantes et tiroirs, bon état général,
+                    nettoyage récent, dimensions : L 159,5 × P 42 × H 80 cm.
+                  </p>
+                </div>
+                <div className="text-panel after-panel">
+                  <p className="panel-label">Après</p>
+                  <h4>Enfilade suédoise Karlit, années 1960 — teck miel, ligne basse et équilibre nordique</h4>
+                  <p>
+                    Une enfilade suédoise signée Karlit, représentative du design des années 1960,
+                    où la précision du dessin rencontre la chaleur stable du teck. Une pièce à la
+                    présence calme, structurante, prête à s’intégrer sans effort dans un intérieur contemporain.
+                  </p>
+                  <p>
+                    Cette enfilade des années 1960, attribuée à la maison Karlit, incarne avec justesse
+                    l’esthétique scandinave de l’époque : recherche d’équilibre entre sobriété formelle,
+                    qualité d’exécution et fonctionnalité réelle. Réalisée en teck à la teinte miel, elle
+                    développe une silhouette basse et étirée. La façade se compose de deux portes
+                    coulissantes latérales et d’un ensemble central de tiroirs inclinés, apportant un rythme
+                    discret et une lecture graphique élégante.
+                  </p>
+                  <p>
+                    Ce type d’enfilade s’intègre naturellement dans un salon, une salle à manger ou une entrée,
+                    où il apporte une structure visuelle stable sans alourdir l’espace. Sa ligne basse permet
+                    d’installer au-dessus un tableau, un miroir ou une composition d’objets.
+                  </p>
+                </div>
               </div>
-            </div>
+            </article>
+
+            <article className="case-study">
+              <div className="case-top">
+                <div>
+                  <p className="case-meta">Exemple 2 · Ensemble de trois chaises années 1950</p>
+                  <h3>Du lot utilitaire à l’ensemble cohérent et désirable.</h3>
+                </div>
+                <div className="case-specs">
+                  <span>Métal noir · velours vert</span>
+                  <span>3 chaises dont 1 à accoudoirs</span>
+                  <span>H 83 · L 60 · P 53 cm</span>
+                </div>
+              </div>
+
+              <div className="case-image-grid">
+                <div className="image-card">
+                  <img src="/images/chaises-1950.jpg" alt="Trois chaises années 1950 en métal noir et velours vert" />
+                </div>
+                <div className="image-card image-placeholder">
+                  <div>
+                    <p>Capture de l’annonce d’origine</p>
+                    <span>À ajouter dans /public/images/annonce-chaises-1950.jpg</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="before-after-grid">
+                <div className="text-panel before-panel">
+                  <p className="panel-label">Avant</p>
+                  <p>
+                    3 chaises années 50 métal et velours vert, idéales pour bureau ou table,
+                    bon état, velours nettoyé, traces d’usage sur le métal, dimensions :
+                    H 83 × L 60 × P 53 cm.
+                  </p>
+                </div>
+                <div className="text-panel after-panel">
+                  <p className="panel-label">Après</p>
+                  <h4>Ensemble de trois chaises années 1950 — structure métallique noire et velours vert, esprit bureau moderniste</h4>
+                  <p>
+                    Un ensemble cohérent de chaises des années 1950, où la rigueur du métal rencontre
+                    la douceur du velours vert. Une esthétique fonctionnelle et chaleureuse, idéale pour
+                    structurer un coin bureau ou une table de repas sans surcharge.
+                  </p>
+                  <p>
+                    Cet ensemble se caractérise par une structure métallique noire aux lignes simples et efficaces,
+                    typiques du mobilier de travail et d’après-guerre. Les assises et dossiers habillés d’un velours
+                    vert récemment nettoyé apportent un contraste intéressant entre structure et matière.
+                    L’une des chaises est dotée d’accoudoirs, ce qui introduit une variation subtile permettant
+                    de composer l’espace plus librement.
+                  </p>
+                  <p>
+                    Quelques traces d’usage sont visibles sur le métal, cohérentes avec l’âge. L’ensemble est propre,
+                    prêt à être utilisé immédiatement.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article className="case-study">
+              <div className="case-top">
+                <div>
+                  <p className="case-meta">Exemple 3 · Bureau ancien à compartiments, Europe du Nord vers 1880</p>
+                  <h3>Du meuble ancien restauré à l’outil de travail historique structuré.</h3>
+                </div>
+                <div className="case-specs">
+                  <span>Europe du Nord</span>
+                  <span>Vers 1880</span>
+                  <span>H 108 · L 106 · P 58 cm</span>
+                </div>
+              </div>
+
+              <div className="case-image-grid">
+                <div className="image-card">
+                  <img src="/images/bureau-1880.jpg" alt="Bureau ancien à compartiments en bois vers 1880" />
+                </div>
+                <div className="image-card image-placeholder">
+                  <div>
+                    <p>Capture de l’annonce d’origine</p>
+                    <span>À ajouter dans /public/images/annonce-bureau-1880.jpg</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="before-after-grid">
+                <div className="text-panel before-panel">
+                  <p className="panel-label">Avant</p>
+                  <p>
+                    Bureau ancien à compartiments de rangement, Europe du Nord, vers 1880,
+                    après restauration. Bureau ancien fin XIXe siècle, très bon état après restauration,
+                    dimensions : H 108 × L 106 × P 58 cm.
+                  </p>
+                </div>
+                <div className="text-panel after-panel">
+                  <p className="panel-label">Après</p>
+                  <h4>Bureau ancien à compartiments, Europe du Nord vers 1880 — architecture structurée et restauration soignée</h4>
+                  <p>
+                    Un bureau de la fin du XIXe siècle conçu comme un véritable espace de travail structuré :
+                    compartiments, organisation, logique d’usage. Une pièce restaurée professionnellement,
+                    prête à intégrer un intérieur actuel.
+                  </p>
+                  <p>
+                    Ce bureau ancien se distingue par une organisation intérieure développée. Il ne s’agit pas
+                    simplement d’un support, mais d’un véritable outil de travail pensé pour ordonner et hiérarchiser
+                    les gestes : ranger, classer, écrire, conserver. L’architecture du bureau est compacte mais
+                    fonctionnelle. Les compartiments et tiroirs sont disposés de manière à rendre l’ensemble
+                    immédiatement lisible.
+                  </p>
+                  <p>
+                    L’ensemble a fait l’objet d’une restauration professionnelle assurant à la fois la stabilité
+                    de la pièce et une lecture esthétique nette, tout en respectant son caractère d’origine.
+                  </p>
+                </div>
+              </div>
+            </article>
           </div>
         </section>
 
-        {/* CONTACT */}
         <section className="section section-contact border-top" id="contact">
           <div className="container">
             <div className="contact-box">
               <p className="eyebrow">Contact</p>
-              <h2>Le plus simple : m'envoyer 2 ou 3 objets.</h2>
+              <h2>Le plus simple : m’envoyer 2 ou 3 objets.</h2>
               <p className="section-intro narrow">
                 Photos, prix, dimensions, état — et toute information disponible.
-                Je vous dirai si c'est un bon test et sous quelle forme commencer.
+                Je vous dirai si c’est un bon test et sous quelle forme commencer.
               </p>
               <div className="actions">
                 <a href="mailto:contact@atelierprovenance.fr" className="button button-primary">
@@ -285,10 +432,8 @@ export default function Page() {
             </div>
           </div>
         </section>
-
       </main>
 
-      {/* FOOTER */}
       <footer className="footer">
         <div className="container footer-inner">
           <p className="footer-logo">Atelier Provenance</p>
@@ -313,8 +458,8 @@ export default function Page() {
         body {
           margin: 0;
           font-family: Georgia, "Times New Roman", serif;
-          color: #1a1a1a;
-          background: #ffffff;
+          color: #2d241d;
+          background: #f6efe4;
           -webkit-font-smoothing: antialiased;
         }
 
@@ -323,41 +468,45 @@ export default function Page() {
           text-decoration: none;
         }
 
+        img {
+          display: block;
+          width: 100%;
+          height: auto;
+        }
+
         main {
           width: 100%;
         }
 
-        /* ── CONTAINER ── */
         .container {
           width: 100%;
-          max-width: 1140px;
+          max-width: 1180px;
           margin: 0 auto;
           padding: 0 32px;
         }
 
-        /* ── NAV ── */
         .nav {
           position: sticky;
           top: 0;
           z-index: 100;
-          background: rgba(255,255,255,0.92);
+          background: rgba(246, 239, 228, 0.92);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
-          border-bottom: 1px solid #ebebeb;
+          border-bottom: 1px solid #dccbb7;
         }
 
         .nav-inner {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          height: 64px;
+          height: 68px;
           gap: 32px;
         }
 
         .nav-logo {
           font-size: 0.95rem;
           letter-spacing: 0.08em;
-          font-weight: 500;
+          font-weight: 600;
           white-space: nowrap;
         }
 
@@ -367,67 +516,107 @@ export default function Page() {
           gap: 28px;
           font-family: Arial, Helvetica, sans-serif;
           font-size: 0.875rem;
-          color: #525252;
+          color: #6a5648;
         }
 
         .nav-links a:not(.button):hover {
-          color: #1a1a1a;
+          color: #2d241d;
         }
 
-        /* ── HERO ── */
         .hero {
-          padding: 104px 0 88px;
+          padding: 104px 0 84px;
+          background: linear-gradient(180deg, #f6efe4 0%, #f3eadc 100%);
         }
 
-        .hero-rule {
+        .hero-grid {
+          display: grid;
+          grid-template-columns: 1.2fr 0.8fr;
+          gap: 48px;
+          align-items: end;
+        }
+
+        .hero-panel {
+          display: flex;
+          justify-content: flex-end;
+        }
+
+        .hero-card {
           width: 100%;
-          height: 1px;
-          background: #e5e5e5;
-          margin-top: 88px;
+          max-width: 320px;
+          background: #fffaf2;
+          border: 1px solid #dccbb7;
+          border-radius: 20px;
+          padding: 24px;
+          box-shadow: 0 10px 30px rgba(88, 62, 40, 0.08);
         }
 
-        /* ── TYPOGRAPHY ── */
+        .hero-label,
+        .panel-label,
+        .case-meta,
+        .feature-title,
+        .feature-number,
         .eyebrow {
-          margin: 0 0 20px;
-          font-size: 11px;
-          letter-spacing: 0.26em;
-          text-transform: uppercase;
-          color: #8a8a8a;
           font-family: Arial, Helvetica, sans-serif;
         }
 
-        h1, h2, h3, p, ul {
+        .hero-label {
+          margin: 0 0 12px;
+          font-size: 11px;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: #a06d2c;
+        }
+
+        .eyebrow {
+          margin: 0 0 20px;
+          font-size: 11px;
+          letter-spacing: 0.24em;
+          text-transform: uppercase;
+          color: #9a744d;
+        }
+
+        h1, h2, h3, h4, p, ul {
           margin-top: 0;
         }
 
         h1 {
           max-width: 900px;
           margin-bottom: 32px;
-          font-size: clamp(2.6rem, 5.5vw, 5rem);
-          line-height: 1.05;
+          font-size: clamp(2.7rem, 5.5vw, 5rem);
+          line-height: 1.04;
           font-weight: 400;
           letter-spacing: -0.02em;
-          color: #111111;
+          color: #2d241d;
         }
 
         h1 em, h2 em {
           font-style: italic;
-          color: #3a3a3a;
+          color: #8d5a1c;
         }
 
         h2 {
           margin-bottom: 20px;
-          font-size: clamp(1.9rem, 3vw, 2.75rem);
-          line-height: 1.15;
+          font-size: clamp(1.95rem, 3vw, 2.8rem);
+          line-height: 1.14;
           font-weight: 400;
           letter-spacing: -0.015em;
+          color: #2d241d;
         }
 
         h3 {
           margin-bottom: 12px;
           font-size: 1.2rem;
           line-height: 1.35;
-          font-weight: 500;
+          font-weight: 600;
+          color: #2d241d;
+        }
+
+        h4 {
+          margin-bottom: 14px;
+          font-size: 1.05rem;
+          line-height: 1.5;
+          font-weight: 600;
+          color: #2d241d;
         }
 
         .intro,
@@ -436,9 +625,11 @@ export default function Page() {
         .card p,
         .offer-desc,
         .example p,
-        .feature p {
+        .feature p,
+        .text-panel p,
+        .hero-card p {
           font-family: Arial, Helvetica, sans-serif;
-          color: #555555;
+          color: #5e5146;
           line-height: 1.85;
         }
 
@@ -446,38 +637,35 @@ export default function Page() {
           max-width: 700px;
           font-size: 1.1rem;
           margin-bottom: 40px;
-          color: #444444;
         }
 
         .section-intro {
           font-size: 1.05rem;
-          max-width: 680px;
+          max-width: 760px;
           margin-bottom: 0;
         }
 
-        /* ── SECTIONS ── */
         .section {
           padding: 96px 0;
         }
 
         .section-alt {
-          background: #f8f7f5;
+          background: #f0e5d4;
         }
 
         .border-top {
-          border-top: 1px solid #e5e5e5;
+          border-top: 1px solid #dccbb7;
         }
 
         .section-head {
-          max-width: 840px;
+          max-width: 900px;
           margin-bottom: 52px;
         }
 
-        /* ── BAND ── */
         .band {
-          background: #f8f7f5;
-          border-top: 1px solid #e5e5e5;
-          border-bottom: 1px solid #e5e5e5;
+          background: #fffaf2;
+          border-top: 1px solid #dccbb7;
+          border-bottom: 1px solid #dccbb7;
           padding: 40px 0;
         }
 
@@ -489,7 +677,7 @@ export default function Page() {
 
         .feature {
           padding: 8px 36px 8px 0;
-          border-right: 1px solid #e5e5e5;
+          border-right: 1px solid #e3d2be;
         }
 
         .feature:last-child {
@@ -504,9 +692,8 @@ export default function Page() {
 
         .feature-number {
           display: block;
-          font-family: Arial, Helvetica, sans-serif;
           font-size: 11px;
-          color: #b0b0b0;
+          color: #c5a17a;
           letter-spacing: 0.1em;
           margin-bottom: 10px;
         }
@@ -516,12 +703,10 @@ export default function Page() {
           font-size: 11px;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          color: #6a6a6a;
-          font-family: Arial, Helvetica, sans-serif;
-          font-weight: 600;
+          color: #9a744d;
+          font-weight: 700;
         }
 
-        /* ── SPLIT ── */
         .split {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -533,20 +718,18 @@ export default function Page() {
           margin-top: 20px;
         }
 
-        /* ── PULL QUOTE ── */
         .pull-quote {
           margin-top: 32px;
           padding: 20px 24px;
-          border-left: 2px solid #1a1a1a;
+          border-left: 2px solid #a06d2c;
           font-style: italic;
           font-size: 1.05rem;
-          color: #2a2a2a;
+          color: #5a4330;
           line-height: 1.6;
-          background: #f8f7f5;
-          border-radius: 0 8px 8px 0;
+          background: #fff7ec;
+          border-radius: 0 10px 10px 0;
         }
 
-        /* ── CARDS ── */
         .cards {
           display: grid;
           gap: 20px;
@@ -561,59 +744,59 @@ export default function Page() {
         }
 
         .card {
-          border: 1px solid #e5e5e5;
-          border-radius: 20px;
-          background: #ffffff;
+          border: 1px solid #dccbb7;
+          border-radius: 22px;
+          background: #fffaf2;
           padding: 32px;
           display: flex;
           flex-direction: column;
-          transition: box-shadow 0.25s ease;
+          transition: box-shadow 0.25s ease, transform 0.2s ease;
         }
 
         .card:hover {
-          box-shadow: 0 4px 28px rgba(0,0,0,0.07);
+          box-shadow: 0 8px 30px rgba(88, 62, 40, 0.08);
+          transform: translateY(-2px);
         }
 
         .card-plain {
-          background: #f8f7f5;
-          border-color: transparent;
+          background: #fff7ec;
         }
 
         .card-icon {
           font-size: 1.4rem;
           margin-bottom: 20px;
-          color: #b0b0b0;
+          color: #c5a17a;
           letter-spacing: 0.05em;
         }
 
         .card-featured {
           border-width: 1.5px;
-          border-color: #1a1a1a;
-          background: #111111;
-          color: #ffffff;
+          border-color: #8d5a1c;
+          background: linear-gradient(180deg, #8d5a1c 0%, #6e4416 100%);
+          color: #fff7ec;
           position: relative;
         }
 
         .card-featured h3 {
-          color: #ffffff;
+          color: #fff7ec;
         }
 
         .card-featured .offer-desc,
         .card-featured ul {
-          color: #c0c0c0;
+          color: #f4e7d7;
         }
 
         .card-featured .price {
-          color: #aaaaaa;
+          color: #f3d2aa;
         }
 
         .card-featured .button-primary {
-          background: #ffffff;
-          color: #111111;
+          background: #fffaf2;
+          color: #6e4416;
         }
 
         .card-featured .button-primary:hover {
-          background: #f0f0f0;
+          background: #f4eadc;
         }
 
         .badge {
@@ -622,15 +805,14 @@ export default function Page() {
           font-size: 11px;
           letter-spacing: 0.15em;
           text-transform: uppercase;
-          color: #111111;
-          background: #ffffff;
+          color: #6e4416;
+          background: #fffaf2;
           border-radius: 999px;
           padding: 4px 12px;
           margin-bottom: 20px;
           align-self: flex-start;
         }
 
-        /* ── OFFER ── */
         .offer-head {
           display: flex;
           align-items: baseline;
@@ -643,7 +825,7 @@ export default function Page() {
         .price {
           font-family: Arial, Helvetica, sans-serif;
           font-size: 0.9rem;
-          color: #7a7a7a;
+          color: #8b6f58;
           white-space: nowrap;
         }
 
@@ -654,7 +836,7 @@ export default function Page() {
         ul {
           padding-left: 16px;
           font-family: Arial, Helvetica, sans-serif;
-          color: #444444;
+          color: #5b4b3f;
           line-height: 1.9;
           margin-bottom: 28px;
           flex: 1;
@@ -669,40 +851,129 @@ export default function Page() {
           margin-top: auto;
         }
 
-        /* ── EXAMPLES ── */
-        .examples {
+        .examples-head {
+          margin-bottom: 36px;
+        }
+
+        .examples-stack {
           display: grid;
-          gap: 16px;
+          gap: 32px;
         }
 
-        .example {
-          border: 1px solid #e8e8e8;
-          border-radius: 16px;
-          padding: 24px 28px;
-          transition: background 0.2s ease;
+        .case-study {
+          border: 1px solid #dccbb7;
+          border-radius: 26px;
+          background: #fffaf2;
+          padding: 30px;
+          box-shadow: 0 10px 30px rgba(88, 62, 40, 0.05);
         }
 
-        .example:hover {
-          background: #f8f7f5;
+        .case-top {
+          display: flex;
+          justify-content: space-between;
+          align-items: start;
+          gap: 24px;
+          margin-bottom: 24px;
         }
 
-        .example-meta {
-          font-family: Arial, Helvetica, sans-serif;
+        .case-meta {
+          margin: 0 0 8px;
           font-size: 11px;
           letter-spacing: 0.16em;
           text-transform: uppercase;
-          color: #aaaaaa;
-          margin-bottom: 8px;
+          color: #a06d2c;
         }
 
-        .example h3 {
-          margin-bottom: 8px;
-          font-size: 1.1rem;
+        .case-specs {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          justify-content: flex-end;
         }
 
-        /* ── CONTACT ── */
+        .case-specs span {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.8rem;
+          color: #7f6856;
+          border: 1px solid #e3d2be;
+          border-radius: 999px;
+          padding: 6px 10px;
+          background: #fff7ec;
+        }
+
+        .case-image-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 18px;
+          margin-bottom: 22px;
+        }
+
+        .image-card {
+          overflow: hidden;
+          border-radius: 18px;
+          border: 1px solid #e3d2be;
+          background: #f3eadc;
+          min-height: 280px;
+        }
+
+        .image-card img {
+          height: 100%;
+          min-height: 280px;
+          object-fit: cover;
+        }
+
+        .image-placeholder {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          padding: 24px;
+          color: #7f6856;
+        }
+
+        .image-placeholder p {
+          margin-bottom: 10px;
+          font-family: Arial, Helvetica, sans-serif;
+          font-weight: 600;
+        }
+
+        .image-placeholder span {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.85rem;
+          line-height: 1.6;
+        }
+
+        .before-after-grid {
+          display: grid;
+          grid-template-columns: 0.85fr 1.15fr;
+          gap: 18px;
+        }
+
+        .text-panel {
+          border-radius: 18px;
+          padding: 24px;
+        }
+
+        .before-panel {
+          background: #f3eadc;
+          border: 1px solid #e3d2be;
+        }
+
+        .after-panel {
+          background: #fff7ec;
+          border: 1px solid #dccbb7;
+        }
+
+        .panel-label {
+          margin: 0 0 12px;
+          font-size: 11px;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: #9a744d;
+        }
+
         .section-contact {
-          background: #f8f7f5;
+          background: #efe2cf;
         }
 
         .contact-box {
@@ -714,7 +985,6 @@ export default function Page() {
           margin-bottom: 36px;
         }
 
-        /* ── BUTTONS ── */
         .actions {
           display: flex;
           flex-wrap: wrap;
@@ -742,30 +1012,29 @@ export default function Page() {
         }
 
         .button-primary {
-          background: #1a1a1a;
-          color: #ffffff;
+          background: #8d5a1c;
+          color: #fffaf2;
         }
 
         .button-primary:hover {
-          background: #3a3a3a;
+          background: #6e4416;
         }
 
         .button-secondary {
-          border: 1px solid #d0d0d0;
-          color: #1a1a1a;
+          border: 1px solid #c9ae91;
+          color: #6e4c2a;
           background: transparent;
         }
 
         .button-secondary:hover {
-          border-color: #8a8a8a;
-          background: #f8f7f5;
+          border-color: #a06d2c;
+          background: #fff7ec;
         }
 
-        /* ── FOOTER ── */
         .footer {
-          border-top: 1px solid #e5e5e5;
+          border-top: 1px solid #dccbb7;
           padding: 36px 0;
-          background: #ffffff;
+          background: #f6efe4;
         }
 
         .footer-inner {
@@ -778,7 +1047,7 @@ export default function Page() {
 
         .footer-logo {
           font-size: 0.95rem;
-          font-weight: 500;
+          font-weight: 600;
           letter-spacing: 0.06em;
           margin: 0;
         }
@@ -786,35 +1055,39 @@ export default function Page() {
         .footer-copy {
           font-family: Arial, Helvetica, sans-serif;
           font-size: 0.8rem;
-          color: #9a9a9a;
+          color: #8b6f58;
           margin: 0;
         }
 
         .footer-email {
           font-family: Arial, Helvetica, sans-serif;
           font-size: 0.85rem;
-          color: #555555;
+          color: #6e4c2a;
           transition: color 0.2s ease;
         }
 
         .footer-email:hover {
-          color: #1a1a1a;
+          color: #8d5a1c;
         }
 
-        /* ── RESPONSIVE ── */
         @media (max-width: 960px) {
           .container {
             padding: 0 24px;
           }
 
-          .grid-three {
+          .hero-grid,
+          .grid-three,
+          .cards-three,
+          .cards-two,
+          .split,
+          .case-image-grid,
+          .before-after-grid {
             grid-template-columns: 1fr;
-            gap: 28px;
           }
 
           .feature {
             border-right: none;
-            border-bottom: 1px solid #e5e5e5;
+            border-bottom: 1px solid #e3d2be;
             padding: 0 0 24px 0 !important;
           }
 
@@ -823,30 +1096,28 @@ export default function Page() {
             padding-bottom: 0 !important;
           }
 
-          .cards-three,
-          .cards-two,
-          .split {
-            grid-template-columns: 1fr;
-          }
-
-          .split {
-            gap: 48px;
-          }
-
           .hero {
             padding: 72px 0 64px;
-          }
-
-          .hero-rule {
-            margin-top: 64px;
           }
 
           .section {
             padding: 72px 0;
           }
 
+          .split {
+            gap: 48px;
+          }
+
           .nav-links a:not(.button) {
             display: none;
+          }
+
+          .case-top {
+            flex-direction: column;
+          }
+
+          .case-specs {
+            justify-content: flex-start;
           }
 
           .footer-inner {
