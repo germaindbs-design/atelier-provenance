@@ -23,7 +23,6 @@ export default function Page() {
       </nav>
 
       <main>
-
         {/* HERO */}
         <section className="hero">
           <div className="container hero-grid">
@@ -35,7 +34,7 @@ export default function Page() {
                 <em>Il reste à la rendre lisible.</em>
               </h1>
               <p className="intro">
-                Rédaction de fiches pour le mobilier de collection. Chaque texte
+                Rédaction de notices pour le mobilier de collection. Chaque texte
                 est construit pour soutenir le prix, clarifier la pièce et rendre
                 l'objet véritablement désirable — pas seulement visible.
               </p>
@@ -66,9 +65,8 @@ export default function Page() {
         <section className="epigraph">
           <div className="container">
             <blockquote className="epigraph-quote">
-              « Le seul véritable voyage, ce ne serait pas d'aller vers de nouveaux paysages,
-              mais d'avoir d'autres yeux, de voir l'univers avec les yeux d'un autre. »
-              <cite>Marcel Proust, <em>La Prisonnière</em></cite>
+              « Les beaux livres sont écrits dans une sorte de langue étrangère. »
+              <cite>Marcel Proust, <em>Contre Sainte-Beuve</em></cite>
             </blockquote>
           </div>
         </section>
@@ -117,7 +115,7 @@ export default function Page() {
                 sélection.
               </p>
               <div className="pull-quote">
-                Une bonne fiche ne crée pas la valeur de l'objet —
+                Une bonne notice ne crée pas la valeur de l'objet —
                 elle la traduit enfin dans une langue que l'acheteur peut entendre.
               </div>
             </div>
@@ -174,15 +172,15 @@ export default function Page() {
               <div className="card">
                 <div className="offer-head">
                   <h3>Première lecture</h3>
-                  <span className="price">3 fiches · 450 €</span>
+                  <span className="price">3 notices · 450 €</span>
                 </div>
                 <p className="offer-desc">
                   Pour évaluer le service sur un premier lot, sans engagement.
                   Le bon point de départ.
                 </p>
                 <ul>
-                  <li>3 fiches complètes</li>
-                  <li>150 € / fiche</li>
+                  <li>3 notices complètes</li>
+                  <li>150 € / notice</li>
                   <li>Analyse marché incluse</li>
                   <li>Version longue + courte</li>
                   <li>Livraison sous 5 jours</li>
@@ -194,18 +192,17 @@ export default function Page() {
 
               {/* OFFRE 2 — FEATURED */}
               <div className="card card-featured">
-                <div className="offer-badge">Le plus choisi</div>
                 <div className="offer-head">
                   <h3>Ensemble</h3>
-                  <span className="price">10 fiches · 1 200 €</span>
+                  <span className="price">10 notices · 1 200 €</span>
                 </div>
                 <p className="offer-desc">
                   Pour traiter un ensemble cohérent et donner une vraie
                   consistance à votre catalogue.
                 </p>
                 <ul>
-                  <li>10 fiches complètes</li>
-                  <li>120 € / fiche</li>
+                  <li>10 notices complètes</li>
+                  <li>120 € / notice</li>
                   <li>Analyse marché incluse</li>
                   <li>Toutes déclinaisons</li>
                   <li>Alignement éditorial global</li>
@@ -223,27 +220,28 @@ export default function Page() {
                   <span className="price">Sur devis</span>
                 </div>
                 <p className="offer-desc">
-                  Pour une collaboration régulière ou un fonds important à
-                  valoriser dans sa totalité.
+                  Pour les marchands et galeries souhaitant un accompagnement
+                  éditorial continu sur l'ensemble de leur stock.
                 </p>
                 <ul>
-                  <li>Volume sur mesure</li>
-                  <li>Tarif dégressif</li>
+                  <li>Volume et cadence adaptés</li>
                   <li>Charte éditoriale dédiée</li>
-                  <li>Suivi continu</li>
-                  <li>Délais négociés</li>
+                  <li>Suivi et révisions inclus</li>
+                  <li>Interlocuteur unique</li>
                 </ul>
                 <a href="#contact" className="button button-primary offer-cta">
-                  Discutons-en
+                  Nous contacter
                 </a>
               </div>
 
             </div>
 
             <p className="pricing-note">
-              Chaque mission débute par un échange pour comprendre la nature des
-              pièces, le canal de diffusion envisagé et le positionnement prix.
-              Aucune fiche n'est rédigée sans cette étape préalable.
+              Chaque notice inclut : analyse du marché de référence, rédaction
+              longue (250–350 mots), version courte adaptée aux réseaux sociaux
+              et aux plateformes de vente, et un extrait accroche utilisable en
+              titre d'annonce. Paiement à la livraison. Aucune automatisation :
+              chaque texte est rédigé à la main, pour une seule pièce à la fois.
             </p>
           </div>
         </section>
@@ -272,11 +270,11 @@ export default function Page() {
                   onClick={() => setOpenExample(openExample === 1 ? null : 1)}
                 >
                   <div className="case-toggle-left">
-                    <p className="case-meta">Exemple 1 · Commode estampillée, XVIIIe siècle</p>
-                    <h3>Soutenir un prix élevé sans justification creuse.</h3>
+                    <p className="case-meta">Exemple 1 · Fauteuil club, vers 1930</p>
+                    <h3>Rendre à un objet usé sa dignité de pièce de caractère.</h3>
                     <div className="case-specs">
-                      <span>Prix affiché : 4 500 €</span>
-                      <span>Acajou · bronze doré</span>
+                      <span>Prix affiché : 850 €</span>
+                      <span>Cuir patiné · chêne</span>
                       <span>Formule Première lecture</span>
                     </div>
                   </div>
@@ -291,27 +289,29 @@ export default function Page() {
                       <div className="text-panel before-panel">
                         <p className="panel-label">Avant</p>
                         <p>
-                          Commode ancienne en acajou avec bronzes dorés, deux
-                          tiroirs, très bon état général, estampille visible.
-                          Époque XVIIIe. H 88 × L 120 × P 58 cm.
+                          Fauteuil club ancien en cuir marron, quelques griffures,
+                          structure bois solide, bon état général. Livraison
+                          possible. H 85 × L 80 × P 75 cm.
                         </p>
                       </div>
                       <div className="text-panel after-panel">
                         <p className="panel-label">Après — format court</p>
                         <p className="panel-sublabel">Adapté à une publication Instagram ou Drouot Digital</p>
                         <h4>
-                          Commode estampillée, acajou et bronzes dorés — époque
-                          Louis XVI
+                          Fauteuil club, circa 1930 — cuir naturel patiné,
+                          structure chêne massif
                         </h4>
                         <p>
-                          Ligne sobre, proportions maîtrisées, bronzes d'origine
-                          en place. L'estampille identifiée confirme l'attribution
-                          et ancre la pièce dans son époque. Un meuble qui n'a
-                          pas besoin d'être défendu — il suffit de le lire.
+                          Ce fauteuil club ne cherche pas à dissimuler son âge :
+                          il l'assume. Le cuir naturel, griffé par l'usage et
+                          assoupli par le temps, a acquis cette teinte profonde
+                          que nulle teinture ne reproduit. La structure en chêne
+                          massif — solide, sans jeu — témoigne d'une fabrication
+                          antérieure aux compromis de série.
                         </p>
                         <p>
-                          Acajou mouluré, deux tiroirs, quincaillerie d'époque.
-                          H 88 × L 120 × P 58 cm.
+                          Un fauteuil de cette génération ne se trouve plus
+                          facilement dans cet état d'intégrité. H 85 × L 80 × P 75 cm.
                         </p>
                       </div>
                     </div>
@@ -326,12 +326,12 @@ export default function Page() {
                   onClick={() => setOpenExample(openExample === 2 ? null : 2)}
                 >
                   <div className="case-toggle-left">
-                    <p className="case-meta">Exemple 2 · Ensemble de chaises, circa 1955</p>
-                    <h3>Faire d'un lot ordinaire un ensemble cohérent.</h3>
+                    <p className="case-meta">Exemple 2 · Chaises, années 1950</p>
+                    <h3>Faire d'un lot banal un ensemble cohérent et désirable.</h3>
                     <div className="case-specs">
-                      <span>Prix affiché : 780 €</span>
+                      <span>Prix affiché : 420 €</span>
                       <span>Métal · velours</span>
-                      <span>Formule Ensemble</span>
+                      <span>Formule Première lecture</span>
                     </div>
                   </div>
                   <div className="case-toggle-icon">
@@ -365,9 +365,8 @@ export default function Page() {
                           la pièce dans l'esthétique des années 1950.
                         </p>
                         <p>
-                          L'une des trois dispose d'accoudoirs, variation subtile
-                          qui permet de composer l'espace plus librement.
-                          Velours nettoyé, métal patiné. H 83 × L 60 × P 53 cm.
+                          Velours nettoyé, patine métallique d'usage.
+                          H 83 × L 60 × P 53 cm.
                         </p>
                       </div>
                     </div>
@@ -402,23 +401,24 @@ export default function Page() {
                         <p className="panel-label">Avant</p>
                         <p>
                           Bureau ancien en noyer avec marqueterie, style
-                          Napoléon III, très bon état, restauré. Trois tiroirs,
-                          plateau cuir. H 78 × L 140 × P 72 cm.
+                          Napoléon III, très bon état après restauration,
+                          nombreux tiroirs, beau meuble de caractère.
+                          H 78 × L 140 × P 72 cm.
                         </p>
                       </div>
                       <div className="text-panel after-panel">
                         <p className="panel-label">Après — format court</p>
                         <p className="panel-sublabel">Adapté à une publication Instagram ou Drouot Digital</p>
                         <h4>
-                          Bureau en noyer marqueté, style Napoléon III, vers
-                          1880 — plateau cuir, trois tiroirs
+                          Bureau à marqueterie, circa 1880 — noyer massif,
+                          esprit Napoléon III, restauration professionnelle
                         </h4>
                         <p>
-                          La marqueterie travaillée sur le plateau et les
-                          façades de tiroirs témoigne d'un soin d'exécution
-                          caractéristique des ateliers de la seconde moitié du
-                          XIXe siècle. Le noyer, dense et chaud, porte une
-                          patine franche — ni retouchée, ni déguisée.
+                          La marqueterie de ce bureau n'est pas un ornement
+                          surajouté : elle est le langage même de l'objet.
+                          Chaque motif témoigne d'un savoir-faire qui disparaît
+                          — celui du marqueteur capable de composer une surface
+                          comme on écrit une phrase.
                         </p>
                         <p>
                           Restauration professionnelle : stabilité assurée,
@@ -441,26 +441,26 @@ export default function Page() {
             <div>
               <p className="eyebrow">Contact</p>
               <h2>
-                Une pièce en tête ?
+                Trois objets suffisent
                 <br />
-                <em>Écrivez-nous.</em>
+                <em>pour commencer.</em>
               </h2>
             </div>
             <div className="text-block">
               <p>
-                Décrivez brièvement les objets que vous souhaitez valoriser —
-                nature, époque, prix envisagé — et nous revenons vers vous sous
-                48 heures avec une proposition adaptée.
+                Décrivez brièvement les pièces que vous souhaitez faire
+                rédiger — période, matière, état, prix envisagé — et nous
+                vous répondons sous 48 heures avec une proposition adaptée.
               </p>
               <p>
-                Chaque collaboration débute par un échange sans engagement,
-                pour s'assurer que le service correspond précisément à votre besoin.
+                Aucun engagement à ce stade. Une première réponse, puis
+                une notice de démonstration si le projet s'y prête.
               </p>
               <a
                 href="mailto:contact@atelierprovenance.fr"
                 className="button button-primary"
               >
-                contact@atelierprovenance.fr
+                Écrire à l'atelier
               </a>
             </div>
           </div>
@@ -554,46 +554,50 @@ export default function Page() {
         }
         .hero-grid {
           display: grid;
-          grid-template-columns: 1fr 420px;
-          gap: 80px; align-items: center;
+          grid-template-columns: 1fr 1fr;
+          gap: 80px;
+          align-items: center;
         }
         .intro {
-          font-family: Arial, Helvetica, sans-serif;
-          font-size: 1.05rem; color: #4a3728;
-          line-height: 1.85; margin: 24px 0 36px;
+          font-size: 1.05rem;
+          color: #4a3728;
+          margin: 24px 0 36px;
+          line-height: 1.85;
         }
         .actions {
-          display: flex; gap: 16px; flex-wrap: wrap;
+          display: flex; gap: 14px; flex-wrap: wrap;
         }
-        .hero-panel {}
+        .hero-panel {
+          display: flex; justify-content: center;
+        }
         .hero-card {
           background: #fffaf2;
           border: 1px solid #dccbb7;
           border-radius: 20px;
-          padding: 32px;
+          padding: 36px;
+          width: 100%;
+          max-width: 380px;
         }
         .hero-label {
           font-family: Arial, Helvetica, sans-serif;
-          font-size: 0.75rem; letter-spacing: 0.12em;
-          text-transform: uppercase; color: #a06d2c;
+          font-size: 0.75rem;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #a06d2c;
           margin-bottom: 20px;
         }
         .hero-list {
-          list-style: none; padding: 0; margin: 0;
-          font-family: Arial, Helvetica, sans-serif;
-          font-size: 0.9rem; color: #4a3728;
+          list-style: none;
+          margin: 0; padding: 0;
         }
         .hero-list li {
-          padding: 10px 0;
+          padding: 12px 0;
           border-bottom: 1px solid #ecddc9;
+          font-size: 0.95rem;
+          color: #4a3728;
           line-height: 1.5;
         }
         .hero-list li:last-child { border-bottom: none; }
-        .hero-list li::before {
-          content: "—";
-          margin-right: 10px;
-          color: #a06d2c;
-        }
 
         /* EPIGRAPHE */
         .epigraph {
@@ -624,8 +628,8 @@ export default function Page() {
 
         /* BAND */
         .band {
-          background: #2d241d;
           padding: 64px 0;
+          background: #2d241d;
           color: #f0e8d8;
         }
         .grid-three {
@@ -634,35 +638,49 @@ export default function Page() {
           gap: 0;
         }
         .feature {
-          padding: 0 40px;
+          padding: 0 48px 0 0;
           border-right: 1px solid #4a3728;
+          margin-right: 48px;
         }
-        .feature:first-child { padding-left: 0; }
-        .feature:last-child { border-right: none; padding-right: 0; }
+        .feature:last-child {
+          border-right: none;
+          margin-right: 0;
+          padding-right: 0;
+        }
         .feature-number {
           font-family: Arial, Helvetica, sans-serif;
-          font-size: 0.75rem; letter-spacing: 0.15em;
-          color: #a06d2c; display: block; margin-bottom: 16px;
+          font-size: 0.75rem;
+          letter-spacing: 0.15em;
+          color: #a06d2c;
+          display: block;
+          margin-bottom: 16px;
         }
         .feature-title {
-          font-size: 1.1rem; font-weight: 600;
-          margin-bottom: 12px; color: #f6efe4;
+          font-size: 1rem;
+          font-weight: 600;
+          margin-bottom: 10px;
+          color: #f0e8d8;
         }
-        .feature p:not(.feature-title) {
-          font-family: Arial, Helvetica, sans-serif;
-          font-size: 0.9rem; color: #c4b49e; line-height: 1.75;
-          margin: 0;
+        .feature p:last-child {
+          font-size: 0.95rem;
+          color: #c4b49e;
+          line-height: 1.7;
         }
 
         /* SECTIONS */
         .section { padding: 96px 0; }
         .section-alt { background: #f0e8d8; }
         .border-top { border-top: 1px solid #dccbb7; }
-        .section-head { max-width: 860px; margin-bottom: 52px; }
+
+        .section-head {
+          max-width: 680px;
+          margin-bottom: 56px;
+        }
         .section-intro {
-          font-family: Arial, Helvetica, sans-serif;
-          font-size: 1rem; color: #5e5146;
-          line-height: 1.85; margin: 16px 0 0;
+          font-size: 1rem;
+          color: #5a4330;
+          line-height: 1.85;
+          margin-top: 16px;
         }
 
         .split {
@@ -708,46 +726,47 @@ export default function Page() {
         .card-featured .offer-desc { color: #c4b49e; }
         .card-featured .price { color: #c4b49e; }
 
-        .offer-badge {
-          display: inline-block;
-          font-family: Arial, Helvetica, sans-serif;
-          font-size: 11px; letter-spacing: 0.12em;
-          text-transform: uppercase;
-          background: #a06d2c;
-          color: #fffaf2;
-          border-radius: 999px;
-          padding: 5px 14px;
-          margin-bottom: 20px;
-          align-self: flex-start;
-        }
         .offer-head {
-          display: flex; align-items: baseline;
-          justify-content: space-between;
-          gap: 12px; margin-bottom: 14px; flex-wrap: wrap;
+          margin-bottom: 12px;
         }
+        .offer-head h3 { margin-bottom: 4px; }
         .price {
           font-family: Arial, Helvetica, sans-serif;
-          font-size: 0.85rem; color: #8b6f58;
-          white-space: nowrap;
+          font-size: 0.85rem;
+          color: #7a5c3e;
+          letter-spacing: 0.04em;
         }
         .offer-desc {
+          font-size: 0.95rem;
+          color: #5a4330;
           margin-bottom: 20px;
-          font-family: Arial, Helvetica, sans-serif;
-          font-size: 0.9rem; color: #5e5146;
-          line-height: 1.7;
+          line-height: 1.65;
         }
-        ul {
-          padding-left: 16px;
-          font-family: Arial, Helvetica, sans-serif;
-          color: #5b4b3f; line-height: 2;
-          margin-bottom: 28px; flex: 1;
+        .card ul {
+          list-style: none;
+          padding: 0; margin: 0 0 28px;
+          flex: 1;
+        }
+        .card ul li {
+          padding: 9px 0;
+          border-bottom: 1px solid #ecddc9;
           font-size: 0.9rem;
+          color: #4a3728;
+          line-height: 1.5;
         }
-        .offer-cta { align-self: flex-start; margin-top: auto; }
+        .card-featured ul li {
+          border-bottom-color: #4a3728;
+        }
+        .card ul li:last-child { border-bottom: none; }
+        .offer-cta { width: 100%; margin-top: auto; }
+
         .button-light {
-          background: #f6efe4; color: #3d2b1f;
+          background: #f0e8d8;
+          color: #2d241d;
         }
-        .button-light:hover { background: #fff7ec; }
+        .button-light:hover {
+          background: #fff7ec;
+        }
 
         .pricing-note {
           margin-top: 32px;
@@ -846,35 +865,47 @@ export default function Page() {
 
         /* CONTACT */
         .contact-email {
-          margin-top: 8px;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          margin-top: 32px;
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.95rem;
+          color: #a06d2c;
+          border-bottom: 1px solid #a06d2c;
+          padding-bottom: 2px;
         }
 
         /* FOOTER */
         .footer {
-          background: #2d241d;
           padding: 40px 0;
+          border-top: 1px solid #dccbb7;
+          background: #2d241d;
           color: #c4b49e;
         }
         .footer-inner {
-          display: flex; align-items: center;
-          justify-content: space-between; gap: 24px;
-          flex-wrap: wrap;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 24px;
         }
         .footer-logo {
-          font-size: 1rem; color: #f0e8d8;
-          margin: 0; letter-spacing: 0.04em;
+          font-size: 0.95rem;
+          color: #f0e8d8;
+          letter-spacing: 0.04em;
+          margin: 0;
         }
         .footer-copy {
           font-family: Arial, Helvetica, sans-serif;
-          font-size: 0.8rem; margin: 0;
+          font-size: 0.8rem;
+          margin: 0;
         }
         .footer-email {
           font-family: Arial, Helvetica, sans-serif;
-          font-size: 0.85rem; color: #c4b49e;
-          border-bottom: 1px solid #4a3728;
-          padding-bottom: 2px;
+          font-size: 0.8rem;
+          color: #a06d2c;
         }
-        .footer-email:hover { color: #f0e8d8; border-color: #a06d2c; }
+        .footer-email:hover { color: #f0e8d8; }
 
         /* BUTTONS */
         .button {
