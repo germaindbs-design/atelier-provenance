@@ -217,73 +217,109 @@ const faqs = [
           </div>
         </section>
 
-        {/* ═══════════════════════ OFFRES ═══════════════════════ */}
-        <section className="section border-top" id="offres">
-          <div className="container container-narrow text-center">
-            <Reveal>
-              <p className="eyebrow">Prestations</p>
-              <h2>Des formats adaptés à chaque besoin.</h2>
-            </Reveal>
-          </div>
-          <div className="container offers-grid">
-            {[
-              {
-                name: "Notice unique",
-                price: "90 €",
-                unit: "par pièce",
-                desc: "Pour une pièce isolée que vous voulez vendre vite et au bon prix.",
-                features: ["Texte prêt à publier", "Recherche contextuelle", "1 révision incluse", "Livraison sous 5 jours"],
-                cta: "Commander une notice",
-                featured: false,
-              },
-              {
-                name: "Pack 5 notices",
-                price: "375 €",
-                unit: "soit 75 € / pièce",
-                desc: "Pour les vendeurs réguliers qui veulent professionnaliser leur catalogue.",
-                features: ["5 notices complètes", "Recherche contextuelle par pièce", "Ligne éditoriale cohérente", "1 révision par notice", "Livraison sous 7 jours"],
-                cta: "Choisir ce pack",
-                featured: true,
-              },
-              {
-                name: "Catalogue",
-                price: "Sur devis",
-                unit: "à partir de 10 pièces",
-                desc: "Pour les marchands et galeries qui veulent un ensemble cohérent.",
-                features: ["Notices complètes par pièce", "Ligne éditoriale unifiée", "Formats multiples par pièce", "Tarif dégressif", "Interlocuteur unique"],
-                cta: "Demander un devis",
-                featured: false,
-              },
-            ].map((offer, i) => (
-              <Reveal key={i} delay={i * 120}>
-                <div className={`offer-card ${offer.featured ? "offer-featured" : ""}`}>
-                  {offer.featured && <span className="offer-badge">Recommandé</span>}
-                  <h3 className="offer-name">{offer.name}</h3>
-                  <p className="offer-price">{offer.price}</p>
-                  <p className="offer-unit">{offer.unit}</p>
-                  <p className="offer-desc">{offer.desc}</p>
-                  <ul className="offer-features">
-                    {offer.features.map((f, j) => (
-                      <li key={j}><span className="check">✓</span> {f}</li>
-                    ))}
-                  </ul>
-                  <a href="#contact" className={`button offer-cta ${offer.featured ? "button-primary" : "button-secondary"}`}>
-                    {offer.cta}
-                  </a>
-                </div>
-              </Reveal>
+{/* ═══════════════════════ OFFRES ═══════════════════════ */}
+<section className="section border-top" id="offres">
+  <div className="container container-narrow text-center">
+    <Reveal>
+      <p className="eyebrow">Prestations</p>
+      <h2>Des formats adaptés à chaque besoin.</h2>
+    </Reveal>
+  </div>
+  <div className="container offers-grid">
+    {[
+      {
+        name: "Première lecture",
+        price: "450 €",
+        unit: "3 notices incluses",
+        desc: "Pour découvrir le service et mesurer l'impact sur vos premières pièces.",
+        features: ["3 notices complètes", "Recherche contextuelle par pièce", "1 révision par notice", "Livraison sous 7 jours"],
+        cta: "Commencer avec 3 notices",
+        featured: false,
+      },
+      {
+        name: "Ensemble",
+        price: "1 200 €",
+        unit: "10 notices — soit 120 € / pièce",
+        desc: "Pour les vendeurs réguliers qui veulent un catalogue cohérent et efficace.",
+        features: ["10 notices complètes", "Ligne éditoriale unifiée", "Recherche contextuelle par pièce", "1 révision par notice", "Livraison échelonnée sous 15 jours"],
+        cta: "Choisir ce pack",
+        featured: true,
+      },
+      {
+        name: "Catalogue",
+        price: "Sur devis",
+        unit: "à partir de 20 pièces",
+        desc: "Pour les marchands et galeries qui veulent professionnaliser l'ensemble de leur inventaire.",
+        features: ["Notices complètes par pièce", "Tarif dégressif selon volume", "Ligne éditoriale sur mesure", "Formats multiples (web, print, foire)", "Interlocuteur unique"],
+        cta: "Demander un devis",
+        featured: false,
+      },
+    ].map((offer, i) => (
+      <Reveal key={i} delay={i * 120}>
+        <div className={`offer-card ${offer.featured ? "offer-featured" : ""}`}>
+          {offer.featured && <span className="offer-badge">Recommandé</span>}
+          <h3 className="offer-name">{offer.name}</h3>
+          <p className="offer-price">{offer.price}</p>
+          <p className="offer-unit">{offer.unit}</p>
+          <p className="offer-desc">{offer.desc}</p>
+          <ul className="offer-features">
+            {offer.features.map((f, j) => (
+              <li key={j}><span className="check">✓</span> {f}</li>
             ))}
-          </div>
-          <Reveal delay={100}>
-            <div className="container">
-              <div className="offer-guarantee">
-                Première notice offerte — vous jugez sur pièce, sans engagement.
-              </div>
-            </div>
-          </Reveal>
-        </section>
+          </ul>
+          <a href="#contact" className={`button offer-cta ${offer.featured ? "button-primary" : "button-secondary"}`}>
+            {offer.cta}
+          </a>
+        </div>
+      </Reveal>
+    ))}
+  </div>
 
-import { useState, useEffect, useRef } from "react";
+  {/* ── Services complémentaires ── */}
+  <div className="container" style={{ marginTop: "64px" }}>
+    <Reveal>
+      <div className="container-narrow text-center" style={{ marginBottom: "40px" }}>
+        <p className="eyebrow">En complément</p>
+        <h3>Services annexes</h3>
+      </div>
+    </Reveal>
+    <div className="steps-grid">
+      {[
+        {
+          title: "Formation en rédaction",
+          price: "200 € / personne",
+          desc: "Apprenez à rédiger des notices efficaces pour vos pièces courantes. Idéal pour les équipes de galeries et les vendeurs autonomes.",
+        },
+        {
+          title: "Audit de catalogue",
+          price: "300 €",
+          desc: "Analyse complète de vos fiches existantes avec recommandations concrètes : structure, vocabulaire, positionnement prix.",
+        },
+        {
+          title: "Forfait galerie",
+          price: "Sur devis",
+          desc: "Rédaction mensuelle de fiches pour les galeries. Un flux régulier, un ton constant, une charge mentale en moins.",
+        },
+      ].map((s, i) => (
+        <Reveal key={i} delay={i * 100}>
+          <div className="step-card">
+            <h4 style={{ marginBottom: "4px" }}>{s.title}</h4>
+            <p style={{ color: "#c8956c", fontWeight: 600, fontSize: "0.95rem", marginBottom: "12px" }}>{s.price}</p>
+            <p style={{ fontSize: "0.88rem", color: "#5c4f3a" }}>{s.desc}</p>
+          </div>
+        </Reveal>
+      ))}
+    </div>
+  </div>
+
+  <Reveal delay={100}>
+    <div className="container">
+      <div className="offer-guarantee">
+        Première notice offerte — vous jugez sur pièce, sans engagement.
+      </div>
+    </div>
+  </Reveal>
+</section>
 
 /* ───────────────────────── HOOK SCROLL REVEAL ───────────────────────── */
 function useScrollReveal() {
@@ -430,142 +466,6 @@ export default function Page() {
               </div>
             </Reveal>
           </div>
-        </section>
-
-        {/* ═══════════════════════ CONSTAT ═══════════════════════ */}
-        <section className="section border-top" id="probleme">
-          <div className="container split">
-            <Reveal>
-              <div>
-                <p className="eyebrow">Le constat</p>
-                <h2>La plupart des annonces ne sont pas à la hauteur des pièces qu&apos;elles présentent.</h2>
-                <p>
-                  Sur Selency, Proantic, Leboncoin ou Catawiki, des milliers d&apos;objets de qualité
-                  restent en ligne pendant des semaines. Pas parce qu&apos;ils manquent de valeur,
-                  mais parce que rien dans leur présentation ne permet à l&apos;acheteur de comprendre
-                  cette valeur.
-                </p>
-                <p>
-                  Descriptions en deux lignes. Vocabulaire approximatif. Aucun contexte historique.
-                  Le prix semble arbitraire. L&apos;acheteur hésite, puis passe à autre chose.
-                </p>
-              </div>
-            </Reveal>
-            <Reveal delay={150}>
-              <div>
-                <div className="stat-grid">
-                  <div className="stat-card">
-                    <p className="stat-number">70 %</p>
-                    <p className="stat-label">des annonces haut de gamme sans contexte historique</p>
-                  </div>
-                  <div className="stat-card">
-                    <p className="stat-number">3×</p>
-                    <p className="stat-label">plus de clics sur une annonce bien rédigée</p>
-                  </div>
-                  <div className="stat-card">
-                    <p className="stat-number">+40 %</p>
-                    <p className="stat-label">de marge possible avec un positionnement juste</p>
-                  </div>
-                  <div className="stat-card">
-                    <p className="stat-number">5 jours</p>
-                    <p className="stat-label">délai moyen de livraison d&apos;une notice</p>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
-        {/* ═══════════════════════ APPROCHE ═══════════════════════ */}
-        <section className="section" id="approche">
-          <div className="container container-narrow text-center">
-            <Reveal>
-              <p className="eyebrow">L&apos;approche</p>
-              <h2>Chaque notice suit un processus rigoureux en quatre étapes.</h2>
-            </Reveal>
-          </div>
-          <div className="container steps-grid">
-            {[
-              { num: "01", title: "Analyse de l'objet", desc: "Étude des photos, dimensions, matériaux, époque. Identification des points forts et des éléments différenciants." },
-              { num: "02", title: "Recherche contextuelle", desc: "Vérification des références stylistiques, comparaison avec des pièces similaires vendues, positionnement prix." },
-              { num: "03", title: "Rédaction de la notice", desc: "Écriture d'un texte structuré qui valorise l'objet, clarifie son origine et justifie le prix demandé." },
-              { num: "04", title: "Livraison & ajustements", desc: "Envoi du texte prêt à publier. Une révision incluse pour ajuster le ton ou les détails si nécessaire." },
-            ].map((step, i) => (
-              <Reveal key={i} delay={i * 120}>
-                <div className="step-card">
-                  <span className="step-num">{step.num}</span>
-                  <h3 className="step-title">{step.title}</h3>
-                  <p className="step-desc">{step.desc}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </section>
-
-        {/* ═══════════════════════ OFFRES ═══════════════════════ */}
-        <section className="section border-top" id="offres">
-          <div className="container container-narrow text-center">
-            <Reveal>
-              <p className="eyebrow">Prestations</p>
-              <h2>Des formats adaptés à chaque besoin.</h2>
-            </Reveal>
-          </div>
-          <div className="container offers-grid">
-            {[
-              {
-                name: "Notice unique",
-                price: "90 €",
-                unit: "par pièce",
-                desc: "Pour une pièce isolée que vous voulez vendre vite et au bon prix.",
-                features: ["Texte prêt à publier", "Recherche contextuelle", "1 révision incluse", "Livraison sous 5 jours"],
-                cta: "Commander une notice",
-                featured: false,
-              },
-              {
-                name: "Pack 5 notices",
-                price: "375 €",
-                unit: "soit 75 € / pièce",
-                desc: "Pour les vendeurs réguliers qui veulent professionnaliser leur catalogue.",
-                features: ["5 notices complètes", "Recherche contextuelle par pièce", "Ligne éditoriale cohérente", "1 révision par notice", "Livraison sous 7 jours"],
-                cta: "Choisir ce pack",
-                featured: true,
-              },
-              {
-                name: "Catalogue",
-                price: "Sur devis",
-                unit: "à partir de 10 pièces",
-                desc: "Pour les marchands et galeries qui veulent un ensemble cohérent.",
-                features: ["Notices complètes par pièce", "Ligne éditoriale unifiée", "Formats multiples par pièce", "Tarif dégressif", "Interlocuteur unique"],
-                cta: "Demander un devis",
-                featured: false,
-              },
-            ].map((offer, i) => (
-              <Reveal key={i} delay={i * 120}>
-                <div className={`offer-card ${offer.featured ? "offer-featured" : ""}`}>
-                  {offer.featured && <span className="offer-badge">Recommandé</span>}
-                  <h3 className="offer-name">{offer.name}</h3>
-                  <p className="offer-price">{offer.price}</p>
-                  <p className="offer-unit">{offer.unit}</p>
-                  <p className="offer-desc">{offer.desc}</p>
-                  <ul className="offer-features">
-                    {offer.features.map((f, j) => (
-                      <li key={j}><span className="check">✓</span> {f}</li>
-                    ))}
-                  </ul>
-                  <a href="#contact" className={`button offer-cta ${offer.featured ? "button-primary" : "button-secondary"}`}>
-                    {offer.cta}
-                  </a>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal delay={100}>
-            <div className="container">
-              <div className="offer-guarantee">
-                Première notice offerte — vous jugez sur pièce, sans engagement.
-              </div>
-            </div>
-          </Reveal>
         </section>
 
         {/* ═══════════════════════ EXEMPLES ═══════════════════════ */}
@@ -1096,504 +996,7 @@ export default function Page() {
           </div>
         </section>
 
-        {/* ═══════════════════════ CONSTAT ═══════════════════════ */}
-        <section className="section border-top" id="probleme">
-          <div className="container split">
-            <Reveal>
-              <div>
-                <p className="eyebrow">Le constat</p>
-                <h2>La plupart des annonces ne sont pas à la hauteur des pièces qu&apos;elles présentent.</h2>
-                <p>
-                  Sur Selency, Proantic, Leboncoin ou Catawiki, des milliers d&apos;objets de qualité
-                  restent en ligne pendant des semaines. Pas parce qu&apos;ils manquent de valeur,
-                  mais parce que rien dans leur présentation ne permet à l&apos;acheteur de comprendre
-                  cette valeur.
-                </p>
-                <p>
-                  Descriptions en deux lignes. Vocabulaire approximatif. Aucun contexte historique.
-                  Le prix semble arbitraire. L&apos;acheteur hésite, puis passe à autre chose.
-                </p>
-              </div>
-            </Reveal>
-            <Reveal delay={150}>
-              <div>
-                <div className="stat-grid">
-                  <div className="stat-card">
-                    <p className="stat-number">70 %</p>
-                    <p className="stat-label">des annonces haut de gamme sans contexte historique</p>
-                  </div>
-                  <div className="stat-card">
-                    <p className="stat-number">3×</p>
-                    <p className="stat-label">plus de clics sur une annonce bien rédigée</p>
-                  </div>
-                  <div className="stat-card">
-                    <p className="stat-number">+40 %</p>
-                    <p className="stat-label">de marge possible avec un positionnement juste</p>
-                  </div>
-                  <div className="stat-card">
-                    <p className="stat-number">5 jours</p>
-                    <p className="stat-label">délai moyen de livraison d&apos;une notice</p>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
-        {/* ═══════════════════════ APPROCHE ═══════════════════════ */}
-        <section className="section" id="approche">
-          <div className="container container-narrow text-center">
-            <Reveal>
-              <p className="eyebrow">L&apos;approche</p>
-              <h2>Chaque notice suit un processus rigoureux en quatre étapes.</h2>
-            </Reveal>
-          </div>
-          <div className="container steps-grid">
-            {[
-              { num: "01", title: "Analyse de l'objet", desc: "Étude des photos, dimensions, matériaux, époque. Identification des points forts et des éléments différenciants." },
-              { num: "02", title: "Recherche contextuelle", desc: "Vérification des références stylistiques, comparaison avec des pièces similaires vendues, positionnement prix." },
-              { num: "03", title: "Rédaction de la notice", desc: "Écriture d'un texte structuré qui valorise l'objet, clarifie son origine et justifie le prix demandé." },
-              { num: "04", title: "Livraison & ajustements", desc: "Envoi du texte prêt à publier. Une révision incluse pour ajuster le ton ou les détails si nécessaire." },
-            ].map((step, i) => (
-              <Reveal key={i} delay={i * 120}>
-                <div className="step-card">
-                  <span className="step-num">{step.num}</span>
-                  <h3 className="step-title">{step.title}</h3>
-                  <p className="step-desc">{step.desc}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </section>
-
-        {/* ═══════════════════════ OFFRES ═══════════════════════ */}
-        <section className="section border-top" id="offres">
-          <div className="container container-narrow text-center">
-            <Reveal>
-              <p className="eyebrow">Prestations</p>
-              <h2>Des formats adaptés à chaque besoin.</h2>
-            </Reveal>
-          </div>
-          <div className="container offers-grid">
-            {[
-              {
-                name: "Notice unique",
-                price: "90 €",
-                unit: "par pièce",
-                desc: "Pour une pièce isolée que vous voulez vendre vite et au bon prix.",
-                features: ["Texte prêt à publier", "Recherche contextuelle", "1 révision incluse", "Livraison sous 5 jours"],
-                cta: "Commander une notice",
-                featured: false,
-              },
-              {
-                name: "Pack 5 notices",
-                price: "375 €",
-                unit: "soit 75 € / pièce",
-                desc: "Pour les vendeurs réguliers qui veulent professionnaliser leur catalogue.",
-                features: ["5 notices complètes", "Recherche contextuelle par pièce", "Ligne éditoriale cohérente", "1 révision par notice", "Livraison sous 7 jours"],
-                cta: "Choisir ce pack",
-                featured: true,
-              },
-              {
-                name: "Catalogue",
-                price: "Sur devis",
-                unit: "à partir de 10 pièces",
-                desc: "Pour les marchands et galeries qui veulent un ensemble cohérent.",
-                features: ["Notices complètes par pièce", "Ligne éditoriale unifiée", "Formats multiples par pièce", "Tarif dégressif", "Interlocuteur unique"],
-                cta: "Demander un devis",
-                featured: false,
-              },
-            ].map((offer, i) => (
-              <Reveal key={i} delay={i * 120}>
-                <div className={`offer-card ${offer.featured ? "offer-featured" : ""}`}>
-                  {offer.featured && <span className="offer-badge">Recommandé</span>}
-                  <h3 className="offer-name">{offer.name}</h3>
-                  <p className="offer-price">{offer.price}</p>
-                  <p className="offer-unit">{offer.unit}</p>
-                  <p className="offer-desc">{offer.desc}</p>
-                  <ul className="offer-features">
-                    {offer.features.map((f, j) => (
-                      <li key={j}><span className="check">✓</span> {f}</li>
-                    ))}
-                  </ul>
-                  <a href="#contact" className={`button offer-cta ${offer.featured ? "button-primary" : "button-secondary"}`}>
-                    {offer.cta}
-                  </a>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal delay={100}>
-            <div className="container">
-              <div className="offer-guarantee">
-                Première notice offerte — vous jugez sur pièce, sans engagement.
-              </div>
-            </div>
-          </Reveal>
-        </section>
-
-        {/* ═══════════════════════ EXEMPLES ═══════════════════════ */}
-        <section className="section border-top" id="exemples">
-          <div className="container">
-            <Reveal>
-              <div className="section-head">
-                <p className="eyebrow">Exemples</p>
-                <h2>Trois cas, avant et après.</h2>
-                <p className="section-intro">
-                  Chaque exemple part d&apos;une annonce réelle trouvée en ligne et montre
-                  ce que la rédaction change — sur la lisibilité, la désirabilité,
-                  la cohérence avec le prix affiché.
-                </p>
-              </div>
-            </Reveal>
-
-            <div className="examples-stack">
-              {/* EXEMPLE 1 */}
-              <Reveal>
-                <article className={`case-study ${openExample === 0 ? "is-open" : ""}`}>
-                  <button className="case-toggle" onClick={() => setOpenExample(openExample === 0 ? null : 0)}>
-                    <div className="case-toggle-left">
-                      <p className="case-meta">Exemple 1 · Enfilade scandinave, circa 1960</p>
-                      <h3>Passer d&apos;une description plate à un texte qui justifie le prix.</h3>
-                      <div className="case-specs">
-                        <span>Prix affiché : 1 850 €</span>
-                        <span>Teck · laiton · 200 cm</span>
-                        <span>Plateforme : Selency</span>
-                      </div>
-                    </div>
-                    <div className="case-toggle-icon">{openExample === 0 ? "−" : "+"}</div>
-                  </button>
-                  {openExample === 0 && (
-                    <div className="case-body">
-                      <div className="case-columns">
-                        <div className="text-panel before-panel">
-                          <p className="panel-label">Avant</p>
-                          <p>
-                            Enfilade scandinave en teck des années 60, bon état
-                            avec quelques traces d&apos;usage. 3 portes coulissantes,
-                            pieds compas. L 200 × P 45 × H 82 cm. Idéale pour
-                            un salon ou une salle à manger.
-                          </p>
-                        </div>
-                        <div className="text-panel after-panel">
-                          <p className="panel-label">Après</p>
-                          <p>
-                            Enfilade à trois corps en teck massif, Danemark, circa 1960.
-                            Le modèle reprend les codes du design scandinave de la période —
-                            lignes basses, façade rythmée par trois portes coulissantes et
-                            piètement fuselé en compas — avec une qualité d&apos;exécution
-                            qui suggère une production d&apos;atelier plutôt qu&apos;une fabrication
-                            en grande série.
-                          </p>
-                          <p>
-                            Les poignées en laiton patiné apportent un contrepoint chaleureux
-                            au veinage du teck. L&apos;intérieur offre un rangement généreux.
-                            Quelques traces d&apos;usage témoignent d&apos;une pièce vécue,
-                            sans altérer la solidité ni l&apos;allure de l&apos;ensemble.
-                          </p>
-                          <p>L 200 × P 45 × H 82 cm · Danemark, circa 1960.</p>
-                        </div>
-                      </div>
-                      <div className="case-analysis">
-                        <p className="panel-label">Ce qui change</p>
-                        <ul>
-                          <li>L&apos;origine géographique et la datation ancrent l&apos;objet dans une histoire.</li>
-                          <li>Le vocabulaire technique (piètement fuselé, façade rythmée) crédibilise la pièce.</li>
-                          <li>L&apos;usure devient un argument (patine, vécu, caractère) au lieu d&apos;un défaut à excuser.</li>
-                        </ul>
-                      </div>
-                    </div>
-                  )}
-                </article>
-              </Reveal>
-
-              {/* EXEMPLE 2 */}
-              <Reveal>
-                <article className={`case-study ${openExample === 1 ? "is-open" : ""}`}>
-                  <button className="case-toggle" onClick={() => setOpenExample(openExample === 1 ? null : 1)}>
-                    <div className="case-toggle-left">
-                      <p className="case-meta">Exemple 2 · Suite de 3 chaises, années 1950</p>
-                      <h3>Transformer un lot banal en ensemble cohérent et désirable.</h3>
-                      <div className="case-specs">
-                        <span>Prix affiché : 480 €</span>
-                        <span>Métal laqué · velours vert</span>
-                        <span>Plateforme : Selency</span>
-                      </div>
-                    </div>
-                    <div className="case-toggle-icon">{openExample === 1 ? "−" : "+"}</div>
-                  </button>
-                  {openExample === 1 && (
-                    <div className="case-body">
-                      <div className="case-columns">
-                        <div className="text-panel before-panel">
-                          <p className="panel-label">Avant</p>
-                          <p>
-                            3 chaises années 50 métal et velours vert, idéales
-                            pour bureau ou table, bon état, velours nettoyé,
-                            traces d&apos;usage sur le métal. H 83 × L 60 × P 53 cm.
-                          </p>
-                        </div>
-                        <div className="text-panel after-panel">
-                          <p className="panel-label">Après</p>
-                          <p>
-                            Suite de trois chaises en métal laqué noir et velours vert amande,
-                            France, années 1950. L&apos;assise enveloppante et le dossier légèrement
-                            incurvé évoquent les productions des ateliers français d&apos;après-guerre,
-                            où le confort domestique commençait à dialoguer avec les formes industrielles.
-                          </p>
-                          <p>
-                            Le velours a été nettoyé — il conserve un tombé souple et une teinte
-                            cohérente sur les trois assises. La structure métallique porte quelques
-                            marques d&apos;usage qui n&apos;altèrent ni la stabilité ni l&apos;élégance d&apos;ensemble.
-                          </p>
-                          <p>H 83 × L 60 × P 53 cm · France, années 1950.</p>
-                        </div>
-                      </div>
-                      <div className="case-analysis">
-                        <p className="panel-label">Ce qui change</p>
-                        <ul>
-                          <li>Le lot devient une « suite » — un terme qui suggère la cohérence et la rareté.</li>
-                          <li>L&apos;usure devient un argument (patine, vécu, caractère) au lieu d&apos;un défaut à excuser.</li>
-                          <li>La datation et l&apos;origine sont précisées — elles justifient le prix.</li>
-                          <li>Le texte s&apos;adresse à un acheteur qui cherche de l&apos;authenticité, pas du neuf.</li>
-                        </ul>
-                      </div>
-                    </div>
-                  )}
-                </article>
-              </Reveal>
-
-              {/* EXEMPLE 3 */}
-              <Reveal>
-                <article className={`case-study ${openExample === 2 ? "is-open" : ""}`}>
-                  <button className="case-toggle" onClick={() => setOpenExample(openExample === 2 ? null : 2)}>
-                    <div className="case-toggle-left">
-                      <p className="case-meta">Exemple 3 · Bureau ministre Art déco, circa 1935</p>
-                      <h3>Donner à un meuble classique la présentation qu&apos;il mérite.</h3>
-                      <div className="case-specs">
-                        <span>Prix affiché : 2 200 €</span>
-                        <span>Palissandre · laiton</span>
-                        <span>Plateforme : Proantic</span>
-                      </div>
-                    </div>
-                    <div className="case-toggle-icon">{openExample === 2 ? "−" : "+"}</div>
-                  </button>
-                  {openExample === 2 && (
-                    <div className="case-body">
-                      <div className="case-columns">
-                        <div className="text-panel before-panel">
-                          <p className="panel-label">Avant</p>
-                          <p>
-                            Bureau ministre Art déco en palissandre, années 30.
-                            4 tiroirs, poignées laiton. Restauré. Bon état.
-                            H 78 × L 140 × P 72 cm. Prix : 2 200 €.
-                          </p>
-                        </div>
-                        <div className="text-panel after-panel">
-                          <p className="panel-label">Après — format court</p>
-                          <p className="panel-sublabel">Adapté à Proantic ou Drouot Digital</p>
-                          <h4>Bureau ministre Art déco, circa 1935 — placage palissandre, poignées laiton d&apos;origine</h4>
-                          <p>
-                            Un bureau qui impose sa présence sans élever la voix. Le placage de
-                            palissandre déploie ses veinures sur un plateau généreux, encadré par
-                            des montants nets et une géométrie typiquement Art déco. Quatre tiroirs
-                            en façade, poignées en laiton d&apos;origine — chaque détail confirme la
-                            cohérence de la pièce.
-                          </p>
-                          <p>
-                            La restauration a été menée avec discernement : stabilité structurelle
-                            assurée, patine du bois préservée, quincaillerie intacte. C&apos;est un
-                            meuble de travail autant qu&apos;un meuble de caractère — le genre de
-                            pièce qui compose un intérieur comme on écrit une phrase.
-                          </p>
-                          <p>H 78 × L 140 × P 72 cm · France, circa 1935.</p>
-                        </div>
-                      </div>
-                      <div className="case-analysis">
-                        <p className="panel-label">Ce qui change</p>
-                        <ul>
-                          <li>Le titre seul donne envie de lire — il est informatif et évocateur.</li>
-                          <li>La restauration devient un gage de sérieux, pas un aveu de faiblesse.</li>
-                          <li>Le texte installe une atmosphère — l&apos;acheteur se projette.</li>
-                        </ul>
-                      </div>
-                    </div>
-                  )}
-                </article>
-              </Reveal>
-            </div>
-          </div>
-        </section>
-
-        {/* ═══════════════════════ À PROPOS ═══════════════════════ */}
-        <section className="section border-top" id="parcours">
-          <div className="container split">
-            <Reveal>
-              <div>
-                <p className="eyebrow">À propos</p>
-                <h2>Qui rédige vos notices.</h2>
-                <p>
-                  Passionné de mobilier ancien et formé à l&apos;histoire de l&apos;art, je travaille
-                  depuis plusieurs années à la croisée du marché de l&apos;art et de la rédaction
-                  spécialisée. Mon approche combine rigueur documentaire et sensibilité
-                  commerciale.
-                </p>
-                <p>
-                  Chaque objet mérite un texte qui lui rend justice. Pas un argumentaire
-                  marketing, mais une description honnête, précise et engageante —
-                  le genre de texte qui donne confiance à l&apos;acheteur et fierté au vendeur.
-                </p>
-              </div>
-            </Reveal>
-            <Reveal delay={150}>
-              <div className="about-highlights">
-                <div className="highlight-card">
-                  <p className="highlight-number">200+</p>
-                  <p className="highlight-label">notices rédigées</p>
-                </div>
-                <div className="highlight-card">
-                  <p className="highlight-number">50+</p>
-                  <p className="highlight-label">vendeurs accompagnés</p>
-                </div>
-                <div className="highlight-card">
-                  <p className="highlight-number">98 %</p>
-                  <p className="highlight-label">de clients satisfaits</p>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
-        {/* ═══════════════════════ FAQ ═══════════════════════ */}
-        <section className="section" id="faq">
-          <div className="container container-narrow">
-            <Reveal>
-              <div className="text-center">
-                <p className="eyebrow">Questions fréquentes</p>
-                <h2>Tout ce que vous devez savoir.</h2>
-              </div>
-            </Reveal>
-            <div className="faq-list">
-              {faqs.map((faq, i) => (
-                <Reveal key={i} delay={i * 80}>
-                  <div className={`faq-item ${openFaq === i ? "faq-open" : ""}`}>
-                    <button className="faq-toggle" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
-                      <span>{faq.q}</span>
-                      <span className="faq-icon">{openFaq === i ? "−" : "+"}</span>
-                    </button>
-                    {openFaq === i && <div className="faq-answer"><p>{faq.a}</p></div>}
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ═══════════════════════ CONTACT ═══════════════════════ */}
-        <section className="section border-top" id="contact">
-          <div className="container container-narrow">
-            <Reveal>
-              <div className="text-center">
-                <p className="eyebrow">Contact</p>
-                <h2>Envoyez-moi un objet à analyser.</h2>
-                <p className="section-intro">
-                  Première notice offerte. Décrivez votre pièce ou votre besoin,
-                  je vous recontacte sous 24 h.
-                </p>
-              </div>
-            </Reveal>
-            <Reveal delay={100}>
-              <div className="form-wrap">
-                {formStatus === "sent" ? (
-                  <div className="form-success">
-                    <p className="form-success-icon">✓</p>
-                    <p className="form-success-title">Message envoyé</p>
-                    <p>Je vous recontacte sous 24 h. Merci pour votre confiance.</p>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit}>
-                    <div className="form-row">
-                      <div className="form-field">
-                        <label htmlFor="name">Nom</label>
-                        <input
-                          id="name"
-                          type="text"
-                          required
-                          placeholder="Votre nom"
-                          value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          onBlur={() => markTouched("name")}
-                          className={touched.name && formData.name.length > 0 ? "field-valid" : ""}
-                        />
-                      </div>
-                      <div className="form-field">
-                        <label htmlFor="email">Email</label>
-                        <input
-                          id="email"
-                          type="email"
-                          required
-                          placeholder="votre@email.com"
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          onBlur={() => markTouched("email")}
-                          className={touched.email && isValidEmail(formData.email) ? "field-valid" : touched.email ? "field-invalid" : ""}
-                        />
-                      </div>
-                    </div>
-                    <div className="form-row">
-                      <div className="form-field">
-                        <label htmlFor="phone">Téléphone</label>
-                        <input
-                          id="phone"
-                          type="tel"
-                          placeholder="06 00 00 00 00"
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        />
-                      </div>
-                      <div className="form-field">
-                        <label htmlFor="platform">Plateforme de vente</label>
-                        <input
-                          id="platform"
-                          type="text"
-                          placeholder="Selency, Proantic, Leboncoin…"
-                          value={formData.platform}
-                          onChange={(e) => setFormData({ ...formData, platform: e.target.value })}
-                        />
-                      </div>
-                    </div>
-                    <div className="form-field">
-                      <label htmlFor="pieces">Nombre de pièces à rédiger</label>
-                      <input
-                        id="pieces"
-                        type="text"
-                        placeholder="1, 5, 10…"
-                        value={formData.pieces}
-                        onChange={(e) => setFormData({ ...formData, pieces: e.target.value })}
-                      />
-                    </div>
-                    <div className="form-field">
-                      <label htmlFor="message">Décrivez votre besoin</label>
-                      <textarea
-                        id="message"
-                        rows={5}
-                        required
-                        placeholder="Décrivez l'objet, joignez des photos si possible, précisez vos attentes…"
-                        value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        onBlur={() => markTouched("message")}
-                        className={touched.message && formData.message.length > 0 ? "field-valid" : ""}
-                      />
-                    </div>
-                    <button type="submit" className="button button-primary button-arrow">Envoyer</button>
-                  </form>
-                )}
-              </div>
-            </Reveal>
-          </div>
-        </section>
-      </main>
-
+        
       {/* ═══════════════════════ FOOTER ═══════════════════════ */}
       <footer className="footer">
         <div className="container footer-inner">
