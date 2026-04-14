@@ -1,4 +1,3 @@
-L'erreur est à la ligne 85 — il manque probablement la partie entre handleSubmit et le return. Le code que je vous ai envoyé était tronqué (les [...]). Voici le fichier page.tsx complet sans coupure :
 "use client";
 
 import { useState, useEffect, useRef } from "react";
