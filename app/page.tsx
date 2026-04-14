@@ -72,7 +72,7 @@ export default function Page() {
   const markTouched = (field: string) => setTouched((prev) => ({ ...prev, [field]: true }));
   const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-   const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const subject = encodeURIComponent(
       "Demande — " + (formData.name || "Nouveau prospect")
