@@ -1,19 +1,9 @@
-"use client";
+import type { Metadata } from 'next'
 
-import './globals.css';
-import { Lora, Inter } from 'next/font/google';
-
-const lora = Lora({
-  subsets: ['latin'],
-  variable: '--font-lora',
-  display: 'swap',
-});
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-});
+export const metadata: Metadata = {
+  title: 'Atelier Provenance | Rédaction experte pour le mobilier de collection',
+  description: 'Des notices expertes qui justifient le prix, créent le désir et accélèrent la vente de vos pièces anciennes et vintage.',
+}
 
 export default function RootLayout({
   children,
@@ -21,10 +11,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr" className={`${lora.variable} ${inter.variable}`}>
-      <body>
-        {children}
-      </body>
+    <html lang="fr">
+      <body>{children}</body>
     </html>
-  );
+  )
 }
