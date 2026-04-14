@@ -37,6 +37,9 @@ function Reveal({ children, delay = 0, className = "" }: { children: React.React
     </div>
   );
 }
+    </div>
+  );
+}
 
 /* ───────────────────────── PAGE ───────────────────────── */
 export default function Page() {
