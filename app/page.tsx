@@ -82,8 +82,7 @@ export default function Page() {
     window.location.href = "mailto:contact.atelierprovenance@gmail.com?subject=" + subject + "&body=" + body;
     setFormStatus("sent");
   };
-
-  const faqs = [
+const faqs = [
     { q: "Que contient exactement une notice ?", a: "Une notice comprend un texte principal (description valorisante de l'objet), les dimensions, la datation, l'origine quand elle est identifiable, et un positionnement par rapport au marché. Le tout est livré prêt à copier-coller sur votre plateforme." },
     { q: "Comment se passe la commande ?", a: "Vous m'envoyez des photos de l'objet, ses dimensions, et les informations dont vous disposez via le formulaire. Je vous recontacte sous 24 h pour confirmer la commande et le délai." },
     { q: "Quel est le délai de livraison ?", a: "5 jours ouvrés pour une notice unique, 7 jours pour un pack de 5. Les catalogues font l'objet d'un planning sur mesure." },
@@ -92,6 +91,7 @@ export default function Page() {
   ];
 
   return (
+    <>
     <>
       {/* ═══════════════════════ NAVBAR ═══════════════════════ */}
       <nav className={`nav ${scrolled ? "nav-scrolled" : ""}`}>
