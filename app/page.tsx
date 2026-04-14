@@ -71,13 +71,15 @@ export default function Page() {
   const markTouched = (field: string) => setTouched((prev) => ({ ...prev, [field]: true }));
   const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  const handleSubmit = (e: React.FormEvent) => {
+   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Demande — ${formData.name || "Nouveau prospect"}`);
-    const body = encodeURIComponent(
-      `Nom : ${formData.name}\nEmail : ${formData.email}\nTéléphone : ${formData.phone}\nPlateforme : ${formData.platform}\nNombre de pièces : ${formData.pieces}\n\nMessage :\n${formData.message}`
+    const subject = encodeURIComponent(
+      "Demande — " + (formData.name || "Nouveau prospect")
     );
-    window.location.href = `mailto:contact.atelierprovenance@gmail.com?subject=${subject}&body=${body}`;
+    const body = encodeURIComponent(
+      "Nom : " + formData.name + "\nEmail : " + formData.email + "\nTéléphone : " + formData.phone + "\nPlateforme : " + formData.platform + "\nNombre de pièces : " + formData.pieces + "\n\nMessage :\n" + formData.message
+    );
+    window.location.href = "mailto:contact.atelierprovenance@gmail.com?subject=" + subject + "&body=" + body;
     setFormStatus("sent");
   };
 
