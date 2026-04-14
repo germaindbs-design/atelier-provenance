@@ -321,42 +321,6 @@ const faqs = [
   </Reveal>
 </section>
 
-/* ───────────────────────── HOOK SCROLL REVEAL ───────────────────────── */
-function useScrollReveal() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  return { ref, isVisible };
-}
-
-/* ───────────────────────── COMPOSANT REVEAL ───────────────────────── */
-function Reveal({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
-  const { ref, isVisible } = useScrollReveal();
-  return (
-    <div
-      ref={ref}
-      className={`reveal ${isVisible ? "reveal-visible" : ""} ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
-    >
-      {children}
-    </div>
-  );
-}
-
 /* ───────────────────────── PAGE ───────────────────────── */
 export default function Page() {
   const [openExample, setOpenExample] = useState<number | null>(null);
@@ -428,45 +392,6 @@ export default function Page() {
           </div>
         </div>
       </nav>
-
-      <main>
-        {/* ═══════════════════════ HERO ═══════════════════════ */}
-        <section className="hero">
-          <div className="hero-bg" style={{ transform: `translateY(${heroOffset}px)` }} />
-          <div className="hero-grain" />
-          <div className="container hero-grid">
-            <Reveal>
-              <div>
-                <p className="eyebrow">Atelier Provenance</p>
-                <h1>Vos pièces ont une valeur.<br /><em>Il reste à la rendre lisible.</em></h1>
-                <p className="intro">
-                  Rédaction de notices pour le mobilier de collection et les objets d&apos;art.
-                  Chaque texte est construit pour soutenir le prix, clarifier l&apos;objet et le
-                  rendre véritablement désirable — pas seulement visible.
-                </p>
-                <div className="actions">
-                  <a href="#contact" className="button button-primary button-arrow">Envoyer un objet à analyser</a>
-                  <a href="#offres" className="button button-secondary">Voir les prestations</a>
-                </div>
-                <p className="hero-free">Première notice offerte, sans engagement.</p>
-              </div>
-            </Reveal>
-            <Reveal delay={200}>
-              <div className="hero-panel">
-                <div className="hero-card">
-                  <p className="hero-label">En bref</p>
-                  <ul className="hero-list">
-                    <li><span className="list-icon">◆</span> Analyse du marché et du positionnement prix</li>
-                    <li><span className="list-icon">◆</span> Vocabulaire juste, ton adapté à votre clientèle</li>
-                    <li><span className="list-icon">◆</span> Formats prêts à publier sur tous vos canaux</li>
-                    <li><span className="list-icon">◆</span> Livraison sous 5 jours ouvrés</li>
-                    <li><span className="list-icon">◆</span> Première notice offerte</li>
-                  </ul>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </section>
 
         {/* ═══════════════════════ EXEMPLES ═══════════════════════ */}
         <section className="section border-top" id="exemples">
