@@ -9,10 +9,9 @@ export default function Header() {
             Atelier Provenance
           </Link>
           <div className="nav-links">
-            <Link href="#services" className="nav-link">Nos services</Link>
-            <Link href="#examples" className="nav-link">Exemples</Link>
-            <Link href="#about" className="nav-link">À propos</Link>
-            <Link href="#contact" className="btn btn-outline">Nous contacter</Link>
+            <Link href="/services" className="nav-link">Services</Link>
+            <Link href="/about" className="nav-link">À propos</Link>
+            <Link href="/contact" className="btn btn-outline">Contact</Link>
           </div>
         </nav>
       </div>
