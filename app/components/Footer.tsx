@@ -1,45 +1,27 @@
-import Link from 'next/link'
-
 export default function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer" style={{ backgroundColor: 'var(--primary)', color: 'white', padding: '3rem 0' }}>
       <div className="container">
         <div className="footer-content">
           <div className="footer-section">
-            <h3>Atelier Provenance</h3>
+            <h3 style={{ fontFamily: 'var(--font-serif)', marginBottom: '1rem' }}>Atelier Provenance</h3>
             <p>Rédaction experte pour le mobilier de collection et les objets anciens.</p>
           </div>
-
           <div className="footer-section">
-            <h3>Services</h3>
-            <ul className="footer-links">
-              <li><Link href="#services">Notices individuelles</Link></li>
-              <li><Link href="#services">Lots de notices</Link></li>
-              <li><Link href="#services">Catalogues complets</Link></li>
-              <li><Link href="#examples">Exemples</Link></li>
+            <h4 style={{ fontFamily: 'var(--font-serif)', marginBottom: '1rem' }}>Liens utiles</h4>
+            <ul style={{ listStyle: 'none' }}>
+              <li><a href="/services" style={{ color: 'white', opacity: 0.8 }}>Services</a></li>
+              <li><a href="/about" style={{ color: 'white', opacity: 0.8 }}>À propos</a></li>
+              <li><a href="/contact" style={{ color: 'white', opacity: 0.8 }}>Contact</a></li>
             </ul>
           </div>
-
           <div className="footer-section">
-            <h3>Légal</h3>
-            <ul className="footer-links">
-              <li><Link href="/mentions-legales">Mentions légales</Link></li>
-              <li><Link href="/cgv">Conditions générales de vente</Link></li>
-              <li><Link href="/confidentialite">Politique de confidentialité</Link></li>
-            </ul>
-          </div>
-
-          <div className="footer-section">
-            <h3>Contact</h3>
-            <ul className="footer-links">
-              <li>contact@atelier-provenance.com</li>
-              <li>+33 6 12 34 56 78</li>
-              <li>Paris, France</li>
-            </ul>
+            <h4 style={{ fontFamily: 'var(--font-serif)', marginBottom: '1rem' }}>Contact</h4>
+            <p>Email: contact@atelier-provenance.com</p>
+            <p>Téléphone: +33 6 12 34 56 78</p>
           </div>
         </div>
-
-        <div className="footer-bottom">
+        <div className="footer-bottom" style={{ marginTop: '2rem', paddingTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
           <p>&copy; {new Date().getFullYear()} Atelier Provenance. Tous droits réservés.</p>
         </div>
       </div>
