@@ -37,7 +37,8 @@ function Reveal({ children, delay = 0, className = "" }: { children: React.React
     </div>
   );
 }
- 
+
+
 /* ───────────────────────── PAGE ───────────────────────── */
 export default function Page() {
   const [openExample, setOpenExample] = useState<number | null>(null);
