@@ -574,7 +574,6 @@ export default function Page() {
           </Reveal>
         </section>
 
-PARTIE 2 — Collez ceci directement après la partie 1 (dans le même fichier) :
         {/* ═══════════════════════ EXEMPLES ═══════════════════════ */}
         <section className="section border-top" id="exemples">
           <div className="container">
@@ -1239,7 +1238,6 @@ export default function Page() {
           </Reveal>
         </section>
 
-PARTIE 2 — Collez ceci directement après la partie 1 (dans le même fichier) :
         {/* ═══════════════════════ EXEMPLES ═══════════════════════ */}
         <section className="section border-top" id="exemples">
           <div className="container">
@@ -1616,7 +1614,6 @@ PARTIE 2 — Collez ceci directement après la partie 1 (dans le même fichier) 
         </div>
       </footer>
 
-PARTIE 3 — Collez ceci directement après la partie 2 (toujours dans le même fichier) :
       {/* ═══════════════════════ STYLES ═══════════════════════ */}
       <style jsx global>{`
         * { margin: 0; padding: 0; box-sizing: border-box; }
