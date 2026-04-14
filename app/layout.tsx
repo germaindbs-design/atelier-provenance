@@ -1,31 +1,29 @@
-import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
-import "./globals.css";
+import './globals.css'
+import type { Metadata } from 'next'
+import { Lora, Inter } from 'next/font/google'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-heading",
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-body",
-  display: "swap",
-});
+const lora = Lora({ subsets: ['latin'], variable: '--font-lora' })
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
-  title: "Music & Style — Rédaction experte pour le marché de l'art",
-  description:
-    "Notices descriptives, catalogues et contenus éditoriaux pour antiquaires, galeristes et maisons de vente.",
-};
+  title: 'Atelier Provenance | Rédaction experte pour le mobilier de collection',
+  description: 'Transformez vos annonces de mobilier ancien en textes qui justifient le prix, créent du désir et accélèrent la vente.',
+}
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="fr" className={`${playfair.variable} ${inter.variable}`}>
-      <body>{children}</body>
+    <html lang="fr">
+      <body className={`${lora.variable} ${inter.variable}`}>
+        <Header />
+        <main>{children}</main>
+        <Footer />
+      </body>
     </html>
-  );
+  )
 }
