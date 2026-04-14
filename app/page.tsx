@@ -1,12 +1,50 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
+/* ───────────────────────── HOOK SCROLL REVEAL ───────────────────────── */
+function useScrollReveal() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, isVisible };
+}
+
+/* ───────────────────────── COMPOSANT REVEAL ───────────────────────── */
+function Reveal({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+  const { ref, isVisible } = useScrollReveal();
+  return (
+    <div
+      ref={ref}
+      className={`reveal ${isVisible ? "reveal-visible" : ""} ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/* ───────────────────────── PAGE ───────────────────────── */
 export default function Page() {
   const [openExample, setOpenExample] = useState<number | null>(null);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [formStatus, setFormStatus] = useState<string | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [scrolled, setScrolled] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,11 +54,29 @@ export default function Page() {
     message: "",
   });
 
+  /* ── Scroll detection pour navbar ── */
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  /* ── Parallax hero ── */
+  const [heroOffset, setHeroOffset] = useState(0);
+  useEffect(() => {
+    const handleParallax = () => setHeroOffset(window.scrollY * 0.3);
+    window.addEventListener("scroll", handleParallax, { passive: true });
+    return () => window.removeEventListener("scroll", handleParallax);
+  }, []);
+
+  /* ── Form validation visuelle ── */
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const markTouched = (field: string) => setTouched((prev) => ({ ...prev, [field]: true }));
+  const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(
-      `Demande — ${formData.name || "Nouveau prospect"}`
-    );
+    const subject = encodeURIComponent(`Demande — ${formData.name || "Nouveau prospect"}`);
     const body = encodeURIComponent(
       `Nom : ${formData.name}\nEmail : ${formData.email}\nTéléphone : ${formData.phone}\nPlateforme : ${formData.platform}\nNombre de pièces : ${formData.pieces}\n\nMessage :\n${formData.message}`
     );
@@ -30,8 +86,8 @@ export default function Page() {
 
   return (
     <>
-      {/* ── NAVIGATION ── */}
-      <nav className="nav">
+      {/* ═══════════════════════ NAVBAR ═══════════════════════ */}
+      <nav className={`nav ${scrolled ? "nav-scrolled" : ""}`}>
         <div className="container nav-inner">
           <a href="#" className="nav-logo">Atelier Provenance</a>
           <button className="mobile-toggle" onClick={() => setMobileMenu(!mobileMenu)} aria-label="Menu">
@@ -47,525 +103,604 @@ export default function Page() {
         </div>
       </nav>
 
-      {/* ── HERO ── */}
-      <section className="hero">
-        <div className="container hero-grid">
-          <div>
-            <p className="eyebrow">Rédaction spécialisée — mobilier de collection</p>
-            <h1>Vos pièces méritent<br /><em>les mots justes.</em></h1>
-            <p className="lead">
-              Atelier Provenance rédige des notices expertes pour le mobilier ancien
-              et vintage. Des textes qui justifient le prix, créent le désir
-              et accélèrent la vente — sur toutes les plateformes.
-            </p>
-            <div className="actions">
-              <a href="#contact" className="button button-primary">Première notice offerte</a>
-              <a href="#exemples" className="button button-outline">Voir des exemples</a>
-            </div>
-          </div>
-          <div className="hero-visual">
-            <span className="hero-visual-text">Photo à venir</span>
-          </div>
-        </div>
-      </section>
-
-      {/* ── PROBLÈME ── */}
-      <section className="section border-top" id="probleme">
-        <div className="container split">
-          <div>
-            <p className="eyebrow">Le constat</p>
-            <h2>La plupart des annonces ne sont pas à la hauteur des pièces qu&apos;elles présentent.</h2>
-            <p>
-              Sur Selency, Proantic, Leboncoin ou Catawiki, des milliers d&apos;objets de qualité
-              restent en ligne pendant des semaines. Pas parce qu&apos;ils manquent de valeur,
-              mais parce que rien dans leur présentation ne permet à l&apos;acheteur de comprendre
-              cette valeur.
-            </p>
-            <p>
-              Descriptions en deux lignes. Vocabulaire approximatif. Aucun contexte historique.
-              Le prix semble arbitraire. L&apos;acheteur hésite, puis passe à autre chose.
-            </p>
-          </div>
-          <div>
-            <div className="stat-grid">
-              <div className="stat-card">
-                <p className="stat-number">70 %</p>
-                <p className="stat-label">des annonces haut de gamme sans contexte historique</p>
-              </div>
-              <div className="stat-card">
-                <p className="stat-number">3×</p>
-                <p className="stat-label">plus de vues avec une description structurée</p>
-              </div>
-              <div className="stat-card">
-                <p className="stat-number">45 j.</p>
-                <p className="stat-label">délai moyen de vente d&apos;une pièce mal décrite</p>
-              </div>
-              <div className="stat-card">
-                <p className="stat-number">−30 %</p>
-                <p className="stat-label">de négociation quand le prix est argumenté</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── APPROCHE ── */}
-      <section className="section section-alt border-top" id="approche">
-        <div className="container">
-          <div className="section-head">
-            <p className="eyebrow">Approche</p>
-            <h2>Ce que nous faisons — et comment.</h2>
-            <p className="section-intro">
-              Chaque notice est le résultat d&apos;un travail de recherche, d&apos;analyse
-              et de rédaction. Pas de modèle générique : chaque pièce est traitée
-              comme un cas singulier.
-            </p>
-          </div>
-          <div className="text-block">
-            <div className="split">
+      <main>
+        {/* ═══════════════════════ HERO ═══════════════════════ */}
+        <section className="hero">
+          <div className="hero-bg" style={{ transform: `translateY(${heroOffset}px)` }} />
+          <div className="hero-grain" />
+          <div className="container hero-grid">
+            <Reveal>
               <div>
-                <h3>Une notice, trois fonctions.</h3>
-                <p>
-                  <strong>Informer.</strong> Identifier l&apos;époque, le style, les matériaux,
-                  la provenance quand elle est traçable. Donner à l&apos;acheteur les repères
-                  qui transforment un objet flou en pièce identifiable.
+                <p className="eyebrow">Atelier Provenance</p>
+                <h1>Vos pièces ont une valeur.<br /><em>Il reste à la rendre lisible.</em></h1>
+                <p className="intro">
+                  Rédaction de notices pour le mobilier de collection et les objets d&apos;art.
+                  Chaque texte est construit pour soutenir le prix, clarifier l&apos;objet et le
+                  rendre véritablement désirable — pas seulement visible.
                 </p>
-                <p>
-                  <strong>Justifier.</strong> Contextualiser le prix par des éléments vérifiables —
-                  cote, rareté, état du marché, comparables récents. L&apos;acheteur doit
-                  comprendre pourquoi ce prix est cohérent.
-                </p>
-                <p>
-                  <strong>Donner envie.</strong> Trouver l&apos;angle, le détail, la phrase qui fait
-                  passer de la curiosité au désir. Sans surenchère — avec précision.
-                </p>
+                <div className="actions">
+                  <a href="#contact" className="button button-primary button-arrow">Envoyer un objet à analyser</a>
+                  <a href="#offres" className="button button-secondary">Voir les prestations</a>
+                </div>
+                <p className="hero-free">Première notice offerte, sans engagement.</p>
               </div>
+            </Reveal>
+            <Reveal delay={200}>
+              <div className="hero-panel">
+                <div className="hero-card">
+                  <p className="hero-label">En bref</p>
+                  <ul className="hero-list">
+                    <li><span className="list-icon">◆</span> Analyse du marché et du positionnement prix</li>
+                    <li><span className="list-icon">◆</span> Vocabulaire juste, ton adapté à votre clientèle</li>
+                    <li><span className="list-icon">◆</span> Formats prêts à publier sur tous vos canaux</li>
+                    <li><span className="list-icon">◆</span> Livraison sous 5 jours ouvrés</li>
+                    <li><span className="list-icon">◆</span> Première notice offerte</li>
+                  </ul>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ═══════════════════════ CONSTAT ═══════════════════════ */}
+        <section className="section border-top" id="probleme">
+          <div className="container split">
+            <Reveal>
               <div>
-                <h3>Le processus, étape par étape.</h3>
-                <div className="process-steps">
-                  <div className="process-step">
-                    <span className="step-num">01</span>
-                    <div><h4>Réception</h4><p>Photos, dimensions, informations connues.</p></div>
+                <p className="eyebrow">Le constat</p>
+                <h2>La plupart des annonces ne sont pas à la hauteur des pièces qu&apos;elles présentent.</h2>
+                <p>
+                  Sur Selency, Proantic, Leboncoin ou Catawiki, des milliers d&apos;objets de qualité
+                  restent en ligne pendant des semaines. Pas parce qu&apos;ils manquent de valeur,
+                  mais parce que rien dans leur présentation ne permet à l&apos;acheteur de comprendre
+                  cette valeur.
+                </p>
+                <p>
+                  Descriptions en deux lignes. Vocabulaire approximatif. Aucun contexte historique.
+                  Le prix semble arbitraire. L&apos;acheteur hésite, puis passe à autre chose.
+                </p>
+              </div>
+            </Reveal>
+            <Reveal delay={150}>
+              <div>
+                <div className="stat-grid">
+                  <div className="stat-card">
+                    <p className="stat-number">70 %</p>
+                    <p className="stat-label">des annonces haut de gamme sans contexte historique</p>
                   </div>
-                  <div className="process-step">
-                    <span className="step-num">02</span>
-                    <div><h4>Recherche</h4><p>Identification, comparables, historique, provenance.</p></div>
+                  <div className="stat-card">
+                    <p className="stat-number">3×</p>
+                    <p className="stat-label">plus de vues avec une description structurée</p>
                   </div>
-                  <div className="process-step">
-                    <span className="step-num">03</span>
-                    <div><h4>Rédaction</h4><p>Texte structuré, vocabulaire précis, ton adapté.</p></div>
-                  </div>
-                  <div className="process-step">
-                    <span className="step-num">04</span>
-                    <div><h4>Déclinaison</h4><p>Notice longue, version courte, version réseaux.</p></div>
+                  <div className="stat-card">
+                    <p className="stat-number">45 j.</p>
+                    <p className="stat-label">durée moyenne de vente sans texte optimisé</p>
                   </div>
                 </div>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ═══════════════════════ APPROCHE ═══════════════════════ */}
+        <section className="section section-dark" id="approche">
+          <div className="container">
+            <Reveal>
+              <div className="section-head section-head-light">
+                <p className="eyebrow eyebrow-light">L&apos;approche</p>
+                <h2>Une notice n&apos;est pas une description.<br /><em>C&apos;est un argument de vente.</em></h2>
+                <p className="section-intro section-intro-light">
+                  Décrire un meuble, tout le monde peut le faire. Donner à un acheteur les raisons
+                  précises de passer à l&apos;acte — c&apos;est un autre métier. Chaque texte est
+                  construit pour créer de la clarté, de la confiance, et du désir.
+                </p>
+              </div>
+            </Reveal>
+            <div className="pillars">
+              {[
+                { num: "01", title: "Positionnement", desc: "Analyse du marché, comparables récents, cohérence entre le prix et le discours." },
+                { num: "02", title: "Précision", desc: "Vocabulaire technique juste — époque, style, matériaux, provenance. Pas d'à-peu-près." },
+                { num: "03", title: "Narration", desc: "Chaque pièce a une histoire. Le texte la rend lisible, mémorable, désirable." },
+              ].map((p, i) => (
+                <Reveal key={i} delay={i * 120}>
+                  <div className="pillar-card">
+                    <span className="pillar-num">{p.num}</span>
+                    <h3>{p.title}</h3>
+                    <p>{p.desc}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════ PROCESSUS ═══════════════════════ */}
+        <section className="section border-top" id="processus">
+          <div className="container split">
+            <Reveal>
+              <div>
+                <p className="eyebrow">Fonctionnement</p>
+                <h2>Un processus simple,<br /><em>un résultat précis.</em></h2>
+                <p>
+                  Chaque mission suit le même protocole — parce que la rigueur
+                  est ce qui sépare un bon texte d&apos;un texte à peu près.
+                </p>
+              </div>
+            </Reveal>
+            <div>
+              <div className="process-steps">
+                {[
+                  { num: "01", title: "Réception", desc: "Photos, contexte, prix envisagé — vous envoyez, nous analysons." },
+                  { num: "02", title: "Recherche", desc: "Comparables, historique, provenance." },
+                  { num: "03", title: "Rédaction", desc: "Texte structuré, vocabulaire précis, ton adapté." },
+                  { num: "04", title: "Déclinaison", desc: "Notice longue, version courte, version réseaux." },
+                ].map((s, i) => (
+                  <Reveal key={i} delay={i * 100}>
+                    <div className="process-step">
+                      <span className="step-num">{s.num}</span>
+                      <div><h4>{s.title}</h4><p>{s.desc}</p></div>
+                    </div>
+                  </Reveal>
+                ))}
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ── OFFRES ── */}
-      <section className="section border-top" id="offres">
-        <div className="container">
-          <div className="section-head">
-            <p className="eyebrow">Prestations</p>
-            <h2>Trois formules, un même niveau d&apos;exigence.</h2>
-            <p className="section-intro">
-              Chaque formule inclut la recherche, la rédaction et les déclinaisons
-              nécessaires. Pas de supplément caché. La première notice est offerte.
-            </p>
-          </div>
-          <div className="offers-grid">
-            <div className="card">
-              <div className="card-badge">Vendeurs</div>
-              <div className="offer-head"><h3>Notice</h3><span className="price">150 €</span></div>
-              <p className="offer-desc">Une pièce, une notice complète, prête à publier.</p>
-              <ul>
-                <li>1 notice complète</li>
-                <li>Recherche &amp; identification</li>
-                <li>Analyse marché / comparables</li>
-                <li>3 déclinaisons (longue, courte, réseaux)</li>
-                <li>Livraison sous 5 jours</li>
-              </ul>
-              <a href="#contact" className="button button-outline offer-cta">Choisir</a>
+        {/* ═══════════════════════ OFFRES ═══════════════════════ */}
+        <section className="section section-alt border-top" id="offres">
+          <div className="container">
+            <Reveal>
+              <div className="section-head">
+                <p className="eyebrow">Prestations</p>
+                <h2>Trois formules,<br /><em>un même niveau d&apos;exigence.</em></h2>
+              </div>
+            </Reveal>
+            <div className="offers-grid">
+              {[
+                {
+                  name: "Essentiel",
+                  price: "45 €",
+                  unit: "par pièce",
+                  desc: "Pour les pièces courantes qui méritent mieux qu'une description de trois lignes.",
+                  features: ["Notice rédigée (≈ 150 mots)", "Vocabulaire technique vérifié", "1 format prêt à publier", "Livraison 5 jours ouvrés"],
+                  cta: "Choisir Essentiel",
+                },
+                {
+                  name: "Signature",
+                  price: "90 €",
+                  unit: "par pièce",
+                  desc: "Pour les pièces qui justifient un argumentaire complet et structuré.",
+                  features: ["Notice développée (≈ 300 mots)", "Recherche de comparables", "Contexte historique et stylistique", "2 formats (annonce + fiche)", "Livraison 5 jours ouvrés"],
+                  cta: "Choisir Signature",
+                  featured: true,
+                },
+                {
+                  name: "Catalogue",
+                  price: "Sur devis",
+                  unit: "à partir de 10 pièces",
+                  desc: "Pour les marchands et galeries qui veulent un ensemble cohérent.",
+                  features: ["Notices complètes par pièce", "Ligne éditoriale unifiée", "Formats multiples par pièce", "Tarif dégressif", "Interlocuteur unique"],
+                  cta: "Demander un devis",
+                },
+              ].map((offer, i) => (
+                <Reveal key={i} delay={i * 120}>
+                  <div className={`offer-card ${offer.featured ? "offer-featured" : ""}`}>
+                    {offer.featured && <span className="offer-badge">Recommandé</span>}
+                    <h3 className="offer-name">{offer.name}</h3>
+                    <p className="offer-price">{offer.price}</p>
+                    <p className="offer-unit">{offer.unit}</p>
+                    <p className="offer-desc">{offer.desc}</p>
+                    <ul className="offer-features">
+                      {offer.features.map((f, j) => (
+                        <li key={j}><span className="check">✓</span> {f}</li>
+                      ))}
+                    </ul>
+                    <a href="#contact" className={`button offer-cta ${offer.featured ? "button-primary" : "button-secondary"}`}>
+                      {offer.cta}
+                    </a>
+                  </div>
+                </Reveal>
+              ))}
             </div>
-            <div className="card card-featured">
-              <div className="card-badge">Marchands</div>
-              <div className="offer-head"><h3>Lot 10</h3><span className="price">1 200 €</span></div>
-              <p className="offer-desc">Dix pièces avec cohérence éditoriale et tarif préférentiel.</p>
-              <ul>
-                <li>10 notices complètes</li>
-                <li>120 € / notice</li>
-                <li>Analyse marché incluse</li>
-                <li>Toutes déclinaisons</li>
-                <li>Alignement éditorial</li>
-                <li>Livraison sous 10 jours</li>
-              </ul>
-              <a href="#contact" className="button button-light offer-cta">Choisir</a>
-            </div>
-            <div className="card">
-              <div className="card-badge">Galeries</div>
-              <div className="offer-head"><h3>Catalogue</h3><span className="price">Sur devis</span></div>
-              <p className="offer-desc">Accompagnement complet pour 20 pièces ou plus.</p>
-              <ul>
-                <li>Catalogue complet</li>
-                <li>Harmonisation du ton</li>
-                <li>Direction éditoriale</li>
-                <li>Positionnement prix argumenté</li>
-                <li>Calendrier sur mesure</li>
-              </ul>
-              <a href="#contact" className="button button-primary offer-cta">Demander un devis</a>
-            </div>
+            <Reveal delay={100}>
+              <div className="offer-guarantee">
+                Première notice offerte — vous jugez sur pièce, sans engagement.
+              </div>
+            </Reveal>
           </div>
-          <div className="offer-guarantee">
-            <p><strong>Première notice offerte.</strong> Envoyez-nous un objet, nous rédigeons la notice sans engagement. Vous jugez du résultat.</p>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ── EXEMPLES ── */}
-      <section className="section section-alt border-top" id="exemples">
-        <div className="container">
-          <div className="section-head">
-            <p className="eyebrow">Exemples</p>
-            <h2>Trois cas, avant et après.</h2>
-            <p className="section-intro">
-              Chaque exemple part d&apos;une annonce réelle trouvée en ligne et montre
-              ce que la rédaction change — sur la lisibilité, la désirabilité,
-              la cohérence avec le prix affiché.
-            </p>
-          </div>
+        {/* ═══════════════════════ EXEMPLES ═══════════════════════ */}
+        <section className="section section-alt border-top" id="exemples">
+          <div className="container">
+            <Reveal>
+              <div className="section-head">
+                <p className="eyebrow">Exemples</p>
+                <h2>Trois cas, avant et après.</h2>
+                <p className="section-intro">
+                  Chaque exemple part d&apos;une annonce réelle trouvée en ligne et montre
+                  ce que la rédaction change — sur la lisibilité, la désirabilité,
+                  la cohérence avec le prix affiché.
+                </p>
+              </div>
+            </Reveal>
 
-          {/* Exemple 1 */}
-          <article className={`case-study ${openExample === 0 ? "is-open" : ""}`}>
-            <button className="case-toggle" onClick={() => setOpenExample(openExample === 0 ? null : 0)}>
-              <div className="case-toggle-left">
-                <p className="case-meta">Exemple 1 · Fauteuil club, circa 1935</p>
-                <h3>De « fauteuil cuir ancien » à une pièce identifiée et désirable.</h3>
-                <div className="case-specs">
-                  <span>Prix affiché : 1 800 €</span>
-                  <span>Cuir havane · structure hêtre</span>
-                  <span>Plateforme : Leboncoin</span>
-                </div>
-              </div>
-              <div className="case-toggle-icon">{openExample === 0 ? "−" : "+"}</div>
-            </button>
-            {openExample === 0 && (
-              <div className="case-body">
-                <div className="case-columns">
-                  <div className="text-panel before-panel">
-                    <p className="panel-label">Avant</p>
-                    <p>
-                      Fauteuil club en cuir ancien, bon état général, cuir
-                      patiné avec quelques marques d&apos;usage, très confortable.
-                      Dimensions : H 85 × L 82 × P 90 cm. À venir chercher
-                      sur place.
-                    </p>
+            {/* EXEMPLE 1 */}
+            <Reveal>
+              <article className={`case-study ${openExample === 0 ? "is-open" : ""}`}>
+                <button className="case-toggle" onClick={() => setOpenExample(openExample === 0 ? null : 0)}>
+                  <div className="case-toggle-left">
+                    <p className="case-meta">Exemple 1 · Enfilade scandinave, circa 1960</p>
+                    <h3>Passer d&apos;une description plate à un texte qui justifie le prix.</h3>
+                    <div className="case-specs">
+                      <span>Prix affiché : 1 850 €</span>
+                      <span>Teck · laiton · 200 cm</span>
+                      <span>Plateforme : Selency</span>
+                    </div>
                   </div>
-                  <div className="text-panel after-panel">
-                    <p className="panel-label">Après — notice complète</p>
-                    <h4>Fauteuil club moustache, circa 1935 — cuir havane patiné, structure hêtre massif</h4>
-                    <p>
-                      Ce fauteuil club moustache des années 1930 porte la patine
-                      lente et régulière d&apos;un cuir qui a vécu sans souffrir.
-                      Le modèle — reconnaissable à ses accoudoirs arrondis en
-                      « moustache » — est l&apos;un des archétypes du club français,
-                      produit en série limitée par les ateliers parisiens de
-                      l&apos;entre-deux-guerres.
-                    </p>
-                    <p>
-                      La structure en hêtre massif est saine, les ressorts
-                      d&apos;origine en bon état, le cuir havane présente une
-                      patine uniforme avec de légères variations de teinte qui
-                      confirment son authenticité. Aucune déchirure, aucune
-                      restauration visible.
-                    </p>
-                    <p>
-                      Sur le marché actuel, les clubs moustache en cuir
-                      d&apos;origine se négocient entre 1 500 et 2 500 € selon
-                      l&apos;état. Cette pièce, dans sa condition actuelle, se
-                      situe dans la fourchette haute par la qualité de sa
-                      patine et l&apos;intégrité de sa structure.
-                    </p>
-                    <p>H 85 × L 82 × P 90 cm · France, circa 1935.</p>
-                  </div>
-                </div>
-                <div className="case-analysis">
-                  <p className="panel-label">Ce qui change</p>
-                  <ul>
-                    <li>Le modèle est identifié (« moustache ») — l&apos;acheteur sait ce qu&apos;il regarde.</li>
-                    <li>Le prix est contextualisé par une fourchette marché vérifiable.</li>
-                    <li>Les défauts (« marques d&apos;usage ») deviennent des qualités (« patine d&apos;origine »).</li>
-                  </ul>
-                </div>
-              </div>
-            )}
-          </article>
-
-          {/* Exemple 2 */}
-          <article className={`case-study ${openExample === 1 ? "is-open" : ""}`}>
-            <button className="case-toggle" onClick={() => setOpenExample(openExample === 1 ? null : 1)}>
-              <div className="case-toggle-left">
-                <p className="case-meta">Exemple 2 · Suite de 3 chaises, années 1950</p>
-                <h3>Transformer un lot banal en ensemble cohérent et désirable.</h3>
-                <div className="case-specs">
-                  <span>Prix affiché : 480 €</span>
-                  <span>Métal laqué · velours vert</span>
-                  <span>Plateforme : Selency</span>
-                </div>
-              </div>
-              <div className="case-toggle-icon">{openExample === 1 ? "−" : "+"}</div>
-            </button>
-            {openExample === 1 && (
-              <div className="case-body">
-                <div className="case-columns">
-                  <div className="text-panel before-panel">
-                    <p className="panel-label">Avant</p>
-                    <p>
-                      3 chaises années 50 métal et velours vert, idéales
-                      pour bureau ou table, bon état, velours nettoyé,
-                      traces d&apos;usage sur le métal. H 83 × L 60 × P 53 cm.
-                    </p>
-                  </div>
-                  <div className="text-panel after-panel">
-                    <p className="panel-label">Après — notice complète</p>
-                    <h4>Suite de trois chaises modernistes, circa 1955 — métal laqué noir, velours vert amande</h4>
-                    <p>
-                      Un ensemble de trois chaises qui résume l&apos;esthétique
-                      des années 1950 : lignes nettes, piétement en métal
-                      laqué noir, assise généreuse recouverte d&apos;un velours
-                      vert amande. Le modèle, probablement issu d&apos;un
-                      atelier français, reprend les codes du mobilier
-                      moderniste — fonctionnel, sobre, élégant sans
-                      ostentation.
-                    </p>
-                    <p>
-                      L&apos;ensemble est cohérent : les trois pièces présentent
-                      la même patine, le même tissu, le même degré d&apos;usure
-                      — ce qui confirme une provenance commune. Le velours a
-                      été nettoyé, le métal présente de légères traces
-                      d&apos;usage qui participent à l&apos;authenticité de
-                      l&apos;ensemble.
-                    </p>
-                    <p>
-                      Les suites de chaises vintage en bon état sont
-                      aujourd&apos;hui très recherchées pour composer des
-                      intérieurs mixtes (table contemporaine + assises
-                      vintage). Ce type de lot se vend habituellement entre
-                      400 et 650 € sur Selency.
-                    </p>
-                    <p>H 83 × L 60 × P 53 cm · France, circa 1955.</p>
-                  </div>
-                </div>
-                <div className="case-analysis">
-                  <p className="panel-label">Ce qui change</p>
-                  <ul>
-                    <li>Le lot devient un « ensemble rare » — la rareté justifie le prix unitaire.</li>
-                    <li>Le vocabulaire positionne l&apos;objet (moderniste, esthétique années 50).</li>
-                    <li>Les traces d&apos;usage sont neutralisées par le mot « authenticité ».</li>
-                  </ul>
-                </div>
-              </div>
-            )}
-          </article>
-
-          {/* Exemple 3 */}
-          <article className={`case-study ${openExample === 2 ? "is-open" : ""}`}>
-            <button className="case-toggle" onClick={() => setOpenExample(openExample === 2 ? null : 2)}>
-              <div className="case-toggle-left">
-                <p className="case-meta">Exemple 3 · Bureau ministre Art déco</p>
-                <h3>Donner à un meuble imposant la présentation qu&apos;il mérite.</h3>
-                <div className="case-specs">
-                  <span>Prix affiché : 2 200 €</span>
-                  <span>Palissandre · laiton</span>
-                  <span>Plateforme : Proantic</span>
-                </div>
-              </div>
-              <div className="case-toggle-icon">{openExample === 2 ? "−" : "+"}</div>
-            </button>
-            {openExample === 2 && (
-              <div className="case-body">
-                <div className="case-columns">
-                  <div className="text-panel before-panel">
-                    <p className="panel-label">Avant</p>
-                    <p>
-                      Bureau Art déco palissandre avec 4 tiroirs, poignées
-                      laiton, bon état, quelques traces sur le plateau.
-                      Dimensions : H 78 × L 140 × P 72 cm. Livraison possible.
-                    </p>
-                  </div>
-                  <div className="text-panel after-panel">
-                    <p className="panel-label">Après — format court</p>
-                    <p className="panel-sublabel">Adapté à Proantic ou Drouot Digital</p>
-                    <h4>Bureau ministre Art déco, circa 1935 — placage palissandre, poignées laiton d&apos;origine</h4>
-                    <p>
-                      Un bureau qui impose sa présence sans élever la voix. Le placage de
-                      palissandre déploie ses veinures sur un plateau généreux, encadré par
-                      des montants nets et une géométrie typiquement Art déco. Quatre tiroirs
-                      en façade, poignées en laiton d&apos;origine — chaque détail confirme la
-                      cohérence de la pièce.
-                    </p>
-                    <p>
-                      La restauration a été menée avec discernement : stabilité structurelle
-                      assurée, patine du bois préservée, quincaillerie intacte. C&apos;est un
-                      meuble de travail autant qu&apos;un meuble de caractère — le genre de
-                      pièce qui compose un intérieur comme on écrit une phrase.
-                    </p>
-                    <p>H 78 × L 140 × P 72 cm · France, circa 1935.</p>
-                  </div>
-                </div>
-                <div className="case-analysis">
-                  <p className="panel-label">Ce qui change</p>
-                  <ul>
-                    <li>Le bureau devient un personnage — « impose sa présence sans élever la voix ».</li>
-                    <li>Le format court est adapté aux plateformes spécialisées.</li>
-                    <li>Les « traces sur le plateau » disparaissent au profit d&apos;une restauration valorisée.</li>
-                  </ul>
-                </div>
-              </div>
-            )}
-          </article>
-        </div>
-      </section>
-
-      {/* ── À PROPOS ── */}
-      <section className="section border-top" id="parcours">
-        <div className="container split">
-          <div>
-            <p className="eyebrow">À propos</p>
-            <h2>Un regard formé aux textes,<br /><em>exercé sur les objets.</em></h2>
-            <p>
-              Atelier Provenance est né d&apos;un double parcours : l&apos;enseignement
-              des lettres et de la philosophie d&apos;abord, puis le marché de l&apos;art
-              — comme marchand, comme rédacteur, comme observateur des mouvements
-              de goût et de valeur.
-            </p>
-            <p>
-              Cette trajectoire n&apos;est pas un détour. C&apos;est elle qui permet de
-              lire un objet comme on lit un texte : en cherchant ce qui fait sens,
-              ce qui justifie l&apos;attention, ce qui mérite d&apos;être dit — et dans
-              quel ordre.
-            </p>
-            <p>
-              Chaque mission est traitée personnellement, sans délégation ni
-              automatisation. Un interlocuteur, un regard, une exigence.
-            </p>
-          </div>
-          <div>
-            <div className="about-cards">
-              <div className="about-card">
-                <h4>Lettres &amp; philosophie</h4>
-                <p>Ancien professeur. Le travail sur la langue et la précision du vocabulaire vient de là.</p>
-              </div>
-              <div className="about-card">
-                <h4>Marché de l&apos;art</h4>
-                <p>Marchand, acheteur, vendeur. La connaissance des prix et des attentes acheteurs vient de là.</p>
-              </div>
-              <div className="about-card">
-                <h4>Rédaction spécialisée</h4>
-                <p>Des centaines de notices rédigées pour des pièces de 200 à 15 000 €.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── FAQ ── */}
-      <section className="section section-alt border-top" id="faq">
-        <div className="container">
-          <div className="section-head">
-            <p className="eyebrow">Questions fréquentes</p>
-            <h2>Ce que vous voulez savoir.</h2>
-          </div>
-          <div className="faq-list">
-            {[
-              { q: "Que comprend exactement une notice ?", a: "Chaque notice inclut : une recherche d'identification (époque, style, matériaux), une analyse des comparables sur le marché, et la rédaction en trois formats — notice complète, version courte, version réseaux sociaux." },
-              { q: "Combien de temps faut-il pour recevoir une notice ?", a: "Comptez 5 jours ouvrés pour une notice individuelle, 10 jours pour un lot de 10. Les catalogues complets font l'objet d'un calendrier sur mesure." },
-              { q: "Que signifie « première notice offerte » ?", a: "Envoyez-nous les photos et informations sur une pièce. Nous rédigeons la notice complète gratuitement et sans engagement. C'est notre manière de démontrer la valeur du travail." },
-              { q: "Travaillez-vous avec des particuliers ?", a: "Principalement avec des professionnels — marchands, galeristes, antiquaires, maisons de vente. Mais un particulier qui vend une pièce de qualité est le bienvenu." },
-              { q: "Comment envoyez-vous les notices ?", a: "Par email, dans un document formaté prêt à copier-coller sur votre plateforme de vente. Nous pouvons aussi adapter le format à vos besoins spécifiques." },
-              { q: "Proposez-vous un abonnement ou un suivi régulier ?", a: "Pas d'abonnement formel, mais nous travaillons en flux continu avec plusieurs marchands. Un tarif dégressif s'applique naturellement au-delà de 10 notices par mois." },
-            ].map((item, i) => (
-              <div className="faq-item" key={i}>
-                <button className="faq-toggle" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
-                  <span>{item.q}</span>
-                  <span className="faq-icon">{openFaq === i ? "−" : "+"}</span>
+                  <div className="case-toggle-icon">{openExample === 0 ? "−" : "+"}</div>
                 </button>
-                {openFaq === i && <div className="faq-answer"><p>{item.a}</p></div>}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+                {openExample === 0 && (
+                  <div className="case-body">
+                    <div className="case-columns">
+                      <div className="text-panel before-panel">
+                        <p className="panel-label">Avant</p>
+                        <p>
+                          Enfilade scandinave en teck des années 60, bon état
+                          avec quelques traces d&apos;usage. 3 portes coulissantes,
+                          pieds compas. L 200 × P 45 × H 82 cm. Idéale pour
+                          salon ou salle à manger.
+                        </p>
+                      </div>
+                      <div className="text-panel after-panel">
+                        <p className="panel-label">Après</p>
+                        <p>
+                          Enfilade trois portes en teck massif, Scandinavie, circa 1960.
+                          Le travail des portes coulissantes — montées sur rail laiton
+                          d&apos;origine — témoigne d&apos;une fabrication soignée, probablement
+                          d&apos;atelier, avec assemblages à tenons visibles en bout de caisson.
+                        </p>
+                        <p>
+                          Le teck a pris cette patine miel que seules les pièces
+                          correctement entretenues développent après six décennies.
+                          Piètement fuselé, lignes tendues, proportions généreuses
+                          (L 200 × P 45 × H 82 cm) — un format de plus en plus
+                          recherché, parfaitement adapté aux intérieurs contemporains
+                          qui cherchent une pièce maîtresse sans lourdeur.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="case-analysis">
+                      <p className="panel-label">Ce qui change</p>
+                      <ul>
+                        <li>L&apos;usure devient un argument (patine, vécu, caractère) au lieu d&apos;un défaut à excuser.</li>
+                        <li>La datation et l&apos;origine sont précisées — elles justifient le prix.</li>
+                        <li>Le texte s&apos;adresse à un acheteur qui cherche de l&apos;authenticité, pas du neuf.</li>
+                      </ul>
+                    </div>
+                  </div>
+                )}
+              </article>
+            </Reveal>
 
-      {/* ── CONTACT ── */}
-      <section className="section border-top" id="contact">
-        <div className="container split">
-          <div>
-            <p className="eyebrow">Contact</p>
-            <h2>Un objet suffit<br /><em>pour commencer.</em></h2>
-            <p>
-              Envoyez-nous les photos et quelques informations sur votre pièce —
-              période, matière, état, prix envisagé. Nous vous répondons sous
-              48 heures avec la notice rédigée, gratuitement et sans engagement.
-            </p>
-            <div className="contact-methods">
-              <a href="mailto:contact.atelierprovenance@gmail.com" className="contact-method">
-                <span className="contact-icon">✉</span>
-                <span>contact.atelierprovenance@gmail.com</span>
-              </a>
-              <a href="tel:+33751420733" className="contact-method">
-                <span className="contact-icon">☏</span>
-                <span>07 51 42 07 33</span>
-              </a>
+            {/* EXEMPLE 2 */}
+            <Reveal delay={100}>
+              <article className={`case-study ${openExample === 1 ? "is-open" : ""}`}>
+                <button className="case-toggle" onClick={() => setOpenExample(openExample === 1 ? null : 1)}>
+                  <div className="case-toggle-left">
+                    <p className="case-meta">Exemple 2 · Suite de 3 chaises, années 1950</p>
+                    <h3>Transformer un lot banal en ensemble cohérent et désirable.</h3>
+                    <div className="case-specs">
+                      <span>Prix affiché : 480 €</span>
+                      <span>Métal laqué · velours vert</span>
+                      <span>Plateforme : Selency</span>
+                    </div>
+                  </div>
+                  <div className="case-toggle-icon">{openExample === 1 ? "−" : "+"}</div>
+                </button>
+                {openExample === 1 && (
+                  <div className="case-body">
+                    <div className="case-columns">
+                      <div className="text-panel before-panel">
+                        <p className="panel-label">Avant</p>
+                        <p>
+                          3 chaises années 50 métal et velours vert, idéales
+                          pour bureau ou table, bon état, velours nettoyé,
+                          traces d&apos;usage sur le métal. H 83 × L 60 × P 53 cm.
+                        </p>
+                      </div>
+                      <div className="text-panel after-panel">
+                        <p className="panel-label">Après</p>
+                        <p>
+                          Suite de trois chaises en métal laqué noir et velours vert
+                          amande, France, années 1950. Le piétement tubulaire fin,
+                          légèrement évasé, donne à l&apos;ensemble une élégance
+                          graphique qui tranche avec la rondeur accueillante de
+                          l&apos;assise.
+                        </p>
+                        <p>
+                          Le velours — nettoyé, encore dense et sans usure
+                          marquante — apporte une chaleur tactile immédiate. Le
+                          vert amande est une teinte d&apos;époque, cohérente avec la
+                          palette des intérieurs français du milieu du siècle :
+                          elle fonctionne aussi bien dans un cadre vintage assumé
+                          que dans un intérieur contemporain en recherche de
+                          caractère.
+                        </p>
+                        <p>
+                          H 83 × L 60 × P 53 cm · vendues par trois, indissociables.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="case-analysis">
+                      <p className="panel-label">Ce qui change</p>
+                      <ul>
+                        <li>Le lot devient un « ensemble » — une intention décorative, pas un hasard.</li>
+                        <li>Le velours vert est contextualisé comme une teinte d&apos;époque recherchée.</li>
+                        <li>Le texte aide l&apos;acheteur à se projeter dans un intérieur précis.</li>
+                      </ul>
+                    </div>
+                  </div>
+                )}
+              </article>
+            </Reveal>
+
+            {/* EXEMPLE 3 */}
+            <Reveal delay={200}>
+              <article className={`case-study ${openExample === 2 ? "is-open" : ""}`}>
+                <button className="case-toggle" onClick={() => setOpenExample(openExample === 2 ? null : 2)}>
+                  <div className="case-toggle-left">
+                    <p className="case-meta">Exemple 3 · Bureau ministre Art déco, circa 1935</p>
+                    <h3>Repositionner une pièce haut de gamme avec le texte qu&apos;elle mérite.</h3>
+                    <div className="case-specs">
+                      <span>Prix affiché : 3 200 €</span>
+                      <span>Palissandre · laiton</span>
+                      <span>Plateforme : Proantic</span>
+                    </div>
+                  </div>
+                  <div className="case-toggle-icon">{openExample === 2 ? "−" : "+"}</div>
+                </button>
+                {openExample === 2 && (
+                  <div className="case-body">
+                    <div className="case-columns">
+                      <div className="text-panel before-panel">
+                        <p className="panel-label">Avant</p>
+                        <p>
+                          Bureau Art Déco en palissandre, bon état, restauré,
+                          4 tiroirs, poignées laiton. Dimensions : H 78 × L 140
+                          × P 72 cm. Années 1930.
+                        </p>
+                      </div>
+                      <div className="text-panel after-panel">
+                        <p className="panel-label">Après — format court</p>
+                        <p className="panel-sublabel">Adapté à Proantic ou Drouot Digital</p>
+                        <h4>Bureau ministre Art déco, circa 1935 — placage palissandre, poignées laiton d&apos;origine</h4>
+                        <p>
+                          Un bureau qui impose sa présence sans élever la voix. Le placage de
+                          palissandre déploie ses veinures sur un plateau généreux, encadré par
+                          des montants nets et une géométrie typiquement Art déco. Quatre tiroirs
+                          en façade, poignées en laiton d&apos;origine — chaque détail confirme la
+                          cohérence de la pièce.
+                        </p>
+                        <p>
+                          La restauration a été menée avec discernement : stabilité structurelle
+                          assurée, patine du bois préservée, quincaillerie intacte. C&apos;est un
+                          meuble de travail autant qu&apos;un meuble de caractère — le genre de
+                          pièce qui compose un intérieur comme on écrit une phrase.
+                        </p>
+                        <p>H 78 × L 140 × P 72 cm · France, circa 1935.</p>
+                      </div>
+                    </div>
+                    <div className="case-analysis">
+                      <p className="panel-label">Ce qui change</p>
+                      <ul>
+                        <li>Le bureau passe du statut de « meuble restauré » à celui de « pièce de caractère » avec une histoire.</li>
+                        <li>Le prix de 3 200 € devient cohérent grâce au registre employé.</li>
+                        <li>Le texte positionne l&apos;objet dans un univers — pas dans un catalogue.</li>
+                      </ul>
+                    </div>
+                  </div>
+                )}
+              </article>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ═══════════════════════ À PROPOS ═══════════════════════ */}
+        <section className="section border-top" id="parcours">
+          <div className="container split">
+            <Reveal>
+              <div>
+                <p className="eyebrow">À propos</p>
+                <h2>Un regard formé aux textes,<br /><em>exercé sur les objets.</em></h2>
+                <p>
+                  Atelier Provenance est né d&apos;un double parcours : l&apos;enseignement
+                  des lettres et de la philosophie d&apos;abord, puis le marché de l&apos;art
+                  — comme marchand, comme rédacteur, comme observateur des mouvements
+                  de goût et de valeur.
+                </p>
+                <p>
+                  Cette trajectoire n&apos;est pas un détour. C&apos;est elle qui permet de
+                  lire un objet comme on lit un texte : en cherchant ce qui fait sens,
+                  ce qui justifie l&apos;attention, ce qui mérite d&apos;être dit — et dans
+                  quel ordre.
+                </p>
+                <p>
+                  Chaque mission est traitée personnellement, sans délégation ni
+                  automatisation. Un interlocuteur, un regard, une exigence.
+                </p>
+              </div>
+            </Reveal>
+            <Reveal delay={150}>
+              <div>
+                <div className="about-cards">
+                  <div className="about-card">
+                    <h4>Lettres &amp; philosophie</h4>
+                    <p>Ancien professeur. Le travail sur la langue et la précision du vocabulaire vient de là.</p>
+                  </div>
+                  <div className="about-card">
+                    <h4>Marché de l&apos;art</h4>
+                    <p>Marchand, acheteur, rédacteur. La compréhension des objets et de leur valeur vient de la pratique.</p>
+                  </div>
+                  <div className="about-card">
+                    <h4>Exigence éditoriale</h4>
+                    <p>Chaque texte est relu, ajusté, vérifié. Pas de production en série, pas de sous-traitance.</p>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ═══════════════════════ FAQ ═══════════════════════ */}
+        <section className="section section-alt border-top" id="faq">
+          <div className="container container-narrow">
+            <Reveal>
+              <div className="section-head">
+                <p className="eyebrow">Questions fréquentes</p>
+                <h2>Ce que vous voulez savoir.</h2>
+              </div>
+            </Reveal>
+            <div className="faq-list">
+              {[
+                { q: "Que comprend exactement une notice ?", a: "Une notice comprend le texte rédigé, prêt à publier, dans le ou les formats prévus par la formule choisie. Le texte inclut : description physique, contexte historique ou stylistique, vocabulaire technique vérifié, et un ton adapté à votre clientèle cible." },
+                { q: "Comment se passe la première notice offerte ?", a: "Vous nous envoyez les photos et informations sur une pièce. Nous rédigeons la notice complète (formule Essentiel) et vous la livrons sous 5 jours. Vous jugez sur pièce — si le résultat vous convient, nous continuons. Sinon, vous ne devez rien." },
+                { q: "Quels types d'objets traitez-vous ?", a: "Mobilier de collection principalement — du XVIIe au design contemporain. Mais aussi luminaires, objets décoratifs, art populaire, curiosités. Si l'objet a une histoire et un prix à justifier, nous pouvons travailler dessus." },
+                { q: "Les textes sont-ils optimisés pour le référencement ?", a: "Oui, les notices intègrent naturellement les termes recherchés par les acheteurs (époque, style, matériaux, provenance). Ce n'est pas du SEO artificiel — c'est de la précision, qui se trouve être exactement ce que les moteurs de recherche valorisent." },
+                { q: "Travaillez-vous avec des particuliers ?", a: "Principalement avec des professionnels — marchands, galeristes, antiquaires, maisons de vente. Mais un particulier qui vend une pièce de qualité est le bienvenu." },
+              ].map((item, i) => (
+                <Reveal key={i} delay={i * 60}>
+                  <div className="faq-item">
+                    <button className="faq-toggle" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
+                      <span>{item.q}</span>
+                      <span className="faq-icon">{openFaq === i ? "−" : "+"}</span>
+                    </button>
+                    {openFaq === i && <div className="faq-answer"><p>{item.a}</p></div>}
+                  </div>
+                </Reveal>
+              ))}
             </div>
           </div>
-          <div>
-            {formStatus === "sent" ? (
-              <div className="form-success">
-                <h3>Message préparé.</h3>
-                <p>Votre client email s&apos;est ouvert avec les informations pré-remplies. Si ce n&apos;est pas le cas, écrivez-nous directement à contact.atelierprovenance@gmail.com</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="contact-form">
-                <div className="form-row">
-                  <div className="form-field">
-                    <label htmlFor="name">Nom</label>
-                    <input id="name" type="text" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
-                  </div>
-                  <div className="form-field">
-                    <label htmlFor="email">Email</label>
-                    <input id="email" type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-field">
-                    <label htmlFor="phone">Téléphone</label>
-                    <input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} />
-                  </div>
-                  <div className="form-field">
-                    <label htmlFor="platform">Plateforme de vente</label>
-                    <input id="platform" type="text" placeholder="Selency, Proantic, autre…" value={formData.platform} onChange={(e) => setFormData({ ...formData, platform: e.target.value })} />
-                  </div>
-                </div>
-                <div className="form-field">
-                  <label htmlFor="pieces">Nombre de pièces à rédiger</label>
-                  <input id="pieces" type="text" placeholder="1, 5, 20…" value={formData.pieces} onChange={(e) => setFormData({ ...formData, pieces: e.target.value })} />
-                </div>
-                <div className="form-field">
-                  <label htmlFor="message">Message</label>
-                  <textarea id="message" rows={4} placeholder="Décrivez brièvement vos pièces ou votre besoin…" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })}></textarea>
-                </div>
-                <button type="submit" className="button button-primary">Envoyer</button>
-              </form>
-            )}
-          </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ── FOOTER ── */}
+        {/* ═══════════════════════ CONTACT ═══════════════════════ */}
+        <section className="section border-top" id="contact">
+          <div className="container split">
+            <Reveal>
+              <div>
+                <p className="eyebrow">Contact</p>
+                <h2>Un objet suffit<br /><em>pour commencer.</em></h2>
+                <p>
+                  Envoyez-nous les photos et quelques informations sur votre pièce —
+                  période, matière, état, prix envisagé. Nous vous répondons sous
+                  48 heures avec la notice rédigée, gratuitement et sans engagement.
+                </p>
+                <div className="contact-methods">
+                  <a href="mailto:contact.atelierprovenance@gmail.com" className="contact-method">
+                    <span className="contact-icon">✉</span>
+                    <span>contact.atelierprovenance@gmail.com</span>
+                  </a>
+                  <a href="tel:+33751420733" className="contact-method">
+                    <span className="contact-icon">☏</span>
+                    <span>07 51 42 07 33</span>
+                  </a>
+                </div>
+              </div>
+            </Reveal>
+            <Reveal delay={150}>
+              <div>
+                {formStatus === "sent" ? (
+                  <div className="form-success">
+                    <div className="form-success-icon">✓</div>
+                    <h3>Message préparé.</h3>
+                    <p>Votre client email s&apos;est ouvert avec les informations pré-remplies. Si ce n&apos;est pas le cas, écrivez-nous directement à contact.atelierprovenance@gmail.com</p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="contact-form">
+                    <div className="form-row">
+                      <div className="form-field">
+                        <label htmlFor="name">Nom</label>
+                        <input
+                          id="name"
+                          type="text"
+                          required
+                          placeholder="Votre nom"
+                          value={formData.name}
+                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          onBlur={() => markTouched("name")}
+                          className={touched.name && formData.name.length > 0 ? "field-valid" : touched.name ? "field-invalid" : ""}
+                        />
+                      </div>
+                      <div className="form-field">
+                        <label htmlFor="email">Email</label>
+                        <input
+                          id="email"
+                          type="email"
+                          required
+                          placeholder="votre@email.com"
+                          value={formData.email}
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          onBlur={() => markTouched("email")}
+                          className={touched.email && isValidEmail(formData.email) ? "field-valid" : touched.email ? "field-invalid" : ""}
+                        />
+                      </div>
+                    </div>
+                    <div className="form-row">
+                      <div className="form-field">
+                        <label htmlFor="phone">Téléphone</label>
+                        <input
+                          id="phone"
+                          type="tel"
+                          placeholder="06 00 00 00 00"
+                          value={formData.phone}
+                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        />
+                      </div>
+                      <div className="form-field">
+                        <label htmlFor="platform">Plateforme de vente</label>
+                        <input
+                          id="platform"
+                          type="text"
+                          placeholder="Selency, Proantic, Leboncoin…"
+                          value={formData.platform}
+                          onChange={(e) => setFormData({ ...formData, platform: e.target.value })}
+                        />
+                      </div>
+                    </div>
+                    <div className="form-field">
+                      <label htmlFor="pieces">Nombre de pièces à rédiger</label>
+                      <input
+                        id="pieces"
+                        type="text"
+                        placeholder="3, 10, catalogue complet…"
+                        value={formData.pieces}
+                        onChange={(e) => setFormData({ ...formData, pieces: e.target.value })}
+                      />
+                    </div>
+                    <div className="form-field">
+                      <label htmlFor="message">Décrivez brièvement vos pièces</label>
+                      <textarea
+                        id="message"
+                        rows={5}
+                        required
+                        placeholder="Période, matière, état, prix envisagé…"
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        onBlur={() => markTouched("message")}
+                        className={touched.message && formData.message.length > 0 ? "field-valid" : touched.message ? "field-invalid" : ""}
+                      />
+                    </div>
+                    <button type="submit" className="button button-primary button-arrow">Envoyer</button>
+                  </form>
+                )}
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      </main>
+
+      {/* ═══════════════════════ FOOTER ═══════════════════════ */}
       <footer className="footer">
         <div className="container footer-inner">
           <div>
@@ -579,191 +714,396 @@ export default function Page() {
         </div>
       </footer>
 
-      {/* ── STYLES ── */}
+      {/* ═══════════════════════ STYLES ═══════════════════════ */}
       <style jsx global>{`
+        /* ── RESET ── */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { font-family: Georgia, "Times New Roman", Times, serif; color: #1a1613; background: #f6efe4; line-height: 1.7; font-size: 16px; }
+        body {
+          font-family: Georgia, "Times New Roman", Times, serif;
+          color: #1a1613;
+          background: #f6efe4;
+          line-height: 1.7;
+          font-size: 16px;
+          overflow-x: hidden;
+        }
         .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+        .container-narrow { max-width: 780px; }
         a { color: inherit; text-decoration: none; }
         ul { list-style: none; }
         em { font-style: italic; }
 
-        /* BUTTONS */
-        .button { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; font-family: Arial, Helvetica, sans-serif; font-size: 0.82rem; letter-spacing: 0.06em; border: 1px solid transparent; cursor: pointer; transition: all 0.2s; text-transform: uppercase; }
-        .button-primary { background: #1a1613; color: #f6efe4; border-color: #1a1613; }
-        .button-primary:hover { background: #2e2820; }
-        .button-outline { background: transparent; color: #1a1613; border-color: #1a1613; }
-        .button-outline:hover { background: #1a1613; color: #f6efe4; }
-        .button-light { background: #f6efe4; color: #1a1613; border-color: #f6efe4; }
-        .button-light:hover { background: #ede4d4; }
-        .button-sm { padding: 8px 20px; font-size: 0.75rem; }
+        /* ── SCROLL REVEAL ── */
+        .reveal {
+          opacity: 0;
+          transform: translateY(32px);
+          transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal-visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
 
-        /* NAV */
-        .nav { position: sticky; top: 0; z-index: 100; background: #f6efe4; border-bottom: 1px solid #dccbb7; }
-        .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-        .nav-logo { font-size: 1.1rem; font-weight: 400; letter-spacing: 0.02em; }
+        /* ── NAVBAR ── */
+        .nav {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 1000;
+          padding: 20px 0;
+          transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+          background: transparent;
+        }
+        .nav-scrolled {
+          background: rgba(246, 239, 228, 0.92);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          padding: 14px 0;
+          box-shadow: 0 1px 0 rgba(26, 22, 19, 0.08);
+        }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo {
+          font-size: 1.15rem;
+          letter-spacing: 0.04em;
+          font-weight: 400;
+          transition: opacity 0.3s;
+        }
+        .nav-logo:hover { opacity: 0.7; }
         .nav-links { display: flex; align-items: center; gap: 32px; }
-        .nav-links a { font-family: Arial, Helvetica, sans-serif; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: #5c4f3a; transition: color 0.2s; }
-        .nav-links a:hover { color: #1a1613; }
-        .mobile-toggle { display: none; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: #1a1613; }
+        .nav-links a {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.78rem;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          position: relative;
+          transition: color 0.3s;
+        }
+        .nav-links a:not(.button)::after {
+          content: "";
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          width: 0;
+          height: 1px;
+          background: #c8956c;
+          transition: width 0.3s ease;
+        }
+        .nav-links a:not(.button):hover::after { width: 100%; }
+        .nav-links a:not(.button):hover { color: #c8956c; }
+        .mobile-toggle {
+          display: none;
+          background: none;
+          border: none;
+          font-size: 1.5rem;
+          cursor: pointer;
+          color: #1a1613;
+          transition: transform 0.3s;
+        }
+        .mobile-toggle:hover { transform: scale(1.1); }
 
-        /* HERO */
-        .hero { padding: 100px 0 80px; }
-        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-        .hero h1 { font-size: 2.8rem; line-height: 1.2; margin-bottom: 24px; font-weight: 400; }
-        .hero p.lead { font-size: 1.1rem; color: #5c4f3a; margin-bottom: 32px; max-width: 520px; }
-        .eyebrow { font-family: Arial, Helvetica, sans-serif; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: #8a7a62; margin-bottom: 16px; }
-        .actions { display: flex; gap: 16px; flex-wrap: wrap; }
-        .hero-visual { background: #ede4d4; border: 1px solid #dccbb7; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; }
-        .hero-visual-text { font-family: Arial, Helvetica, sans-serif; font-size: 0.75rem; color: #8a7a62; letter-spacing: 0.08em; text-transform: uppercase; }
+        /* ── BUTTONS ── */
+        .button {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.82rem;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          padding: 14px 28px;
+          border: none;
+          cursor: pointer;
+          transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+          position: relative;
+          overflow: hidden;
+        }
+        .button-primary {
+          background: #1a1613;
+          color: #f6efe4;
+        }
+        .button-primary:hover {
+          background: #c8956c;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 20px rgba(200, 149, 108, 0.25);
+        }
+        .button-secondary {
+          border: 1px solid #1a1613;
+          color: #1a1613;
+          background: transparent;
+        }
+        .button-secondary:hover {
+          background: #1a1613;
+          color: #f6efe4;
+          transform: translateY(-1px);
+        }
+        .button-sm { padding: 10px 20px; font-size: 0.75rem; }
+        .button-arrow::after { content: " →"; transition: transform 0.3s; }
+        .button-arrow:hover::after { transform: translateX(4px); display: inline-block; }
 
-        /* SECTIONS */
+        /* ── HERO ── */
+        .hero {
+          position: relative;
+          padding: 160px 0 100px;
+          overflow: hidden;
+        }
+        .hero-bg {
+          position: absolute;
+          top: -60px;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background:
+            radial-gradient(ellipse at 75% 20%, rgba(200, 149, 108, 0.15) 0%, transparent 60%),
+            radial-gradient(ellipse at 20% 80%, rgba(184, 122, 60, 0.08) 0%, transparent 50%),
+            radial-gradient(ellipse at 50% 50%, rgba(218, 175, 120, 0.06) 0%, transparent 70%);
+          z-index: 0;
+          will-change: transform;
+        }
+        .hero-grain {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          opacity: 0.03;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+          z-index: 1;
+          pointer-events: none;
+        }
+        .hero-grid {
+          display: grid;
+          grid-template-columns: 1.1fr 0.9fr;
+          gap: 64px;
+          align-items: center;
+          position: relative;
+          z-index: 2;
+        }
+        .hero h1 {
+          font-size: 3.1rem;
+          font-weight: 400;
+          line-height: 1.18;
+          margin-bottom: 24px;
+          letter-spacing: -0.01em;
+        }
+        .hero h1 em { color: #c8956c; }
+        .eyebrow {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.72rem;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: #b8854e;
+          margin-bottom: 16px;
+          display: block;
+        }
+        .eyebrow-light { color: #d4a574; }
+        .intro { font-size: 1.08rem; color: #5c4f3a; margin-bottom: 32px; }
+        .actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+        .hero-free {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.78rem;
+          color: #b8854e;
+          letter-spacing: 0.04em;
+        }
+        .hero-card {
+          background: rgba(26, 22, 19, 0.04);
+          border: 1px solid rgba(200, 149, 108, 0.2);
+          backdrop-filter: blur(8px);
+          padding: 36px 32px;
+          transition: border-color 0.4s;
+        }
+        .hero-card:hover { border-color: rgba(200, 149, 108, 0.45); }
+        .hero-label {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.68rem;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #b8854e;
+          margin-bottom: 20px;
+        }
+        .hero-list { display: flex; flex-direction: column; gap: 14px; }
+        .hero-list li {
+          font-size: 0.95rem;
+          color: #3d3428;
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+        }
+        .list-icon { color: #c8956c; font-size: 0.5rem; margin-top: 7px; flex-shrink: 0; }
+
+        /* ── SECTIONS ── */
         .section { padding: 96px 0; }
-        .section-alt { background: #ede4d4; }
+        .section-alt { background: #f0e6d6; }
+        .section-dark {
+          background: #1a1613;
+          color: #f6efe4;
+        }
         .border-top { border-top: 1px solid #dccbb7; }
-        .section-head { max-width: 640px; margin-bottom: 56px; }
-        .section-head h2 { font-size: 2rem; font-weight: 400; line-height: 1.3; margin-bottom: 16px; }
-        .section-intro { color: #5c4f3a; font-size: 1rem; }
+        .section-dark .border-top { border-top-color: rgba(255,255,255,0.08); }
+        .section-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
+        .section-head h2 {
+          font-size: 2.3rem;
+          font-weight: 400;
+          line-height: 1.25;
+          margin-bottom: 16px;
+        }
+        .section-head h2 em { color: #c8956c; }
+        .section-head-light h2 em { color: #d4a574; }
+        .section-intro { font-size: 1.02rem; color: #5c4f3a; }
+        .section-intro-light { color: #a89880; }
 
-        /* SPLIT LAYOUT */
+        /* ── SPLIT ── */
         .split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
-        .split h2 { font-size: 2rem; font-weight: 400; line-height: 1.3; margin-bottom: 20px; }
-        .split p { margin-bottom: 16px; color: #3a3228; }
+        h2 { font-size: 2rem; font-weight: 400; line-height: 1.3; margin-bottom: 20px; }
+        h2 em { color: #c8956c; }
+        .split p { color: #5c4f3a; margin-bottom: 16px; }
+        .section-dark .split p { color: #a89880; }
 
-        /* STAT GRID */
-        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .stat-card { background: #ede4d4; border: 1px solid #dccbb7; padding: 24px; }
-        .stat-number { font-size: 2rem; font-weight: 400; color: #1a1613; margin-bottom: 4px; }
-        .stat-label { font-family: Arial, Helvetica, sans-serif; font-size: 0.75rem; color: #8a7a62; letter-spacing: 0.04em; }
+        /* ── STAT GRID ── */
+        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .stat-card {
+          background: #f6efe4;
+          border: 1px solid #dccbb7;
+          padding: 28px 24px;
+          transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .stat-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 8px 32px rgba(200, 149, 108, 0.12);
+          border-color: #c8956c;
+        }
+        .stat-number {
+          font-size: 2rem;
+          font-weight: 700;
+          color: #c8956c;
+          display: block;
+          margin-bottom: 4px;
+        }
+        .stat-label {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.78rem;
+          color: #8a7a62;
+          letter-spacing: 0.04em;
+        }
 
-        /* TEXT BLOCK */
-        .text-block { background: #f6efe4; border: 1px solid #dccbb7; padding: 48px; }
-        .text-block h3 { font-size: 1.4rem; font-weight: 400; margin-bottom: 20px; }
-        .text-block p { margin-bottom: 16px; color: #3a3228; font-size: 0.95rem; }
+        /* ── PILLARS ── */
+        .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+        .pillar-card {
+          padding: 36px 28px;
+          border: 1px solid rgba(200, 149, 108, 0.15);
+          transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .pillar-card:hover {
+          border-color: rgba(200, 149, 108, 0.4);
+          transform: translateY(-4px);
+          background: rgba(200, 149, 108, 0.04);
+        }
+        .pillar-num {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.72rem;
+          color: #d4a574;
+          letter-spacing: 0.1em;
+          display: block;
+          margin-bottom: 16px;
+        }
+        .pillar-card h3 { font-size: 1.2rem; font-weight: 400; margin-bottom: 12px; }
+        .pillar-card p { font-size: 0.92rem; color: #a89880; line-height: 1.6; }
 
-        /* PROCESS */
-        .process-steps { margin-top: 24px; }
-        .process-step { display: flex; gap: 20px; padding: 20px 0; border-bottom: 1px solid #dccbb7; }
+        /* ── PROCESS ── */
+        .process-steps { display: flex; flex-direction: column; gap: 0; }
+        .process-step {
+          display: flex;
+          gap: 20px;
+          align-items: flex-start;
+          padding: 24px 0;
+          border-bottom: 1px solid #dccbb7;
+          transition: all 0.3s;
+        }
+        .process-step:hover { padding-left: 8px; }
         .process-step:last-child { border-bottom: none; }
-        .step-num { font-family: Arial, Helvetica, sans-serif; font-size: 0.75rem; color: #8a7a62; letter-spacing: 0.08em; min-width: 32px; padding-top: 4px; }
-        .process-step h4 { font-size: 1rem; font-weight: 400; margin-bottom: 4px; }
-        .process-step p { font-size: 0.88rem; color: #5c4f3a; margin-bottom: 0; }
+        .step-num {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.72rem;
+          color: #c8956c;
+          letter-spacing: 0.1em;
+          flex-shrink: 0;
+          margin-top: 3px;
+        }
+        .process-step h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; }
+        .process-step p { font-size: 0.9rem; color: #5c4f3a; margin-bottom: 0; }
 
-        /* CARDS / OFFERS */
+        /* ── OFFERS ── */
         .offers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-        .card { background: #f6efe4; border: 1px solid #dccbb7; padding: 40px 32px; display: flex; flex-direction: column; }
-        .card-featured { background: #1a1613; color: #f6efe4; border-color: #1a1613; }
-        .card-featured .offer-desc { color: #a89880; }
-        .card-featured .card-badge { background: #f6efe4; color: #1a1613; }
-        .card-featured ul li { color: #d4c8b4; border-color: #2e2820; }
-        .card-badge { font-family: Arial, Helvetica, sans-serif; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; background: #ede4d4; color: #5c4f3a; padding: 4px 12px; display: inline-block; margin-bottom: 24px; align-self: flex-start; }
-        .offer-head { margin-bottom: 16px; }
-        .offer-head h3 { font-size: 1.6rem; font-weight: 400; margin-bottom: 4px; }
-        .price { font-family: Arial, Helvetica, sans-serif; font-size: 0.85rem; color: #8a7a62; }
-        .card-featured .price { color: #a89880; }
-        .offer-desc { font-size: 0.9rem; color: #5c4f3a; margin-bottom: 24px; }
-        .card ul { margin-bottom: 32px; flex-grow: 1; }
-        .card ul li { padding: 8px 0; border-bottom: 1px solid #dccbb7; font-size: 0.88rem; color: #3a3228; }
+        .offer-card {
+          background: #f6efe4;
+          border: 1px solid #dccbb7;
+          padding: 40px 28px 36px;
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .offer-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 12px 40px rgba(200, 149, 108, 0.15);
+        }
+        .offer-featured {
+          border-color: #c8956c;
+          background: #1a1613;
+          color: #f6efe4;
+          box-shadow: 0 8px 32px rgba(26, 22, 19, 0.2);
+        }
+        .offer-featured:hover {
+          box-shadow: 0 16px 48px rgba(200, 149, 108, 0.25);
+        }
+        .offer-badge {
+          position: absolute;
+          top: -12px;
+          left: 28px;
+          background: #c8956c;
+          color: #1a1613;
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.68rem;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          padding: 5px 14px;
+          font-weight: 600;
+        }
+        .offer-name {
+          font-size: 1.1rem;
+          font-weight: 400;
+          letter-spacing: 0.04em;
+          margin-bottom: 8px;
+        }
+        .offer-price { font-size: 2rem; font-weight: 700; margin-bottom: 2px; color: #c8956c; }
+        .offer-featured .offer-price { color: #d4a574; }
+        .offer-unit {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.75rem;
+          color: #8a7a62;
+          margin-bottom: 16px;
+        }
+        .offer-desc { font-size: 0.92rem; color: #5c4f3a; margin-bottom: 24px; line-height: 1.6; }
+        .offer-featured .offer-desc { color: #a89880; }
+        .offer-features { margin-bottom: 28px; display: flex; flex-direction: column; gap: 10px; }
+        .offer-features li { font-size: 0.88rem; display: flex; align-items: flex-start; gap: 8px; }
+        .check { color: #c8956c; font-weight: 700; flex-shrink: 0; }
+        .offer-featured .offer-features li { color: #d4c4a8; }
         .offer-cta { margin-top: auto; text-align: center; justify-content: center; width: 100%; }
-        .offer-guarantee { text-align: center; margin-top: 40px; padding: 28px; border: 1px dashed #dccbb7; font-size: 0.95rem; color: #5c4f3a; }
-
-        /* CASE STUDIES */
-        .case-study { border: 1px solid #dccbb7; margin-bottom: 16px; background: #f6efe4; }
-        .section-alt .case-study { background: #f6efe4; }
-        .case-toggle { width: 100%; display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; padding: 32px; background: none; border: none; cursor: pointer; text-align: left; font-family: inherit; color: inherit; }
-        .case-toggle:hover { background: rgba(0,0,0,0.02); }
-        .case-toggle-left { flex: 1; }
-        .case-meta { font-family: Arial, Helvetica, sans-serif; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: #8a7a62; margin-bottom: 8px; }
-        .case-toggle h3 { font-size: 1.2rem; font-weight: 400; line-height: 1.4; margin-bottom: 12px; }
-        .case-specs { display: flex; gap: 16px; flex-wrap: wrap; }
-        .case-specs span { font-family: Arial, Helvetica, sans-serif; font-size: 0.72rem; color: #8a7a62; letter-spacing: 0.04em; padding: 4px 10px; border: 1px solid #dccbb7; }
-        .case-toggle-icon { font-size: 1.5rem; color: #8a7a62; min-width: 32px; text-align: center; padding-top: 4px; }
-        .case-body { padding: 0 32px 32px; }
-        .case-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
-        .text-panel { padding: 28px; font-size: 0.9rem; line-height: 1.7; }
-        .text-panel p { margin-bottom: 12px; }
-        .text-panel h4 { font-size: 1rem; font-weight: 400; margin-bottom: 12px; font-style: italic; }
-        .before-panel { background: #f6efe4; border: 1px solid #dccbb7; }
-        .after-panel { background: #1a1613; color: #f6efe4; border: 1px solid #1a1613; }
-        .after-panel .panel-sublabel { color: #8a7a62; }
-        .panel-label { font-family: Arial, Helvetica, sans-serif; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: #8a7a62; margin-bottom: 12px; }
-        .panel-sublabel { font-family: Arial, Helvetica, sans-serif; font-size: 0.72rem; color: #5c4f3a; margin-bottom: 16px; }
-        .case-analysis { padding: 24px; background: #ede4d4; border: 1px solid #dccbb7; }
-        .case-analysis ul { margin-top: 12px; }
-        .case-analysis li { padding: 6px 0; font-size: 0.9rem; color: #5c4f3a; }
-        .case-analysis li::before { content: "→ "; color: #8a7a62; }
-
-        /* ABOUT */
-        .about-cards { display: grid; grid-template-columns: 1fr; gap: 16px; }
-        .about-card { background: #ede4d4; border: 1px solid #dccbb7; padding: 28px; }
-        .about-card h4 { font-size: 1rem; font-weight: 400; margin-bottom: 8px; }
-        .about-card p { font-size: 0.88rem; color: #5c4f3a; margin-bottom: 0; }
-
-        /* FAQ */
-        .faq-list { max-width: 720px; }
-        .faq-item { border-bottom: 1px solid #dccbb7; }
-        .faq-toggle { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 0; background: none; border: none; cursor: pointer; font-family: inherit; font-size: 1rem; color: #1a1613; text-align: left; gap: 16px; }
-        .faq-toggle:hover { color: #5c4f3a; }
-        .faq-icon { font-size: 1.2rem; color: #8a7a62; min-width: 24px; text-align: center; }
-        .faq-answer { padding: 0 0 20px; }
-        .faq-answer p { font-size: 0.92rem; color: #5c4f3a; line-height: 1.7; }
-
-        /* CONTACT */
-        .contact-methods { display: flex; gap: 24px; margin-top: 32px; flex-wrap: wrap; }
-        .contact-method { display: flex; align-items: center; gap: 12px; padding: 16px 20px; border: 1px solid #dccbb7; font-family: Arial, Helvetica, sans-serif; font-size: 0.82rem; transition: all 0.2s; }
-        .contact-method:hover { background: #ede4d4; }
-        .contact-icon { font-size: 1.2rem; }
-        .contact-form { display: flex; flex-direction: column; gap: 16px; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .form-field { display: flex; flex-direction: column; gap: 6px; }
-        .form-field label { font-family: Arial, Helvetica, sans-serif; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: #8a7a62; }
-        .form-field input, .form-field textarea { padding: 12px 16px; border: 1px solid #dccbb7; background: #f6efe4; font-family: Georgia, "Times New Roman", Times, serif; font-size: 0.92rem; color: #1a1613; transition: border-color 0.2s; }
-        .form-field input:focus, .form-field textarea:focus { outline: none; border-color: #1a1613; }
-        .form-field textarea { resize: vertical; }
-        .form-success { background: #ede4d4; border: 1px solid #dccbb7; padding: 32px; }
-        .form-success h3 { font-size: 1.2rem; font-weight: 400; margin-bottom: 8px; }
-        .form-success p { font-size: 0.9rem; color: #5c4f3a; }
-
-        /* FOOTER */
-        .footer { background: #1a1613; color: #f6efe4; padding: 40px 0; }
-        .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-        .footer-logo { font-size: 1rem; margin-bottom: 4px; }
-        .footer-copy { font-family: Arial, Helvetica, sans-serif; font-size: 0.72rem; color: #8a7a62; }
-        .footer-right { display: flex; gap: 24px; }
-        .footer-email, .footer-phone { font-family: Arial, Helvetica, sans-serif; font-size: 0.78rem; color: #a89880; transition: color 0.2s; }
-        .footer-email:hover, .footer-phone:hover { color: #f6efe4; }
-
-        /* MOBILE */
-        @media (max-width: 900px) {
-          .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-          .hero-visual { max-height: 300px; }
-          .split { grid-template-columns: 1fr; gap: 48px; }
-          .offers-grid { grid-template-columns: 1fr; }
-          .case-columns { grid-template-columns: 1fr; }
-          .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; background: #f6efe4; flex-direction: column; padding: 24px; border-bottom: 1px solid #dccbb7; gap: 16px; }
-          .nav-open { display: flex; }
-          .mobile-toggle { display: block; }
-          .form-row { grid-template-columns: 1fr; }
+        .offer-featured .button-primary:hover { background: #c8956c; }
+        .offer-guarantee {
+          text-align: center;
+          margin-top: 40px;
+          padding: 28px;
+          border: 1px dashed #c8956c;
+          font-size: 0.95rem;
+          color: #5c4f3a;
+          background: rgba(200, 149, 108, 0.04);
         }
 
-        @media (max-width: 600px) {
-          .stat-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-          .about-cards { grid-template-columns: 1fr; }
-          .contact-methods { flex-direction: column; }
-          .case-toggle { padding: 20px; }
-          .case-body { padding: 0 20px 20px; }
-          .hero h1 { font-size: 2rem; }
-          .section-head h2, .text-block h2 { font-size: 1.6rem; }
-        }
-
-        @media (max-width: 480px) {
-          .hero { padding: 56px 0 48px; }
-          .section { padding: 56px 0; }
-          .button { width: 100%; justify-content: center; }
-          .actions { flex-direction: column; }
-        }
-      `}</style>
-    </>
-  );
-}
+        /* ── CASE STUDIES ── */
+        .case-study {
+          border: 1px solid #dccbb7;
+          margin-bottom: 16px;
+          background: #f6efe4;
+          transition: all 0.4s cubic-bezier(0.22, 1
