@@ -1,80 +1,105 @@
-import Link from 'next/link'
-import Comparison from '../components/Comparison'
+"use client";
+
+import { useState } from "react";
+import Header from "./components/Header";
+import Hero from "./components/Hero";
+import Services from "./components/Services";
+import Comparison from "./components/Comparison";
+import About from "./components/About";
+import Cta from "./components/Cta";
+import Footer from "./components/Footer";
 
 export default function Home() {
+  const [openExample, setOpenExample] = useState<number | null>(null);
+  const [mobileMenu, setMobileMenu] = useState(false);
+  const [formStatus, setFormStatus] = useState<string | null>(null);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    platform: "",
+    pieces: "",
+    message: "",
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(
+      `Demande — ${formData.name || "Nouveau prospect"}`
+    );
+    const body = encodeURIComponent(
+      `Nom : ${formData.name}\nEmail : ${formData.email}\nTéléphone : ${formData.phone}\nPlateforme : ${formData.platform}\nNombre de pièces : ${formData.pieces}\n\nMessage :\n${formData.message}`
+    );
+    window.location.href = `mailto:contact.atelierprovenance@gmail.com?subject=${subject}&body=${body}`;
+    setFormStatus("sent");
+  };
+
   return (
     <>
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="container">
-          <div className="hero-content">
-            <div className="hero-text">
-              <h1 className="hero-title">
-                Transformez vos annonces en histoires qui vendent
-              </h1>
-              <p className="hero-subtitle">
-                Des notices expertes pour le mobilier de collection et les objets anciens,
-                qui justifient le prix et accélèrent la vente.
+      <Header mobileMenu={mobileMenu} setMobileMenu={setMobileMenu} />
+      <main>
+        <Hero />
+        <section className="section border-top" id="probleme">
+          {/* Contenu du constat */}
+          <div className="container split">
+            <div>
+              <p className="eyebrow">Le constat</p>
+              <h2>La plupart des annonces ne sont pas à la hauteur des pièces qu'elles présentent.</h2>
+              <p>
+                Sur Selency, Proantic, Leboncoin ou Catawiki, des milliers d'objets de qualité
+                restent en ligne pendant des semaines. Pas parce qu'ils manquent de valeur,
+                mais parce que rien dans leur présentation ne permet à l'acheteur de comprendre
+                cette valeur.
               </p>
-              <Link href="/contact" className="btn">
-                Demander un devis
-              </Link>
+              <p>
+                Descriptions en deux lignes. Vocabulaire approximatif. Aucun contexte historique.
+                Le prix semble arbitraire. L'acheteur hésite, puis passe à autre chose.
+              </p>
             </div>
-            <div className="hero-image">
-              <img
-                src="/hero-image.jpg"
-                alt="Mobilier ancien de collection"
-                style={{ width: '100%', height: 'auto' }}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section className="section">
-        <div className="container">
-          <h2 className="section-title">Nos services</h2>
-          <div className="services-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
-            <div className="service-card" style={{ background: 'white', padding: '2rem', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
-              <h3 style={{ fontFamily: 'var(--font-serif)', color: 'var(--primary)', marginBottom: '1rem' }}>Notice individuelle</h3>
-              <p>150 € par notice (lot de 3 : 450 €)</p>
-              <p>Une description détaillée qui met en valeur votre objet et justifie son prix.</p>
-            </div>
-            <div className="service-card" style={{ background: 'white', padding: '2rem', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
-              <h3 style={{ fontFamily: 'var(--font-serif)', color: 'var(--primary)', marginBottom: '1rem' }}>Lot de 10 notices</h3>
-              <p>120 € par notice (1 200 € le lot)</p>
-              <p>Idéal pour les galeries et antiquaires avec un catalogue important.</p>
-            </div>
-            <div className="service-card" style={{ background: 'white', padding: '2rem', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
-              <h3 style={{ fontFamily: 'var(--font-serif)', color: 'var(--primary)', marginBottom: '1rem' }}>Catalogue complet</h3>
-              <p>Sur devis</p>
-              <p>Harmonisation de l'ensemble de votre catalogue avec un ton cohérent.</p>
+            <div>
+              <div className="stat-grid">
+                <div className="stat-card">
+                  <p className="stat-number">70 %</p>
+                  <p className="stat-label">des annonces haut de gamme sans contexte historique</p>
+                </div>
+                <div className="stat-card">
+                  <p className="stat-number">3×</p>
+                  <p className="stat-label">plus de vues avec une description structurée</p>
+                </div>
+                <div className="stat-card">
+                  <p className="stat-number">45 j.</p>
+                  <p className="stat-label">temps moyen de vente sans description optimisée</p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Comparison Section */}
-      <section className="section" style={{ backgroundColor: '#f5f3f0' }}>
-        <div className="container">
-          <h2 className="section-title">Avant / Après</h2>
-          <Comparison />
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="section">
-        <div className="container">
-          <div style={{ backgroundColor: 'var(--primary)', color: 'white', padding: '3rem', borderRadius: '8px', textAlign: 'center' }}>
-            <h2 style={{ fontFamily: 'var(--font-serif)', marginBottom: '1rem' }}>Prêt à vendre plus vite et plus cher ?</h2>
-            <p style={{ marginBottom: '2rem', opacity: 0.9 }}>Offrez à vos objets la description qu'ils méritent.</p>
-            <Link href="/contact" className="btn" style={{ backgroundColor: 'var(--accent)', color: 'var(--dark)' }}>
-              Demander un devis gratuit
-            </Link>
-          </div>
-        </div>
-      </section>
+        <Services />
+        <Comparison openExample={openExample} setOpenExample={setOpenExample} />
+        <About openFaq={openFaq} setOpenFaq={setOpenFaq} />
+        <Cta
+          formData={formData}
+          setFormData={setFormData}
+          formStatus={formStatus}
+          handleSubmit={handleSubmit}
+        />
+      </main>
+      <Footer />
+      <style jsx global>{`
+        /* Votre CSS global ici (celui que vous avez partagé) */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+          font-family: Georgia, "Times New Roman", Times, serif;
+          color: #1a1613;
+          background: #f6efe4;
+          line-height: 1.7;
+          font-size: 16px;
+        }
+        /* ... (le reste de votre CSS) */
+      `}</style>
     </>
-  )
+  );
 }
