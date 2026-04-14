@@ -93,7 +93,6 @@ const faqs = [
 
   return (
     <>
-    <>
       {/* ═══════════════════════ NAVBAR ═══════════════════════ */}
       <nav className={`nav ${scrolled ? "nav-scrolled" : ""}`}>
         <div className="container nav-inner">
@@ -284,10 +283,7 @@ const faqs = [
               </div>
             </div>
           </Reveal>
-        </section>Vous avez raison. Le fichier est trop long pour un seul message. Je vais le découper en 3 parties que vous collerez l'une après l'autre dans le même fichier app/page.tsx.
-
-PARTIE 1 — Collez ceci en premier :
-"use client";
+        </section>
 
 import { useState, useEffect, useRef } from "react";
 
