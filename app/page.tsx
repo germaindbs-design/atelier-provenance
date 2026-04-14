@@ -1,3 +1,4 @@
+L'erreur est à la ligne 85 — il manque probablement la partie entre handleSubmit et le return. Le code que je vous ai envoyé était tronqué (les [...]). Voici le fichier page.tsx complet sans coupure :
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -54,14 +55,12 @@ export default function Page() {
     message: "",
   });
 
-  /* ── Scroll detection pour navbar ── */
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /* ── Parallax hero ── */
   const [heroOffset, setHeroOffset] = useState(0);
   useEffect(() => {
     const handleParallax = () => setHeroOffset(window.scrollY * 0.3);
@@ -69,7 +68,6 @@ export default function Page() {
     return () => window.removeEventListener("scroll", handleParallax);
   }, []);
 
-  /* ── Form validation visuelle ── */
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const markTouched = (field: string) => setTouched((prev) => ({ ...prev, [field]: true }));
   const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -312,7 +310,7 @@ export default function Page() {
         </section>
 
         {/* ═══════════════════════ EXEMPLES ═══════════════════════ */}
-        <section className="section section-alt border-top" id="exemples">
+        <section className="section border-top" id="exemples">
           <div className="container">
             <Reveal>
               <div className="section-head">
@@ -326,189 +324,185 @@ export default function Page() {
               </div>
             </Reveal>
 
-            {/* EXEMPLE 1 */}
-            <Reveal>
-              <article className={`case-study ${openExample === 0 ? "is-open" : ""}`}>
-                <button className="case-toggle" onClick={() => setOpenExample(openExample === 0 ? null : 0)}>
-                  <div className="case-toggle-left">
-                    <p className="case-meta">Exemple 1 · Enfilade scandinave, circa 1960</p>
-                    <h3>Passer d&apos;une description plate à un texte qui justifie le prix.</h3>
-                    <div className="case-specs">
-                      <span>Prix affiché : 1 850 €</span>
-                      <span>Teck · laiton · 200 cm</span>
-                      <span>Plateforme : Selency</span>
-                    </div>
-                  </div>
-                  <div className="case-toggle-icon">{openExample === 0 ? "−" : "+"}</div>
-                </button>
-                {openExample === 0 && (
-                  <div className="case-body">
-                    <div className="case-columns">
-                      <div className="text-panel before-panel">
-                        <p className="panel-label">Avant</p>
-                        <p>
-                          Enfilade scandinave en teck des années 60, bon état
-                          avec quelques traces d&apos;usage. 3 portes coulissantes,
-                          pieds compas. L 200 × P 45 × H 82 cm. Idéale pour
-                          salon ou salle à manger.
-                        </p>
-                      </div>
-                      <div className="text-panel after-panel">
-                        <p className="panel-label">Après</p>
-                        <p>
-                          Enfilade trois portes en teck massif, Scandinavie, circa 1960.
-                          Le travail des portes coulissantes — montées sur rail laiton
-                          d&apos;origine — témoigne d&apos;une fabrication soignée, probablement
-                          d&apos;atelier, avec assemblages à tenons visibles en bout de caisson.
-                        </p>
-                        <p>
-                          Le teck a pris cette patine miel que seules les pièces
-                          correctement entretenues développent après six décennies.
-                          Piètement fuselé, lignes tendues, proportions généreuses
-                          (L 200 × P 45 × H 82 cm) — un format de plus en plus
-                          recherché, parfaitement adapté aux intérieurs contemporains
-                          qui cherchent une pièce maîtresse sans lourdeur.
-                        </p>
+            <div className="examples-stack">
+              {/* EXEMPLE 1 */}
+              <Reveal>
+                <article className={`case-study ${openExample === 0 ? "is-open" : ""}`}>
+                  <button className="case-toggle" onClick={() => setOpenExample(openExample === 0 ? null : 0)}>
+                    <div className="case-toggle-left">
+                      <p className="case-meta">Exemple 1 · Enfilade scandinave, circa 1960</p>
+                      <h3>Passer d&apos;une description plate à un texte qui justifie le prix.</h3>
+                      <div className="case-specs">
+                        <span>Prix affiché : 1 850 €</span>
+                        <span>Teck · laiton · 200 cm</span>
+                        <span>Plateforme : Selency</span>
                       </div>
                     </div>
-                    <div className="case-analysis">
-                      <p className="panel-label">Ce qui change</p>
-                      <ul>
-                        <li>L&apos;usure devient un argument (patine, vécu, caractère) au lieu d&apos;un défaut à excuser.</li>
-                        <li>La datation et l&apos;origine sont précisées — elles justifient le prix.</li>
-                        <li>Le texte s&apos;adresse à un acheteur qui cherche de l&apos;authenticité, pas du neuf.</li>
-                      </ul>
+                    <div className="case-toggle-icon">{openExample === 0 ? "−" : "+"}</div>
+                  </button>
+                  {openExample === 0 && (
+                    <div className="case-body">
+                      <div className="case-columns">
+                        <div className="text-panel before-panel">
+                          <p className="panel-label">Avant</p>
+                          <p>
+                            Enfilade scandinave en teck des années 60, bon état
+                            avec quelques traces d&apos;usage. 3 portes coulissantes,
+                            pieds compas. L 200 × P 45 × H 82 cm. Idéale pour
+                            salon ou salle à manger.
+                          </p>
+                        </div>
+                        <div className="text-panel after-panel">
+                          <p className="panel-label">Après</p>
+                          <p>
+                            Enfilade trois portes en teck massif, Scandinavie, circa 1960.
+                            Le travail des portes coulissantes — montées sur rail laiton
+                            d&apos;origine — témoigne d&apos;une fabrication soignée, probablement
+                            d&apos;atelier, avec assemblages à tenons visibles en bout de caisson.
+                          </p>
+                          <p>
+                            Le teck a pris cette patine miel que seules les pièces
+                            correctement entretenues développent après six décennies.
+                            Piètement fuselé, lignes tendues, proportions justes :
+                            c&apos;est le vocabulaire d&apos;un design qui ne cherche pas l&apos;effet
+                            mais la justesse.
+                          </p>
+                          <p>L 200 × P 45 × H 82 cm · Scandinavie, circa 1960.</p>
+                        </div>
+                      </div>
+                      <div className="case-analysis">
+                        <p className="panel-label">Ce qui change</p>
+                        <ul>
+                          <li>Le texte identifie des marqueurs de qualité précis (rail laiton, tenons, teck massif).</li>
+                          <li>La patine devient un argument de valeur, pas un défaut.</li>
+                          <li>Le vocabulaire positionne la pièce dans un segment « mobilier de collection ».</li>
+                        </ul>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </article>
-            </Reveal>
+                  )}
+                </article>
+              </Reveal>
 
-            {/* EXEMPLE 2 */}
-            <Reveal delay={100}>
-              <article className={`case-study ${openExample === 1 ? "is-open" : ""}`}>
-                <button className="case-toggle" onClick={() => setOpenExample(openExample === 1 ? null : 1)}>
-                  <div className="case-toggle-left">
-                    <p className="case-meta">Exemple 2 · Suite de 3 chaises, années 1950</p>
-                    <h3>Transformer un lot banal en ensemble cohérent et désirable.</h3>
-                    <div className="case-specs">
-                      <span>Prix affiché : 480 €</span>
-                      <span>Métal laqué · velours vert</span>
-                      <span>Plateforme : Selency</span>
-                    </div>
-                  </div>
-                  <div className="case-toggle-icon">{openExample === 1 ? "−" : "+"}</div>
-                </button>
-                {openExample === 1 && (
-                  <div className="case-body">
-                    <div className="case-columns">
-                      <div className="text-panel before-panel">
-                        <p className="panel-label">Avant</p>
-                        <p>
-                          3 chaises années 50 métal et velours vert, idéales
-                          pour bureau ou table, bon état, velours nettoyé,
-                          traces d&apos;usage sur le métal. H 83 × L 60 × P 53 cm.
-                        </p>
-                      </div>
-                      <div className="text-panel after-panel">
-                        <p className="panel-label">Après</p>
-                        <p>
-                          Suite de trois chaises en métal laqué noir et velours vert
-                          amande, France, années 1950. Le piétement tubulaire fin,
-                          légèrement évasé, donne à l&apos;ensemble une élégance
-                          graphique qui tranche avec la rondeur accueillante de
-                          l&apos;assise.
-                        </p>
-                        <p>
-                          Le velours — nettoyé, encore dense et sans usure
-                          marquante — apporte une chaleur tactile immédiate. Le
-                          vert amande est une teinte d&apos;époque, cohérente avec la
-                          palette des intérieurs français du milieu du siècle :
-                          elle fonctionne aussi bien dans un cadre vintage assumé
-                          que dans un intérieur contemporain en recherche de
-                          caractère.
-                        </p>
-                        <p>
-                          H 83 × L 60 × P 53 cm · vendues par trois, indissociables.
-                        </p>
+              {/* EXEMPLE 2 */}
+              <Reveal>
+                <article className={`case-study ${openExample === 1 ? "is-open" : ""}`}>
+                  <button className="case-toggle" onClick={() => setOpenExample(openExample === 1 ? null : 1)}>
+                    <div className="case-toggle-left">
+                      <p className="case-meta">Exemple 2 · Suite de 3 chaises, années 1950</p>
+                      <h3>Transformer un lot banal en ensemble cohérent et désirable.</h3>
+                      <div className="case-specs">
+                        <span>Prix affiché : 480 €</span>
+                        <span>Métal laqué · velours vert</span>
+                        <span>Plateforme : Selency</span>
                       </div>
                     </div>
-                    <div className="case-analysis">
-                      <p className="panel-label">Ce qui change</p>
-                      <ul>
-                        <li>Le lot devient un « ensemble » — une intention décorative, pas un hasard.</li>
-                        <li>Le velours vert est contextualisé comme une teinte d&apos;époque recherchée.</li>
-                        <li>Le texte aide l&apos;acheteur à se projeter dans un intérieur précis.</li>
-                      </ul>
+                    <div className="case-toggle-icon">{openExample === 1 ? "−" : "+"}</div>
+                  </button>
+                  {openExample === 1 && (
+                    <div className="case-body">
+                      <div className="case-columns">
+                        <div className="text-panel before-panel">
+                          <p className="panel-label">Avant</p>
+                          <p>
+                            3 chaises années 50 métal et velours vert, idéales
+                            pour bureau ou table, bon état, velours nettoyé,
+                            traces d&apos;usage sur le métal. H 83 × L 60 × P 53 cm.
+                          </p>
+                        </div>
+                        <div className="text-panel after-panel">
+                          <p className="panel-label">Après</p>
+                          <p>
+                            Suite de trois chaises en métal laqué noir et velours vert amande,
+                            France, années 1950. L&apos;assise enveloppante et le dossier légèrement
+                            incurvé évoquent les productions des ateliers français d&apos;après-guerre,
+                            où le confort domestique commençait à dialoguer avec les formes
+                            industrielles.
+                          </p>
+                          <p>
+                            Le velours a été nettoyé — il conserve un tombé souple et une teinte
+                            cohérente. La structure métallique porte quelques traces d&apos;usage qui
+                            ne compromettent ni la stabilité ni l&apos;élégance d&apos;ensemble.
+                          </p>
+                          <p>H 83 × L 60 × P 53 cm · France, années 1950.</p>
+                        </div>
+                      </div>
+                      <div className="case-analysis">
+                        <p className="panel-label">Ce qui change</p>
+                        <ul>
+                          <li>L&apos;usure devient un argument (patine, vécu, caractère) au lieu d&apos;un défaut à excuser.</li>
+                          <li>La datation et l&apos;origine sont précisées — elles justifient le prix.</li>
+                          <li>Le texte s&apos;adresse à un acheteur qui cherche de l&apos;authenticité, pas du neuf.</li>
+                        </ul>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </article>
-            </Reveal>
+                  )}
+                </article>
+              </Reveal>
 
-            {/* EXEMPLE 3 */}
-            <Reveal delay={200}>
-              <article className={`case-study ${openExample === 2 ? "is-open" : ""}`}>
-                <button className="case-toggle" onClick={() => setOpenExample(openExample === 2 ? null : 2)}>
-                  <div className="case-toggle-left">
-                    <p className="case-meta">Exemple 3 · Bureau ministre Art déco, circa 1935</p>
-                    <h3>Repositionner une pièce haut de gamme avec le texte qu&apos;elle mérite.</h3>
-                    <div className="case-specs">
-                      <span>Prix affiché : 3 200 €</span>
-                      <span>Palissandre · laiton</span>
-                      <span>Plateforme : Proantic</span>
-                    </div>
-                  </div>
-                  <div className="case-toggle-icon">{openExample === 2 ? "−" : "+"}</div>
-                </button>
-                {openExample === 2 && (
-                  <div className="case-body">
-                    <div className="case-columns">
-                      <div className="text-panel before-panel">
-                        <p className="panel-label">Avant</p>
-                        <p>
-                          Bureau Art Déco en palissandre, bon état, restauré,
-                          4 tiroirs, poignées laiton. Dimensions : H 78 × L 140
-                          × P 72 cm. Années 1930.
-                        </p>
-                      </div>
-                      <div className="text-panel after-panel">
-                        <p className="panel-label">Après — format court</p>
-                        <p className="panel-sublabel">Adapté à Proantic ou Drouot Digital</p>
-                        <h4>Bureau ministre Art déco, circa 1935 — placage palissandre, poignées laiton d&apos;origine</h4>
-                        <p>
-                          Un bureau qui impose sa présence sans élever la voix. Le placage de
-                          palissandre déploie ses veinures sur un plateau généreux, encadré par
-                          des montants nets et une géométrie typiquement Art déco. Quatre tiroirs
-                          en façade, poignées en laiton d&apos;origine — chaque détail confirme la
-                          cohérence de la pièce.
-                        </p>
-                        <p>
-                          La restauration a été menée avec discernement : stabilité structurelle
-                          assurée, patine du bois préservée, quincaillerie intacte. C&apos;est un
-                          meuble de travail autant qu&apos;un meuble de caractère — le genre de
-                          pièce qui compose un intérieur comme on écrit une phrase.
-                        </p>
-                        <p>H 78 × L 140 × P 72 cm · France, circa 1935.</p>
+              {/* EXEMPLE 3 */}
+              <Reveal>
+                <article className={`case-study ${openExample === 2 ? "is-open" : ""}`}>
+                  <button className="case-toggle" onClick={() => setOpenExample(openExample === 2 ? null : 2)}>
+                    <div className="case-toggle-left">
+                      <p className="case-meta">Exemple 3 · Bureau ministre Art déco, circa 1935</p>
+                      <h3>Donner à une pièce de caractère le texte qu&apos;elle mérite.</h3>
+                      <div className="case-specs">
+                        <span>Prix affiché : 2 400 €</span>
+                        <span>Palissandre · laiton</span>
+                        <span>Plateforme : Proantic</span>
                       </div>
                     </div>
-                    <div className="case-analysis">
-                      <p className="panel-label">Ce qui change</p>
-                      <ul>
-                        <li>Le bureau passe du statut de « meuble restauré » à celui de « pièce de caractère » avec une histoire.</li>
-                        <li>Le prix de 3 200 € devient cohérent grâce au registre employé.</li>
-                        <li>Le texte positionne l&apos;objet dans un univers — pas dans un catalogue.</li>
-                      </ul>
+                    <div className="case-toggle-icon">{openExample === 2 ? "−" : "+"}</div>
+                  </button>
+                  {openExample === 2 && (
+                    <div className="case-body">
+                      <div className="case-columns">
+                        <div className="text-panel before-panel">
+                          <p className="panel-label">Avant</p>
+                          <p>
+                            Bureau Art déco en palissandre, 4 tiroirs, poignées
+                            laiton. Restauré. Bon état général. H 78 × L 140 × P 72 cm.
+                            Années 1930.
+                          </p>
+                        </div>
+                        <div className="text-panel after-panel">
+                          <p className="panel-label">Après — format court</p>
+                          <p className="panel-sublabel">Adapté à Proantic ou Drouot Digital</p>
+                          <h4>Bureau ministre Art déco, circa 1935 — placage palissandre, poignées laiton d&apos;origine</h4>
+                          <p>
+                            Un bureau qui impose sa présence sans élever la voix. Le placage de
+                            palissandre déploie ses veinures sur un plateau généreux, encadré par
+                            des montants nets et une géométrie typiquement Art déco. Quatre tiroirs
+                            en façade, poignées en laiton d&apos;origine — chaque détail confirme la
+                            cohérence de la pièce.
+                          </p>
+                          <p>
+                            La restauration a été menée avec discernement : stabilité structurelle
+                            assurée, patine du bois préservée, quincaillerie intacte. C&apos;est un
+                            meuble de travail autant qu&apos;un meuble de caractère — le genre de
+                            pièce qui compose un intérieur comme on écrit une phrase.
+                          </p>
+                          <p>H 78 × L 140 × P 72 cm · France, circa 1935.</p>
+                        </div>
+                      </div>
+                      <div className="case-analysis">
+                        <p className="panel-label">Ce qui change</p>
+                        <ul>
+                          <li>Le format court est pensé pour les plateformes spécialisées — dense, précis, sans remplissage.</li>
+                          <li>La restauration est valorisée comme un signe de soin, pas comme un aveu de faiblesse.</li>
+                          <li>Le texte installe une image mentale — « le genre de pièce qui compose un intérieur ».</li>
+                        </ul>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </article>
-            </Reveal>
+                  )}
+                </article>
+              </Reveal>
+            </div>
           </div>
         </section>
 
         {/* ═══════════════════════ À PROPOS ═══════════════════════ */}
-        <section className="section border-top" id="parcours">
+        <section className="section section-alt border-top" id="parcours">
           <div className="container split">
             <Reveal>
               <div>
@@ -541,11 +535,11 @@ export default function Page() {
                   </div>
                   <div className="about-card">
                     <h4>Marché de l&apos;art</h4>
-                    <p>Marchand, acheteur, rédacteur. La compréhension des objets et de leur valeur vient de la pratique.</p>
+                    <p>Marchand, acheteur, rédacteur. Une connaissance concrète des objets et de leur circulation.</p>
                   </div>
                   <div className="about-card">
-                    <h4>Exigence éditoriale</h4>
-                    <p>Chaque texte est relu, ajusté, vérifié. Pas de production en série, pas de sous-traitance.</p>
+                    <h4>Rédaction spécialisée</h4>
+                    <p>Notices, fiches, catalogues. Chaque format a ses règles — et ses exigences.</p>
                   </div>
                 </div>
               </div>
@@ -554,24 +548,23 @@ export default function Page() {
         </section>
 
         {/* ═══════════════════════ FAQ ═══════════════════════ */}
-        <section className="section section-alt border-top" id="faq">
+        <section className="section border-top" id="faq">
           <div className="container container-narrow">
             <Reveal>
               <div className="section-head">
                 <p className="eyebrow">Questions fréquentes</p>
-                <h2>Ce que vous voulez savoir.</h2>
+                <h2>Ce que nos clients demandent.</h2>
               </div>
             </Reveal>
             <div className="faq-list">
               {[
-                { q: "Que comprend exactement une notice ?", a: "Une notice comprend le texte rédigé, prêt à publier, dans le ou les formats prévus par la formule choisie. Le texte inclut : description physique, contexte historique ou stylistique, vocabulaire technique vérifié, et un ton adapté à votre clientèle cible." },
-                { q: "Comment se passe la première notice offerte ?", a: "Vous nous envoyez les photos et informations sur une pièce. Nous rédigeons la notice complète (formule Essentiel) et vous la livrons sous 5 jours. Vous jugez sur pièce — si le résultat vous convient, nous continuons. Sinon, vous ne devez rien." },
-                { q: "Quels types d'objets traitez-vous ?", a: "Mobilier de collection principalement — du XVIIe au design contemporain. Mais aussi luminaires, objets décoratifs, art populaire, curiosités. Si l'objet a une histoire et un prix à justifier, nous pouvons travailler dessus." },
-                { q: "Les textes sont-ils optimisés pour le référencement ?", a: "Oui, les notices intègrent naturellement les termes recherchés par les acheteurs (époque, style, matériaux, provenance). Ce n'est pas du SEO artificiel — c'est de la précision, qui se trouve être exactement ce que les moteurs de recherche valorisent." },
+                { q: "La première notice est vraiment gratuite ?", a: "Oui. Vous envoyez les photos et les informations, nous rédigeons la notice. Si le résultat vous convient, nous continuons. Sinon, vous gardez le texte — sans contrepartie." },
+                { q: "Quels types d'objets acceptez-vous ?", a: "Mobilier ancien et vintage, objets d'art, luminaires, céramiques, pièces de design. Si l'objet a une valeur à défendre, nous pouvons écrire dessus." },
+                { q: "Quel est le délai de livraison ?", a: "5 jours ouvrés pour les formules Essentiel et Signature. Les missions Catalogue font l'objet d'un planning sur mesure." },
                 { q: "Travaillez-vous avec des particuliers ?", a: "Principalement avec des professionnels — marchands, galeristes, antiquaires, maisons de vente. Mais un particulier qui vend une pièce de qualité est le bienvenu." },
               ].map((item, i) => (
-                <Reveal key={i} delay={i * 60}>
-                  <div className="faq-item">
+                <Reveal key={i} delay={i * 80}>
+                  <div className="faq-item" key={i}>
                     <button className="faq-toggle" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
                       <span>{item.q}</span>
                       <span className="faq-icon">{openFaq === i ? "−" : "+"}</span>
@@ -585,11 +578,11 @@ export default function Page() {
         </section>
 
         {/* ═══════════════════════ CONTACT ═══════════════════════ */}
-        <section className="section border-top" id="contact">
+        <section className="section section-dark border-top" id="contact">
           <div className="container split">
             <Reveal>
               <div>
-                <p className="eyebrow">Contact</p>
+                <p className="eyebrow eyebrow-light">Contact</p>
                 <h2>Un objet suffit<br /><em>pour commencer.</em></h2>
                 <p>
                   Envoyez-nous les photos et quelques informations sur votre pièce —
@@ -716,7 +709,6 @@ export default function Page() {
 
       {/* ═══════════════════════ STYLES ═══════════════════════ */}
       <style jsx global>{`
-        /* ── RESET ── */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
@@ -838,8 +830,8 @@ export default function Page() {
           transform: translateY(-1px);
         }
         .button-sm { padding: 10px 20px; font-size: 0.75rem; }
-        .button-arrow::after { content: " →"; transition: transform 0.3s; }
-        .button-arrow:hover::after { transform: translateX(4px); display: inline-block; }
+        .button-arrow::after { content: " →"; transition: transform 0.3s; display: inline-block; }
+        .button-arrow:hover::after { transform: translateX(4px); }
 
         /* ── HERO ── */
         .hero {
@@ -862,10 +854,7 @@ export default function Page() {
         }
         .hero-grain {
           position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
+          top: 0; left: 0; right: 0; bottom: 0;
           opacity: 0.03;
           background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
           z-index: 1;
@@ -934,12 +923,9 @@ export default function Page() {
         /* ── SECTIONS ── */
         .section { padding: 96px 0; }
         .section-alt { background: #f0e6d6; }
-        .section-dark {
-          background: #1a1613;
-          color: #f6efe4;
-        }
+        .section-dark { background: #1a1613; color: #f6efe4; }
         .border-top { border-top: 1px solid #dccbb7; }
-        .section-dark .border-top { border-top-color: rgba(255,255,255,0.08); }
+        .section-dark.border-top { border-top-color: rgba(255,255,255,0.08); }
         .section-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
         .section-head h2 {
           font-size: 2.3rem;
@@ -1102,8 +1088,90 @@ export default function Page() {
         }
 
         /* ── CASE STUDIES ── */
+        .examples-stack { display: flex; flex-direction: column; gap: 16px; }
         .case-study {
           border: 1px solid #dccbb7;
-          margin-bottom: 16px;
           background: #f6efe4;
-          transition: all 0.4s cubic-bezier(0.22, 1
+          transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .case-study:hover { border-color: #c8956c; }
+        .case-study.is-open { border-color: #1a1613; }
+        .case-toggle {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          padding: 28px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          text-align: left;
+          gap: 24px;
+          font-family: inherit;
+          color: inherit;
+        }
+        .case-toggle-left { flex: 1; }
+        .case-meta {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.72rem;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: #b8854e;
+          margin-bottom: 6px;
+        }
+        .case-toggle h3 { font-size: 1.15rem; font-weight: 400; line-height: 1.4; }
+        .case-specs {
+          display: flex;
+          gap: 16px;
+          flex-wrap: wrap;
+          margin-top: 8px;
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.75rem;
+          color: #8a7a62;
+        }
+        .case-toggle-icon { font-size: 1.5rem; color: #c8956c; flex-shrink: 0; transition: transform 0.3s; }
+        .case-study.is-open .case-toggle-icon { transform: rotate(180deg); }
+        .case-body { padding: 0 28px 28px; }
+        .case-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+        .text-panel { padding: 24px; font-size: 0.92rem; line-height: 1.7; }
+        .text-panel p { margin-bottom: 12px; }
+        .text-panel h4 { font-size: 1rem; font-weight: 600; margin-bottom: 12px; }
+        .before-panel { background: #ede4d4; border: 1px solid #dccbb7; }
+        .after-panel { background: #1a1613; color: #f6efe4; border: 1px solid #2a2520; }
+        .panel-label {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.68rem;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #b8854e;
+          margin-bottom: 12px;
+          display: block;
+        }
+        .after-panel .panel-label { color: #d4a574; }
+        .panel-sublabel {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.72rem;
+          color: #8a7a62;
+          margin-bottom: 12px;
+          font-style: italic;
+        }
+        .case-analysis {
+          background: rgba(200, 149, 108, 0.06);
+          border: 1px solid rgba(200, 149, 108, 0.15);
+          padding: 24px;
+        }
+        .case-analysis ul { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+        .case-analysis li {
+          font-size: 0.88rem;
+          color: #5c4f3a;
+          padding-left: 16px;
+          position: relative;
+        }
+        .case-analysis li::before {
+          content: "→";
+          position: absolute;
+          left: 0;
+          color: #c8956c;
+        }
+
+        /* ── ABOUT
