@@ -2147,12 +2147,9 @@ export default function Page() {
             top: 100%;
             left: 0;
             right: 0;
-            background: rgba(246, 239, 228, 0.98)}; backdrop-filter: blur(12px); flex-direction: column; padding: 20px 24px; gap: 12px; }
-          .nav-links.open { display: flex; }
-          .mobile-toggle { display: flex; }
-          .hero h1 { font-size: 1.8rem; }
-        }
-      `}</style>
-    </>
-  );
+            background: rgba(246, 239, 228, 0.98);
+backdrop-filter: blur(12px);
+flex-direction: column;
+padding: 20px 24px;
+gap: 12px;
 }
