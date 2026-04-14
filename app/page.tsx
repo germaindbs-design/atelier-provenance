@@ -84,11 +84,11 @@ export default function Page() {
   };
   
 const faqs = [
-    { q: "Que contient exactement une notice ?", a: "Une notice comprend un texte principal (description valorisante de l'objet), les dimensions, la datation, l'origine quand elle est identifiable, et un positionnement par rapport au marché. Le tout est livré prêt à copier-coller sur votre plateforme." },
-    { q: "Comment se passe la commande ?", a: "Vous m'envoyez des photos de l'objet, ses dimensions, et les informations dont vous disposez via le formulaire. Je vous recontacte sous 24 h pour confirmer la commande et le délai." },
-    { q: "Quel est le délai de livraison ?", a: "5 jours ouvrés pour une notice unique, 7 jours pour un pack de 5. Les catalogues font l'objet d'un planning sur mesure." },
+    { q: "Que contient exactement une notice ?", a: "Une notice comprend un texte principal (description valorisante de l\u0027objet), les dimensions, la datation, l\u0027origine quand elle est identifiable, et un positionnement par rapport au marché. Le tout est livré prêt à copier-coller sur votre plateforme." },
+    { q: "Comment se passe la commande ?", a: "Vous m\u0027envoyez des photos de l\u0027objet, ses dimensions, et les informations dont vous disposez via le formulaire. Je vous recontacte sous 24 h pour confirmer la commande et le délai." },
+    { q: "Quel est le délai de livraison ?", a: "5 jours ouvrés pour une notice unique, 7 jours pour un pack de 5. Les catalogues font l\u0027objet d\u0027un planning sur mesure." },
     { q: "Et si le texte ne me convient pas ?", a: "Une révision est incluse dans chaque notice. Vous pouvez demander des ajustements de ton, de longueur ou de détails sans surcoût." },
-    { q: "La première notice est vraiment offerte ?", a: "Oui. Vous m'envoyez un objet, je rédige la notice, vous jugez du résultat. Aucun engagement, aucune carte bancaire." },
+    { q: "La première notice est vraiment offerte ?", a: "Oui. Vous m\u0027envoyez un objet, je rédige la notice, vous jugez du résultat. Aucun engagement, aucune carte bancaire." },
   ];
 
   return (
