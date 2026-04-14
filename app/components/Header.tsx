@@ -1,20 +1,31 @@
-import Link from 'next/link'
+"use client";
 
-export default function Header() {
+export default function Header({
+  mobileMenu,
+  setMobileMenu
+}: {
+  mobileMenu: boolean;
+  setMobileMenu: (value: boolean) => void;
+}) {
   return (
-    <header className="header">
-      <div className="container">
-        <nav className="nav">
-          <Link href="/" className="logo">
-            Atelier Provenance
-          </Link>
-          <div className="nav-links">
-            <Link href="/services" className="nav-link">Services</Link>
-            <Link href="/about" className="nav-link">À propos</Link>
-            <Link href="/contact" className="btn btn-outline">Contact</Link>
-          </div>
-        </nav>
+    <nav className="nav">
+      <div className="container nav-inner">
+        <a href="#" className="nav-logo">Atelier Provenance</a>
+        <button
+          className="mobile-toggle"
+          onClick={() => setMobileMenu(!mobileMenu)}
+          aria-label="Menu"
+        >
+          {mobileMenu ? "✕" : "☰"}
+        </button>
+        <div className={`nav-links ${mobileMenu ? "nav-open" : ""}`}>
+          <a href="#approche" onClick={() => setMobileMenu(false)}>Approche</a>
+          <a href="#offres" onClick={() => setMobileMenu(false)}>Prestations</a>
+          <a href="#exemples" onClick={() => setMobileMenu(false)}>Exemples</a>
+          <a href="#parcours" onClick={() => setMobileMenu(false)}>À propos</a>
+          <a href="#contact" className="button button-primary button-sm" onClick={() => setMobileMenu(false)}>Prendre contact</a>
+        </div>
       </div>
-    </header>
-  )
+    </nav>
+  );
 }
