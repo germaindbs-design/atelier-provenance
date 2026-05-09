@@ -385,7 +385,7 @@ export default function Page() {
               <div className="section-head">
                 <p className="eyebrow">Prestations</p>
                 <h2>
-                  Trois formules,
+                  Quatre formules,
                   <br />
                   <em>un même niveau d&apos;exigence.</em>
                 </h2>
@@ -395,109 +395,131 @@ export default function Page() {
                 </p>
               </div>
             </Reveal>
-            <div className="offers-grid">
-              {/* ── LOT DE 3 — point d'entrée ── */}
+            <div className="offers-grid offers-grid-4">
+
+              {/* ── BROCHURE 1–5 ── */}
               <Reveal delay={0}>
                 <div className="offer-card">
-                  <h3 className="offer-name">Lot de 3</h3>
-                  <p className="offer-price">450 €</p>
-                  <p className="offer-unit">point d&apos;entrée · livraison sous 7 jours</p>
+                  <h3 className="offer-name">Brochure</h3>
+                  <p className="offer-price">150 €</p>
+                  <p className="offer-unit">/ notice · 1 à 5 pièces · livraison sous 5 jours</p>
                   <p className="offer-desc">
-                    Pour découvrir le service sur un premier lot et mesurer
-                    concrètement ce que la rédaction change.
+                    Pour découvrir le service et mesurer concrètement
+                    ce que la rédaction change sur vos premières pièces.
                   </p>
                   <ul className="offer-features">
                     {[
-                      "3 notices complètes",
+                      "1 à 5 notices complètes",
+                      "Recherche & identification",
+                      "Analyse marché / comparables",
+                      "Toutes déclinaisons incluses",
+                      "Diffusion dans le catalogue Lila D'Algarve",
+                    ].map((f, j) => (
+                      <li key={j}><span className="check">✓</span> {f}</li>
+                    ))}
+                  </ul>
+                  <a href="#contact" className="button button-secondary offer-cta">
+                    Commencer
+                  </a>
+                </div>
+              </Reveal>
+
+              {/* ── LIVRET 6–10 — recommandé ── */}
+              <Reveal delay={80}>
+                <div className="offer-card offer-featured">
+                  <span className="offer-badge">Recommandé</span>
+                  <h3 className="offer-name">Livret</h3>
+                  <p className="offer-price">130 €</p>
+                  <p className="offer-unit">/ notice · 6 à 10 pièces · livraison sous 10 jours</p>
+                  <p className="offer-desc">
+                    Le bon équilibre entre volume et engagement. Assez de
+                    pièces pour que les résultats soient immédiatement visibles.
+                  </p>
+                  <ul className="offer-features">
+                    {[
+                      "6 à 10 notices complètes",
                       "Recherche & identification",
                       "Analyse marché / comparables",
                       "Toutes déclinaisons incluses",
                       "Cohérence éditoriale du lot",
-                      "Diffusion dans le catalogue Lila D'Algarve",
-                    ].map((f, j) => (
-                      <li key={j}>
-                        <span className="check">✓</span> {f}
-                      </li>
-                    ))}
-                  </ul>
-                  <a
-                    href="#contact"
-                    className="button button-secondary offer-cta"
-                  >
-                    Commencer par 3 notices
-                  </a>
-                </div>
-              </Reveal>
-
-              {/* ── LOT DE 10 — mis en avant ── */}
-              <Reveal delay={120}>
-                <div className="offer-card offer-featured">
-                  <span className="offer-badge">Recommandé</span>
-                  <h3 className="offer-name">Lot de 10</h3>
-                  <p className="offer-price">1 200 €</p>
-                  <p className="offer-unit">120 € / notice · livraison sous 10 jours</p>
-                  <p className="offer-desc">
-                    Pour les marchands et galeries qui veulent un catalogue
-                    cohérent, avec tarif préférentiel et direction éditoriale.
-                  </p>
-                  <ul className="offer-features">
-                    {[
-                      "10 notices complètes",
-                      "Recherche & identification",
-                      "Analyse marché / comparables",
-                      "Toutes déclinaisons incluses",
-                      "Alignement éditorial du catalogue",
                       "Interlocuteur unique",
                       "Diffusion dans le catalogue Lila D'Algarve",
                     ].map((f, j) => (
-                      <li key={j}>
-                        <span className="check">✓</span> {f}
-                      </li>
+                      <li key={j}><span className="check">✓</span> {f}</li>
                     ))}
                   </ul>
-                  <a
-                    href="#contact"
-                    className="button button-primary offer-cta"
-                  >
-                    Choisir ce lot
+                  <a href="#contact" className="button button-primary offer-cta">
+                    Choisir le Livret
                   </a>
                 </div>
               </Reveal>
 
-              {/* ── CATALOGUE SUR DEVIS ── */}
-              <Reveal delay={240}>
+              {/* ── RECUEIL 11–15 ── */}
+              <Reveal delay={160}>
                 <div className="offer-card">
-                  <h3 className="offer-name">Catalogue</h3>
-                  <p className="offer-price offer-price-devis">Sur devis</p>
-                  <p className="offer-unit">20 pièces ou plus · calendrier sur mesure</p>
+                  <h3 className="offer-name">Recueil</h3>
+                  <p className="offer-price">110 €</p>
+                  <p className="offer-unit">/ notice · 11 à 15 pièces · livraison sous 15 jours</p>
                   <p className="offer-desc">
-                    Pour un accompagnement complet — harmonisation du ton,
-                    direction éditoriale, positionnement prix sur l&apos;ensemble
-                    du catalogue.
+                    Pour les marchands avec un fonds à valoriser dans sa
+                    globalité. Direction éditoriale et cohérence d&apos;ensemble.
                   </p>
                   <ul className="offer-features">
                     {[
-                      "Notices complètes par pièce",
-                      "Harmonisation du ton éditorial",
-                      "Direction éditoriale",
-                      "Positionnement prix argumenté",
-                      "Calendrier et interlocuteur dédiés",
+                      "11 à 15 notices complètes",
+                      "Recherche & identification",
+                      "Analyse marché / comparables",
+                      "Toutes déclinaisons incluses",
+                      "Direction éditoriale du fonds",
+                      "Interlocuteur unique",
                       "Diffusion dans le catalogue Lila D'Algarve",
                     ].map((f, j) => (
-                      <li key={j}>
-                        <span className="check">✓</span> {f}
-                      </li>
+                      <li key={j}><span className="check">✓</span> {f}</li>
                     ))}
                   </ul>
-                  <a
-                    href="#contact"
-                    className="button button-secondary offer-cta"
-                  >
-                    Demander un devis
+                  <a href="#contact" className="button button-secondary offer-cta">
+                    Choisir le Recueil
+                  </a>
+                </div>
+              </Reveal>
+
+              {/* ── CATALOGUE 16–20 ── */}
+              <Reveal delay={240}>
+                <div className="offer-card">
+                  <h3 className="offer-name">Catalogue</h3>
+                  <p className="offer-price">100 €</p>
+                  <p className="offer-unit">/ notice · 16 à 20 pièces · livraison sous 20 jours</p>
+                  <p className="offer-desc">
+                    Pour les galeries. Un catalogue complet, cohérent,
+                    prêt à publier — sur toutes les plateformes.
+                  </p>
+                  <ul className="offer-features">
+                    {[
+                      "16 à 20 notices complètes",
+                      "Recherche & identification",
+                      "Analyse marché / comparables",
+                      "Toutes déclinaisons incluses",
+                      "Direction éditoriale complète",
+                      "Interlocuteur dédié",
+                      "Diffusion dans le catalogue Lila D'Algarve",
+                    ].map((f, j) => (
+                      <li key={j}><span className="check">✓</span> {f}</li>
+                    ))}
+                  </ul>
+                  <a href="#contact" className="button button-secondary offer-cta">
+                    Choisir le Catalogue
                   </a>
                 </div>
               </Reveal>
             </div>
+
+            {/* ── NOTE FONDS ── */}
+            <Reveal delay={100}>
+              <p className="offer-fonds-note">
+                Pour les fonds de plus de 20 pièces —{" "}
+                <a href="#contact" className="offer-fonds-link">nous contacter pour un devis sur mesure</a>
+              </p>
+            </Reveal>
 
             {/* ── LILA D'ALGARVE CALLOUT ── */}
             <Reveal delay={100}>
@@ -776,7 +798,7 @@ export default function Page() {
                 },
                 {
                   q: "Quel est le délai de livraison ?",
-                  a: "7 jours ouvrés pour un lot de 3, 10 jours pour un lot de 10. Les missions catalogue font l'objet d'un planning sur mesure.",
+                  a: "5 jours ouvrés pour une Brochure, 10 jours pour un Livret, 15 jours pour un Recueil, 20 jours pour un Catalogue. Au-delà de 20 pièces, le délai est défini sur mesure.",
                 },
                 {
                   q: "Travaillez-vous avec des particuliers ?",
