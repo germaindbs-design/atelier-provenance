@@ -79,64 +79,6 @@ export default function MentionsLegales() {
         </div>
       </main>
 
-      <style jsx global>{`
-        .legal-page {
-          background: #f6efe4;
-          min-height: 100vh;
-          padding: 80px 0 120px;
-        }
-        .legal-container {
-          max-width: 720px;
-        }
-        .legal-header {
-          margin-bottom: 56px;
-          padding-bottom: 32px;
-          border-bottom: 1px solid #dccbb7;
-        }
-        .legal-back {
-          font-family: Arial, sans-serif;
-          font-size: 0.78rem;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-          color: #c8956c;
-          text-decoration: none;
-          display: inline-block;
-          margin-bottom: 24px;
-          transition: color 0.2s;
-        }
-        .legal-back:hover { color: #1a1613; }
-        .legal-header h1 {
-          font-size: 2.2rem;
-          font-weight: 400;
-          color: #3a2519;
-          line-height: 1.2;
-          margin-top: 8px;
-        }
-        .legal-body { display: flex; flex-direction: column; gap: 40px; }
-        .legal-section h2 {
-          font-family: Arial, sans-serif;
-          font-size: 0.72rem;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          color: #c8956c;
-          margin-bottom: 16px;
-          padding-bottom: 8px;
-          border-bottom: 0.5px solid #dccbb7;
-        }
-        .legal-section p {
-          font-size: 0.95rem;
-          color: #5c4f3a;
-          line-height: 1.8;
-          margin-bottom: 10px;
-        }
-        .legal-section a {
-          color: #c8956c;
-          text-decoration: underline;
-          text-underline-offset: 3px;
-        }
-        .legal-section a:hover { color: #1a1613; }
-        .legal-section strong { color: #3a2519; font-weight: 600; }
-      `}</style>
     </>
   );
 }
