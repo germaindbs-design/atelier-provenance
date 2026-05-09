@@ -22,7 +22,7 @@ export default function CGV() {
                 à tout client professionnel ou particulier.
               </p>
               <p>
-                Les prestations consistent en la rédaction de notices expertes pour le mobilier
+                Les prestations consistent en la rédaction de notices expertes (Brochure, Livret, Recueil, Catalogue) pour le mobilier
                 de collection et les objets d&apos;art, incluant contexte historique, analyse de marché,
                 versions longue, courte et réseaux sociaux, et recommandation de prix argumentée.
               </p>
@@ -32,9 +32,11 @@ export default function CGV() {
               <h2>Article 2 — Tarifs et formules</h2>
               <p>Les tarifs en vigueur sont les suivants :</p>
               <ul className="legal-list">
-                <li><strong>Lot de 3 notices</strong> — 450 € TTC (150 € / notice)</li>
-                <li><strong>Lot de 10 notices</strong> — 1 200 € TTC (120 € / notice)</li>
-                <li><strong>Catalogue (20 pièces ou plus)</strong> — sur devis</li>
+                <li><strong>Brochure</strong> (1 à 5 notices) — 150 € TTC / notice</li>
+                <li><strong>Livret</strong> (6 à 10 notices) — 130 € TTC / notice</li>
+                <li><strong>Recueil</strong> (11 à 15 notices) — 110 € TTC / notice</li>
+                <li><strong>Catalogue</strong> (16 à 20 notices) — 100 € TTC / notice</li>
+                <li><strong>Fonds</strong> (plus de 20 notices) — sur devis</li>
               </ul>
               <p>
                 Les prix sont exprimés en euros toutes taxes comprises. En tant que
@@ -64,9 +66,11 @@ export default function CGV() {
             <section className="legal-section">
               <h2>Article 4 — Délais de livraison</h2>
               <ul className="legal-list">
-                <li>Lot de 3 notices : <strong>7 jours ouvrés</strong> à compter de la réception des éléments</li>
-                <li>Lot de 10 notices : <strong>10 jours ouvrés</strong> à compter de la réception des éléments</li>
-                <li>Catalogue : délai défini dans le devis</li>
+                <li>Brochure (1–5 notices) : <strong>5 jours ouvrés</strong></li>
+                <li>Livret (6–10 notices) : <strong>10 jours ouvrés</strong></li>
+                <li>Recueil (11–15 notices) : <strong>15 jours ouvrés</strong></li>
+                <li>Catalogue (16–20 notices) : <strong>20 jours ouvrés</strong></li>
+                <li>Fonds (plus de 20 notices) : délai défini dans le devis</li>
               </ul>
               <p>
                 Les délais courent à compter de la réception complète des éléments nécessaires
