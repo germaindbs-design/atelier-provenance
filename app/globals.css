@@ -1042,8 +1042,25 @@ h2 em {
   align-items: flex-end;
   gap: 4px;
 }
-.footer-email,
-.footer-phone {
+.footer-legal-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+.footer-legal {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.72rem;
+  color: #5c4f3a;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.3s;
+}
+.footer-legal:hover { color: #c8956c; }
+.footer-legal-sep {
+  font-size: 0.72rem;
+  color: #3a2519;
+}
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.78rem;
   color: #5c4f3a;
