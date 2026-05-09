@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -26,7 +25,15 @@ function useScrollReveal() {
 }
 
 /* ───────────────────────── COMPOSANT REVEAL ───────────────────────── */
-function Reveal({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+function Reveal({
+  children,
+  delay = 0,
+  className = "",
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) {
   const { ref, isVisible } = useScrollReveal();
   return (
     <div
@@ -38,7 +45,6 @@ function Reveal({ children, delay = 0, className = "" }: { children: React.React
     </div>
   );
 }
-
 
 /* ───────────────────────── PAGE ───────────────────────── */
 export default function Page() {
@@ -70,8 +76,10 @@ export default function Page() {
   }, []);
 
   const [touched, setTouched] = useState<Record<string, boolean>>({});
-  const markTouched = (field: string) => setTouched((prev) => ({ ...prev, [field]: true }));
-  const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const markTouched = (field: string) =>
+    setTouched((prev) => ({ ...prev, [field]: true }));
+  const isValidEmail = (email: string) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -79,9 +87,24 @@ export default function Page() {
       "Demande — " + (formData.name || "Nouveau prospect")
     );
     const body = encodeURIComponent(
-      "Nom : " + formData.name + "\nEmail : " + formData.email + "\nTéléphone : " + formData.phone + "\nPlateforme : " + formData.platform + "\nNombre de pièces : " + formData.pieces + "\n\nMessage :\n" + formData.message
+      "Nom : " +
+        formData.name +
+        "\nEmail : " +
+        formData.email +
+        "\nTéléphone : " +
+        formData.phone +
+        "\nPlateforme : " +
+        formData.platform +
+        "\nNombre de pièces : " +
+        formData.pieces +
+        "\n\nMessage :\n" +
+        formData.message
     );
-    window.location.href = "mailto:contact.atelierprovenance@gmail.com?subject=" + subject + "&body=" + body;
+    window.location.href =
+      "mailto:contact.atelierprovenance@gmail.com?subject=" +
+      subject +
+      "&body=" +
+      body;
     setFormStatus("sent");
   };
 
@@ -90,16 +113,36 @@ export default function Page() {
       {/* ═══════════════════════ NAVBAR ═══════════════════════ */}
       <nav className={`nav ${scrolled ? "nav-scrolled" : ""}`}>
         <div className="container nav-inner">
-          <a href="#" className="nav-logo">Atelier Provenance</a>
-          <button className="mobile-toggle" onClick={() => setMobileMenu(!mobileMenu)} aria-label="Menu">
+          <a href="#" className="nav-logo">
+            Atelier Provenance
+          </a>
+          <button
+            className="mobile-toggle"
+            onClick={() => setMobileMenu(!mobileMenu)}
+            aria-label="Menu"
+          >
             {mobileMenu ? "✕" : "☰"}
           </button>
           <div className={`nav-links ${mobileMenu ? "nav-open" : ""}`}>
-            <a href="#approche" onClick={() => setMobileMenu(false)}>Approche</a>
-            <a href="#offres" onClick={() => setMobileMenu(false)}>Prestations</a>
-            <a href="#exemples" onClick={() => setMobileMenu(false)}>Exemples</a>
-            <a href="#parcours" onClick={() => setMobileMenu(false)}>À propos</a>
-            <a href="#contact" className="button button-primary button-sm" onClick={() => setMobileMenu(false)}>Prendre contact</a>
+            <a href="#approche" onClick={() => setMobileMenu(false)}>
+              Approche
+            </a>
+            <a href="#offres" onClick={() => setMobileMenu(false)}>
+              Prestations
+            </a>
+            <a href="#exemples" onClick={() => setMobileMenu(false)}>
+              Exemples
+            </a>
+            <a href="#parcours" onClick={() => setMobileMenu(false)}>
+              À propos
+            </a>
+            <a
+              href="#contact"
+              className="button button-primary button-sm"
+              onClick={() => setMobileMenu(false)}
+            >
+              Prendre contact
+            </a>
           </div>
         </div>
       </nav>
@@ -107,23 +150,40 @@ export default function Page() {
       <main>
         {/* ═══════════════════════ HERO ═══════════════════════ */}
         <section className="hero">
-          <div className="hero-bg" style={{ transform: `translateY(${heroOffset}px)` }} />
+          <div
+            className="hero-bg"
+            style={{ transform: `translateY(${heroOffset}px)` }}
+          />
           <div className="hero-grain" />
           <div className="container hero-grid">
             <Reveal>
               <div>
                 <p className="eyebrow">Atelier Provenance</p>
-                <h1>Vos pièces ont une valeur.<br /><em>Il reste à la rendre lisible.</em></h1>
+                <h1>
+                  Vos pièces ont une valeur.
+                  <br />
+                  <em>Il reste à la rendre lisible.</em>
+                </h1>
                 <p className="intro">
-                  Rédaction de notices pour le mobilier de collection et les objets d&apos;art.
-                  Chaque texte est construit pour soutenir le prix, clarifier l&apos;objet et le
-                  rendre véritablement désirable — pas seulement visible.
+                  Rédaction de notices pour le mobilier de collection et les
+                  objets d&apos;art. Chaque texte est construit pour soutenir le
+                  prix, clarifier l&apos;objet et le rendre véritablement
+                  désirable — pas seulement visible.
                 </p>
                 <div className="actions">
-                  <a href="#contact" className="button button-primary button-arrow">Envoyer un objet à analyser</a>
-                  <a href="#offres" className="button button-secondary">Voir les prestations</a>
+                  <a
+                    href="#contact"
+                    className="button button-primary button-arrow"
+                  >
+                    Envoyer un objet à analyser
+                  </a>
+                  <a href="#offres" className="button button-secondary">
+                    Voir les prestations
+                  </a>
                 </div>
-                <p className="hero-free">Première notice offerte, sans engagement.</p>
+                <p className="hero-free">
+                  Première notice offerte, sans engagement.
+                </p>
               </div>
             </Reveal>
             <Reveal delay={200}>
@@ -131,11 +191,26 @@ export default function Page() {
                 <div className="hero-card">
                   <p className="hero-label">En bref</p>
                   <ul className="hero-list">
-                    <li><span className="list-icon">◆</span> Analyse du marché et du positionnement prix</li>
-                    <li><span className="list-icon">◆</span> Vocabulaire juste, ton adapté à votre clientèle</li>
-                    <li><span className="list-icon">◆</span> Formats prêts à publier sur tous vos canaux</li>
-                    <li><span className="list-icon">◆</span> Livraison sous 5 jours ouvrés</li>
-                    <li><span className="list-icon">◆</span> Première notice offerte</li>
+                    <li>
+                      <span className="list-icon">◆</span> Analyse du marché et
+                      du positionnement prix
+                    </li>
+                    <li>
+                      <span className="list-icon">◆</span> Vocabulaire juste,
+                      ton adapté à votre clientèle
+                    </li>
+                    <li>
+                      <span className="list-icon">◆</span> Formats prêts à
+                      publier sur tous vos canaux
+                    </li>
+                    <li>
+                      <span className="list-icon">◆</span> Livraison sous 5
+                      jours ouvrés
+                    </li>
+                    <li>
+                      <span className="list-icon">◆</span> Première notice
+                      offerte
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -149,16 +224,21 @@ export default function Page() {
             <Reveal>
               <div>
                 <p className="eyebrow">Le constat</p>
-                <h2>La plupart des annonces ne sont pas à la hauteur des pièces qu&apos;elles présentent.</h2>
+                <h2>
+                  La plupart des annonces ne sont pas à la hauteur des pièces
+                  qu&apos;elles présentent.
+                </h2>
                 <p>
-                  Sur Selency, Proantic, Leboncoin ou Catawiki, des milliers d&apos;objets de qualité
-                  restent en ligne pendant des semaines. Pas parce qu&apos;ils manquent de valeur,
-                  mais parce que rien dans leur présentation ne permet à l&apos;acheteur de comprendre
-                  cette valeur.
+                  Sur Selency, Proantic, Leboncoin ou Catawiki, des milliers
+                  d&apos;objets de qualité restent en ligne pendant des semaines.
+                  Pas parce qu&apos;ils manquent de valeur, mais parce que rien dans
+                  leur présentation ne permet à l&apos;acheteur de comprendre cette
+                  valeur.
                 </p>
                 <p>
-                  Descriptions en deux lignes. Vocabulaire approximatif. Aucun contexte historique.
-                  Le prix semble arbitraire. L&apos;acheteur hésite, puis passe à autre chose.
+                  Descriptions en deux lignes. Vocabulaire approximatif. Aucun
+                  contexte historique. Le prix semble arbitraire. L&apos;acheteur
+                  hésite, puis passe à autre chose.
                 </p>
               </div>
             </Reveal>
@@ -167,15 +247,21 @@ export default function Page() {
                 <div className="stat-grid">
                   <div className="stat-card">
                     <p className="stat-number">70 %</p>
-                    <p className="stat-label">des annonces haut de gamme sans contexte historique</p>
+                    <p className="stat-label">
+                      des annonces haut de gamme sans contexte historique
+                    </p>
                   </div>
                   <div className="stat-card">
                     <p className="stat-number">3×</p>
-                    <p className="stat-label">plus de vues avec une description structurée</p>
+                    <p className="stat-label">
+                      plus de vues avec une description structurée
+                    </p>
                   </div>
                   <div className="stat-card">
                     <p className="stat-number">45 j.</p>
-                    <p className="stat-label">durée moyenne de vente sans texte optimisé</p>
+                    <p className="stat-label">
+                      durée moyenne de vente sans texte optimisé
+                    </p>
                   </div>
                 </div>
               </div>
@@ -189,19 +275,36 @@ export default function Page() {
             <Reveal>
               <div className="section-head section-head-light">
                 <p className="eyebrow eyebrow-light">L&apos;approche</p>
-                <h2>Une notice n&apos;est pas une description.<br /><em>C&apos;est un argument de vente.</em></h2>
+                <h2>
+                  Une notice n&apos;est pas une description.
+                  <br />
+                  <em>C&apos;est un argument de vente.</em>
+                </h2>
                 <p className="section-intro section-intro-light">
-                  Décrire un meuble, tout le monde peut le faire. Donner à un acheteur les raisons
-                  précises de passer à l&apos;acte — c&apos;est un autre métier. Chaque texte est
-                  construit pour créer de la clarté, de la confiance, et du désir.
+                  Décrire un meuble, tout le monde peut le faire. Donner à un
+                  acheteur les raisons précises de passer à l&apos;acte — c&apos;est un
+                  autre métier. Chaque texte est construit pour créer de la
+                  clarté, de la confiance, et du désir.
                 </p>
               </div>
             </Reveal>
             <div className="pillars">
               {[
-                { num: "01", title: "Positionnement", desc: "Analyse du marché, comparables récents, cohérence entre le prix et le discours." },
-                { num: "02", title: "Précision", desc: "Vocabulaire technique juste — époque, style, matériaux, provenance. Pas d'à-peu-près." },
-                { num: "03", title: "Narration", desc: "Chaque pièce a une histoire. Le texte la rend lisible, mémorable, désirable." },
+                {
+                  num: "01",
+                  title: "Positionnement",
+                  desc: "Analyse du marché, comparables récents, cohérence entre le prix et le discours.",
+                },
+                {
+                  num: "02",
+                  title: "Précision",
+                  desc: "Vocabulaire technique juste — époque, style, matériaux, provenance. Pas d'à-peu-près.",
+                },
+                {
+                  num: "03",
+                  title: "Narration",
+                  desc: "Chaque pièce a une histoire. Le texte la rend lisible, mémorable, désirable.",
+                },
               ].map((p, i) => (
                 <Reveal key={i} delay={i * 120}>
                   <div className="pillar-card">
@@ -221,7 +324,11 @@ export default function Page() {
             <Reveal>
               <div>
                 <p className="eyebrow">Fonctionnement</p>
-                <h2>Un processus simple,<br /><em>un résultat précis.</em></h2>
+                <h2>
+                  Un processus simple,
+                  <br />
+                  <em>un résultat précis.</em>
+                </h2>
                 <p>
                   Chaque mission suit le même protocole — parce que la rigueur
                   est ce qui sépare un bon texte d&apos;un texte à peu près.
@@ -231,15 +338,34 @@ export default function Page() {
             <div>
               <div className="process-steps">
                 {[
-                  { num: "01", title: "Réception", desc: "Photos, contexte, prix envisagé — vous envoyez, nous analysons." },
-                  { num: "02", title: "Recherche", desc: "Comparables, historique, provenance." },
-                  { num: "03", title: "Rédaction", desc: "Texte structuré, vocabulaire précis, ton adapté." },
-                  { num: "04", title: "Déclinaison", desc: "Notice longue, version courte, version réseaux." },
+                  {
+                    num: "01",
+                    title: "Réception",
+                    desc: "Photos, contexte, prix envisagé — vous envoyez, nous analysons.",
+                  },
+                  {
+                    num: "02",
+                    title: "Recherche",
+                    desc: "Comparables, historique, provenance.",
+                  },
+                  {
+                    num: "03",
+                    title: "Rédaction",
+                    desc: "Texte structuré, vocabulaire précis, ton adapté.",
+                  },
+                  {
+                    num: "04",
+                    title: "Déclinaison",
+                    desc: "Notice longue, version courte, version réseaux.",
+                  },
                 ].map((s, i) => (
                   <Reveal key={i} delay={i * 100}>
                     <div className="process-step">
                       <span className="step-num">{s.num}</span>
-                      <div><h4>{s.title}</h4><p>{s.desc}</p></div>
+                      <div>
+                        <h4>{s.title}</h4>
+                        <p>{s.desc}</p>
+                      </div>
                     </div>
                   </Reveal>
                 ))}
@@ -254,56 +380,146 @@ export default function Page() {
             <Reveal>
               <div className="section-head">
                 <p className="eyebrow">Prestations</p>
-                <h2>Trois formules,<br /><em>un même niveau d&apos;exigence.</em></h2>
+                <h2>
+                  Trois formules,
+                  <br />
+                  <em>un même niveau d&apos;exigence.</em>
+                </h2>
+                <p className="section-intro">
+                  Chaque formule inclut la recherche, la rédaction et toutes les
+                  déclinaisons nécessaires. Pas de supplément caché.
+                </p>
               </div>
             </Reveal>
             <div className="offers-grid">
-              {[
-                {
-                  name: "Essentiel",
-                  price: "45 €",
-                  unit: "par pièce",
-                  desc: "Pour les pièces courantes qui méritent mieux qu'une description de trois lignes.",
-                  features: ["Notice rédigée (≈ 150 mots)", "Vocabulaire technique vérifié", "1 format prêt à publier", "Livraison 5 jours ouvrés"],
-                  cta: "Choisir Essentiel",
-                },
-                {
-                  name: "Signature",
-                  price: "90 €",
-                  unit: "par pièce",
-                  desc: "Pour les pièces qui justifient un argumentaire complet et structuré.",
-                  features: ["Notice développée (≈ 300 mots)", "Recherche de comparables", "Contexte historique et stylistique", "2 formats (annonce + fiche)", "Livraison 5 jours ouvrés"],
-                  cta: "Choisir Signature",
-                  featured: true,
-                },
-                {
-                  name: "Catalogue",
-                  price: "Sur devis",
-                  unit: "à partir de 10 pièces",
-                  desc: "Pour les marchands et galeries qui veulent un ensemble cohérent.",
-                  features: ["Notices complètes par pièce", "Ligne éditoriale unifiée", "Formats multiples par pièce", "Tarif dégressif", "Interlocuteur unique"],
-                  cta: "Demander un devis",
-                },
-              ].map((offer, i) => (
-                <Reveal key={i} delay={i * 120}>
-                  <div className={`offer-card ${offer.featured ? "offer-featured" : ""}`}>
-                    {offer.featured && <span className="offer-badge">Recommandé</span>}
-                    <h3 className="offer-name">{offer.name}</h3>
-                    <p className="offer-price">{offer.price}</p>
-                    <p className="offer-unit">{offer.unit}</p>
-                    <p className="offer-desc">{offer.desc}</p>
-                    <ul className="offer-features">
-                      {offer.features.map((f, j) => (
-                        <li key={j}><span className="check">✓</span> {f}</li>
-                      ))}
-                    </ul>
-                    <a href="#contact" className={`button offer-cta ${offer.featured ? "button-primary" : "button-secondary"}`}>
-                      {offer.cta}
-                    </a>
-                  </div>
-                </Reveal>
-              ))}
+              {/* ── LOT DE 3 — point d'entrée ── */}
+              <Reveal delay={0}>
+                <div className="offer-card">
+                  <h3 className="offer-name">Lot de 3</h3>
+                  <p className="offer-price">450 €</p>
+                  <p className="offer-unit">point d&apos;entrée · livraison sous 7 jours</p>
+                  <p className="offer-desc">
+                    Pour découvrir le service sur un premier lot et mesurer
+                    concrètement ce que la rédaction change.
+                  </p>
+                  <ul className="offer-features">
+                    {[
+                      "3 notices complètes",
+                      "Recherche & identification",
+                      "Analyse marché / comparables",
+                      "Toutes déclinaisons incluses",
+                      "Cohérence éditoriale du lot",
+                      "Diffusion dans le catalogue Lila D'Algarve",
+                    ].map((f, j) => (
+                      <li key={j}>
+                        <span className="check">✓</span> {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href="#contact"
+                    className="button button-secondary offer-cta"
+                  >
+                    Commencer par 3 notices
+                  </a>
+                </div>
+              </Reveal>
+
+              {/* ── LOT DE 10 — mis en avant ── */}
+              <Reveal delay={120}>
+                <div className="offer-card offer-featured">
+                  <span className="offer-badge">Recommandé</span>
+                  <h3 className="offer-name">Lot de 10</h3>
+                  <p className="offer-price">1 200 €</p>
+                  <p className="offer-unit">120 € / notice · livraison sous 10 jours</p>
+                  <p className="offer-desc">
+                    Pour les marchands et galeries qui veulent un catalogue
+                    cohérent, avec tarif préférentiel et direction éditoriale.
+                  </p>
+                  <ul className="offer-features">
+                    {[
+                      "10 notices complètes",
+                      "Recherche & identification",
+                      "Analyse marché / comparables",
+                      "Toutes déclinaisons incluses",
+                      "Alignement éditorial du catalogue",
+                      "Interlocuteur unique",
+                      "Diffusion dans le catalogue Lila D'Algarve",
+                    ].map((f, j) => (
+                      <li key={j}>
+                        <span className="check">✓</span> {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href="#contact"
+                    className="button button-primary offer-cta"
+                  >
+                    Choisir ce lot
+                  </a>
+                </div>
+              </Reveal>
+
+              {/* ── CATALOGUE SUR DEVIS ── */}
+              <Reveal delay={240}>
+                <div className="offer-card">
+                  <h3 className="offer-name">Catalogue</h3>
+                  <p className="offer-price offer-price-devis">Sur devis</p>
+                  <p className="offer-unit">20 pièces ou plus · calendrier sur mesure</p>
+                  <p className="offer-desc">
+                    Pour un accompagnement complet — harmonisation du ton,
+                    direction éditoriale, positionnement prix sur l&apos;ensemble
+                    du catalogue.
+                  </p>
+                  <ul className="offer-features">
+                    {[
+                      "Notices complètes par pièce",
+                      "Harmonisation du ton éditorial",
+                      "Direction éditoriale",
+                      "Positionnement prix argumenté",
+                      "Calendrier et interlocuteur dédiés",
+                      "Diffusion dans le catalogue Lila D'Algarve",
+                    ].map((f, j) => (
+                      <li key={j}>
+                        <span className="check">✓</span> {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href="#contact"
+                    className="button button-secondary offer-cta"
+                  >
+                    Demander un devis
+                  </a>
+                </div>
+              </Reveal>
             </div>
+
+            {/* ── LILA D'ALGARVE CALLOUT ── */}
+            <Reveal delay={100}>
+              <div className="lda-banner">
+                <div className="lda-banner-inner">
+                  <div>
+                    <p className="lda-eyebrow">Inclus dans toutes les formules</p>
+                    <p className="lda-title">
+                      Chaque pièce rédigée est publiée dans{" "}
+                      <em>Lila D&apos;Algarve</em>
+                    </p>
+                    <p className="lda-desc">
+                      Notre catalogue éditorial diffuse vos notices auprès d&apos;une
+                      audience d&apos;acheteurs et de collectionneurs. Un canal de
+                      visibilité supplémentaire, sans démarche de votre part.
+                    </p>
+                  </div>
+                  <div className="lda-badge">
+                    <span className="lda-badge-icon">✦</span>
+                    <span className="lda-badge-text">Lila D&apos;Algarve</span>
+                    <span className="lda-badge-sub">Catalogue & réseaux</span>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+
             <Reveal delay={100}>
               <div className="offer-guarantee">
                 Première notice offerte — vous jugez sur pièce, sans engagement.
@@ -320,9 +536,9 @@ export default function Page() {
                 <p className="eyebrow">Exemples</p>
                 <h2>Trois cas, avant et après.</h2>
                 <p className="section-intro">
-                  Chaque exemple part d&apos;une annonce réelle trouvée en ligne et montre
-                  ce que la rédaction change — sur la lisibilité, la désirabilité,
-                  la cohérence avec le prix affiché.
+                  Chaque exemple part d&apos;une annonce réelle trouvée en ligne et
+                  montre ce que la rédaction change — sur la lisibilité, la
+                  désirabilité, la cohérence avec le prix affiché.
                 </p>
               </div>
             </Reveal>
@@ -330,18 +546,32 @@ export default function Page() {
             <div className="examples-stack">
               {/* EXEMPLE 1 */}
               <Reveal>
-                <article className={`case-study ${openExample === 0 ? "is-open" : ""}`}>
-                  <button className="case-toggle" onClick={() => setOpenExample(openExample === 0 ? null : 0)}>
+                <article
+                  className={`case-study ${openExample === 0 ? "is-open" : ""}`}
+                >
+                  <button
+                    className="case-toggle"
+                    onClick={() =>
+                      setOpenExample(openExample === 0 ? null : 0)
+                    }
+                  >
                     <div className="case-toggle-left">
-                      <p className="case-meta">Exemple 1 · Enfilade scandinave, circa 1960</p>
-                      <h3>Passer d&apos;une description plate à un texte qui justifie le prix.</h3>
+                      <p className="case-meta">
+                        Exemple 1 · Enfilade scandinave, circa 1960
+                      </p>
+                      <h3>
+                        Passer d&apos;une description plate à un texte qui justifie
+                        le prix.
+                      </h3>
                       <div className="case-specs">
                         <span>Prix affiché : 1 850 €</span>
                         <span>Teck · laiton · 200 cm</span>
                         <span>Plateforme : Selency</span>
                       </div>
                     </div>
-                    <div className="case-toggle-icon">{openExample === 0 ? "−" : "+"}</div>
+                    <div className="case-toggle-icon">
+                      {openExample === 0 ? "−" : "+"}
+                    </div>
                   </button>
                   {openExample === 0 && (
                     <div className="case-body">
@@ -358,17 +588,19 @@ export default function Page() {
                         <div className="text-panel after-panel">
                           <p className="panel-label">Après</p>
                           <p>
-                            Enfilade trois portes en teck massif, Scandinavie, circa 1960.
-                            Le travail des portes coulissantes — montées sur rail laiton
-                            d&apos;origine — témoigne d&apos;une fabrication soignée, probablement
-                            d&apos;atelier, avec assemblages à tenons visibles en bout de caisson.
+                            Enfilade trois portes en teck massif, Scandinavie,
+                            circa 1960. Le travail des portes coulissantes —
+                            montées sur rail laiton d&apos;origine — témoigne
+                            d&apos;une fabrication soignée, probablement d&apos;atelier,
+                            avec assemblages à tenons visibles en bout de
+                            caisson.
                           </p>
                           <p>
-                            Le teck a pris cette patine miel que seules les pièces
-                            correctement entretenues développent après six décennies.
-                            Piètement fuselé, lignes tendues, proportions justes :
-                            c&apos;est le vocabulaire d&apos;un design qui ne cherche pas l&apos;effet
-                            mais la justesse.
+                            Le teck a pris cette patine miel que seules les
+                            pièces correctement entretenues développent après
+                            six décennies. Piètement fuselé, lignes tendues,
+                            proportions justes : c&apos;est le vocabulaire d&apos;un
+                            design qui ne cherche pas l&apos;effet mais la justesse.
                           </p>
                           <p>L 200 × P 45 × H 82 cm · Scandinavie, circa 1960.</p>
                         </div>
@@ -376,9 +608,18 @@ export default function Page() {
                       <div className="case-analysis">
                         <p className="panel-label">Ce qui change</p>
                         <ul>
-                          <li>Le texte identifie des marqueurs de qualité précis (rail laiton, tenons, teck massif).</li>
-                          <li>La patine devient un argument de valeur, pas un défaut.</li>
-                          <li>Le vocabulaire positionne la pièce dans un segment « mobilier de collection ».</li>
+                          <li>
+                            Le texte identifie des marqueurs de qualité précis
+                            (rail laiton, tenons, teck massif).
+                          </li>
+                          <li>
+                            La patine devient un argument de valeur, pas un
+                            défaut.
+                          </li>
+                          <li>
+                            Le vocabulaire positionne la pièce dans un segment
+                            « mobilier de collection ».
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -388,18 +629,32 @@ export default function Page() {
 
               {/* EXEMPLE 2 */}
               <Reveal>
-                <article className={`case-study ${openExample === 1 ? "is-open" : ""}`}>
-                  <button className="case-toggle" onClick={() => setOpenExample(openExample === 1 ? null : 1)}>
+                <article
+                  className={`case-study ${openExample === 1 ? "is-open" : ""}`}
+                >
+                  <button
+                    className="case-toggle"
+                    onClick={() =>
+                      setOpenExample(openExample === 1 ? null : 1)
+                    }
+                  >
                     <div className="case-toggle-left">
-                      <p className="case-meta">Exemple 2 · Suite de 3 chaises, années 1950</p>
-                      <h3>Transformer un lot banal en ensemble cohérent et désirable.</h3>
+                      <p className="case-meta">
+                        Exemple 2 · Suite de 3 chaises, années 1950
+                      </p>
+                      <h3>
+                        Transformer un lot banal en ensemble cohérent et
+                        désirable.
+                      </h3>
                       <div className="case-specs">
                         <span>Prix affiché : 480 €</span>
                         <span>Métal laqué · velours vert</span>
                         <span>Plateforme : Selency</span>
                       </div>
                     </div>
-                    <div className="case-toggle-icon">{openExample === 1 ? "−" : "+"}</div>
+                    <div className="case-toggle-icon">
+                      {openExample === 1 ? "−" : "+"}
+                    </div>
                   </button>
                   {openExample === 1 && (
                     <div className="case-body">
@@ -415,16 +670,19 @@ export default function Page() {
                         <div className="text-panel after-panel">
                           <p className="panel-label">Après</p>
                           <p>
-                            Suite de trois chaises en métal laqué noir et velours vert amande,
-                            France, années 1950. L&apos;assise enveloppante et le dossier légèrement
-                            incurvé évoquent les productions des ateliers français d&apos;après-guerre,
-                            où le confort domestique commençait à dialoguer avec les formes
-                            industrielles.
+                            Suite de trois chaises en métal laqué noir et
+                            velours vert amande, France, années 1950.
+                            L&apos;assise enveloppante et le dossier légèrement
+                            incurvé évoquent les productions des ateliers
+                            français d&apos;après-guerre, où le confort domestique
+                            commençait à dialoguer avec les formes industrielles.
                           </p>
                           <p>
-                            Le velours a été nettoyé — il conserve un tombé souple et une teinte
-                            cohérente. La structure métallique porte quelques traces d&apos;usage qui
-                            ne compromettent ni la stabilité ni l&apos;élégance d&apos;ensemble.
+                            Le velours a été nettoyé — il conserve un tombé
+                            souple et une teinte cohérente. La structure
+                            métallique porte quelques traces d&apos;usage qui ne
+                            compromettent ni la stabilité ni l&apos;élégance
+                            d&apos;ensemble.
                           </p>
                           <p>H 83 × L 60 × P 53 cm · France, années 1950.</p>
                         </div>
@@ -432,9 +690,18 @@ export default function Page() {
                       <div className="case-analysis">
                         <p className="panel-label">Ce qui change</p>
                         <ul>
-                          <li>L&apos;usure devient un argument (patine, vécu, caractère) au lieu d&apos;un défaut à excuser.</li>
-                          <li>La datation et l&apos;origine sont précisées — elles justifient le prix.</li>
-                          <li>Le texte s&apos;adresse à un acheteur qui cherche de l&apos;authenticité, pas du neuf.</li>
+                          <li>
+                            L&apos;usure devient un argument (patine, vécu,
+                            caractère) au lieu d&apos;un défaut à excuser.
+                          </li>
+                          <li>
+                            La datation et l&apos;origine sont précisées — elles
+                            justifient le prix.
+                          </li>
+                          <li>
+                            Le texte s&apos;adresse à un acheteur qui cherche de
+                            l&apos;authenticité, pas du neuf.
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -444,18 +711,31 @@ export default function Page() {
 
               {/* EXEMPLE 3 */}
               <Reveal>
-                <article className={`case-study ${openExample === 2 ? "is-open" : ""}`}>
-                  <button className="case-toggle" onClick={() => setOpenExample(openExample === 2 ? null : 2)}>
+                <article
+                  className={`case-study ${openExample === 2 ? "is-open" : ""}`}
+                >
+                  <button
+                    className="case-toggle"
+                    onClick={() =>
+                      setOpenExample(openExample === 2 ? null : 2)
+                    }
+                  >
                     <div className="case-toggle-left">
-                      <p className="case-meta">Exemple 3 · Bureau ministre Art déco, circa 1935</p>
-                      <h3>Donner à une pièce de caractère le texte qu&apos;elle mérite.</h3>
+                      <p className="case-meta">
+                        Exemple 3 · Bureau ministre Art déco, circa 1935
+                      </p>
+                      <h3>
+                        Donner à une pièce de caractère le texte qu&apos;elle mérite.
+                      </h3>
                       <div className="case-specs">
                         <span>Prix affiché : 2 400 €</span>
                         <span>Palissandre · laiton</span>
                         <span>Plateforme : Proantic</span>
                       </div>
                     </div>
-                    <div className="case-toggle-icon">{openExample === 2 ? "−" : "+"}</div>
+                    <div className="case-toggle-icon">
+                      {openExample === 2 ? "−" : "+"}
+                    </div>
                   </button>
                   {openExample === 2 && (
                     <div className="case-body">
@@ -464,26 +744,34 @@ export default function Page() {
                           <p className="panel-label">Avant</p>
                           <p>
                             Bureau Art déco en palissandre, 4 tiroirs, poignées
-                            laiton. Restauré. Bon état général. H 78 × L 140 × P 72 cm.
-                            Années 1930.
+                            laiton. Restauré. Bon état général. H 78 × L 140 ×
+                            P 72 cm. Années 1930.
                           </p>
                         </div>
                         <div className="text-panel after-panel">
                           <p className="panel-label">Après — format court</p>
-                          <p className="panel-sublabel">Adapté à Proantic ou Drouot Digital</p>
-                          <h4>Bureau ministre Art déco, circa 1935 — placage palissandre, poignées laiton d&apos;origine</h4>
+                          <p className="panel-sublabel">
+                            Adapté à Proantic ou Drouot Digital
+                          </p>
+                          <h4>
+                            Bureau ministre Art déco, circa 1935 — placage
+                            palissandre, poignées laiton d&apos;origine
+                          </h4>
                           <p>
-                            Un bureau qui impose sa présence sans élever la voix. Le placage de
-                            palissandre déploie ses veinures sur un plateau généreux, encadré par
-                            des montants nets et une géométrie typiquement Art déco. Quatre tiroirs
-                            en façade, poignées en laiton d&apos;origine — chaque détail confirme la
-                            cohérence de la pièce.
+                            Un bureau qui impose sa présence sans élever la
+                            voix. Le placage de palissandre déploie ses veinures
+                            sur un plateau généreux, encadré par des montants
+                            nets et une géométrie typiquement Art déco. Quatre
+                            tiroirs en façade, poignées en laiton d&apos;origine —
+                            chaque détail confirme la cohérence de la pièce.
                           </p>
                           <p>
-                            La restauration a été menée avec discernement : stabilité structurelle
-                            assurée, patine du bois préservée, quincaillerie intacte. C&apos;est un
-                            meuble de travail autant qu&apos;un meuble de caractère — le genre de
-                            pièce qui compose un intérieur comme on écrit une phrase.
+                            La restauration a été menée avec discernement :
+                            stabilité structurelle assurée, patine du bois
+                            préservée, quincaillerie intacte. C&apos;est un meuble
+                            de travail autant qu&apos;un meuble de caractère — le
+                            genre de pièce qui compose un intérieur comme on
+                            écrit une phrase.
                           </p>
                           <p>H 78 × L 140 × P 72 cm · France, circa 1935.</p>
                         </div>
@@ -491,9 +779,18 @@ export default function Page() {
                       <div className="case-analysis">
                         <p className="panel-label">Ce qui change</p>
                         <ul>
-                          <li>Le format court est pensé pour les plateformes spécialisées — dense, précis, sans remplissage.</li>
-                          <li>La restauration est valorisée comme un signe de soin, pas comme un aveu de faiblesse.</li>
-                          <li>Le texte installe une image mentale — « le genre de pièce qui compose un intérieur ».</li>
+                          <li>
+                            Le format court est pensé pour les plateformes
+                            spécialisées — dense, précis, sans remplissage.
+                          </li>
+                          <li>
+                            La restauration est valorisée comme un signe de
+                            soin, pas comme un aveu de faiblesse.
+                          </li>
+                          <li>
+                            Le texte installe une image mentale — « le genre de
+                            pièce qui compose un intérieur ».
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -510,18 +807,22 @@ export default function Page() {
             <Reveal>
               <div>
                 <p className="eyebrow">À propos</p>
-                <h2>Un regard formé aux textes,<br /><em>exercé sur les objets.</em></h2>
+                <h2>
+                  Un regard formé aux textes,
+                  <br />
+                  <em>exercé sur les objets.</em>
+                </h2>
                 <p>
-                  Atelier Provenance est né d&apos;un double parcours : l&apos;enseignement
-                  des lettres et de la philosophie d&apos;abord, puis le marché de l&apos;art
-                  — comme marchand, comme rédacteur, comme observateur des mouvements
-                  de goût et de valeur.
+                  Atelier Provenance est né d&apos;un double parcours :
+                  l&apos;enseignement des lettres et de la philosophie d&apos;abord, puis
+                  le marché de l&apos;art — comme marchand, comme rédacteur, comme
+                  observateur des mouvements de goût et de valeur.
                 </p>
                 <p>
-                  Cette trajectoire n&apos;est pas un détour. C&apos;est elle qui permet de
-                  lire un objet comme on lit un texte : en cherchant ce qui fait sens,
-                  ce qui justifie l&apos;attention, ce qui mérite d&apos;être dit — et dans
-                  quel ordre.
+                  Cette trajectoire n&apos;est pas un détour. C&apos;est elle qui permet
+                  de lire un objet comme on lit un texte : en cherchant ce qui
+                  fait sens, ce qui justifie l&apos;attention, ce qui mérite d&apos;être
+                  dit — et dans quel ordre.
                 </p>
                 <p>
                   Chaque mission est traitée personnellement, sans délégation ni
@@ -534,15 +835,24 @@ export default function Page() {
                 <div className="about-cards">
                   <div className="about-card">
                     <h4>Lettres &amp; philosophie</h4>
-                    <p>Ancien professeur. Le travail sur la langue et la précision du vocabulaire vient de là.</p>
+                    <p>
+                      Ancien professeur. Le travail sur la langue et la
+                      précision du vocabulaire vient de là.
+                    </p>
                   </div>
                   <div className="about-card">
                     <h4>Marché de l&apos;art</h4>
-                    <p>Marchand, acheteur, rédacteur. Une connaissance concrète des objets et de leur circulation.</p>
+                    <p>
+                      Marchand, acheteur, rédacteur. Une connaissance concrète
+                      des objets et de leur circulation.
+                    </p>
                   </div>
                   <div className="about-card">
                     <h4>Rédaction spécialisée</h4>
-                    <p>Notices, fiches, catalogues. Chaque format a ses règles — et ses exigences.</p>
+                    <p>
+                      Notices, fiches, catalogues. Chaque format a ses règles —
+                      et ses exigences.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -561,18 +871,45 @@ export default function Page() {
             </Reveal>
             <div className="faq-list">
               {[
-                { q: "La première notice est vraiment gratuite ?", a: "Oui. Vous envoyez les photos et les informations, nous rédigeons la notice. Si le résultat vous convient, nous continuons. Sinon, vous gardez le texte — sans contrepartie." },
-                { q: "Quels types d'objets acceptez-vous ?", a: "Mobilier ancien et vintage, objets d'art, luminaires, céramiques, pièces de design. Si l'objet a une valeur à défendre, nous pouvons écrire dessus." },
-                { q: "Quel est le délai de livraison ?", a: "5 jours ouvrés pour les formules Essentiel et Signature. Les missions Catalogue font l'objet d'un planning sur mesure." },
-                { q: "Travaillez-vous avec des particuliers ?", a: "Principalement avec des professionnels — marchands, galeristes, antiquaires, maisons de vente. Mais un particulier qui vend une pièce de qualité est le bienvenu." },
+                {
+                  q: "La première notice est vraiment gratuite ?",
+                  a: "Oui. Vous envoyez les photos et les informations, nous rédigeons la notice. Si le résultat vous convient, nous continuons. Sinon, vous gardez le texte — sans contrepartie.",
+                },
+                {
+                  q: "Que comprend exactement une notice ?",
+                  a: "Chaque notice inclut la recherche (identification, comparables, contexte historique), la rédaction principale et trois déclinaisons : version longue pour les plateformes spécialisées, version courte pour les annonces généralistes, version adaptée aux réseaux sociaux.",
+                },
+                {
+                  q: "Qu'est-ce que le catalogue Lila D'Algarve ?",
+                  a: "Lila D'Algarve est notre catalogue éditorial — un espace où nous diffusons les pièces rédigées auprès d'une audience d'acheteurs et de collectionneurs. Chaque notice publiée y est référencée, vous offrant un canal de visibilité supplémentaire sans démarche de votre part.",
+                },
+                {
+                  q: "Quels types d'objets acceptez-vous ?",
+                  a: "Mobilier ancien et vintage, objets d'art, luminaires, céramiques, pièces de design. Si l'objet a une valeur à défendre, nous pouvons écrire dessus.",
+                },
+                {
+                  q: "Quel est le délai de livraison ?",
+                  a: "7 jours ouvrés pour un lot de 3, 10 jours pour un lot de 10. Les missions catalogue font l'objet d'un planning sur mesure.",
+                },
+                {
+                  q: "Travaillez-vous avec des particuliers ?",
+                  a: "Principalement avec des professionnels — marchands, galeristes, antiquaires, maisons de vente. Mais un particulier qui vend une pièce de qualité est le bienvenu.",
+                },
               ].map((item, i) => (
-                <Reveal key={i} delay={i * 80}>
-                  <div className="faq-item" key={i}>
-                    <button className="faq-toggle" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
+                <Reveal key={i} delay={i * 60}>
+                  <div className="faq-item">
+                    <button
+                      className="faq-toggle"
+                      onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                    >
                       <span>{item.q}</span>
                       <span className="faq-icon">{openFaq === i ? "−" : "+"}</span>
                     </button>
-                    {openFaq === i && <div className="faq-answer"><p>{item.a}</p></div>}
+                    {openFaq === i && (
+                      <div className="faq-answer">
+                        <p>{item.a}</p>
+                      </div>
+                    )}
                   </div>
                 </Reveal>
               ))}
@@ -586,14 +923,22 @@ export default function Page() {
             <Reveal>
               <div>
                 <p className="eyebrow eyebrow-light">Contact</p>
-                <h2>Un objet suffit<br /><em>pour commencer.</em></h2>
+                <h2>
+                  Un objet suffit
+                  <br />
+                  <em>pour commencer.</em>
+                </h2>
                 <p>
-                  Envoyez-nous les photos et quelques informations sur votre pièce —
-                  période, matière, état, prix envisagé. Nous vous répondons sous
-                  48 heures avec la notice rédigée, gratuitement et sans engagement.
+                  Envoyez-nous les photos et quelques informations sur votre
+                  pièce — période, matière, état, prix envisagé. Nous vous
+                  répondons sous 48 heures avec la notice rédigée, gratuitement
+                  et sans engagement.
                 </p>
                 <div className="contact-methods">
-                  <a href="mailto:contact.atelierprovenance@gmail.com" className="contact-method">
+                  <a
+                    href="mailto:contact.atelierprovenance@gmail.com"
+                    className="contact-method"
+                  >
                     <span className="contact-icon">✉</span>
                     <span>contact.atelierprovenance@gmail.com</span>
                   </a>
@@ -610,7 +955,11 @@ export default function Page() {
                   <div className="form-success">
                     <div className="form-success-icon">✓</div>
                     <h3>Message préparé.</h3>
-                    <p>Votre client email s&apos;est ouvert avec les informations pré-remplies. Si ce n&apos;est pas le cas, écrivez-nous directement à contact.atelierprovenance@gmail.com</p>
+                    <p>
+                      Votre client email s&apos;est ouvert avec les informations
+                      pré-remplies. Si ce n&apos;est pas le cas, écrivez-nous
+                      directement à contact.atelierprovenance@gmail.com
+                    </p>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="contact-form">
@@ -623,9 +972,17 @@ export default function Page() {
                           required
                           placeholder="Votre nom"
                           value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          onChange={(e) =>
+                            setFormData({ ...formData, name: e.target.value })
+                          }
                           onBlur={() => markTouched("name")}
-                          className={touched.name && formData.name.length > 0 ? "field-valid" : touched.name ? "field-invalid" : ""}
+                          className={
+                            touched.name && formData.name.length > 0
+                              ? "field-valid"
+                              : touched.name
+                              ? "field-invalid"
+                              : ""
+                          }
                         />
                       </div>
                       <div className="form-field">
@@ -636,9 +993,17 @@ export default function Page() {
                           required
                           placeholder="votre@email.com"
                           value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          onChange={(e) =>
+                            setFormData({ ...formData, email: e.target.value })
+                          }
                           onBlur={() => markTouched("email")}
-                          className={touched.email && isValidEmail(formData.email) ? "field-valid" : touched.email ? "field-invalid" : ""}
+                          className={
+                            touched.email && isValidEmail(formData.email)
+                              ? "field-valid"
+                              : touched.email
+                              ? "field-invalid"
+                              : ""
+                          }
                         />
                       </div>
                     </div>
@@ -650,7 +1015,9 @@ export default function Page() {
                           type="tel"
                           placeholder="06 00 00 00 00"
                           value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                          onChange={(e) =>
+                            setFormData({ ...formData, phone: e.target.value })
+                          }
                         />
                       </div>
                       <div className="form-field">
@@ -660,18 +1027,25 @@ export default function Page() {
                           type="text"
                           placeholder="Selency, Proantic, Leboncoin…"
                           value={formData.platform}
-                          onChange={(e) => setFormData({ ...formData, platform: e.target.value })}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              platform: e.target.value,
+                            })
+                          }
                         />
                       </div>
                     </div>
                     <div className="form-field">
-                      <label htmlFor="pieces">Nombre de pièces à rédiger</label>
+                      <label htmlFor="pieces">Nombre de pièces</label>
                       <input
                         id="pieces"
                         type="text"
-                        placeholder="3, 10, catalogue complet…"
+                        placeholder="1, 3, 10, catalogue complet…"
                         value={formData.pieces}
-                        onChange={(e) => setFormData({ ...formData, pieces: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, pieces: e.target.value })
+                        }
                       />
                     </div>
                     <div className="form-field">
@@ -682,12 +1056,25 @@ export default function Page() {
                         required
                         placeholder="Période, matière, état, prix envisagé…"
                         value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, message: e.target.value })
+                        }
                         onBlur={() => markTouched("message")}
-                        className={touched.message && formData.message.length > 0 ? "field-valid" : touched.message ? "field-invalid" : ""}
+                        className={
+                          touched.message && formData.message.length > 0
+                            ? "field-valid"
+                            : touched.message
+                            ? "field-invalid"
+                            : ""
+                        }
                       />
                     </div>
-                    <button type="submit" className="button button-primary button-arrow">Envoyer</button>
+                    <button
+                      type="submit"
+                      className="button button-primary button-arrow"
+                    >
+                      Envoyer
+                    </button>
                   </form>
                 )}
               </div>
@@ -701,19 +1088,40 @@ export default function Page() {
         <div className="container footer-inner">
           <div>
             <p className="footer-logo">Atelier Provenance</p>
-            <p className="footer-copy">© {new Date().getFullYear()} — Rédaction de mobilier de collection</p>
+            <p className="footer-copy">
+              © {new Date().getFullYear()} — Rédaction de mobilier de collection
+            </p>
+          </div>
+          <div className="footer-center">
+            <p className="footer-lda">
+              Un projet{" "}
+              <span className="footer-lda-name">Lila D&apos;Algarve</span>
+            </p>
           </div>
           <div className="footer-right">
-            <a href="mailto:contact.atelierprovenance@gmail.com" className="footer-email">contact.atelierprovenance@gmail.com</a>
-            <a href="tel:+33751420733" className="footer-phone">07 51 42 07 33</a>
+            <a
+              href="mailto:contact.atelierprovenance@gmail.com"
+              className="footer-email"
+            >
+              contact.atelierprovenance@gmail.com
+            </a>
+            <a href="tel:+33751420733" className="footer-phone">
+              07 51 42 07 33
+            </a>
           </div>
         </div>
       </footer>
 
       {/* ═══════════════════════ STYLES ═══════════════════════ */}
       <style jsx global>{`
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        html {
+          scroll-behavior: smooth;
+        }
         body {
           font-family: Georgia, "Times New Roman", Times, serif;
           color: #1a1613;
@@ -722,17 +1130,31 @@ export default function Page() {
           font-size: 16px;
           overflow-x: hidden;
         }
-        .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
-        .container-narrow { max-width: 780px; }
-        a { color: inherit; text-decoration: none; }
-        ul { list-style: none; }
-        em { font-style: italic; }
+        .container {
+          max-width: 1120px;
+          margin: 0 auto;
+          padding: 0 24px;
+        }
+        .container-narrow {
+          max-width: 780px;
+        }
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+        ul {
+          list-style: none;
+        }
+        em {
+          font-style: italic;
+        }
 
         /* ── SCROLL REVEAL ── */
         .reveal {
           opacity: 0;
           transform: translateY(32px);
-          transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+          transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+            transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .reveal-visible {
           opacity: 1;
@@ -757,15 +1179,25 @@ export default function Page() {
           padding: 14px 0;
           box-shadow: 0 1px 0 rgba(26, 22, 19, 0.08);
         }
-        .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+        .nav-inner {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
         .nav-logo {
           font-size: 1.15rem;
           letter-spacing: 0.04em;
           font-weight: 400;
           transition: opacity 0.3s;
         }
-        .nav-logo:hover { opacity: 0.7; }
-        .nav-links { display: flex; align-items: center; gap: 32px; }
+        .nav-logo:hover {
+          opacity: 0.7;
+        }
+        .nav-links {
+          display: flex;
+          align-items: center;
+          gap: 32px;
+        }
         .nav-links a {
           font-family: Arial, Helvetica, sans-serif;
           font-size: 0.78rem;
@@ -784,8 +1216,12 @@ export default function Page() {
           background: #c8956c;
           transition: width 0.3s ease;
         }
-        .nav-links a:not(.button):hover::after { width: 100%; }
-        .nav-links a:not(.button):hover { color: #c8956c; }
+        .nav-links a:not(.button):hover::after {
+          width: 100%;
+        }
+        .nav-links a:not(.button):hover {
+          color: #c8956c;
+        }
         .mobile-toggle {
           display: none;
           background: none;
@@ -795,7 +1231,9 @@ export default function Page() {
           color: #1a1613;
           transition: transform 0.3s;
         }
-        .mobile-toggle:hover { transform: scale(1.1); }
+        .mobile-toggle:hover {
+          transform: scale(1.1);
+        }
 
         /* ── BUTTONS ── */
         .button {
@@ -832,9 +1270,18 @@ export default function Page() {
           color: #f6efe4;
           transform: translateY(-1px);
         }
-        .button-sm { padding: 10px 20px; font-size: 0.75rem; }
-        .button-arrow::after { content: " →"; transition: transform 0.3s; display: inline-block; }
-        .button-arrow:hover::after { transform: translateX(4px); }
+        .button-sm {
+          padding: 10px 20px;
+          font-size: 0.75rem;
+        }
+        .button-arrow::after {
+          content: " →";
+          transition: transform 0.3s;
+          display: inline-block;
+        }
+        .button-arrow:hover::after {
+          transform: translateX(4px);
+        }
 
         /* ── HERO ── */
         .hero {
@@ -848,16 +1295,30 @@ export default function Page() {
           left: 0;
           right: 0;
           bottom: 0;
-          background:
-            radial-gradient(ellipse at 75% 20%, rgba(200, 149, 108, 0.15) 0%, transparent 60%),
-            radial-gradient(ellipse at 20% 80%, rgba(184, 122, 60, 0.08) 0%, transparent 50%),
-            radial-gradient(ellipse at 50% 50%, rgba(218, 175, 120, 0.06) 0%, transparent 70%);
+          background: radial-gradient(
+              ellipse at 75% 20%,
+              rgba(200, 149, 108, 0.15) 0%,
+              transparent 60%
+            ),
+            radial-gradient(
+              ellipse at 20% 80%,
+              rgba(184, 122, 60, 0.08) 0%,
+              transparent 50%
+            ),
+            radial-gradient(
+              ellipse at 50% 50%,
+              rgba(218, 175, 120, 0.06) 0%,
+              transparent 70%
+            );
           z-index: 0;
           will-change: transform;
         }
         .hero-grain {
           position: absolute;
-          top: 0; left: 0; right: 0; bottom: 0;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
           opacity: 0.03;
           background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
           z-index: 1;
@@ -878,7 +1339,9 @@ export default function Page() {
           margin-bottom: 24px;
           letter-spacing: -0.01em;
         }
-        .hero h1 em { color: #c8956c; }
+        .hero h1 em {
+          color: #c8956c;
+        }
         .eyebrow {
           font-family: Arial, Helvetica, sans-serif;
           font-size: 0.72rem;
@@ -888,9 +1351,20 @@ export default function Page() {
           margin-bottom: 16px;
           display: block;
         }
-        .eyebrow-light { color: #d4a574; }
-        .intro { font-size: 1.08rem; color: #5c4f3a; margin-bottom: 32px; }
-        .actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+        .eyebrow-light {
+          color: #d4a574;
+        }
+        .intro {
+          font-size: 1.08rem;
+          color: #5c4f3a;
+          margin-bottom: 32px;
+        }
+        .actions {
+          display: flex;
+          gap: 16px;
+          flex-wrap: wrap;
+          margin-bottom: 20px;
+        }
         .hero-free {
           font-family: Arial, Helvetica, sans-serif;
           font-size: 0.78rem;
@@ -904,7 +1378,9 @@ export default function Page() {
           padding: 36px 32px;
           transition: border-color 0.4s;
         }
-        .hero-card:hover { border-color: rgba(200, 149, 108, 0.45); }
+        .hero-card:hover {
+          border-color: rgba(200, 149, 108, 0.45);
+        }
         .hero-label {
           font-family: Arial, Helvetica, sans-serif;
           font-size: 0.68rem;
@@ -913,7 +1389,11 @@ export default function Page() {
           color: #b8854e;
           margin-bottom: 20px;
         }
-        .hero-list { display: flex; flex-direction: column; gap: 14px; }
+        .hero-list {
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+        }
         .hero-list li {
           font-size: 0.95rem;
           color: #3d3428;
@@ -921,35 +1401,85 @@ export default function Page() {
           align-items: flex-start;
           gap: 10px;
         }
-        .list-icon { color: #c8956c; font-size: 0.5rem; margin-top: 7px; flex-shrink: 0; }
+        .list-icon {
+          color: #c8956c;
+          font-size: 0.5rem;
+          margin-top: 7px;
+          flex-shrink: 0;
+        }
 
         /* ── SECTIONS ── */
-        .section { padding: 96px 0; }
-        .section-alt { background: #f0e6d6; }
-        .section-dark { background: #1a1613; color: #f6efe4; }
-        .border-top { border-top: 1px solid #dccbb7; }
-        .section-dark.border-top { border-top-color: rgba(255,255,255,0.08); }
-        .section-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
+        .section {
+          padding: 96px 0;
+        }
+        .section-alt {
+          background: #f0e6d6;
+        }
+        .section-dark {
+          background: #1a1613;
+          color: #f6efe4;
+        }
+        .border-top {
+          border-top: 1px solid #dccbb7;
+        }
+        .section-dark.border-top {
+          border-top-color: rgba(255, 255, 255, 0.08);
+        }
+        .section-head {
+          text-align: center;
+          max-width: 640px;
+          margin: 0 auto 56px;
+        }
         .section-head h2 {
           font-size: 2.3rem;
           font-weight: 400;
           line-height: 1.25;
           margin-bottom: 16px;
         }
-        .section-head h2 em { color: #c8956c; }
-        .section-head-light h2 em { color: #d4a574; }
-        .section-intro { font-size: 1.02rem; color: #5c4f3a; }
-        .section-intro-light { color: #a89880; }
+        .section-head h2 em {
+          color: #c8956c;
+        }
+        .section-head-light h2 em {
+          color: #d4a574;
+        }
+        .section-intro {
+          font-size: 1.02rem;
+          color: #5c4f3a;
+        }
+        .section-intro-light {
+          color: #a89880;
+        }
 
         /* ── SPLIT ── */
-        .split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
-        h2 { font-size: 2rem; font-weight: 400; line-height: 1.3; margin-bottom: 20px; }
-        h2 em { color: #c8956c; }
-        .split p { color: #5c4f3a; margin-bottom: 16px; }
-        .section-dark .split p { color: #a89880; }
+        .split {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 64px;
+          align-items: start;
+        }
+        h2 {
+          font-size: 2rem;
+          font-weight: 400;
+          line-height: 1.3;
+          margin-bottom: 20px;
+        }
+        h2 em {
+          color: #c8956c;
+        }
+        .split p {
+          color: #5c4f3a;
+          margin-bottom: 16px;
+        }
+        .section-dark .split p {
+          color: #a89880;
+        }
 
         /* ── STAT GRID ── */
-        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .stat-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+        }
         .stat-card {
           background: #f6efe4;
           border: 1px solid #dccbb7;
@@ -976,7 +1506,12 @@ export default function Page() {
         }
 
         /* ── PILLARS ── */
-        .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+        .pillars {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+          margin-top: 48px;
+        }
         .pillar-card {
           padding: 36px 28px;
           border: 1px solid rgba(200, 149, 108, 0.15);
@@ -995,11 +1530,23 @@ export default function Page() {
           display: block;
           margin-bottom: 16px;
         }
-        .pillar-card h3 { font-size: 1.2rem; font-weight: 400; margin-bottom: 12px; }
-        .pillar-card p { font-size: 0.92rem; color: #a89880; line-height: 1.6; }
+        .pillar-card h3 {
+          font-size: 1.2rem;
+          font-weight: 400;
+          margin-bottom: 12px;
+        }
+        .pillar-card p {
+          font-size: 0.92rem;
+          color: #a89880;
+          line-height: 1.6;
+        }
 
         /* ── PROCESS ── */
-        .process-steps { display: flex; flex-direction: column; gap: 0; }
+        .process-steps {
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+        }
         .process-step {
           display: flex;
           gap: 20px;
@@ -1008,8 +1555,12 @@ export default function Page() {
           border-bottom: 1px solid #dccbb7;
           transition: all 0.3s;
         }
-        .process-step:hover { padding-left: 8px; }
-        .process-step:last-child { border-bottom: none; }
+        .process-step:hover {
+          padding-left: 8px;
+        }
+        .process-step:last-child {
+          border-bottom: none;
+        }
         .step-num {
           font-family: Arial, Helvetica, sans-serif;
           font-size: 0.72rem;
@@ -1018,11 +1569,23 @@ export default function Page() {
           flex-shrink: 0;
           margin-top: 3px;
         }
-        .process-step h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; }
-        .process-step p { font-size: 0.9rem; color: #5c4f3a; margin-bottom: 0; }
+        .process-step h4 {
+          font-size: 1.05rem;
+          font-weight: 600;
+          margin-bottom: 4px;
+        }
+        .process-step p {
+          font-size: 0.9rem;
+          color: #5c4f3a;
+          margin-bottom: 0;
+        }
 
         /* ── OFFERS ── */
-        .offers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .offers-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+        }
         .offer-card {
           background: #f6efe4;
           border: 1px solid #dccbb7;
@@ -1064,25 +1627,143 @@ export default function Page() {
           letter-spacing: 0.04em;
           margin-bottom: 8px;
         }
-        .offer-price { font-size: 2rem; font-weight: 700; margin-bottom: 2px; color: #c8956c; }
-        .offer-featured .offer-price { color: #d4a574; }
+        .offer-price {
+          font-size: 2rem;
+          font-weight: 700;
+          margin-bottom: 2px;
+          color: #c8956c;
+        }
+        .offer-featured .offer-price {
+          color: #d4a574;
+        }
         .offer-unit {
           font-family: Arial, Helvetica, sans-serif;
           font-size: 0.75rem;
           color: #8a7a62;
           margin-bottom: 16px;
         }
-        .offer-desc { font-size: 0.92rem; color: #5c4f3a; margin-bottom: 24px; line-height: 1.6; }
-        .offer-featured .offer-desc { color: #a89880; }
-        .offer-features { margin-bottom: 28px; display: flex; flex-direction: column; gap: 10px; }
-        .offer-features li { font-size: 0.88rem; display: flex; align-items: flex-start; gap: 8px; }
-        .check { color: #c8956c; font-weight: 700; flex-shrink: 0; }
-        .offer-featured .offer-features li { color: #d4c4a8; }
-        .offer-cta { margin-top: auto; text-align: center; justify-content: center; width: 100%; }
-        .offer-featured .button-primary:hover { background: #c8956c; }
+        .offer-featured .offer-unit {
+          color: #a89880;
+        }
+        .offer-desc {
+          font-size: 0.92rem;
+          color: #5c4f3a;
+          margin-bottom: 24px;
+          line-height: 1.6;
+        }
+        .offer-featured .offer-desc {
+          color: #a89880;
+        }
+        .offer-features {
+          margin-bottom: 28px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          flex: 1;
+        }
+        .offer-features li {
+          font-size: 0.88rem;
+          display: flex;
+          align-items: flex-start;
+          gap: 8px;
+        }
+        .check {
+          color: #c8956c;
+          font-weight: 700;
+          flex-shrink: 0;
+        }
+        .offer-featured .offer-features li {
+          color: #d4c4a8;
+        }
+        .offer-cta {
+          margin-top: auto;
+          text-align: center;
+          justify-content: center;
+          width: 100%;
+        }
+        .offer-featured .button-primary:hover {
+          background: #c8956c;
+        }
+        .offer-price-devis {
+          font-size: 1.5rem !important;
+          padding-top: 0.25rem;
+        }
+
+        /* ── LILA D'ALGARVE BANNER ── */
+        .lda-banner {
+          margin-top: 40px;
+          border: 1px solid rgba(200, 149, 108, 0.3);
+          background: linear-gradient(
+            135deg,
+            rgba(200, 149, 108, 0.06) 0%,
+            rgba(184, 133, 78, 0.04) 100%
+          );
+          padding: 32px 36px;
+        }
+        .lda-banner-inner {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 32px;
+        }
+        .lda-eyebrow {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.68rem;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: #b8854e;
+          margin-bottom: 8px;
+          display: block;
+        }
+        .lda-title {
+          font-size: 1.15rem;
+          color: #1a1613;
+          margin-bottom: 8px;
+          font-weight: 400;
+        }
+        .lda-title em {
+          color: #c8956c;
+          font-style: italic;
+        }
+        .lda-desc {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.85rem;
+          color: #5c4f3a;
+          line-height: 1.6;
+          max-width: 520px;
+        }
+        .lda-badge {
+          flex-shrink: 0;
+          border: 1px solid rgba(200, 149, 108, 0.4);
+          padding: 20px 28px;
+          text-align: center;
+          min-width: 160px;
+        }
+        .lda-badge-icon {
+          display: block;
+          font-size: 1.2rem;
+          color: #c8956c;
+          margin-bottom: 8px;
+        }
+        .lda-badge-text {
+          display: block;
+          font-size: 1rem;
+          color: #1a1613;
+          font-style: italic;
+          margin-bottom: 4px;
+        }
+        .lda-badge-sub {
+          display: block;
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.65rem;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #b8854e;
+        }
+
         .offer-guarantee {
           text-align: center;
-          margin-top: 40px;
+          margin-top: 24px;
           padding: 28px;
           border: 1px dashed #c8956c;
           font-size: 0.95rem;
@@ -1091,14 +1772,22 @@ export default function Page() {
         }
 
         /* ── CASE STUDIES ── */
-        .examples-stack { display: flex; flex-direction: column; gap: 16px; }
+        .examples-stack {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
         .case-study {
           border: 1px solid #dccbb7;
           background: #f6efe4;
           transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .case-study:hover { border-color: #c8956c; }
-        .case-study.is-open { border-color: #1a1613; }
+        .case-study:hover {
+          border-color: #c8956c;
+        }
+        .case-study.is-open {
+          border-color: #1a1613;
+        }
         .case-toggle {
           display: flex;
           justify-content: space-between;
@@ -1113,7 +1802,9 @@ export default function Page() {
           font-family: inherit;
           color: inherit;
         }
-        .case-toggle-left { flex: 1; }
+        .case-toggle-left {
+          flex: 1;
+        }
         .case-meta {
           font-family: Arial, Helvetica, sans-serif;
           font-size: 0.72rem;
@@ -1122,7 +1813,11 @@ export default function Page() {
           color: #b8854e;
           margin-bottom: 6px;
         }
-        .case-toggle h3 { font-size: 1.15rem; font-weight: 400; line-height: 1.4; }
+        .case-toggle h3 {
+          font-size: 1.15rem;
+          font-weight: 400;
+          line-height: 1.4;
+        }
         .case-specs {
           display: flex;
           gap: 16px;
@@ -1132,15 +1827,46 @@ export default function Page() {
           font-size: 0.75rem;
           color: #8a7a62;
         }
-        .case-toggle-icon { font-size: 1.5rem; color: #c8956c; flex-shrink: 0; transition: transform 0.3s; }
-        .case-study.is-open .case-toggle-icon { transform: rotate(180deg); }
-        .case-body { padding: 0 28px 28px; }
-        .case-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
-        .text-panel { padding: 24px; font-size: 0.92rem; line-height: 1.7; }
-        .text-panel p { margin-bottom: 12px; }
-        .text-panel h4 { font-size: 1rem; font-weight: 600; margin-bottom: 12px; }
-        .before-panel { background: #ede4d4; border: 1px solid #dccbb7; }
-        .after-panel { background: #1a1613; color: #f6efe4; border: 1px solid #2a2520; }
+        .case-toggle-icon {
+          font-size: 1.5rem;
+          color: #c8956c;
+          flex-shrink: 0;
+          transition: transform 0.3s;
+        }
+        .case-study.is-open .case-toggle-icon {
+          transform: rotate(180deg);
+        }
+        .case-body {
+          padding: 0 28px 28px;
+        }
+        .case-columns {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 24px;
+          margin-bottom: 24px;
+        }
+        .text-panel {
+          padding: 24px;
+          font-size: 0.92rem;
+          line-height: 1.7;
+        }
+        .text-panel p {
+          margin-bottom: 12px;
+        }
+        .text-panel h4 {
+          font-size: 1rem;
+          font-weight: 600;
+          margin-bottom: 12px;
+        }
+        .before-panel {
+          background: #ede4d4;
+          border: 1px solid #dccbb7;
+        }
+        .after-panel {
+          background: #1a1613;
+          color: #f6efe4;
+          border: 1px solid #2a2520;
+        }
         .panel-label {
           font-family: Arial, Helvetica, sans-serif;
           font-size: 0.68rem;
@@ -1150,7 +1876,9 @@ export default function Page() {
           margin-bottom: 12px;
           display: block;
         }
-        .after-panel .panel-label { color: #d4a574; }
+        .after-panel .panel-label {
+          color: #d4a574;
+        }
         .panel-sublabel {
           font-family: Arial, Helvetica, sans-serif;
           font-size: 0.72rem;
@@ -1163,7 +1891,12 @@ export default function Page() {
           border: 1px solid rgba(200, 149, 108, 0.15);
           padding: 24px;
         }
-        .case-analysis ul { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+        .case-analysis ul {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          margin-top: 12px;
+        }
         .case-analysis li {
           font-size: 0.88rem;
           color: #5c4f3a;
@@ -1177,4 +1910,307 @@ export default function Page() {
           color: #c8956c;
         }
 
-        /* ── ABOUT
+        /* ── ABOUT ── */
+        .about-cards {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+        .about-card {
+          padding: 24px 28px;
+          border: 1px solid #dccbb7;
+          background: #f6efe4;
+          transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .about-card:hover {
+          border-color: #c8956c;
+          transform: translateX(4px);
+        }
+        .about-card h4 {
+          font-size: 0.95rem;
+          font-weight: 600;
+          margin-bottom: 8px;
+          letter-spacing: 0.02em;
+        }
+        .about-card p {
+          font-size: 0.88rem;
+          color: #5c4f3a;
+          margin-bottom: 0;
+        }
+
+        /* ── FAQ ── */
+        .faq-list {
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+        }
+        .faq-item {
+          border-bottom: 1px solid #dccbb7;
+        }
+        .faq-toggle {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          padding: 24px 0;
+          background: none;
+          border: none;
+          cursor: pointer;
+          text-align: left;
+          font-family: Georgia, serif;
+          font-size: 1rem;
+          color: #1a1613;
+          gap: 24px;
+          transition: color 0.3s;
+        }
+        .faq-toggle:hover {
+          color: #c8956c;
+        }
+        .faq-icon {
+          font-size: 1.3rem;
+          color: #c8956c;
+          flex-shrink: 0;
+        }
+        .faq-answer {
+          padding-bottom: 24px;
+        }
+        .faq-answer p {
+          font-size: 0.95rem;
+          color: #5c4f3a;
+          line-height: 1.7;
+        }
+
+        /* ── CONTACT ── */
+        .contact-methods {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          margin-top: 32px;
+        }
+        .contact-method {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          font-size: 0.95rem;
+          color: #d4c4a8;
+          transition: color 0.3s;
+        }
+        .contact-method:hover {
+          color: #c8956c;
+        }
+        .contact-icon {
+          font-size: 1.1rem;
+          width: 32px;
+          height: 32px;
+          border: 1px solid rgba(200, 149, 108, 0.3);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+        .contact-form {
+          background: rgba(255, 255, 255, 0.04);
+          border: 1px solid rgba(200, 149, 108, 0.2);
+          padding: 36px;
+        }
+        .form-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 16px;
+          margin-bottom: 16px;
+        }
+        .form-field {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          margin-bottom: 16px;
+        }
+        .form-field label {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.72rem;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: #a89880;
+        }
+        .form-field input,
+        .form-field textarea {
+          background: rgba(255, 255, 255, 0.06);
+          border: 1px solid rgba(200, 149, 108, 0.2);
+          padding: 12px 16px;
+          color: #f6efe4;
+          font-family: Georgia, serif;
+          font-size: 0.92rem;
+          outline: none;
+          transition: border-color 0.3s;
+          width: 100%;
+        }
+        .form-field input::placeholder,
+        .form-field textarea::placeholder {
+          color: rgba(246, 239, 228, 0.3);
+        }
+        .form-field input:focus,
+        .form-field textarea:focus {
+          border-color: #c8956c;
+        }
+        .form-field textarea {
+          resize: vertical;
+        }
+        .field-valid {
+          border-color: rgba(150, 200, 108, 0.5) !important;
+        }
+        .field-invalid {
+          border-color: rgba(200, 108, 108, 0.5) !important;
+        }
+        .form-success {
+          text-align: center;
+          padding: 60px 40px;
+          border: 1px solid rgba(200, 149, 108, 0.2);
+        }
+        .form-success-icon {
+          width: 56px;
+          height: 56px;
+          border: 1px solid #c8956c;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.5rem;
+          color: #c8956c;
+          margin: 0 auto 24px;
+        }
+        .form-success h3 {
+          font-size: 1.3rem;
+          margin-bottom: 12px;
+        }
+        .form-success p {
+          font-size: 0.9rem;
+          color: #a89880;
+          line-height: 1.6;
+        }
+
+        /* ── FOOTER ── */
+        .footer {
+          background: #120f0d;
+          padding: 48px 0;
+          border-top: 1px solid rgba(200, 149, 108, 0.2);
+        }
+        .footer-inner {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 24px;
+        }
+        .footer-logo {
+          font-size: 1.05rem;
+          color: #f6efe4;
+          margin-bottom: 4px;
+        }
+        .footer-copy {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.75rem;
+          color: #5c4f3a;
+        }
+        .footer-center {
+          text-align: center;
+        }
+        .footer-lda {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.72rem;
+          letter-spacing: 0.08em;
+          color: #5c4f3a;
+          text-transform: uppercase;
+        }
+        .footer-lda-name {
+          color: #c8956c;
+          font-style: italic;
+          font-family: Georgia, serif;
+          text-transform: none;
+          letter-spacing: 0;
+          font-size: 0.88rem;
+        }
+        .footer-right {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 4px;
+        }
+        .footer-email,
+        .footer-phone {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 0.78rem;
+          color: #5c4f3a;
+          transition: color 0.3s;
+        }
+        .footer-email:hover,
+        .footer-phone:hover {
+          color: #c8956c;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+          .mobile-toggle {
+            display: block;
+          }
+          .nav-links {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #f6efe4;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            z-index: 999;
+          }
+          .nav-links.nav-open {
+            display: flex;
+          }
+          .nav-links a {
+            font-size: 1.1rem;
+          }
+          .hero-grid,
+          .split {
+            grid-template-columns: 1fr;
+            gap: 40px;
+          }
+          .hero {
+            padding: 120px 0 80px;
+          }
+          .hero h1 {
+            font-size: 2.2rem;
+          }
+          .pillars,
+          .offers-grid {
+            grid-template-columns: 1fr;
+          }
+          .stat-grid {
+            grid-template-columns: 1fr;
+          }
+          .case-columns {
+            grid-template-columns: 1fr;
+          }
+          .footer-inner {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+          }
+          .footer-right {
+            align-items: flex-start;
+          }
+          .lda-banner-inner {
+            flex-direction: column;
+          }
+          .lda-badge {
+            width: 100%;
+          }
+          .form-row {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}</style>
+    </>
+  );
+}
