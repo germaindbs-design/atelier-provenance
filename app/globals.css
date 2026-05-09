@@ -811,6 +811,14 @@ h2 em {
 }
 
 /* ── ABOUT ── */
+.about-name {
+  font-family: Georgia, serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  color: #c8956c;
+  margin-bottom: 20px !important;
+  letter-spacing: 0.02em;
+}
 .about-cards {
   display: flex;
   flex-direction: column;
