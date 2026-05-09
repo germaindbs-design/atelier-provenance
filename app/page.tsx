@@ -687,21 +687,30 @@ export default function Page() {
                   <br />
                   <em>exercé sur les objets.</em>
                 </h2>
+                <p className="about-name">Germain</p>
                 <p>
-                  Atelier Provenance est né d&apos;un double parcours :
-                  l&apos;enseignement des lettres et de la philosophie d&apos;abord, puis
-                  le marché de l&apos;art — comme marchand, comme rédacteur, comme
-                  observateur des mouvements de goût et de valeur.
+                  Atelier Provenance est né d&apos;un constat simple : les objets
+                  qui méritent d&apos;être racontés sont rarement bien racontés.
                 </p>
                 <p>
-                  Cette trajectoire n&apos;est pas un détour. C&apos;est elle qui permet
-                  de lire un objet comme on lit un texte : en cherchant ce qui
-                  fait sens, ce qui justifie l&apos;attention, ce qui mérite d&apos;être
-                  dit — et dans quel ordre.
+                  Le marché de l&apos;art est venu tôt — acheteur et vendeur assez
+                  jeune, avant même que ça ait un nom. Une sensibilité aux
+                  objets, à ce qu&apos;ils portent, à ce qui fait qu&apos;on s&apos;arrête
+                  devant l&apos;un plutôt qu&apos;un autre.
                 </p>
                 <p>
-                  Chaque mission est traitée personnellement, sans délégation ni
-                  automatisation. Un interlocuteur, un regard, une exigence.
+                  Les études sont venues confirmer autre chose : deux masters —
+                  l&apos;un en lettres, l&apos;autre en philosophie — et quelques années
+                  d&apos;enseignement dans chacune. Ce qu&apos;on apprend là, c&apos;est à lire
+                  un texte jusqu&apos;à ce qu&apos;il cède quelque chose, à chercher ce
+                  qui fait sens plutôt que ce qui fait effet, à trouver le mot
+                  juste — pas celui qui impressionne.
+                </p>
+                <p>
+                  Atelier Provenance est l&apos;endroit où ces deux trajectoires se
+                  rejoignent. Chaque notice est rédigée personnellement — pas de
+                  délégation, pas d&apos;automatisation. Un regard, une exigence,
+                  un texte.
                 </p>
               </div>
             </Reveal>
@@ -709,24 +718,27 @@ export default function Page() {
               <div>
                 <div className="about-cards">
                   <div className="about-card">
-                    <h4>Lettres &amp; philosophie</h4>
+                    <h4>Marché de l&apos;art</h4>
                     <p>
-                      Ancien professeur. Le travail sur la langue et la
-                      précision du vocabulaire vient de là.
+                      Acheteur et vendeur depuis longtemps. Une connaissance
+                      concrète des objets, de leur valeur, et de ce qui fait
+                      qu&apos;une pièce trouve preneur.
                     </p>
                   </div>
                   <div className="about-card">
-                    <h4>Marché de l&apos;art</h4>
+                    <h4>Lettres &amp; philosophie</h4>
                     <p>
-                      Marchand, acheteur, rédacteur. Une connaissance concrète
-                      des objets et de leur circulation.
+                      Deux masters, plusieurs années d&apos;enseignement. Le travail
+                      sur la langue, la précision du vocabulaire et la rigueur
+                      du raisonnement viennent de là.
                     </p>
                   </div>
                   <div className="about-card">
                     <h4>Rédaction spécialisée</h4>
                     <p>
-                      Notices, fiches, catalogues. Chaque format a ses règles —
-                      et ses exigences.
+                      Notices, fiches, catalogues — chaque format a ses règles
+                      et ses exigences. Aucune automatisation, chaque texte
+                      écrit à la main.
                     </p>
                   </div>
                 </div>
