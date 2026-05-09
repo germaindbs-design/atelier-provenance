@@ -1073,6 +1073,59 @@ h2 em {
   color: #c8956c;
 }
 
+
+/* ── PAPER / EMBOSS EFFECT — applied to all interactive cards ── */
+.stat-card,
+.pillar-card,
+.offer-card,
+.case-study,
+.about-card,
+.faq-item {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.6),
+    inset 0 -1px 0 rgba(92,61,46,0.08),
+    inset 1px 0 0 rgba(255,255,255,0.4),
+    inset -1px 0 0 rgba(92,61,46,0.06),
+    0 1px 3px rgba(92,61,46,0.08),
+    0 4px 12px rgba(92,61,46,0.05);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-blend-mode: multiply;
+}
+
+/* Hover — légère élévation */
+.stat-card:hover,
+.pillar-card:hover,
+.offer-card:hover,
+.case-study:hover,
+.about-card:hover {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.6),
+    inset 0 -1px 0 rgba(92,61,46,0.08),
+    inset 1px 0 0 rgba(255,255,255,0.4),
+    inset -1px 0 0 rgba(92,61,46,0.06),
+    0 4px 16px rgba(92,61,46,0.12),
+    0 8px 32px rgba(92,61,46,0.07);
+}
+
+/* Carte featured (fond sombre) — effet adapté */
+.offer-featured {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    inset 0 -1px 0 rgba(0,0,0,0.2),
+    0 4px 20px rgba(26,22,19,0.25),
+    0 8px 40px rgba(200,149,108,0.1);
+  background-image: none;
+}
+.offer-featured:hover {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    inset 0 -1px 0 rgba(0,0,0,0.2),
+    0 8px 32px rgba(26,22,19,0.3),
+    0 16px 48px rgba(200,149,108,0.15);
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .mobile-toggle {
