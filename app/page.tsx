@@ -516,8 +516,7 @@ export default function Page() {
                     </p>
                   </div>
                   <div className="lda-badge">
-                    <span className="lda-badge-icon">✦</span>
-                    <span className="lda-badge-text">Lila D&apos;Algarve</span>
+                    <img src="/Lila-D-Algarve.png" alt="Lila D'Algarve" className="lda-logo-img" />
                     <span className="lda-badge-sub">Catalogue & réseaux</span>
                   </div>
                 </div>
