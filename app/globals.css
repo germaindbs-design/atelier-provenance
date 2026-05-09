@@ -78,13 +78,20 @@ em {
   opacity: 0.7;
 }
 .nav-logo-img {
-  height: 56px;
+  height: 80px;
   width: auto;
   display: block;
-  transition: opacity 0.3s, height 0.3s;
+  transition: opacity 0.3s, height 0.4s;
 }
 .nav-scrolled .nav-logo-img {
-  height: 44px;
+  height: 56px;
+}
+.lda-logo-img {
+  width: 120px;
+  height: auto;
+  display: block;
+  margin: 0 auto 8px;
+  border-radius: 4px;
 }
 .nav-links {
   display: flex;
