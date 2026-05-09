@@ -995,6 +995,11 @@ export default function Page() {
             <a href="tel:+33751420733" className="footer-phone">
               07 51 42 07 33
             </a>
+            <div className="footer-legal-links">
+              <a href="/mentions-legales" className="footer-legal">Mentions légales</a>
+              <span className="footer-legal-sep">·</span>
+              <a href="/cgv" className="footer-legal">CGV</a>
+            </div>
           </div>
         </div>
       </footer>
