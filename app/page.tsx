@@ -114,7 +114,11 @@ export default function Page() {
       <nav className={`nav ${scrolled ? "nav-scrolled" : ""}`}>
         <div className="container nav-inner">
           <a href="#" className="nav-logo">
-            Atelier Provenance
+            <img
+              src="/Logo.png"
+              alt="Atelier Provenance"
+              className="nav-logo-img"
+            />
           </a>
           <button
             className="mobile-toggle"
@@ -544,82 +548,42 @@ export default function Page() {
             </Reveal>
 
             <div className="examples-stack">
-              {/* EXEMPLE 1 */}
+
+              {/* EXEMPLE 1 — Commode Louis XV */}
               <Reveal>
-                <article
-                  className={`case-study ${openExample === 0 ? "is-open" : ""}`}
-                >
-                  <button
-                    className="case-toggle"
-                    onClick={() =>
-                      setOpenExample(openExample === 0 ? null : 0)
-                    }
-                  >
+                <article className={`case-study ${openExample === 0 ? "is-open" : ""}`}>
+                  <button className="case-toggle" onClick={() => setOpenExample(openExample === 0 ? null : 0)}>
                     <div className="case-toggle-left">
-                      <p className="case-meta">
-                        Exemple 1 · Enfilade scandinave, circa 1960
-                      </p>
-                      <h3>
-                        Passer d&apos;une description plate à un texte qui justifie
-                        le prix.
-                      </h3>
+                      <p className="case-meta">Exemple 1 · Commode galbée Louis XV</p>
+                      <h3>Transformer une description générique en notice qui justifie 1 480 €.</h3>
                       <div className="case-specs">
-                        <span>Prix affiché : 1 850 €</span>
-                        <span>Teck · laiton · 200 cm</span>
-                        <span>Plateforme : Selency</span>
+                        <span>Prix affiché : 1 480 €</span>
+                        <span>Marqueterie · bronzes · marbre</span>
+                        <span>Plateforme : Proantic</span>
                       </div>
                     </div>
-                    <div className="case-toggle-icon">
-                      {openExample === 0 ? "−" : "+"}
-                    </div>
+                    <div className="case-toggle-icon">{openExample === 0 ? "−" : "+"}</div>
                   </button>
                   {openExample === 0 && (
                     <div className="case-body">
                       <div className="case-columns">
                         <div className="text-panel before-panel">
                           <p className="panel-label">Avant</p>
-                          <p>
-                            Enfilade scandinave en teck des années 60, bon état
-                            avec quelques traces d&apos;usage. 3 portes coulissantes,
-                            pieds compas. L 200 × P 45 × H 82 cm. Idéale pour
-                            salon ou salle à manger.
-                          </p>
+                          <p>Commode galbée de style Louis XV en marqueterie et bois de rose, présentant une silhouette galbée caractéristique. Bon état général. Garnitures présentes. Traces d&apos;usage cohérentes avec son état.</p>
                         </div>
                         <div className="text-panel after-panel">
                           <p className="panel-label">Après</p>
-                          <p>
-                            Enfilade trois portes en teck massif, Scandinavie,
-                            circa 1960. Le travail des portes coulissantes —
-                            montées sur rail laiton d&apos;origine — témoigne
-                            d&apos;une fabrication soignée, probablement d&apos;atelier,
-                            avec assemblages à tenons visibles en bout de
-                            caisson.
-                          </p>
-                          <p>
-                            Le teck a pris cette patine miel que seules les
-                            pièces correctement entretenues développent après
-                            six décennies. Piètement fuselé, lignes tendues,
-                            proportions justes : c&apos;est le vocabulaire d&apos;un
-                            design qui ne cherche pas l&apos;effet mais la justesse.
-                          </p>
-                          <p>L 200 × P 45 × H 82 cm · Scandinavie, circa 1960.</p>
+                          <p>Silhouette en arbalète à deux tiroirs sans traverse, la façade entièrement animée par une marqueterie florale d&apos;une densité remarquable : lys, roses et feuillages en médaillon central sur fond de bois de rose en chevrons.</p>
+                          <p>Les bronzes dorés — chutes d&apos;angle feuillagées, entrée de serrure rocaille, sabots enroulés — sont d&apos;origine et conservent un bel éclat. Plateau de marbre veiné violet et crème, bords chantournés.</p>
+                          <p>Une pièce lisible et bien aboutie, dont la qualité d&apos;exécution la distingue nettement des reproductions ordinaires du même style.</p>
                         </div>
                       </div>
                       <div className="case-analysis">
                         <p className="panel-label">Ce qui change</p>
                         <ul>
-                          <li>
-                            Le texte identifie des marqueurs de qualité précis
-                            (rail laiton, tenons, teck massif).
-                          </li>
-                          <li>
-                            La patine devient un argument de valeur, pas un
-                            défaut.
-                          </li>
-                          <li>
-                            Le vocabulaire positionne la pièce dans un segment
-                            « mobilier de collection ».
-                          </li>
+                          <li>Le galbe &laquo;&nbsp;en arbalète&nbsp;&raquo; et les tiroirs sans traverse sont nommés — ce sont les marqueurs des meilleures commodes Louis XV.</li>
+                          <li>Le marbre et les bronzes d&apos;origine, absents de l&apos;annonce initiale, deviennent des arguments centraux.</li>
+                          <li>Le prix de 1 480 € devient cohérent — il est ancré dans des éléments vérifiables.</li>
                         </ul>
                       </div>
                     </div>
@@ -627,81 +591,40 @@ export default function Page() {
                 </article>
               </Reveal>
 
-              {/* EXEMPLE 2 */}
+              {/* EXEMPLE 2 — Vase bohémien */}
               <Reveal>
-                <article
-                  className={`case-study ${openExample === 1 ? "is-open" : ""}`}
-                >
-                  <button
-                    className="case-toggle"
-                    onClick={() =>
-                      setOpenExample(openExample === 1 ? null : 1)
-                    }
-                  >
+                <article className={`case-study ${openExample === 1 ? "is-open" : ""}`}>
+                  <button className="case-toggle" onClick={() => setOpenExample(openExample === 1 ? null : 1)}>
                     <div className="case-toggle-left">
-                      <p className="case-meta">
-                        Exemple 2 · Suite de 3 chaises, années 1950
-                      </p>
-                      <h3>
-                        Transformer un lot banal en ensemble cohérent et
-                        désirable.
-                      </h3>
+                      <p className="case-meta">Exemple 2 · Grand vase cristal de Bohême</p>
+                      <h3>Repositionner une pièce sous-évaluée grâce à une lecture de marché.</h3>
                       <div className="case-specs">
-                        <span>Prix affiché : 480 €</span>
-                        <span>Métal laqué · velours vert</span>
-                        <span>Plateforme : Selency</span>
+                        <span>Prix affiché : 980 €</span>
+                        <span>Cristal cobalt · émaux · or fin</span>
+                        <span>Plateforme : Proantic</span>
                       </div>
                     </div>
-                    <div className="case-toggle-icon">
-                      {openExample === 1 ? "−" : "+"}
-                    </div>
+                    <div className="case-toggle-icon">{openExample === 1 ? "−" : "+"}</div>
                   </button>
                   {openExample === 1 && (
                     <div className="case-body">
                       <div className="case-columns">
                         <div className="text-panel before-panel">
                           <p className="panel-label">Avant</p>
-                          <p>
-                            3 chaises années 50 métal et velours vert, idéales
-                            pour bureau ou table, bon état, velours nettoyé,
-                            traces d&apos;usage sur le métal. H 83 × L 60 × P 53 cm.
-                          </p>
+                          <p>Magnifique vase en Cristal de Bohême richement décoré de motifs fleuris, entièrement peint à la main et doré. En parfait état aucun éclat, étiquette d&apos;origine présente. Hauteur 59.5cm.</p>
                         </div>
                         <div className="text-panel after-panel">
                           <p className="panel-label">Après</p>
-                          <p>
-                            Suite de trois chaises en métal laqué noir et
-                            velours vert amande, France, années 1950.
-                            L&apos;assise enveloppante et le dossier légèrement
-                            incurvé évoquent les productions des ateliers
-                            français d&apos;après-guerre, où le confort domestique
-                            commençait à dialoguer avec les formes industrielles.
-                          </p>
-                          <p>
-                            Le velours a été nettoyé — il conserve un tombé
-                            souple et une teinte cohérente. La structure
-                            métallique porte quelques traces d&apos;usage qui ne
-                            compromettent ni la stabilité ni l&apos;élégance
-                            d&apos;ensemble.
-                          </p>
-                          <p>H 83 × L 60 × P 53 cm · France, années 1950.</p>
+                          <p>Silhouette balustre à col évasé, cristal soufflé bleu cobalt intense, dorure à l&apos;or fin sur fond brossé mat. Le décor floral — fleurs blanches et feuilles vertes en émaux en relief dans un cartouche ovale — est peint à la main et cuit au four.</p>
+                          <p>Format imposant de 59,5 cm. État parfait : aucun éclat, dorure homogène, étiquette d&apos;origine présente. Une pièce qui n&apos;a pas besoin d&apos;être mise en scène pour convaincre.</p>
                         </div>
                       </div>
                       <div className="case-analysis">
                         <p className="panel-label">Ce qui change</p>
                         <ul>
-                          <li>
-                            L&apos;usure devient un argument (patine, vécu,
-                            caractère) au lieu d&apos;un défaut à excuser.
-                          </li>
-                          <li>
-                            La datation et l&apos;origine sont précisées — elles
-                            justifient le prix.
-                          </li>
-                          <li>
-                            Le texte s&apos;adresse à un acheteur qui cherche de
-                            l&apos;authenticité, pas du neuf.
-                          </li>
+                          <li>L&apos;émaillage à chaud en relief est identifié — c&apos;est ce qui distingue cette pièce des vases décorés par impression.</li>
+                          <li>Le format 59,5 cm est mis en avant comme argument : la majorité des vases comparables font 30 à 45 cm.</li>
+                          <li>La notice inclut une recommandation de repositionnement à 1 300 – 1 400 €, comparables de marché à l&apos;appui.</li>
                         </ul>
                       </div>
                     </div>
@@ -709,94 +632,47 @@ export default function Page() {
                 </article>
               </Reveal>
 
-              {/* EXEMPLE 3 */}
+              {/* EXEMPLE 3 — Miroir Viardot */}
               <Reveal>
-                <article
-                  className={`case-study ${openExample === 2 ? "is-open" : ""}`}
-                >
-                  <button
-                    className="case-toggle"
-                    onClick={() =>
-                      setOpenExample(openExample === 2 ? null : 2)
-                    }
-                  >
+                <article className={`case-study ${openExample === 2 ? "is-open" : ""}`}>
+                  <button className="case-toggle" onClick={() => setOpenExample(openExample === 2 ? null : 2)}>
                     <div className="case-toggle-left">
-                      <p className="case-meta">
-                        Exemple 3 · Bureau ministre Art déco, circa 1935
-                      </p>
-                      <h3>
-                        Donner à une pièce de caractère le texte qu&apos;elle mérite.
-                      </h3>
+                      <p className="case-meta">Exemple 3 · Miroir japonisant dans le goût de Gabriel Viardot</p>
+                      <h3>Positionner une pièce rare dans son contexte de marché pour défendre un prix élevé.</h3>
                       <div className="case-specs">
-                        <span>Prix affiché : 2 400 €</span>
-                        <span>Palissandre · laiton</span>
+                        <span>Prix affiché : 12 000 €</span>
+                        <span>Bois sculpté · nacre · dragon</span>
                         <span>Plateforme : Proantic</span>
                       </div>
                     </div>
-                    <div className="case-toggle-icon">
-                      {openExample === 2 ? "−" : "+"}
-                    </div>
+                    <div className="case-toggle-icon">{openExample === 2 ? "−" : "+"}</div>
                   </button>
                   {openExample === 2 && (
                     <div className="case-body">
                       <div className="case-columns">
                         <div className="text-panel before-panel">
                           <p className="panel-label">Avant</p>
-                          <p>
-                            Bureau Art déco en palissandre, 4 tiroirs, poignées
-                            laiton. Restauré. Bon état général. H 78 × L 140 ×
-                            P 72 cm. Années 1930.
-                          </p>
+                          <p>Rare et exceptionnel Miroir Style Gabriel Viardot à décors Japonisant, Représentant Plusieurs dragons. Fabrication d&apos;époque 1900. Vraiment un magnifique Miroir de belle manufacture, pièce unique. Provient d&apos;une belle demeure.</p>
                         </div>
                         <div className="text-panel after-panel">
-                          <p className="panel-label">Après — format court</p>
-                          <p className="panel-sublabel">
-                            Adapté à Proantic ou Drouot Digital
-                          </p>
-                          <h4>
-                            Bureau ministre Art déco, circa 1935 — placage
-                            palissandre, poignées laiton d&apos;origine
-                          </h4>
-                          <p>
-                            Un bureau qui impose sa présence sans élever la
-                            voix. Le placage de palissandre déploie ses veinures
-                            sur un plateau généreux, encadré par des montants
-                            nets et une géométrie typiquement Art déco. Quatre
-                            tiroirs en façade, poignées en laiton d&apos;origine —
-                            chaque détail confirme la cohérence de la pièce.
-                          </p>
-                          <p>
-                            La restauration a été menée avec discernement :
-                            stabilité structurelle assurée, patine du bois
-                            préservée, quincaillerie intacte. C&apos;est un meuble
-                            de travail autant qu&apos;un meuble de caractère — le
-                            genre de pièce qui compose un intérieur comme on
-                            écrit une phrase.
-                          </p>
-                          <p>H 78 × L 140 × P 72 cm · France, circa 1935.</p>
+                          <p className="panel-label">Après</p>
+                          <p>Cadre en bois sculpté à décor japonisant d&apos;une richesse exceptionnelle : dragon en ronde-bosse dont le corps enroulé court sur toute la traverse supérieure, fronton en pagode à double corniche retroussée, panneaux de frise géométrique et incrustations de nacre.</p>
+                          <p>Ce vocabulaire ornemental est celui que Gabriel Viardot (1830–1906) a développé et rendu célèbre, primé aux Expositions universelles de 1878 et 1889. Format monumental — environ 220 cm de hauteur. Dans son jus, patine cohérente d&apos;époque.</p>
                         </div>
                       </div>
                       <div className="case-analysis">
                         <p className="panel-label">Ce qui change</p>
                         <ul>
-                          <li>
-                            Le format court est pensé pour les plateformes
-                            spécialisées — dense, précis, sans remplissage.
-                          </li>
-                          <li>
-                            La restauration est valorisée comme un signe de
-                            soin, pas comme un aveu de faiblesse.
-                          </li>
-                          <li>
-                            Le texte installe une image mentale — « le genre de
-                            pièce qui compose un intérieur ».
-                          </li>
+                          <li>Le dragon est décrit précisément — ronde-bosse, corps enroulé, détail des écailles — ce qui trahit la main d&apos;un sculpteur expérimenté.</li>
+                          <li>L&apos;attribution à Viardot est contextualisée avec des références historiques vérifiables.</li>
+                          <li>La notice recommande un repositionnement à 16 000 – 20 000 € sans expertise, au-delà avec attribution confirmée.</li>
                         </ul>
                       </div>
                     </div>
                   )}
                 </article>
               </Reveal>
+
             </div>
           </div>
         </section>
