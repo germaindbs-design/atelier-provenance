@@ -1112,8 +1112,8 @@ export default function Page() {
         </div>
       </footer>
 
-      {/* ═══════════════════════ STYLES ═══════════════════════ */}
-      <style jsx global>{`
+      {/* styles → globals.css */}
+      {/* <style jsx global>{`
         * {
           margin: 0;
           padding: 0;
@@ -2210,7 +2210,7 @@ export default function Page() {
             grid-template-columns: 1fr;
           }
         }
-      `}</style>
+      */}
     </>
   );
 }
