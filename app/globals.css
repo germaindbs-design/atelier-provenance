@@ -1061,6 +1061,8 @@ h2 em {
   font-size: 0.72rem;
   color: #3a2519;
 }
+.footer-email,
+.footer-phone {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.78rem;
   color: #5c4f3a;
