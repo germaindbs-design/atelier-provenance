@@ -5,83 +5,89 @@ export default function CGV() {
         <div className="container legal-container">
 
           <div className="legal-header">
-            <a href="/" className="legal-back">← Retour</a>
+            <a href="/" className="legal-back">&larr; Retour</a>
             <p className="eyebrow">Conditions contractuelles</p>
-            <h1>Conditions Générales de Vente</h1>
-            <p className="legal-date">En vigueur à compter du 1er janvier 2026</p>
+            <h1>Conditions G&eacute;n&eacute;rales de Vente</h1>
+            <p className="legal-date">En vigueur &agrave; compter du 9 juillet 2026</p>
           </div>
 
           <div className="legal-body">
 
             <section className="legal-section">
-              <h2>Article 1 — Objet</h2>
+              <h2>Article 1 &mdash; Objet</h2>
               <p>
-                Les présentes Conditions Générales de Vente régissent les prestations
-                de rédaction fournies par Germain Dubois, exerçant sous le nom commercial
+                Les pr&eacute;sentes Conditions G&eacute;n&eacute;rales de Vente r&eacute;gissent les prestations
+                fournies par Germain Dubois, exer&ccedil;ant sous le nom commercial
                 <strong> Atelier Provenance</strong>, micro-entrepreneur (immatriculation en cours),
-                à tout client professionnel ou particulier.
+                &agrave; tout client professionnel ou particulier.
               </p>
               <p>
-                Les prestations consistent en des missions éditoriales pour le mobilier
-                de collection et les objets d&apos;art (Audit Express, Pack Pilote, Abonnement,
-                Système Premium) : audit de catalogue, rédaction de fiches documentées avec
-                contexte historique et analyse de marché, versions longue, courte et réseaux
-                sociaux, direction éditoriale et formation d&apos;équipe.
+                Deux activit&eacute;s distinctes sont propos&eacute;es : d&apos;une part le
+                <strong> d&eacute;p&ocirc;t-vente en qualit&eacute; de mandataire</strong> (reprise de pi&egrave;ces
+                &agrave; prix fixe convenu, documentation et revente pour le compte du d&eacute;posant),
+                r&eacute;gi par un contrat de d&eacute;p&ocirc;t individuel sign&eacute; pour chaque pi&egrave;ce ;
+                d&apos;autre part la <strong>r&eacute;daction de fiches professionnelles</strong> (notices
+                document&eacute;es de quatre pages avec versions plateforme et r&eacute;seaux) pour le
+                mobilier de collection et les objets d&apos;art, r&eacute;gie par les pr&eacute;sentes CGV.
               </p>
             </section>
 
             <section className="legal-section">
-              <h2>Article 2 — Tarifs et formules</h2>
-              <p>Les tarifs en vigueur sont les suivants :</p>
+              <h2>Article 2 &mdash; Tarifs</h2>
+              <p><strong>D&eacute;p&ocirc;t-vente.</strong> Aucun frais n&apos;est factur&eacute; au d&eacute;posant.
+                Le prix de reprise fixe, les conditions de r&eacute;vision (point &agrave; 60 jours)
+                et le prix de pr&eacute;sentation de la pi&egrave;ce sont convenus par &eacute;crit dans le
+                contrat de d&eacute;p&ocirc;t. La r&eacute;mun&eacute;ration d&apos;Atelier Provenance est constitu&eacute;e
+                de l&apos;&eacute;cart entre le prix de reprise convenu et le prix de vente effectif.
+              </p>
+              <p><strong>Fiches professionnelles.</strong> Les tarifs en vigueur sont :</p>
               <ul className="legal-list">
-                <li><strong>Audit Express</strong> — analyse de 10 objets, réécriture de 2 fiches, recommandations, appel de 30 min — 390 € TTC</li>
-                <li><strong>Pack Pilote</strong> — 15 fiches premium, versions courtes et longues, contenus complémentaires — 1 900 € TTC</li>
-                <li><strong>Abonnement</strong> — 30 à 60 fiches par mois, optimisation continue, support — 3 000 à 6 000 € TTC / mois selon devis</li>
-                <li><strong>Système Premium</strong> — refonte de catalogue, storytelling global, formation d&apos;équipe — 8 000 à 20 000 € TTC selon devis</li>
+                <li><strong>Notice &agrave; l&apos;unit&eacute;</strong> &mdash; dossier PDF de 4 pages, version plateforme, version r&eacute;seaux &mdash; 150 &euro;</li>
+                <li><strong>Pack 3 notices</strong> &mdash; 450 &euro; (150 &euro; la notice)</li>
+                <li><strong>Pack 10 notices</strong> &mdash; 1 200 &euro; (120 &euro; la notice)</li>
+                <li><strong>Catalogue</strong> &mdash; harmonisation compl&egrave;te d&apos;un catalogue &mdash; sur devis</li>
               </ul>
               <p>
-                Le montant de l&apos;Audit Express est déductible de toute mission engagée
-                dans les 60 jours suivant sa livraison.
+                Les prix sont exprim&eacute;s en euros. En tant que micro-entrepreneur
+                b&eacute;n&eacute;ficiant de la franchise en base de TVA (article 293 B du CGI),
+                aucune TVA n&apos;est applicable. Mention port&eacute;e sur les factures :
+                &laquo;&nbsp;TVA non applicable &mdash; art. 293 B du CGI&nbsp;&raquo;.
               </p>
               <p>
-                Les prix sont exprimés en euros toutes taxes comprises. En tant que
-                micro-entrepreneur bénéficiant de la franchise en base de TVA (article 293 B
-                du CGI), aucune TVA n&apos;est applicable. Mention portée sur les factures :
-                &laquo;&nbsp;TVA non applicable — art. 293 B du CGI&nbsp;&raquo;.
-              </p>
-              <p>
-                Une fiche d&apos;exemple peut être offerte à titre de démonstration, sans
-                engagement de la part du client. Elle ne donne lieu à aucune facturation.
+                Une notice vitrine peut &ecirc;tre offerte &agrave; titre de d&eacute;monstration lors
+                d&apos;une premi&egrave;re collaboration, sans engagement ni facturation.
               </p>
             </section>
 
             <section className="legal-section">
-              <h2>Article 3 — Commande et acompte</h2>
+              <h2>Article 3 &mdash; Commande et acompte</h2>
               <p>
-                Toute commande est confirmée par échange écrit (email) ou devis signé.
-                Pour le Pack Pilote et le Système Premium, un acompte de
-                <strong> 50 % du montant total</strong> est exigible à la confirmation de commande.
-                Le solde est dû à la livraison.
+                Toute commande de fiches est confirm&eacute;e par &eacute;change &eacute;crit (email) ou
+                devis sign&eacute;. La notice &agrave; l&apos;unit&eacute; et le pack 3 sont payables
+                int&eacute;gralement &agrave; la commande. Pour le pack 10 et les missions catalogue,
+                un acompte de <strong>50&nbsp;% du montant total</strong> est exigible &agrave; la
+                confirmation, le solde &agrave; la livraison.
               </p>
               <p>
-                L&apos;Audit Express est payable intégralement à la commande.
-                L&apos;Abonnement est facturé mensuellement, à terme à échoir.
+                Le d&eacute;p&ocirc;t-vente ne donne lieu &agrave; aucun paiement du d&eacute;posant :
+                le contrat de d&eacute;p&ocirc;t sign&eacute; vaut commande.
               </p>
             </section>
 
             <section className="legal-section">
-              <h2>Article 4 — Délais de livraison</h2>
+              <h2>Article 4 &mdash; D&eacute;lais de livraison</h2>
               <ul className="legal-list">
-                <li>Audit Express : <strong>7 jours ouvrés</strong></li>
-                <li>Pack Pilote : <strong>3 à 4 semaines</strong></li>
-                <li>Abonnement : livraisons échelonnées définies au devis</li>
-                <li>Système Premium : <strong>2 à 4 mois</strong>, calendrier défini au devis</li>
+                <li>Notice &agrave; l&apos;unit&eacute; : <strong>5 jours ouvr&eacute;s</strong></li>
+                <li>Pack 3 notices : <strong>2 semaines</strong></li>
+                <li>Pack 10 notices : <strong>4 semaines</strong></li>
+                <li>Catalogue : calendrier d&eacute;fini au devis</li>
+                <li>D&eacute;p&ocirc;t-vente : estimation sous <strong>48 h</strong>, notice produite avant mise en diffusion</li>
               </ul>
               <p>
-                Les délais courent à compter de la réception complète des éléments nécessaires
-                à la rédaction (photos, dimensions, informations sur la pièce, prix envisagé).
-                Tout retard dans la transmission des éléments par le client décale en conséquence
-                la date de livraison.
+                Les d&eacute;lais courent &agrave; compter de la r&eacute;ception compl&egrave;te des &eacute;l&eacute;ments
+                n&eacute;cessaires (photos, dimensions, informations sur la pi&egrave;ce, prix envisag&eacute;).
+                Tout retard dans la transmission des &eacute;l&eacute;ments par le client d&eacute;cale en
+                cons&eacute;quence la date de livraison.
               </p>
             </section>
 
