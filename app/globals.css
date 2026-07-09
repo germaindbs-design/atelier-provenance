@@ -179,7 +179,7 @@ img { max-width: 100%; display: block; }
 }
 .hero-surtitre .losange { width: 6px; height: 6px; }
 .hero h1 {
-  font-size: clamp(2.6rem, 5.2vw, 4.1rem);
+  font-size: clamp(2.7rem, 5.6vw, 4.6rem);
   letter-spacing: -0.01em;
   margin-bottom: 28px;
 }
@@ -225,6 +225,14 @@ img { max-width: 100%; display: block; }
   text-transform: uppercase;
   color: var(--or);
   white-space: nowrap;
+}
+.figure-credit {
+  margin-top: 8px;
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  color: var(--taupe);
+  text-transform: uppercase;
 }
 .hero-figure { max-width: 430px; justify-self: end; }
 
@@ -388,7 +396,7 @@ img { max-width: 100%; display: block; }
 }
 .section-papier .etude-prix { background: var(--ivoire); }
 .etude-prix .tag { color: var(--taupe); }
-.etude-prix-valeur { font-size: 1.35rem; color: var(--encre); }
+.etude-prix-valeur { font-size: 1.35rem; color: var(--encre); font-variant-numeric: tabular-nums; }
 .etude-prix-valeur em { color: var(--or); font-style: normal; }
 .etudes-source {
   margin-top: 48px;
@@ -429,7 +437,12 @@ img { max-width: 100%; display: block; }
   padding: 6px 12px;
 }
 .tarif .tag { color: var(--taupe); margin-bottom: 20px; }
-.tarif-prix { font-size: 2.3rem; line-height: 1; margin-bottom: 4px; }
+.tarif-prix {
+  font-size: 2.3rem;
+  line-height: 1;
+  margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
+}
 .tarif-unite { font-size: 0.9rem; color: var(--or); margin-bottom: 20px; min-height: 1.3em; }
 .tarif p { font-size: 0.97rem; color: var(--taupe); line-height: 1.6; flex: 1; }
 .tarif .btn { margin-top: 26px; }
@@ -799,4 +812,31 @@ img { max-width: 100%; display: block; }
   .hero-actions .btn { width: 100%; }
   .formulaire { padding: 32px 24px; }
   .chapter-head .chapter-line:last-child { display: none; }
+}
+
+/* ── ACCESSIBILITÉ (ui-ux-pro-max) ── */
+a, button, select { cursor: pointer; }
+:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 3px;
+}
+.formulaire input:focus-visible,
+.formulaire textarea:focus-visible,
+.formulaire select:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 0;
+}
+.faq-answer[hidden] { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

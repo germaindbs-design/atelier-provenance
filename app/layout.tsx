@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     siteName: "Atelier Provenance",
     locale: "fr_FR",
     type: "website",
-    images: [{ url: "/etudes/commode.webp", width: 900, height: 1200 }],
+    images: [{ url: "/etudes/met-commode.webp", width: 960, height: 1200 }],
   },
   twitter: {
     card: "summary_large_image",

@@ -15,10 +15,21 @@ export default function MentionsLegales() {
             <section className="legal-section">
               <h2>Éditeur du site</h2>
               <p><strong>Germain Dubois</strong></p>
-              <p>Micro-entrepreneur — immatriculation en cours</p>
+              <p>Micro-entrepreneur</p>
+              <p>SIREN : 104 842 760 — SIRET : 104 842 760 00019</p>
               <p>Activité : Rédaction spécialisée pour le mobilier de collection et les objets d&apos;art</p>
               <p>Email : <a href="mailto:contact.atelierprovenance@gmail.com">contact.atelierprovenance@gmail.com</a></p>
               <p>Téléphone : <a href="tel:+33751420733">07 51 42 07 33</a></p>
+            </section>
+
+            <section className="legal-section">
+              <h2>Crédits iconographiques</h2>
+              <p>
+                Les photographies d&apos;œuvres illustrant les études du site sont des
+                images d&apos;illustration de pièces comparables, issues des collections
+                en libre accès (Open Access) du Metropolitan Museum of Art de New York,
+                placées dans le domaine public sous licence CC0.
+              </p>
             </section>
 
             <section className="legal-section">

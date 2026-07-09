@@ -18,7 +18,7 @@ export default function CGV() {
               <p>
                 Les pr&eacute;sentes Conditions G&eacute;n&eacute;rales de Vente r&eacute;gissent les prestations
                 fournies par Germain Dubois, exer&ccedil;ant sous le nom commercial
-                <strong> Atelier Provenance</strong>, micro-entrepreneur (immatriculation en cours),
+                <strong> Atelier Provenance</strong>, micro-entrepreneur (SIREN 104 842 760, SIRET 104 842 760 00019),
                 &agrave; tout client professionnel ou particulier.
               </p>
               <p>

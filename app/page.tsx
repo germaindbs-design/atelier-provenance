@@ -92,8 +92,10 @@ const ETAPES = [
 
 const ETUDES = [
   {
-    image: "/etudes/vase.webp",
-    alt: "Grand vase en cristal de Bohême bleu cobalt à émaux en relief et dorure",
+    image: "/etudes/met-verre.webp",
+    alt: "Gobelet en verre de Bohême à décor émaillé et doré, Friedrich Egermann, vers 1840-1850",
+    cartel: "Verre de Bohême, Friedrich Egermann, vers 1840–1850",
+    credit: "Image d'illustration (pièce comparable) — The Metropolitan Museum of Art, domaine public",
     avantTitre: "« Cristal de Bohême grand vase émaillée richement décorée dorée »",
     avantTexte:
       "Le titre d'origine, tel qu'en ligne. Ni la teinte, ni la technique des émaux en relief, ni le format hors norme ne sont établis.",
@@ -106,8 +108,10 @@ const ETUDES = [
     prixNote: "repositionnement défendable, argumenté par comparables",
   },
   {
-    image: "/etudes/miroir.webp",
-    alt: "Grand miroir japonisant dans le goût de Gabriel Viardot, dragon sculpté et fronton pagode",
+    image: "/etudes/met-japonisme.webp",
+    alt: "Cabinet japonisant en bois sculpté et panneaux laqués, Herter Brothers, 1879-1882",
+    cartel: "Cabinet japonisant, Herter Brothers, 1879–1882",
+    credit: "Image d'illustration (pièce comparable) — The Metropolitan Museum of Art, domaine public",
     avantTitre:
       "« Gabriel Viardot dans le goût grand Miroir japonisant d'époque 1900s »",
     avantTexte:
@@ -121,8 +125,10 @@ const ETUDES = [
     prixNote: "défendable sans expertise ; davantage avec attribution confirmée",
   },
   {
-    image: "/etudes/commode.webp",
-    alt: "Commode galbée de style Louis XV en marqueterie florale, bronzes dorés et plateau de marbre",
+    image: "/etudes/met-commode.webp",
+    alt: "Commode d'époque Louis XV en marqueterie et bronzes dorés, Roger Vandercruse dit Lacroix, vers 1755-1760",
+    cartel: "Commode Louis XV, R. Vandercruse dit Lacroix, vers 1755–1760",
+    credit: "Image d'illustration (pièce comparable) — The Metropolitan Museum of Art, domaine public",
     avantTitre: "« Commode ancienne style Louis XV »",
     avantTexte:
       "Une description en deux lignes : ni le galbe en arbalète, ni la marqueterie florale, ni le marbre n'étaient nommés.",
@@ -132,7 +138,7 @@ const ETUDES = [
       "« Le galbe dit en arbalète — renflement latéral prononcé, ventre saillant — est la forme la plus caractéristique et la plus recherchée de ce répertoire. »",
     prixLabel: "Positionné 1 480 €",
     prixValeur: "prix confirmé, désormais argumenté",
-    prixNote: "titre réécrit pour le référencement Proantic et Selency",
+    prixNote: "titre réécrit pour le référencement sur les plateformes",
   },
 ];
 
@@ -178,7 +184,7 @@ const TARIFS = [
 const FAQ = [
   {
     q: "Combien coûte le dépôt-vente ?",
-    a: "Rien. Le prix de reprise est convenu à l'entrée et garanti par contrat ; notre rémunération est l'écart entre ce prix et le prix de revente que la documentation permet d'obtenir. Cet écart est contractualisé dès le départ — vous savez à quel prix votre pièce est proposée.",
+    a: "Rien. Le prix de reprise est convenu à l'entrée et garanti par contrat. Notre rémunération est la différence entre ce prix garanti et le prix de vente ; elle est inscrite au contrat dès le départ, et vous savez à quel prix votre pièce est proposée.",
   },
   {
     q: "Qui fixe le prix de reprise ?",
@@ -282,19 +288,18 @@ export default function Page() {
                 Dépôt-vente &amp; documentation · Mobilier ancien, objets d&apos;art
               </p>
               <h1>
-                Confiez la pièce.
+                Nous vendons vos meubles
                 <br />
-                Nous établissons sa valeur,
+                et objets anciens —
                 <br />
-                <em>puis nous la vendons.</em>
+                <em>à leur juste prix.</em>
               </h1>
               <p className="hero-texte">
-                Atelier Provenance reprend meubles et objets anciens en
-                dépôt-vente : un prix de reprise fixe, garanti par contrat, une
-                notice documentée de quatre pages, et une diffusion travaillée
-                auprès des acheteurs — en France et à l&apos;international. Vous ne
-                payez rien : notre rémunération est l&apos;écart que la
-                documentation permet.
+                Le principe du dépôt-vente : vous recevez un prix de reprise
+                garanti par contrat. Nous documentons la pièce — une notice de
+                quatre pages — puis nous la vendons, en France et à
+                l&apos;international. Vous ne payez rien : la différence entre le
+                prix garanti et le prix de vente nous rémunère.
               </p>
               <div className="hero-actions">
                 <a href="#contact" className="btn btn-plein">
@@ -315,15 +320,22 @@ export default function Page() {
             <Reveal delay={150} className="hero-figure">
               <figure className="figure">
                 <img
-                  src="/etudes/commode.webp"
-                  alt="Commode galbée de style Louis XV, marqueterie florale et bronzes dorés"
-                  width={900}
+                  src="/etudes/met-commode.webp"
+                  alt="Commode d'époque Louis XV en marqueterie et bronzes dorés, Roger Vandercruse dit Lacroix, vers 1755-1760"
+                  width={960}
                   height={1200}
                 />
                 <figcaption className="figure-cartel">
-                  <p>Commode galbée de style Louis XV, marqueterie florale</p>
-                  <span>Notice réf. 1731171</span>
+                  <p>
+                    Commode d&apos;époque Louis XV, Roger Vandercruse dit Lacroix,
+                    vers 1755–1760
+                  </p>
+                  <span>The Met · CC0</span>
                 </figcaption>
+                <p className="figure-credit">
+                  Image d&apos;illustration — The Metropolitan Museum of Art,
+                  domaine public
+                </p>
               </figure>
             </Reveal>
           </div>
@@ -345,23 +357,20 @@ export default function Page() {
                 <div className="depot-principe">
                   <p>
                     Une belle pièce mal documentée se vend en dessous de sa
-                    valeur — ou ne se vend pas. Le dépôt-vente d&apos;Atelier
-                    Provenance repose sur un principe simple :{" "}
-                    <strong>
-                      nous convenons ensemble d&apos;un prix de reprise fixe,
-                    </strong>{" "}
-                    que vous touchez quelle que soit l&apos;issue de la négociation.
-                    La pièce reste votre propriété jusqu&apos;à la vente.
+                    valeur — ou ne se vend pas. Le dépôt-vente repose sur un
+                    principe simple : <strong>nous convenons ensemble d&apos;un
+                    prix de reprise fixe.</strong> Ce prix vous est acquis dès
+                    que la pièce est vendue, quel que soit le montant de la
+                    vente. La pièce reste votre propriété jusque-là.
                   </p>
                   <p>
-                    Nous produisons ensuite la notice qui documente et rassure,
-                    puis nous proposons la pièce au-dessus de ce prix.{" "}
+                    Nous rédigeons ensuite la notice qui documente la pièce,
+                    puis nous la proposons à un prix supérieur au prix garanti.{" "}
                     <strong>
-                      L&apos;écart est notre rémunération — il est inscrit au
-                      contrat,
+                      La différence entre les deux est notre rémunération.
                     </strong>{" "}
-                    pas découvert après coup. Vous savez à quel prix votre
-                    pièce est présentée, et à qui.
+                    Elle est inscrite au contrat dès le départ : vous savez à
+                    quel prix votre pièce est présentée, et à qui.
                   </p>
                 </div>
               </Reveal>
@@ -464,10 +473,10 @@ export default function Page() {
                 <em>avant et après.</em>
               </h2>
               <p className="section-intro">
-                Notices produites sur des pièces de la Maison Charlot
-                Antiquités &amp; Brocante (Bourgogne). À gauche, l&apos;annonce telle
-                qu&apos;elle était en ligne ; à droite, ce que la recherche a
-                établi — et ce que cela change au prix.
+                Trois notices produites pour un marchand professionnel — les
+                annonces et les prix sont réels, le vendeur reste anonyme. À
+                gauche, le titre tel qu&apos;il était en ligne ; à droite, ce que
+                la recherche a établi — et ce que cela change au prix.
               </p>
             </Reveal>
             <div className="etudes">
@@ -477,9 +486,10 @@ export default function Page() {
                     <figure className="figure etude-figure">
                       <img src={e.image} alt={e.alt} loading="lazy" />
                       <figcaption className="figure-cartel">
-                        <p>{e.apresTitre.split(" — ")[0]}</p>
+                        <p>{e.cartel}</p>
                         <span>Étude {["I", "II", "III"][i]}</span>
                       </figcaption>
+                      <p className="figure-credit">{e.credit}</p>
                     </figure>
                     <div className="etude-corps">
                       <div className="etude-volet etude-volet-avant">
@@ -510,10 +520,12 @@ export default function Page() {
             </div>
             <Reveal>
               <p className="etudes-source">
-                Recommandations de prix issues des notices livrées, réf.
-                1730555, 1731201 et 1731171 — comparables : adjudications
-                récentes et annonces actives, sources citées en page 4 de
-                chaque notice.
+                Recommandations de prix issues des notices livrées —
+                comparables : adjudications récentes et annonces actives,
+                sources citées en page 4 de chaque notice. Les photographies
+                sont des images d&apos;illustration de pièces comparables, issues
+                des collections en libre accès du Metropolitan Museum of Art
+                (domaine public, CC0).
               </p>
             </Reveal>
           </div>
@@ -764,14 +776,22 @@ export default function Page() {
                     <div className="faq-item" key={i}>
                       <button
                         className="faq-toggle"
+                        aria-expanded={openFaq === i}
+                        aria-controls={`faq-panel-${i}`}
                         onClick={() => setOpenFaq(openFaq === i ? null : i)}
                       >
                         {f.q}
-                        <span className="faq-icon">
+                        <span className="faq-icon" aria-hidden="true">
                           {openFaq === i ? "−" : "+"}
                         </span>
                       </button>
-                      {openFaq === i && <p className="faq-answer">{f.a}</p>}
+                      <p
+                        className="faq-answer"
+                        id={`faq-panel-${i}`}
+                        hidden={openFaq !== i}
+                      >
+                        {f.a}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -784,6 +804,7 @@ export default function Page() {
                   <input
                     type="text"
                     required
+                    autoComplete="name"
                     value={formData.name}
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
@@ -795,6 +816,7 @@ export default function Page() {
                   <input
                     type="email"
                     required
+                    autoComplete="email"
                     value={formData.email}
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
