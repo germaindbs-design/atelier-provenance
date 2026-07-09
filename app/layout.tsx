@@ -1,23 +1,34 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Atelier Provenance | Rédaction experte pour le mobilier de collection",
+  title: "Atelier Provenance — La valeur de vos objets, rendue lisible",
   description:
-    "Des notices expertes qui justifient le prix, créent le désir et accélèrent la vente de vos pièces anciennes et vintage.",
+    "Atelier éditorial pour maisons de vente, galeries et marchands : audit de catalogue, fiches premium, direction éditoriale. De l'Audit Express au Système Premium.",
   keywords: [
     "mobilier ancien",
     "rédaction",
     "antiquités",
     "notice",
-    "mobilier de collection",
+    "catalogue",
+    "galerie",
     "objets d'art",
+    "storytelling",
   ],
   authors: [{ name: "Atelier Provenance" }],
   openGraph: {
-    title: "Atelier Provenance | Rédaction experte pour le mobilier de collection",
+    title: "Atelier Provenance — La valeur de vos objets, rendue lisible",
     description:
-      "Des notices expertes qui justifient le prix, créent le désir et accélèrent la vente de vos pièces anciennes et vintage.",
+      "Atelier éditorial pour maisons de vente, galeries et marchands : audit de catalogue, fiches premium, direction éditoriale.",
     url: "https://atelier-provenance.vercel.app",
     siteName: "Atelier Provenance",
     locale: "fr_FR",
@@ -26,13 +37,14 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Atelier Provenance",
-    description: "Rédaction experte pour le mobilier de collection et les objets d'art.",
+    description:
+      "Atelier éditorial pour le mobilier de collection et les objets d'art.",
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  themeColor: "#1a1613",
+  robots: { index: true, follow: true },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#211C16",
 };
 
 export default function RootLayout({
@@ -41,7 +53,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr">
+    <html lang="fr" className={cormorant.variable}>
       <body>{children}</body>
     </html>
   );

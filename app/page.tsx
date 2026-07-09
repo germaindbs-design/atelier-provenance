@@ -2,11 +2,10 @@
 
 import { useState, useEffect, useRef } from "react";
 
-/* ───────────────────────── HOOK SCROLL REVEAL ───────────────────────── */
+/* ───────────────────────── SCROLL REVEAL ───────────────────────── */
 function useScrollReveal() {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -15,16 +14,14 @@ function useScrollReveal() {
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
-
   return { ref, isVisible };
 }
 
-/* ───────────────────────── COMPOSANT REVEAL ───────────────────────── */
 function Reveal({
   children,
   delay = 0,
@@ -46,18 +43,131 @@ function Reveal({
   );
 }
 
+/* ───────────────────────── ORNEMENTS ───────────────────────── */
+function Losange({ className = "" }: { className?: string }) {
+  return <span className={`losange ${className}`} aria-hidden="true" />;
+}
+
+function ChapterHead({
+  numero,
+  titre,
+  light = false,
+}: {
+  numero: string;
+  titre: string;
+  light?: boolean;
+}) {
+  return (
+    <div className={`chapter-head ${light ? "chapter-head-light" : ""}`}>
+      <span className="chapter-line" />
+      <span className="chapter-label">
+        Chapitre {numero} — {titre}
+      </span>
+      <span className="chapter-line" />
+    </div>
+  );
+}
+
+/* ───────────────────────── DONNÉES ───────────────────────── */
+const OFFRES = [
+  {
+    numero: "I",
+    nom: "Audit Express",
+    prix: "390 €",
+    duree: "Livré sous 7 jours",
+    promesse: "Voir immédiatement ce que vos objets pourraient devenir.",
+    contenu: [
+      "Analyse de 10 objets de votre catalogue",
+      "Réécriture complète de 2 fiches",
+      "Recommandations concrètes et priorisées",
+      "Appel de restitution de 30 minutes",
+    ],
+    resultat:
+      "Une vision claire des améliorations possibles et de leur impact direct sur vos ventes.",
+    badge: "Point d'entrée",
+    cta: "Demander un audit",
+  },
+  {
+    numero: "II",
+    nom: "Pack Pilote",
+    prix: "1 900 €",
+    duree: "Mission de 3 à 4 semaines",
+    promesse:
+      "Transformer votre catalogue en un outil de vente clair et désirable.",
+    contenu: [
+      "15 fiches premium, recherchées et documentées",
+      "Versions longues et courtes pour chaque pièce",
+      "Contenus complémentaires (réseaux, newsletter)",
+      "Cohérence éditoriale de l'ensemble",
+    ],
+    resultat:
+      "Meilleure lisibilité, valeur perçue augmentée, ventes facilitées.",
+    badge: null,
+    cta: "Lancer un pilote",
+  },
+  {
+    numero: "III",
+    nom: "Abonnement",
+    prix: "3 000 – 6 000 € / mois",
+    duree: "Engagement trimestriel",
+    promesse: "Externaliser la rédaction sans perdre en qualité.",
+    contenu: [
+      "30 à 60 fiches par mois selon la formule",
+      "Optimisation continue des fiches existantes",
+      "Interlocuteur dédié, support prioritaire",
+      "Reporting mensuel sur les performances",
+    ],
+    resultat: "Production fluide, catalogue cohérent, gain de temps durable.",
+    badge: null,
+    cta: "Étudier un abonnement",
+  },
+  {
+    numero: "IV",
+    nom: "Système Premium",
+    prix: "8 000 – 20 000 €",
+    duree: "Mission de 2 à 4 mois",
+    promesse: "Transformer votre manière de vendre.",
+    contenu: [
+      "Refonte complète du catalogue",
+      "Storytelling global de la maison",
+      "Formation de votre équipe à la méthode",
+      "Chartes, gabarits et outils transmis",
+    ],
+    resultat: "Positionnement haut de gamme et autonomie interne durable.",
+    badge: null,
+    cta: "Ouvrir la discussion",
+  },
+];
+
+const FAQ = [
+  {
+    q: "Pourquoi un audit plutôt qu'une notice à l'unité ?",
+    a: "Parce qu'une fiche isolée ne change pas un catalogue. L'Audit Express identifie d'abord où la valeur se perd — vocabulaire, structure, positionnement prix — puis le démontre sur deux de vos pièces. Vous décidez ensuite, preuves en main, de la suite à donner.",
+  },
+  {
+    q: "Travaillez-vous avec les petites structures ?",
+    a: "Oui. L'Audit Express (390 €) est précisément conçu pour les marchands et galeries qui veulent mesurer l'impact avant d'engager davantage. Le parcours est progressif : chaque étape se finance par les résultats de la précédente.",
+  },
+  {
+    q: "Qu'est-ce que Lila D'Algarve ?",
+    a: "Notre média éditorial, consacré au mobilier ancien et aux arts décoratifs. Les pièces travaillées avec nos clients peuvent y être présentées à une audience de collectionneurs — un canal de visibilité supplémentaire, sans démarche de votre part.",
+  },
+  {
+    q: "Comment garantissez-vous l'exactitude des attributions ?",
+    a: "Par la prudence lexicale des maisons de vente : « estampillé », « attribué à », « dans le goût de » n'y sont jamais interchangeables. Chaque affirmation est sourcée ; en cas de doute, la formulation le dit.",
+  },
+];
+
 /* ───────────────────────── PAGE ───────────────────────── */
 export default function Page() {
-  const [openExample, setOpenExample] = useState<number | null>(null);
   const [mobileMenu, setMobileMenu] = useState(false);
-  const [formStatus, setFormStatus] = useState<string | null>(null);
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [formStatus, setFormStatus] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
-    platform: "",
+    structure: "",
     pieces: "",
     message: "",
   });
@@ -68,57 +178,31 @@ export default function Page() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const [heroOffset, setHeroOffset] = useState(0);
-  useEffect(() => {
-    const handleParallax = () => setHeroOffset(window.scrollY * 0.3);
-    window.addEventListener("scroll", handleParallax, { passive: true });
-    return () => window.removeEventListener("scroll", handleParallax);
-  }, []);
-
-  const [touched, setTouched] = useState<Record<string, boolean>>({});
-  const markTouched = (field: string) =>
-    setTouched((prev) => ({ ...prev, [field]: true }));
-  const isValidEmail = (email: string) =>
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const subject = encodeURIComponent(
-      "Demande — " + (formData.name || "Nouveau prospect")
+      "Demande — " + (formData.name || "Nouveau contact")
     );
     const body = encodeURIComponent(
-      "Nom : " +
-        formData.name +
-        "\nEmail : " +
-        formData.email +
-        "\nTéléphone : " +
-        formData.phone +
-        "\nPlateforme : " +
-        formData.platform +
-        "\nNombre de pièces : " +
-        formData.pieces +
-        "\n\nMessage :\n" +
-        formData.message
+      "Nom : " + formData.name +
+      "\nEmail : " + formData.email +
+      "\nStructure : " + formData.structure +
+      "\nTaille du catalogue : " + formData.pieces +
+      "\n\nMessage :\n" + formData.message
     );
     window.location.href =
-      "mailto:contact.atelierprovenance@gmail.com?subject=" +
-      subject +
-      "&body=" +
-      body;
+      "mailto:contact.atelierprovenance@gmail.com?subject=" + subject + "&body=" + body;
     setFormStatus("sent");
   };
 
   return (
     <>
-      {/* ═══════════════════════ NAVBAR ═══════════════════════ */}
+      {/* ═══════════ NAV ═══════════ */}
       <nav className={`nav ${scrolled ? "nav-scrolled" : ""}`}>
         <div className="container nav-inner">
           <a href="#" className="nav-logo">
-            <img
-              src="/Logo.png"
-              alt="Atelier Provenance"
-              className="nav-logo-img"
-            />
+            <span className="nav-losange" aria-hidden="true" />
+            Atelier Provenance
           </a>
           <button
             className="mobile-toggle"
@@ -128,248 +212,98 @@ export default function Page() {
             {mobileMenu ? "✕" : "☰"}
           </button>
           <div className={`nav-links ${mobileMenu ? "nav-open" : ""}`}>
-            <a href="#approche" onClick={() => setMobileMenu(false)}>
-              Approche
-            </a>
-            <a href="#offres" onClick={() => setMobileMenu(false)}>
-              Prestations
-            </a>
-            <a href="#exemples" onClick={() => setMobileMenu(false)}>
-              Exemples
-            </a>
-            <a href="#parcours" onClick={() => setMobileMenu(false)}>
-              À propos
-            </a>
+            <a href="#constat" onClick={() => setMobileMenu(false)}>Le constat</a>
+            <a href="#methode" onClick={() => setMobileMenu(false)}>La méthode</a>
+            <a href="#parcours" onClick={() => setMobileMenu(false)}>Le parcours</a>
+            <a href="#etude" onClick={() => setMobileMenu(false)}>Étude</a>
+            <a href="#media" onClick={() => setMobileMenu(false)}>Le média</a>
             <a
               href="#contact"
-              className="button button-primary button-sm"
+              className="nav-cta"
               onClick={() => setMobileMenu(false)}
             >
-              Prendre contact
+              Demander un audit
             </a>
           </div>
         </div>
       </nav>
 
       <main>
-        {/* ═══════════════════════ HERO ═══════════════════════ */}
+        {/* ═══════════ HERO ═══════════ */}
         <section className="hero">
-          <div
-            className="hero-bg"
-            style={{ transform: `translateY(${heroOffset}px)` }}
-          />
-          <div className="hero-grain" />
-          <div className="container hero-grid">
-            <Reveal>
-              <div>
-                <p className="eyebrow">Atelier Provenance</p>
-                <h1>
-                  Vos pièces ont une valeur.
-                  <br />
-                  <em>Il reste à la rendre lisible.</em>
-                </h1>
-                <p className="intro">
-                  Rédaction de notices pour le mobilier de collection et les
-                  objets d&apos;art. Chaque texte est construit pour soutenir le
-                  prix, clarifier l&apos;objet et le rendre véritablement
-                  désirable — pas seulement visible.
-                </p>
-                <div className="actions">
-                  <a
-                    href="#contact"
-                    className="button button-primary button-arrow"
-                  >
-                    Envoyer un objet à analyser
-                  </a>
-                  <a href="#offres" className="button button-secondary">
-                    Voir les prestations
-                  </a>
-                </div>
-                <p className="hero-free">
-                  Première notice offerte, sans engagement.
-                </p>
-              </div>
-            </Reveal>
-            <Reveal delay={200}>
-              <div className="hero-panel">
-                <div className="hero-card">
-                  <p className="hero-label">En bref</p>
-                  <ul className="hero-list">
-                    <li>
-                      <span className="list-icon">◆</span> Analyse du marché et
-                      du positionnement prix
-                    </li>
-                    <li>
-                      <span className="list-icon">◆</span> Vocabulaire juste,
-                      ton adapté à votre clientèle
-                    </li>
-                    <li>
-                      <span className="list-icon">◆</span> Formats prêts à
-                      publier sur tous vos canaux
-                    </li>
-                    <li>
-                      <span className="list-icon">◆</span> Livraison sous 5
-                      jours ouvrés
-                    </li>
-                    <li>
-                      <span className="list-icon">◆</span> Première notice
-                      offerte
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
-        {/* ═══════════════════════ CONSTAT ═══════════════════════ */}
-        <section className="section border-top" id="probleme">
-          <div className="container split">
-            <Reveal>
-              <div>
-                <p className="eyebrow">Le constat</p>
-                <h2>
-                  La plupart des annonces ne sont pas à la hauteur des pièces
-                  qu&apos;elles présentent.
-                </h2>
-                <p>
-                  Sur Selency, Proantic, Leboncoin ou Catawiki, des milliers
-                  d&apos;objets de qualité restent en ligne pendant des semaines.
-                  Pas parce qu&apos;ils manquent de valeur, mais parce que rien dans
-                  leur présentation ne permet à l&apos;acheteur de comprendre cette
-                  valeur.
-                </p>
-                <p>
-                  Descriptions en deux lignes. Vocabulaire approximatif. Aucun
-                  contexte historique. Le prix semble arbitraire. L&apos;acheteur
-                  hésite, puis passe à autre chose.
-                </p>
-              </div>
-            </Reveal>
-            <Reveal delay={150}>
-              <div>
-                <div className="stat-grid">
-                  <div className="stat-card">
-                    <p className="stat-number">70 %</p>
-                    <p className="stat-label">
-                      des annonces haut de gamme sans contexte historique
-                    </p>
-                  </div>
-                  <div className="stat-card">
-                    <p className="stat-number">3×</p>
-                    <p className="stat-label">
-                      plus de vues avec une description structurée
-                    </p>
-                  </div>
-                  <div className="stat-card">
-                    <p className="stat-number">45 j.</p>
-                    <p className="stat-label">
-                      durée moyenne de vente sans texte optimisé
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
-        {/* ═══════════════════════ APPROCHE ═══════════════════════ */}
-        <section className="section section-dark" id="approche">
-          <div className="container">
-            <Reveal>
-              <div className="section-head section-head-light">
-                <p className="eyebrow eyebrow-light">L&apos;approche</p>
-                <h2>
-                  Une notice n&apos;est pas une description.
-                  <br />
-                  <em>C&apos;est un argument de vente.</em>
-                </h2>
-                <p className="section-intro section-intro-light">
-                  Décrire un meuble, tout le monde peut le faire. Donner à un
-                  acheteur les raisons précises de passer à l&apos;acte — c&apos;est un
-                  autre métier. Chaque texte est construit pour créer de la
-                  clarté, de la confiance, et du désir.
-                </p>
-              </div>
-            </Reveal>
-            <div className="pillars">
-              {[
-                {
-                  num: "01",
-                  title: "Positionnement",
-                  desc: "Analyse du marché, comparables récents, cohérence entre le prix et le discours.",
-                },
-                {
-                  num: "02",
-                  title: "Précision",
-                  desc: "Vocabulaire technique juste — époque, style, matériaux, provenance. Pas d'à-peu-près.",
-                },
-                {
-                  num: "03",
-                  title: "Narration",
-                  desc: "Chaque pièce a une histoire. Le texte la rend lisible, mémorable, désirable.",
-                },
-              ].map((p, i) => (
-                <Reveal key={i} delay={i * 120}>
-                  <div className="pillar-card">
-                    <span className="pillar-num">{p.num}</span>
-                    <h3>{p.title}</h3>
-                    <p>{p.desc}</p>
-                  </div>
-                </Reveal>
-              ))}
+          <div className="hero-frame">
+            <Losange className="hero-losange" />
+            <p className="hero-surtitre">Atelier éditorial · Mobilier de collection & objets d&apos;art</p>
+            <h1>
+              La valeur d&apos;un objet
+              <br />
+              est une histoire <em>bien établie.</em>
+            </h1>
+            <p className="hero-texte">
+              Nous écrivons ce qui manque entre vos pièces et leurs acheteurs :
+              audit de catalogue, fiches premium, direction éditoriale complète —
+              pour les maisons de vente, galeries et marchands qui veulent que
+              leurs objets soient compris, puis désirés.
+            </p>
+            <div className="hero-actions">
+              <a href="#contact" className="btn btn-plein">
+                Demander un Audit Express — 390 €
+              </a>
+              <a href="#parcours" className="btn btn-filet">
+                Découvrir le parcours
+              </a>
+            </div>
+            <div className="hero-cartel">
+              <span>Recherche documentée</span>
+              <Losange />
+              <span>Vocabulaire de maison de vente</span>
+              <Losange />
+              <span>Résultats mesurés</span>
             </div>
           </div>
+          <a href="#constat" className="hero-scroll" aria-label="Défiler">
+            <span />
+          </a>
         </section>
 
-        {/* ═══════════════════════ PROCESSUS ═══════════════════════ */}
-        <section className="section border-top" id="processus">
-          <div className="container split">
+        {/* ═══════════ CHAPITRE I — LE CONSTAT ═══════════ */}
+        <section className="section" id="constat">
+          <div className="container">
             <Reveal>
-              <div>
-                <p className="eyebrow">Fonctionnement</p>
-                <h2>
-                  Un processus simple,
-                  <br />
-                  <em>un résultat précis.</em>
-                </h2>
-                <p>
-                  Chaque mission suit le même protocole — parce que la rigueur
-                  est ce qui sépare un bon texte d&apos;un texte à peu près.
-                </p>
-              </div>
+              <ChapterHead numero="I" titre="Le constat" />
+              <h2 className="section-titre">
+                Les belles pièces ne se vendent pas mal.
+                <br />
+                <em>Elles se vendent muettes.</em>
+              </h2>
             </Reveal>
-            <div>
-              <div className="process-steps">
+            <div className="constat-grid">
+              <Reveal delay={80}>
+                <div className="constat-texte">
+                  <p>
+                    Sur Selency, Proantic ou Catawiki, des milliers d&apos;objets de
+                    qualité attendent des semaines. Non par manque de valeur —
+                    par manque de preuves. Description en deux lignes,
+                    vocabulaire approximatif, aucun contexte : le prix semble
+                    arbitraire, l&apos;acheteur hésite, puis passe.
+                  </p>
+                  <p>
+                    Un catalogue n&apos;est pas une somme d&apos;annonces. C&apos;est le
+                    discours d&apos;une maison sur ce qu&apos;elle vend. Quand ce discours
+                    manque, c&apos;est la marge qui le paie.
+                  </p>
+                </div>
+              </Reveal>
+              <div className="constat-chiffres">
                 {[
-                  {
-                    num: "01",
-                    title: "Réception",
-                    desc: "Photos, contexte, prix envisagé — vous envoyez, nous analysons.",
-                  },
-                  {
-                    num: "02",
-                    title: "Recherche",
-                    desc: "Comparables, historique, provenance.",
-                  },
-                  {
-                    num: "03",
-                    title: "Rédaction",
-                    desc: "Texte structuré, vocabulaire précis, ton adapté.",
-                  },
-                  {
-                    num: "04",
-                    title: "Déclinaison",
-                    desc: "Notice longue, version courte, version réseaux.",
-                  },
-                ].map((s, i) => (
-                  <Reveal key={i} delay={i * 100}>
-                    <div className="process-step">
-                      <span className="step-num">{s.num}</span>
-                      <div>
-                        <h4>{s.title}</h4>
-                        <p>{s.desc}</p>
-                      </div>
+                  ["70 %", "des annonces haut de gamme sans contexte historique"],
+                  ["3×", "plus de vues avec une fiche structurée et documentée"],
+                  ["45 j.", "de délai moyen de vente sans texte travaillé"],
+                ].map(([n, l], i) => (
+                  <Reveal key={i} delay={120 + i * 100}>
+                    <div className="chiffre">
+                      <p className="chiffre-num">{n}</p>
+                      <p className="chiffre-label">{l}</p>
                     </div>
                   </Reveal>
                 ))}
@@ -378,654 +312,357 @@ export default function Page() {
           </div>
         </section>
 
-        {/* ═══════════════════════ OFFRES ═══════════════════════ */}
-        <section className="section section-alt border-top" id="offres">
+        {/* ═══════════ CHAPITRE II — LA MÉTHODE ═══════════ */}
+        <section className="section section-nuit" id="methode">
           <div className="container">
             <Reveal>
-              <div className="section-head">
-                <p className="eyebrow">Prestations</p>
-                <h2>
-                  Quatre formules,
-                  <br />
-                  <em>un même niveau d&apos;exigence.</em>
-                </h2>
-                <p className="section-intro">
-                  Chaque formule inclut la recherche, la rédaction et toutes les
-                  déclinaisons nécessaires. Pas de supplément caché.
-                </p>
-              </div>
+              <ChapterHead numero="II" titre="La méthode" light />
+              <h2 className="section-titre section-titre-light">
+                Une fiche n&apos;est pas une description.
+                <br />
+                <em>C&apos;est un argument.</em>
+              </h2>
             </Reveal>
-            <div className="offers-grid offers-grid-4">
-
-              {/* ── BROCHURE 1–5 ── */}
-              <Reveal delay={0}>
-                <div className="offer-card">
-                  <h3 className="offer-name">Brochure</h3>
-                  <p className="offer-price">150 €</p>
-                  <p className="offer-unit">/ notice · 1 à 5 pièces · livraison sous 5 jours</p>
-                  <p className="offer-desc">
-                    Pour découvrir le service et mesurer concrètement
-                    ce que la rédaction change sur vos premières pièces.
-                  </p>
-                  <ul className="offer-features">
-                    {[
-                      "1 à 5 notices complètes",
-                      "Recherche & identification",
-                      "Analyse marché / comparables",
-                      "Toutes déclinaisons incluses",
-                      "Diffusion dans le catalogue Lila D'Algarve",
-                    ].map((f, j) => (
-                      <li key={j}><span className="check">✓</span> {f}</li>
-                    ))}
-                  </ul>
-                  <a href="#contact" className="button button-secondary offer-cta">
-                    Commencer
-                  </a>
-                </div>
-              </Reveal>
-
-              {/* ── LIVRET 6–10 — recommandé ── */}
-              <Reveal delay={80}>
-                <div className="offer-card offer-featured">
-                  <span className="offer-badge">Recommandé</span>
-                  <h3 className="offer-name">Livret</h3>
-                  <p className="offer-price">130 €</p>
-                  <p className="offer-unit">/ notice · 6 à 10 pièces · livraison sous 10 jours</p>
-                  <p className="offer-desc">
-                    Le bon équilibre entre volume et engagement. Assez de
-                    pièces pour que les résultats soient immédiatement visibles.
-                  </p>
-                  <ul className="offer-features">
-                    {[
-                      "6 à 10 notices complètes",
-                      "Recherche & identification",
-                      "Analyse marché / comparables",
-                      "Toutes déclinaisons incluses",
-                      "Cohérence éditoriale du lot",
-                      "Interlocuteur unique",
-                      "Diffusion dans le catalogue Lila D'Algarve",
-                    ].map((f, j) => (
-                      <li key={j}><span className="check">✓</span> {f}</li>
-                    ))}
-                  </ul>
-                  <a href="#contact" className="button button-primary offer-cta">
-                    Choisir le Livret
-                  </a>
-                </div>
-              </Reveal>
-
-              {/* ── RECUEIL 11–15 ── */}
-              <Reveal delay={160}>
-                <div className="offer-card">
-                  <h3 className="offer-name">Recueil</h3>
-                  <p className="offer-price">110 €</p>
-                  <p className="offer-unit">/ notice · 11 à 15 pièces · livraison sous 15 jours</p>
-                  <p className="offer-desc">
-                    Pour les marchands avec un fonds à valoriser dans sa
-                    globalité. Direction éditoriale et cohérence d&apos;ensemble.
-                  </p>
-                  <ul className="offer-features">
-                    {[
-                      "11 à 15 notices complètes",
-                      "Recherche & identification",
-                      "Analyse marché / comparables",
-                      "Toutes déclinaisons incluses",
-                      "Direction éditoriale du fonds",
-                      "Interlocuteur unique",
-                      "Diffusion dans le catalogue Lila D'Algarve",
-                    ].map((f, j) => (
-                      <li key={j}><span className="check">✓</span> {f}</li>
-                    ))}
-                  </ul>
-                  <a href="#contact" className="button button-secondary offer-cta">
-                    Choisir le Recueil
-                  </a>
-                </div>
-              </Reveal>
-
-              {/* ── CATALOGUE 16–20 ── */}
-              <Reveal delay={240}>
-                <div className="offer-card">
-                  <h3 className="offer-name">Catalogue</h3>
-                  <p className="offer-price">100 €</p>
-                  <p className="offer-unit">/ notice · 16 à 20 pièces · livraison sous 20 jours</p>
-                  <p className="offer-desc">
-                    Pour les galeries. Un catalogue complet, cohérent,
-                    prêt à publier — sur toutes les plateformes.
-                  </p>
-                  <ul className="offer-features">
-                    {[
-                      "16 à 20 notices complètes",
-                      "Recherche & identification",
-                      "Analyse marché / comparables",
-                      "Toutes déclinaisons incluses",
-                      "Direction éditoriale complète",
-                      "Interlocuteur dédié",
-                      "Diffusion dans le catalogue Lila D'Algarve",
-                    ].map((f, j) => (
-                      <li key={j}><span className="check">✓</span> {f}</li>
-                    ))}
-                  </ul>
-                  <a href="#contact" className="button button-secondary offer-cta">
-                    Choisir le Catalogue
-                  </a>
-                </div>
-              </Reveal>
-            </div>
-
-            {/* ── NOTE FONDS ── */}
-            <Reveal delay={100}>
-              <p className="offer-fonds-note">
-                Pour les fonds de plus de 20 pièces —{" "}
-                <a href="#contact" className="offer-fonds-link">nous contacter pour un devis sur mesure</a>
-              </p>
-            </Reveal>
-
-            {/* ── LILA D'ALGARVE CALLOUT ── */}
-            <Reveal delay={100}>
-              <div className="lda-banner">
-                <div className="lda-banner-inner">
-                  <div>
-                    <p className="lda-eyebrow">Inclus dans toutes les formules</p>
-                    <p className="lda-title">
-                      Chaque pièce rédigée est publiée dans{" "}
-                      <em>Lila D&apos;Algarve</em>
-                    </p>
-                    <p className="lda-desc">
-                      Notre catalogue éditorial diffuse vos notices auprès d&apos;une
-                      audience d&apos;acheteurs et de collectionneurs. Un canal de
-                      visibilité supplémentaire, sans démarche de votre part.
-                    </p>
-                  </div>
-                  <div className="lda-badge">
-                    <img src="/Lila-D-Algarve.png" alt="Lila D'Algarve" className="lda-logo-img" />
-                    <span className="lda-badge-sub">Catalogue & réseaux</span>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-
-            <Reveal delay={100}>
-              <div className="offer-guarantee">
-                Première notice offerte — vous jugez sur pièce, sans engagement.
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
-        {/* ═══════════════════════ EXEMPLES ═══════════════════════ */}
-        <section className="section border-top" id="exemples">
-          <div className="container">
-            <Reveal>
-              <div className="section-head">
-                <p className="eyebrow">Exemples</p>
-                <h2>Trois cas, avant et après.</h2>
-                <p className="section-intro">
-                  Chaque exemple part d&apos;une annonce réelle trouvée en ligne et
-                  montre ce que la rédaction change — sur la lisibilité, la
-                  désirabilité, la cohérence avec le prix affiché.
-                </p>
-              </div>
-            </Reveal>
-
-            <div className="examples-stack">
-
-              {/* EXEMPLE 1 — Commode Louis XV */}
-              <Reveal>
-                <article className={`case-study ${openExample === 0 ? "is-open" : ""}`}>
-                  <button className="case-toggle" onClick={() => setOpenExample(openExample === 0 ? null : 0)}>
-                    <div className="case-toggle-left">
-                      <p className="case-meta">Exemple 1 · Commode galbée Louis XV</p>
-                      <h3>Transformer une description générique en notice qui justifie 1 480 €.</h3>
-                      <div className="case-specs">
-                        <span>Prix affiché : 1 480 €</span>
-                        <span>Marqueterie · bronzes · marbre</span>
-                        <span>Plateforme : Proantic</span>
-                      </div>
-                    </div>
-                    <div className="case-toggle-icon">{openExample === 0 ? "−" : "+"}</div>
-                  </button>
-                  {openExample === 0 && (
-                    <div className="case-body">
-                      <div className="case-columns">
-                        <div className="text-panel before-panel">
-                          <p className="panel-label">Avant</p>
-                          <p>Commode galbée de style Louis XV en marqueterie et bois de rose, présentant une silhouette galbée caractéristique. Bon état général. Garnitures présentes. Traces d&apos;usage cohérentes avec son état.</p>
-                        </div>
-                        <div className="text-panel after-panel">
-                          <p className="panel-label">Après</p>
-                          <p>Silhouette en arbalète à deux tiroirs sans traverse, la façade entièrement animée par une marqueterie florale d&apos;une densité remarquable : lys, roses et feuillages en médaillon central sur fond de bois de rose en chevrons.</p>
-                          <p>Les bronzes dorés — chutes d&apos;angle feuillagées, entrée de serrure rocaille, sabots enroulés — sont d&apos;origine et conservent un bel éclat. Plateau de marbre veiné violet et crème, bords chantournés.</p>
-                          <p>Une pièce lisible et bien aboutie, dont la qualité d&apos;exécution la distingue nettement des reproductions ordinaires du même style.</p>
-                        </div>
-                      </div>
-                      <div className="case-analysis">
-                        <p className="panel-label">Ce qui change</p>
-                        <ul>
-                          <li>Le galbe &laquo;&nbsp;en arbalète&nbsp;&raquo; et les tiroirs sans traverse sont nommés — ce sont les marqueurs des meilleures commodes Louis XV.</li>
-                          <li>Le marbre et les bronzes d&apos;origine, absents de l&apos;annonce initiale, deviennent des arguments centraux.</li>
-                          <li>Le prix de 1 480 € devient cohérent — il est ancré dans des éléments vérifiables.</li>
-                        </ul>
-                      </div>
-                    </div>
-                  )}
-                </article>
-              </Reveal>
-
-              {/* EXEMPLE 2 — Vase bohémien */}
-              <Reveal>
-                <article className={`case-study ${openExample === 1 ? "is-open" : ""}`}>
-                  <button className="case-toggle" onClick={() => setOpenExample(openExample === 1 ? null : 1)}>
-                    <div className="case-toggle-left">
-                      <p className="case-meta">Exemple 2 · Grand vase cristal de Bohême</p>
-                      <h3>Repositionner une pièce sous-évaluée grâce à une lecture de marché.</h3>
-                      <div className="case-specs">
-                        <span>Prix affiché : 980 €</span>
-                        <span>Cristal cobalt · émaux · or fin</span>
-                        <span>Plateforme : Proantic</span>
-                      </div>
-                    </div>
-                    <div className="case-toggle-icon">{openExample === 1 ? "−" : "+"}</div>
-                  </button>
-                  {openExample === 1 && (
-                    <div className="case-body">
-                      <div className="case-columns">
-                        <div className="text-panel before-panel">
-                          <p className="panel-label">Avant</p>
-                          <p>Magnifique vase en Cristal de Bohême richement décoré de motifs fleuris, entièrement peint à la main et doré. En parfait état aucun éclat, étiquette d&apos;origine présente. Hauteur 59.5cm.</p>
-                        </div>
-                        <div className="text-panel after-panel">
-                          <p className="panel-label">Après</p>
-                          <p>Silhouette balustre à col évasé, cristal soufflé bleu cobalt intense, dorure à l&apos;or fin sur fond brossé mat. Le décor floral — fleurs blanches et feuilles vertes en émaux en relief dans un cartouche ovale — est peint à la main et cuit au four.</p>
-                          <p>Format imposant de 59,5 cm. État parfait : aucun éclat, dorure homogène, étiquette d&apos;origine présente. Une pièce qui n&apos;a pas besoin d&apos;être mise en scène pour convaincre.</p>
-                        </div>
-                      </div>
-                      <div className="case-analysis">
-                        <p className="panel-label">Ce qui change</p>
-                        <ul>
-                          <li>L&apos;émaillage à chaud en relief est identifié — c&apos;est ce qui distingue cette pièce des vases décorés par impression.</li>
-                          <li>Le format 59,5 cm est mis en avant comme argument : la majorité des vases comparables font 30 à 45 cm.</li>
-                          <li>La notice inclut une recommandation de repositionnement à 1 300 – 1 400 €, comparables de marché à l&apos;appui.</li>
-                        </ul>
-                      </div>
-                    </div>
-                  )}
-                </article>
-              </Reveal>
-
-              {/* EXEMPLE 3 — Miroir Viardot */}
-              <Reveal>
-                <article className={`case-study ${openExample === 2 ? "is-open" : ""}`}>
-                  <button className="case-toggle" onClick={() => setOpenExample(openExample === 2 ? null : 2)}>
-                    <div className="case-toggle-left">
-                      <p className="case-meta">Exemple 3 · Miroir japonisant dans le goût de Gabriel Viardot</p>
-                      <h3>Positionner une pièce rare dans son contexte de marché pour défendre un prix élevé.</h3>
-                      <div className="case-specs">
-                        <span>Prix affiché : 12 000 €</span>
-                        <span>Bois sculpté · nacre · dragon</span>
-                        <span>Plateforme : Proantic</span>
-                      </div>
-                    </div>
-                    <div className="case-toggle-icon">{openExample === 2 ? "−" : "+"}</div>
-                  </button>
-                  {openExample === 2 && (
-                    <div className="case-body">
-                      <div className="case-columns">
-                        <div className="text-panel before-panel">
-                          <p className="panel-label">Avant</p>
-                          <p>Rare et exceptionnel Miroir Style Gabriel Viardot à décors Japonisant, Représentant Plusieurs dragons. Fabrication d&apos;époque 1900. Vraiment un magnifique Miroir de belle manufacture, pièce unique. Provient d&apos;une belle demeure.</p>
-                        </div>
-                        <div className="text-panel after-panel">
-                          <p className="panel-label">Après</p>
-                          <p>Cadre en bois sculpté à décor japonisant d&apos;une richesse exceptionnelle : dragon en ronde-bosse dont le corps enroulé court sur toute la traverse supérieure, fronton en pagode à double corniche retroussée, panneaux de frise géométrique et incrustations de nacre.</p>
-                          <p>Ce vocabulaire ornemental est celui que Gabriel Viardot (1830–1906) a développé et rendu célèbre, primé aux Expositions universelles de 1878 et 1889. Format monumental — environ 220 cm de hauteur. Dans son jus, patine cohérente d&apos;époque.</p>
-                        </div>
-                      </div>
-                      <div className="case-analysis">
-                        <p className="panel-label">Ce qui change</p>
-                        <ul>
-                          <li>Le dragon est décrit précisément — ronde-bosse, corps enroulé, détail des écailles — ce qui trahit la main d&apos;un sculpteur expérimenté.</li>
-                          <li>L&apos;attribution à Viardot est contextualisée avec des références historiques vérifiables.</li>
-                          <li>La notice recommande un repositionnement à 16 000 – 20 000 € sans expertise, au-delà avec attribution confirmée.</li>
-                        </ul>
-                      </div>
-                    </div>
-                  )}
-                </article>
-              </Reveal>
-
-            </div>
-          </div>
-        </section>
-
-        {/* ═══════════════════════ À PROPOS ═══════════════════════ */}
-        <section className="section section-alt border-top" id="parcours">
-          <div className="container split">
-            <Reveal>
-              <div>
-                <p className="eyebrow">À propos</p>
-                <h2>
-                  Un regard formé aux textes,
-                  <br />
-                  <em>exercé sur les objets.</em>
-                </h2>
-                <p className="about-name">Germain</p>
-                <p>
-                  Atelier Provenance est né d&apos;un constat simple : les objets
-                  qui méritent d&apos;être racontés sont rarement bien racontés.
-                </p>
-                <p>
-                  Le marché de l&apos;art est venu tôt — acheteur et vendeur assez
-                  jeune, avant même que ça ait un nom. Une sensibilité aux
-                  objets, à ce qu&apos;ils portent, à ce qui fait qu&apos;on s&apos;arrête
-                  devant l&apos;un plutôt qu&apos;un autre.
-                </p>
-                <p>
-                  Les études sont venues confirmer autre chose : deux masters —
-                  l&apos;un en lettres, l&apos;autre en philosophie — et quelques années
-                  d&apos;enseignement dans chacune. Ce qu&apos;on apprend là, c&apos;est à lire
-                  un texte jusqu&apos;à ce qu&apos;il cède quelque chose, à chercher ce
-                  qui fait sens plutôt que ce qui fait effet, à trouver le mot
-                  juste — pas celui qui impressionne.
-                </p>
-                <p>
-                  Atelier Provenance est l&apos;endroit où ces deux trajectoires se
-                  rejoignent. Chaque notice est rédigée personnellement — pas de
-                  délégation, pas d&apos;automatisation. Un regard, une exigence,
-                  un texte.
-                </p>
-              </div>
-            </Reveal>
-            <Reveal delay={150}>
-              <div>
-                <div className="about-cards">
-                  <div className="about-card">
-                    <h4>Marché de l&apos;art</h4>
-                    <p>
-                      Acheteur et vendeur depuis longtemps. Une connaissance
-                      concrète des objets, de leur valeur, et de ce qui fait
-                      qu&apos;une pièce trouve preneur.
-                    </p>
-                  </div>
-                  <div className="about-card">
-                    <h4>Lettres &amp; philosophie</h4>
-                    <p>
-                      Deux masters, plusieurs années d&apos;enseignement. Le travail
-                      sur la langue, la précision du vocabulaire et la rigueur
-                      du raisonnement viennent de là.
-                    </p>
-                  </div>
-                  <div className="about-card">
-                    <h4>Rédaction spécialisée</h4>
-                    <p>
-                      Notices, fiches, catalogues — chaque format a ses règles
-                      et ses exigences. Aucune automatisation, chaque texte
-                      écrit à la main.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
-        {/* ═══════════════════════ FAQ ═══════════════════════ */}
-        <section className="section border-top" id="faq">
-          <div className="container container-narrow">
-            <Reveal>
-              <div className="section-head">
-                <p className="eyebrow">Questions fréquentes</p>
-                <h2>Ce que nos clients demandent.</h2>
-              </div>
-            </Reveal>
-            <div className="faq-list">
+            <div className="cartels">
               {[
                 {
-                  q: "La première notice est vraiment gratuite ?",
-                  a: "Oui. Vous envoyez les photos et les informations, nous rédigeons la notice. Si le résultat vous convient, nous continuons. Sinon, vous gardez le texte — sans contrepartie.",
+                  num: "01",
+                  titre: "Positionnement",
+                  texte:
+                    "Comparables récents, analyse du marché, cohérence entre le prix demandé et le discours tenu. Le texte soutient le prix — jamais l'inverse.",
                 },
                 {
-                  q: "Que comprend exactement une notice ?",
-                  a: "Chaque notice inclut la recherche (identification, comparables, contexte historique), la rédaction principale et trois déclinaisons : version longue pour les plateformes spécialisées, version courte pour les annonces généralistes, version adaptée aux réseaux sociaux.",
+                  num: "02",
+                  titre: "Précision",
+                  texte:
+                    "Époque, style, matériaux, provenance : le vocabulaire des maisons de vente, avec sa prudence — « attribué à » n'est pas « estampillé ».",
                 },
                 {
-                  q: "Qu'est-ce que le catalogue Lila D'Algarve ?",
-                  a: "Lila D'Algarve est notre catalogue éditorial — un espace où nous diffusons les pièces rédigées auprès d'une audience d'acheteurs et de collectionneurs. Chaque notice publiée y est référencée, vous offrant un canal de visibilité supplémentaire sans démarche de votre part.",
+                  num: "03",
+                  titre: "Narration",
+                  texte:
+                    "Chaque pièce a traversé quelque chose. Le texte le rend lisible et mémorable : on n'achète pas un meuble ancien, on achète son histoire.",
                 },
-                {
-                  q: "Quels types d'objets acceptez-vous ?",
-                  a: "Mobilier ancien et vintage, objets d'art, luminaires, céramiques, pièces de design. Si l'objet a une valeur à défendre, nous pouvons écrire dessus.",
-                },
-                {
-                  q: "Quel est le délai de livraison ?",
-                  a: "5 jours ouvrés pour une Brochure, 10 jours pour un Livret, 15 jours pour un Recueil, 20 jours pour un Catalogue. Au-delà de 20 pièces, le délai est défini sur mesure.",
-                },
-                {
-                  q: "Travaillez-vous avec des particuliers ?",
-                  a: "Principalement avec des professionnels — marchands, galeristes, antiquaires, maisons de vente. Mais un particulier qui vend une pièce de qualité est le bienvenu.",
-                },
-              ].map((item, i) => (
-                <Reveal key={i} delay={i * 60}>
-                  <div className="faq-item">
-                    <button
-                      className="faq-toggle"
-                      onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    >
-                      <span>{item.q}</span>
-                      <span className="faq-icon">{openFaq === i ? "−" : "+"}</span>
-                    </button>
-                    {openFaq === i && (
-                      <div className="faq-answer">
-                        <p>{item.a}</p>
-                      </div>
-                    )}
+              ].map((c, i) => (
+                <Reveal key={i} delay={i * 120}>
+                  <div className="cartel">
+                    <span className="cartel-num">{c.num}</span>
+                    <h3>{c.titre}</h3>
+                    <p>{c.texte}</p>
                   </div>
                 </Reveal>
               ))}
             </div>
+            <Reveal delay={200}>
+              <div className="protocole">
+                {[
+                  ["Réception", "Photos, contexte, prix envisagé"],
+                  ["Recherche", "Comparables, historique, provenance"],
+                  ["Rédaction", "Texte structuré, ton de la maison"],
+                  ["Déclinaison", "Fiche longue, courte, réseaux"],
+                ].map(([t, d], i) => (
+                  <div className="protocole-etape" key={i}>
+                    <span className="protocole-num">{i + 1}</span>
+                    <div>
+                      <h4>{t}</h4>
+                      <p>{d}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
           </div>
         </section>
 
-        {/* ═══════════════════════ CONTACT ═══════════════════════ */}
-        <section className="section section-dark border-top" id="contact">
-          <div className="container split">
+        {/* ═══════════ CHAPITRE III — LE PARCOURS ═══════════ */}
+        <section className="section" id="parcours">
+          <div className="container">
+            <Reveal>
+              <ChapterHead numero="III" titre="Le parcours" />
+              <h2 className="section-titre">
+                Quatre étapes,
+                <br />
+                <em>chacune finance la suivante.</em>
+              </h2>
+              <p className="section-intro">
+                Pas de grille au poids de la notice : un parcours. On commence
+                par voir (l&apos;audit), on prouve (le pilote), puis on installe —
+                en continu ou en profondeur.
+              </p>
+            </Reveal>
+            <div className="offres">
+              {OFFRES.map((o, i) => (
+                <Reveal key={i} delay={i * 80}>
+                  <article className="offre">
+                    <div className="offre-tete">
+                      <span className="offre-numero">{o.numero}</span>
+                      <div className="offre-identite">
+                        <h3>{o.nom}</h3>
+                        <p className="offre-promesse">{o.promesse}</p>
+                      </div>
+                      <div className="offre-prix">
+                        {o.badge && <span className="offre-badge">{o.badge}</span>}
+                        <p className="offre-montant">{o.prix}</p>
+                        <p className="offre-duree">{o.duree}</p>
+                      </div>
+                    </div>
+                    <div className="offre-corps">
+                      <div className="offre-col">
+                        <h5>Contenu</h5>
+                        <ul>
+                          {o.contenu.map((c, j) => (
+                            <li key={j}>{c}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="offre-col">
+                        <h5>Résultat</h5>
+                        <p className="offre-resultat">{o.resultat}</p>
+                        <a href="#contact" className="btn btn-filet btn-sm">
+                          {o.cta}
+                        </a>
+                      </div>
+                    </div>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
+            <Reveal delay={120}>
+              <p className="offres-note">
+                La plupart des collaborations commencent par l&apos;Audit Express :
+                390 €, déductibles de toute mission engagée dans les 60 jours.
+              </p>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ═══════════ CHAPITRE IV — ÉTUDE ═══════════ */}
+        <section className="section section-papier" id="etude">
+          <div className="container">
+            <Reveal>
+              <ChapterHead numero="IV" titre="Étude" />
+              <h2 className="section-titre">
+                Le même objet,
+                <br />
+                <em>avant et après.</em>
+              </h2>
+            </Reveal>
+            <div className="etude-diptyque">
+              <Reveal delay={80}>
+                <div className="etude-volet etude-avant">
+                  <p className="etude-etiquette">Annonce d&apos;origine</p>
+                  <h4>Commode ancienne marqueterie</h4>
+                  <p className="etude-texte-avant">
+                    « Belle commode ancienne en marqueterie avec dessus marbre.
+                    Bronzes dorés. Quelques traces d&apos;usage. Dimensions standard.
+                    À venir chercher sur place. »
+                  </p>
+                  <p className="etude-verdict">
+                    Ni époque, ni bois, ni attribution. Le prix demandé n&apos;a
+                    aucun texte pour le soutenir.
+                  </p>
+                </div>
+              </Reveal>
+              <Reveal delay={180}>
+                <div className="etude-volet etude-apres">
+                  <p className="etude-etiquette etude-etiquette-or">
+                    Fiche Atelier Provenance
+                  </p>
+                  <h4>Commode galbée d&apos;époque Louis XV, marqueterie de bois de rose</h4>
+                  <p className="etude-texte-apres">
+                    « Commode à façade galbée toutes faces, Paris, vers 1760.
+                    Placage de bois de rose en frisage, ornementation de bronzes
+                    ciselés et dorés, dessus de marbre brèche d&apos;Alep. Le galbe,
+                    sculpté dans le bâti de chêne, signe le travail des ateliers
+                    parisiens du milieu du siècle… »
+                  </p>
+                  <p className="etude-verdict etude-verdict-or">
+                    Datation argumentée, matériaux nommés, contexte d&apos;atelier :
+                    l&apos;acheteur comprend ce qu&apos;il paie.
+                  </p>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════ CHAPITRE V — LE MÉDIA ═══════════ */}
+        <section className="section section-nuit" id="media">
+          <div className="container media-grid">
             <Reveal>
               <div>
-                <p className="eyebrow eyebrow-light">Contact</p>
-                <h2>
-                  Un objet suffit
-                  <br />
-                  <em>pour commencer.</em>
+                <ChapterHead numero="V" titre="Le média" light />
+                <h2 className="section-titre section-titre-light">
+                  Lila <em>D&apos;Algarve</em>
                 </h2>
-                <p>
-                  Envoyez-nous les photos et quelques informations sur votre
-                  pièce — période, matière, état, prix envisagé. Nous vous
-                  répondons sous 48 heures avec la notice rédigée, gratuitement
-                  et sans engagement.
+                <p className="media-texte">
+                  Notre regard rendu public : un média éditorial consacré au
+                  mobilier ancien et aux arts décoratifs. Pièces de collections
+                  publiques, détails d&apos;atelier, objets choisis — la preuve,
+                  publiée trois fois par semaine, que la précision peut être
+                  belle.
                 </p>
-                <div className="contact-methods">
-                  <a
-                    href="mailto:contact.atelierprovenance@gmail.com"
-                    className="contact-method"
-                  >
-                    <span className="contact-icon">✉</span>
-                    <span>contact.atelierprovenance@gmail.com</span>
-                  </a>
-                  <a href="tel:+33751420733" className="contact-method">
-                    <span className="contact-icon">☏</span>
-                    <span>07 51 42 07 33</span>
-                  </a>
-                </div>
+                <p className="media-texte media-texte-sec">
+                  Les pièces travaillées avec nos clients peuvent y être
+                  présentées à une audience de collectionneurs.
+                </p>
+                <a
+                  href="https://www.instagram.com/liladalgarve"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-filet btn-clair"
+                >
+                  Suivre sur Instagram
+                </a>
               </div>
             </Reveal>
             <Reveal delay={150}>
-              <div>
-                {formStatus === "sent" ? (
-                  <div className="form-success">
-                    <div className="form-success-icon">✓</div>
-                    <h3>Message préparé.</h3>
-                    <p>
-                      Votre client email s&apos;est ouvert avec les informations
-                      pré-remplies. Si ce n&apos;est pas le cas, écrivez-nous
-                      directement à contact.atelierprovenance@gmail.com
-                    </p>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="contact-form">
-                    <div className="form-row">
-                      <div className="form-field">
-                        <label htmlFor="name">Nom</label>
-                        <input
-                          id="name"
-                          type="text"
-                          required
-                          placeholder="Votre nom"
-                          value={formData.name}
-                          onChange={(e) =>
-                            setFormData({ ...formData, name: e.target.value })
-                          }
-                          onBlur={() => markTouched("name")}
-                          className={
-                            touched.name && formData.name.length > 0
-                              ? "field-valid"
-                              : touched.name
-                              ? "field-invalid"
-                              : ""
-                          }
-                        />
-                      </div>
-                      <div className="form-field">
-                        <label htmlFor="email">Email</label>
-                        <input
-                          id="email"
-                          type="email"
-                          required
-                          placeholder="votre@email.com"
-                          value={formData.email}
-                          onChange={(e) =>
-                            setFormData({ ...formData, email: e.target.value })
-                          }
-                          onBlur={() => markTouched("email")}
-                          className={
-                            touched.email && isValidEmail(formData.email)
-                              ? "field-valid"
-                              : touched.email
-                              ? "field-invalid"
-                              : ""
-                          }
-                        />
-                      </div>
+              <div className="media-carte">
+                <img
+                  src="/Lila-D-Algarve.png"
+                  alt="Lila D'Algarve"
+                  className="media-logo"
+                />
+                <div className="media-piliers">
+                  {[
+                    ["Le regard", "pièces de collections publiques"],
+                    ["La pièce", "objets choisis, disponibles"],
+                    ["Le détail", "ce que l'œil néglige"],
+                  ].map(([t, d], i) => (
+                    <div className="media-pilier" key={i}>
+                      <h5>{t}</h5>
+                      <p>{d}</p>
                     </div>
-                    <div className="form-row">
-                      <div className="form-field">
-                        <label htmlFor="phone">Téléphone</label>
-                        <input
-                          id="phone"
-                          type="tel"
-                          placeholder="06 00 00 00 00"
-                          value={formData.phone}
-                          onChange={(e) =>
-                            setFormData({ ...formData, phone: e.target.value })
-                          }
-                        />
-                      </div>
-                      <div className="form-field">
-                        <label htmlFor="platform">Plateforme de vente</label>
-                        <input
-                          id="platform"
-                          type="text"
-                          placeholder="Selency, Proantic, Leboncoin…"
-                          value={formData.platform}
-                          onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              platform: e.target.value,
-                            })
-                          }
-                        />
-                      </div>
-                    </div>
-                    <div className="form-field">
-                      <label htmlFor="pieces">Nombre de pièces</label>
-                      <input
-                        id="pieces"
-                        type="text"
-                        placeholder="1, 3, 10, catalogue complet…"
-                        value={formData.pieces}
-                        onChange={(e) =>
-                          setFormData({ ...formData, pieces: e.target.value })
-                        }
-                      />
-                    </div>
-                    <div className="form-field">
-                      <label htmlFor="message">Décrivez brièvement vos pièces</label>
-                      <textarea
-                        id="message"
-                        rows={5}
-                        required
-                        placeholder="Période, matière, état, prix envisagé…"
-                        value={formData.message}
-                        onChange={(e) =>
-                          setFormData({ ...formData, message: e.target.value })
-                        }
-                        onBlur={() => markTouched("message")}
-                        className={
-                          touched.message && formData.message.length > 0
-                            ? "field-valid"
-                            : touched.message
-                            ? "field-invalid"
-                            : ""
-                        }
-                      />
-                    </div>
-                    <button
-                      type="submit"
-                      className="button button-primary button-arrow"
-                    >
-                      Envoyer
-                    </button>
-                  </form>
-                )}
+                  ))}
+                </div>
               </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ═══════════ CHAPITRE VI — CONTACT ═══════════ */}
+        <section className="section" id="contact">
+          <div className="container contact-grid">
+            <Reveal>
+              <div>
+                <ChapterHead numero="VI" titre="Contact" />
+                <h2 className="section-titre">
+                  Commencer par
+                  <br />
+                  <em>un regard sur votre catalogue.</em>
+                </h2>
+                <p className="section-intro">
+                  Décrivez votre structure et votre fonds en quelques lignes.
+                  Réponse sous 48 h, avec un premier avis — franc — sur ce
+                  qu&apos;un audit pourrait vous apprendre.
+                </p>
+                <div className="faq-list">
+                  {FAQ.map((f, i) => (
+                    <div className="faq-item" key={i}>
+                      <button
+                        className="faq-toggle"
+                        onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                      >
+                        {f.q}
+                        <span className="faq-icon">{openFaq === i ? "−" : "+"}</span>
+                      </button>
+                      {openFaq === i && <p className="faq-answer">{f.a}</p>}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+            <Reveal delay={120}>
+              <form className="formulaire" onSubmit={handleSubmit}>
+                <label>
+                  Nom
+                  <input
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  />
+                </label>
+                <label>
+                  Email
+                  <input
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  />
+                </label>
+                <label>
+                  Structure (galerie, maison de vente, marchand…)
+                  <input
+                    type="text"
+                    value={formData.structure}
+                    onChange={(e) => setFormData({ ...formData, structure: e.target.value })}
+                  />
+                </label>
+                <label>
+                  Taille du catalogue (approximative)
+                  <input
+                    type="text"
+                    value={formData.pieces}
+                    onChange={(e) => setFormData({ ...formData, pieces: e.target.value })}
+                  />
+                </label>
+                <label>
+                  Votre situation, vos objectifs
+                  <textarea
+                    rows={5}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  />
+                </label>
+                <button type="submit" className="btn btn-plein btn-large">
+                  Envoyer la demande
+                </button>
+                {formStatus === "sent" && (
+                  <p className="form-confirmation">
+                    Votre client email s&apos;est ouvert avec la demande préparée —
+                    il ne reste qu&apos;à envoyer.
+                  </p>
+                )}
+                <p className="form-direct">
+                  Ou directement :{" "}
+                  <a href="mailto:contact.atelierprovenance@gmail.com">
+                    contact.atelierprovenance@gmail.com
+                  </a>
+                </p>
+              </form>
             </Reveal>
           </div>
         </section>
       </main>
 
-      {/* ═══════════════════════ FOOTER ═══════════════════════ */}
+      {/* ═══════════ FOOTER ═══════════ */}
       <footer className="footer">
         <div className="container footer-inner">
-          <div>
-            <p className="footer-logo">Atelier Provenance</p>
-            <p className="footer-copy">
-              © {new Date().getFullYear()} — Rédaction de mobilier de collection
+          <div className="footer-marque">
+            <Losange />
+            <p className="footer-nom">Atelier Provenance</p>
+            <p className="footer-ligne">
+              La valeur de vos objets, rendue lisible.
             </p>
           </div>
-          <div className="footer-center">
-            <p className="footer-lda">
-              Un projet{" "}
-              <span className="footer-lda-name">Lila D&apos;Algarve</span>
-            </p>
+          <div className="footer-liens">
+            <a href="#constat">Le constat</a>
+            <a href="#methode">La méthode</a>
+            <a href="#parcours">Le parcours</a>
+            <a href="#media">Lila D&apos;Algarve</a>
           </div>
-          <div className="footer-right">
-            <a
-              href="mailto:contact.atelierprovenance@gmail.com"
-              className="footer-email"
-            >
-              contact.atelierprovenance@gmail.com
-            </a>
-            <a href="tel:+33751420733" className="footer-phone">
-              07 51 42 07 33
-            </a>
-            <div className="footer-legal-links">
-              <a href="/mentions-legales" className="footer-legal">Mentions légales</a>
-              <span className="footer-legal-sep">·</span>
-              <a href="/cgv" className="footer-legal">CGV</a>
-            </div>
+          <div className="footer-legal-bloc">
+            <a href="/mentions-legales" className="footer-legal">Mentions légales</a>
+            <span className="footer-legal-sep">·</span>
+            <a href="/cgv" className="footer-legal">CGV</a>
+            <p className="footer-copyright">
+              © {new Date().getFullYear()} Atelier Provenance
+            </p>
           </div>
         </div>
       </footer>
-
     </>
   );
 }

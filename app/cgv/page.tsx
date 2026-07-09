@@ -22,9 +22,11 @@ export default function CGV() {
                 à tout client professionnel ou particulier.
               </p>
               <p>
-                Les prestations consistent en la rédaction de notices expertes (Brochure, Livret, Recueil, Catalogue) pour le mobilier
-                de collection et les objets d&apos;art, incluant contexte historique, analyse de marché,
-                versions longue, courte et réseaux sociaux, et recommandation de prix argumentée.
+                Les prestations consistent en des missions éditoriales pour le mobilier
+                de collection et les objets d&apos;art (Audit Express, Pack Pilote, Abonnement,
+                Système Premium) : audit de catalogue, rédaction de fiches documentées avec
+                contexte historique et analyse de marché, versions longue, courte et réseaux
+                sociaux, direction éditoriale et formation d&apos;équipe.
               </p>
             </section>
 
@@ -32,12 +34,15 @@ export default function CGV() {
               <h2>Article 2 — Tarifs et formules</h2>
               <p>Les tarifs en vigueur sont les suivants :</p>
               <ul className="legal-list">
-                <li><strong>Brochure</strong> (1 à 5 notices) — 150 € TTC / notice</li>
-                <li><strong>Livret</strong> (6 à 10 notices) — 130 € TTC / notice</li>
-                <li><strong>Recueil</strong> (11 à 15 notices) — 110 € TTC / notice</li>
-                <li><strong>Catalogue</strong> (16 à 20 notices) — 100 € TTC / notice</li>
-                <li><strong>Fonds</strong> (plus de 20 notices) — sur devis</li>
+                <li><strong>Audit Express</strong> — analyse de 10 objets, réécriture de 2 fiches, recommandations, appel de 30 min — 390 € TTC</li>
+                <li><strong>Pack Pilote</strong> — 15 fiches premium, versions courtes et longues, contenus complémentaires — 1 900 € TTC</li>
+                <li><strong>Abonnement</strong> — 30 à 60 fiches par mois, optimisation continue, support — 3 000 à 6 000 € TTC / mois selon devis</li>
+                <li><strong>Système Premium</strong> — refonte de catalogue, storytelling global, formation d&apos;équipe — 8 000 à 20 000 € TTC selon devis</li>
               </ul>
+              <p>
+                Le montant de l&apos;Audit Express est déductible de toute mission engagée
+                dans les 60 jours suivant sa livraison.
+              </p>
               <p>
                 Les prix sont exprimés en euros toutes taxes comprises. En tant que
                 micro-entrepreneur bénéficiant de la franchise en base de TVA (article 293 B
@@ -45,32 +50,32 @@ export default function CGV() {
                 &laquo;&nbsp;TVA non applicable — art. 293 B du CGI&nbsp;&raquo;.
               </p>
               <p>
-                Une première notice est offerte à titre d&apos;essai, sans engagement de la part
-                du client. Cette notice gratuite ne donne lieu à aucune facturation.
+                Une fiche d&apos;exemple peut être offerte à titre de démonstration, sans
+                engagement de la part du client. Elle ne donne lieu à aucune facturation.
               </p>
             </section>
 
             <section className="legal-section">
               <h2>Article 3 — Commande et acompte</h2>
               <p>
-                Toute commande est confirmée par échange écrit (email).
-                Pour les lots de 10 notices et les missions catalogue, un acompte de
+                Toute commande est confirmée par échange écrit (email) ou devis signé.
+                Pour le Pack Pilote et le Système Premium, un acompte de
                 <strong> 50 % du montant total</strong> est exigible à la confirmation de commande.
                 Le solde est dû à la livraison.
               </p>
               <p>
-                Pour les lots de 3 notices, le paiement intégral est dû à la livraison.
+                L&apos;Audit Express est payable intégralement à la commande.
+                L&apos;Abonnement est facturé mensuellement, à terme à échoir.
               </p>
             </section>
 
             <section className="legal-section">
               <h2>Article 4 — Délais de livraison</h2>
               <ul className="legal-list">
-                <li>Brochure (1–5 notices) : <strong>5 jours ouvrés</strong></li>
-                <li>Livret (6–10 notices) : <strong>10 jours ouvrés</strong></li>
-                <li>Recueil (11–15 notices) : <strong>15 jours ouvrés</strong></li>
-                <li>Catalogue (16–20 notices) : <strong>20 jours ouvrés</strong></li>
-                <li>Fonds (plus de 20 notices) : délai défini dans le devis</li>
+                <li>Audit Express : <strong>7 jours ouvrés</strong></li>
+                <li>Pack Pilote : <strong>3 à 4 semaines</strong></li>
+                <li>Abonnement : livraisons échelonnées définies au devis</li>
+                <li>Système Premium : <strong>2 à 4 mois</strong>, calendrier défini au devis</li>
               </ul>
               <p>
                 Les délais courent à compter de la réception complète des éléments nécessaires
